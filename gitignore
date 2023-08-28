@@ -1,0 +1,19 @@
+﻿# Ignore Mac / Windows system files
+.DS_Store
+
+# Ignore JetBrains IDE settings
+.idea/
+
+# Ignore compiled files
+obj/
+bin/
+
+# Shared objects
+*.dll
+*.exe
+
+# Ignore cache and user-specific files
+.cache/
+.com
+DotSettings.user
+Folder.DotSettings.User
