@@ -1,8 +1,9 @@
 ﻿# Ignore Mac / Windows system files
 .DS_Store
 
-# Ignore JetBrains IDE settings
+# Ignore JetBrains + vscode settings
 .idea/
+.vscode/
 
 # Ignore compiled files
 obj/
@@ -17,3 +18,4 @@ bin/
 .com
 DotSettings.user
 Folder.DotSettings.User
+```
