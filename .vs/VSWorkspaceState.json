@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CaveroClubhuis",
+    "\\CaveroClubhuis\\Pages",
+    "\\CaveroClubhuis\\Pages\\Shared",
+    "\\CaveroClubhuis\\Properties",
+    "\\CaveroClubhuis\\wwwroot"
   ],
-  "SelectedNode": "\\C:\\Users\\megan\\Source\\Repos\\ProjectC",
+  "SelectedNode": "\\CaveroClubhuis\\CaveroClubhuis.sln",
   "PreviewInSolutionExplorer": false
 }
