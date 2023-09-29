@@ -4,6 +4,7 @@
 # Ignore JetBrains + vscode settings
 .idea/
 .vscode/
+.vs/
 
 # Ignore compiled files
 obj/
