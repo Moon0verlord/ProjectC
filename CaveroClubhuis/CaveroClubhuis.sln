@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubhuisCavero", "ClubhuisCavero.csproj", "{A713D207-074D-4CFD-BDB1-335C465DEC70}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaveroClubhuis", "CaveroClubhuis.csproj", "{B1FE7E02-C269-4500-BCFC-2A5C8F8CC3DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A713D207-074D-4CFD-BDB1-335C465DEC70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A713D207-074D-4CFD-BDB1-335C465DEC70}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A713D207-074D-4CFD-BDB1-335C465DEC70}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A713D207-074D-4CFD-BDB1-335C465DEC70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1FE7E02-C269-4500-BCFC-2A5C8F8CC3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1FE7E02-C269-4500-BCFC-2A5C8F8CC3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1FE7E02-C269-4500-BCFC-2A5C8F8CC3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1FE7E02-C269-4500-BCFC-2A5C8F8CC3DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {61B643A0-FEC5-4006-9E4E-864A2FAD68B6}
+		SolutionGuid = {7A127C8A-C670-4F9A-BCA6-FCC5B3790880}
 	EndGlobalSection
 EndGlobal
