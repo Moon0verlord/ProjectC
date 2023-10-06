@@ -6,6 +6,9 @@
 .vscode/
 .vs/
 
+#ignore ide objects
+.obj/
+
 # Ignore cache and user-specific files
 .cache/
 .com
