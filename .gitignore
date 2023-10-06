@@ -8,6 +8,7 @@
 
 #ignore ide objects
 .obj/
+.bin/
 
 # Ignore cache and user-specific files
 .cache/
