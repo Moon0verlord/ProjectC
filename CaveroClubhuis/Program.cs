@@ -17,6 +17,11 @@ builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
+app.MapGet("/", () =>
+{
+    return Results.Redirect("/Identity/Account/Login");
+});
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
