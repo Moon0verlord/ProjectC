@@ -1,13 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CaveroClubhuis.Areas.Identity.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CaveroClubhuis.Data;
 
+[Keyless]
 public class InOffice
 {
     [Key, Column(Order = 1)]
-    public int UserId { get; set; }
+    public string UserId { get; set; }
 
     [Key, Column(Order = 2)]
     public DateTime CheckInDate { get; set; }
