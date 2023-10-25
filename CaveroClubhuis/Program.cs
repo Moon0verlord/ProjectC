@@ -24,7 +24,9 @@ using (var serviceScope = app.Services.CreateScope())
 {
     var serviceProvider = serviceScope.ServiceProvider;
     var dbContext = serviceProvider.GetRequiredService<CaveroClubhuisContext>();
-    DBSeeder.Initialize(dbContext);
+    DBSeeder.InitializeEvents(dbContext);
+    DBSeeder.InitializeInOffice(dbContext);
+    DBSeeder.InitializeReviews(dbContext);
 }
 
 app.MapGet("/", () =>
