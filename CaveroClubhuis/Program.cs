@@ -14,9 +14,18 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<CaveroUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<CaveroClubhuisContext>();
+
+
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
+
+using (var serviceScope = app.Services.CreateScope())
+{
+    var serviceProvider = serviceScope.ServiceProvider;
+    var dbContext = serviceProvider.GetRequiredService<CaveroClubhuisContext>();
+    DBSeeder.Initialize(dbContext);
+}
 
 app.MapGet("/", () =>
 {
@@ -41,6 +50,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
 
 app.MapRazorPages();
 

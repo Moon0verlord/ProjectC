@@ -5,13 +5,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CaveroClubhuis.Data;
 
-[Keyless]
+
 public class EventParticipants
 {
-    [Key, Column(Order = 1)]
-    public string UserId { get; set; }
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int EventParticipantId { get; set; } // Primary key
 
-    [Key, Column(Order = 2)]
+    public string UserId { get; set; }
     public int EventId { get; set; }
 
     [Required]
@@ -23,6 +24,7 @@ public class EventParticipants
     [ForeignKey("EventId")]
     public Events Event { get; set; }
 }
+
 
 
 public enum Responses

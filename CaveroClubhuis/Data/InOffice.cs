@@ -5,13 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CaveroClubhuis.Data;
 
-[Keyless]
+
 public class InOffice
-{
-    [Key, Column(Order = 1)]
+{    
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int InOfficeId { get; set; } // Primary key
+
+    [Required]
     public string UserId { get; set; }
 
-    [Key, Column(Order = 2)]
     public DateTime CheckInDate { get; set; }
 
     [Required]

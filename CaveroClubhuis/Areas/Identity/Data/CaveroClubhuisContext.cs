@@ -44,9 +44,6 @@ public class CaveroClubhuisContext : IdentityDbContext<CaveroUser>
             .HasOne(e => e.User)
             .WithMany()
             .HasForeignKey(e => e.UserId);
-        // build the other tables
-        // Configure EventParticipants table
-
         
     }
 }
