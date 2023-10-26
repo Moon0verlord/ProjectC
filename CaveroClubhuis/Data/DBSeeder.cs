@@ -22,8 +22,8 @@ public class DBSeeder
             {
                 Title = "Why Bald People?",
                 Description = "Exploring baldness and its effects on the human psyche",
-                Date = DateTime.UtcNow.AddDays(10),
-                Time = DateTime.UtcNow.AddHours(2),
+                Date = DateTime.UtcNow.Date.AddDays(10),
+                Time = DateTime.UtcNow.AddHours(10),
                 UserId = GetRandomUserId(context),
                 Location = "Online",
                 Approval = true
@@ -32,7 +32,7 @@ public class DBSeeder
             {
                 Title = "Capitol Visit",
                 Description = "We will be visiting the capitol to convince the government to ban baldness",
-                Date = DateTime.UtcNow.AddDays(2),
+                Date = DateTime.UtcNow.Date.AddDays(2),
                 Time = DateTime.UtcNow.AddHours(2),
                 UserId = GetRandomUserId(context),
                 Location = "Den Haag",
@@ -42,7 +42,7 @@ public class DBSeeder
             {
                 Title = "Spawning Yakub",
                 Description = "We will be attempting the summoning of Yakub.",
-                Date = DateTime.UtcNow.AddDays(5),
+                Date = DateTime.UtcNow.Date.AddDays(5),
                 Time = DateTime.UtcNow.AddHours(4),
                 UserId = GetRandomUserId(context),
                 Location = "Arabia",
@@ -52,7 +52,7 @@ public class DBSeeder
             {
                 Title = "Joining the war on drugs",
                 Description = "We will be joining the war on drugs. by selling drugs.",
-                Date = DateTime.UtcNow,
+                Date = DateTime.UtcNow.Date.AddDays(1),
                 Time = DateTime.UtcNow.AddHours(8),
                 UserId = GetRandomUserId(context),
                 Location = "The streets",
@@ -62,7 +62,7 @@ public class DBSeeder
             {
                 Title = "Tax Fraud part 2",
                 Description = "We will be committing tax fraud. again.",
-                Date = DateTime.UtcNow.AddDays(7),
+                Date = DateTime.UtcNow.Date.AddDays(7),
                 Time = DateTime.UtcNow.AddHours(5),
                 UserId = GetRandomUserId(context),
                 Location = "Belastingdienst HQ",
