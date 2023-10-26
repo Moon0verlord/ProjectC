@@ -22,7 +22,7 @@ public class DBSeeder
             {
                 Title = "Why Bald People?",
                 Description = "Exploring baldness and its effects on the human psyche",
-                Date = DateTime.UtcNow,
+                Date = DateTime.UtcNow.AddDays(10),
                 Time = DateTime.UtcNow.AddHours(2),
                 UserId = GetRandomUserId(context),
                 Location = "Online",
@@ -32,7 +32,7 @@ public class DBSeeder
             {
                 Title = "Capitol Visit",
                 Description = "We will be visiting the capitol to convince the government to ban baldness",
-                Date = DateTime.UtcNow,
+                Date = DateTime.UtcNow.AddDays(2),
                 Time = DateTime.UtcNow.AddHours(2),
                 UserId = GetRandomUserId(context),
                 Location = "Den Haag",
@@ -42,7 +42,7 @@ public class DBSeeder
             {
                 Title = "Spawning Yakub",
                 Description = "We will be attempting the summoning of Yakub.",
-                Date = DateTime.UtcNow,
+                Date = DateTime.UtcNow.AddDays(5),
                 Time = DateTime.UtcNow.AddHours(4),
                 UserId = GetRandomUserId(context),
                 Location = "Arabia",
@@ -62,14 +62,13 @@ public class DBSeeder
             {
                 Title = "Tax Fraud part 2",
                 Description = "We will be committing tax fraud. again.",
-                Date = DateTime.UtcNow,
+                Date = DateTime.UtcNow.AddDays(7),
                 Time = DateTime.UtcNow.AddHours(5),
                 UserId = GetRandomUserId(context),
                 Location = "Belastingdienst HQ",
                 Approval = true
             }
         };
-        
         context.Events.AddRange(initialEvents);
         context.SaveChanges();
     }
@@ -88,9 +87,9 @@ public class DBSeeder
         context.SaveChanges();
     }
     
+    // Seed your database with initial reviews
     public static void InitializeReviews(CaveroClubhuisContext context)
     {
-        
         var Review = new EventReviews()
         {
             UserId = GetRandomUserId(context),
@@ -100,7 +99,6 @@ public class DBSeeder
         context.EventReviews.Add(Review);
         context.SaveChanges();
     }
-    
     
     // Get a random user id from the database
     public static string GetRandomUserId(CaveroClubhuisContext context)
