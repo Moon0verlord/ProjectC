@@ -15,6 +15,7 @@ public class InOffice
     [Required]
     public string UserId { get; set; }
 
+    // Date & Time is stored in UTC Timezone
     public DateTime CheckInDate { get; set; }
 
     [Required]

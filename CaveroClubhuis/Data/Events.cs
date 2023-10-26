@@ -16,10 +16,10 @@ public class Events
 
     [Required]
     public string Description { get; set; }
-
+    // Date & Time is stored in UTC Timezone
     [Required]
     public DateTime Date { get; set; }
-
+    // Date & Time is stored in UTC Timezone
     [Required]
     public DateTime Time { get; set; }
 

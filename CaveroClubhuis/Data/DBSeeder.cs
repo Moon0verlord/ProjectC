@@ -5,6 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 public class DBSeeder
 {
+    private readonly CaveroClubhuisContext _dbContext;
+    public DBSeeder (CaveroClubhuisContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+    
     public static void InitializeEvents(CaveroClubhuisContext context)
     {
         context.Database.EnsureCreated();
@@ -76,7 +82,6 @@ public class DBSeeder
     // Seed your database with initial in-office entries
     public static void InitializeInOffice(CaveroClubhuisContext context)
     {
-        
         var inOfficeEntry = new InOffice
         {
             UserId = GetRandomUserId(context),
@@ -114,4 +119,14 @@ public class DBSeeder
 
     }
     
+    // Get the time of the An in the database
+    public static DateTime GetEventTime(CaveroClubhuisContext dbContext)
+    {
+        var events = dbContext.Events
+            .Where(e => e.Id == 1)
+            .SingleOrDefault();
+        
+            return events.Time;
+        
+    }
 }

@@ -20,14 +20,22 @@ builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
+// Seed database with with data (Optional)
 using (var serviceScope = app.Services.CreateScope())
 {
     var serviceProvider = serviceScope.ServiceProvider;
     var dbContext = serviceProvider.GetRequiredService<CaveroClubhuisContext>();
-    DBSeeder.InitializeEvents(dbContext);
-    DBSeeder.InitializeInOffice(dbContext);
-    DBSeeder.InitializeReviews(dbContext);
+    DBSeeder.InitializeEvents(dbContext); 
+    // DBSeeder.InitializeInOffice(dbContext);
+   // DBSeeder.InitializeReviews(dbContext);
+    // DateTime eventTime = DBSeeder.GetEventTime(dbContext);
+    // string FormattedTime = eventTime.ToString("HH:mm");
+    // Console.WriteLine($"Hour of event:{eventTime.ToString()}");
+    // Console.WriteLine($"Formatted time: {FormattedTime}");
 }
+
+
+
 
 app.MapGet("/", () =>
 {
