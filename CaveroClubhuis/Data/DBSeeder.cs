@@ -5,11 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 public class DBSeeder
 {
-    private readonly CaveroClubhuisContext _dbContext;
-    public DBSeeder (CaveroClubhuisContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
     
     public static void InitializeEvents(CaveroClubhuisContext context)
     {
@@ -98,7 +93,7 @@ public class DBSeeder
         var Review = new EventReviews()
         {
             UserId = GetRandomUserId(context),
-            EventId = 1,
+            EventId = GetRamdomEventId(context),
             FeedbackText = "10/10 would recommend",
         };
         context.EventReviews.Add(Review);
@@ -106,7 +101,7 @@ public class DBSeeder
     }
     
     // Get a random user id from the database
-    public static string GetRandomUserId(CaveroClubhuisContext context)
+    private static string GetRandomUserId(CaveroClubhuisContext context)
     {
         {
             var randomUserId = context.Users
@@ -119,14 +114,24 @@ public class DBSeeder
 
     }
     
+    // Get a random event id from the database
+    private static int GetRamdomEventId(CaveroClubhuisContext context)
+    {
+        {
+            var randomEventId = context.Events
+                .OrderBy(r => Guid.NewGuid())
+                .Select(events => events.Id)
+                .FirstOrDefault();
+
+            return randomEventId;
+        }
+    }
+    
     // Get the time of the An in the database
     public static DateTime GetEventTime(CaveroClubhuisContext dbContext)
     {
         var events = dbContext.Events
-            .Where(e => e.Id == 1)
-            .SingleOrDefault();
-        
-            return events.Time;
-        
+            .SingleOrDefault(e => e.Id == 1);
+            return events!.Time;
     }
 }

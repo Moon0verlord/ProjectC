@@ -2,6 +2,7 @@ using CaveroClubhuis.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using CaveroClubhuis.Data;
+using Npgsql.Replication.TestDecoding;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,13 +26,9 @@ using (var serviceScope = app.Services.CreateScope())
 {
     var serviceProvider = serviceScope.ServiceProvider;
     var dbContext = serviceProvider.GetRequiredService<CaveroClubhuisContext>();
-    DBSeeder.InitializeEvents(dbContext); 
-    // DBSeeder.InitializeInOffice(dbContext);
-   // DBSeeder.InitializeReviews(dbContext);
-    // DateTime eventTime = DBSeeder.GetEventTime(dbContext);
-    // string FormattedTime = eventTime.ToString("HH:mm");
-    // Console.WriteLine($"Hour of event:{eventTime.ToString()}");
-    // Console.WriteLine($"Formatted time: {FormattedTime}");
+    //DBSeeder.InitializeEvents(dbContext); 
+    //DBSeeder.InitializeInOffice(dbContext);
+    //DBSeeder.InitializeReviews(dbContext);
 }
 
 
@@ -60,7 +57,6 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
 
 app.MapRazorPages();
 
