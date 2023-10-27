@@ -36,11 +36,12 @@
         .login_form {
             position: relative;
             margin-inline: 1.5rem;
-            background-color: hsla(0,0%,100%, .01);
+            background-color: hsl(0,0%,98%);
             border: 2px solid hsla(0,0%,100%, .7);
             padding: 2.5rem 1rem;
-            color: white;
+            color: #000000;
             border-radius: 1rem;
+            box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.5);
         }
 
         .login_title {
@@ -62,21 +63,21 @@
             grid-template-columns: 1fr max-content;
             column-gap: .75rem;
             align-items: center;
-            border: 2px solid hsla(0,0%,100%, .7);
+            border: 2px solid hsl(0,0%,16%);
             padding-inline: 1.25rem;
-            border-radius: 4rem;
+            border-radius: 1rem;
         }
 
         .login_input {
             align-content: center;
             width: 100%;
             background: none;
-            color: white;
+            color: #282828;
             padding-block: 1rem;
         }
 
             .login_input::placeholder {
-                color: white;
+                color: #000000;
             }
 
         .login_box i {
@@ -108,26 +109,32 @@
             width: 100%;
             padding: 1rem;
             margin-bottom: 1rem;
-            background-color: white;
-            border-radius: 4rem;
-            color: black;
+            background-color: #282828;
+            border-radius: 1rem;
+            color: #fafafa;
             font-weight: 500;
             cursor: pointer;
         }
+        
+        .login_button:hover {
+            background-color: #000000;
+        }
+        
 
         .login_register {
             text-align: center;
             font-size: .813rem;
             text-decoration: none;
+            margin-bottom: 10px;
         }
 
         .login_forgot {
-            color: white;
+            color: #000000;
             text-decoration: none;
         }
 
             .login_register a, .login_forgot a {
-                color: white;
+                color: #000000;
                 text-decoration: none;
             }
 
@@ -144,44 +151,46 @@
 </head>
 
 <body style="background-color:#803689">
-    <div class="login">
-        <!--image-->
-        <form action="" class="login_form">
-            <h1 class="login_title">Login</h1>
+<div class="login">
+    <!--image-->
+    <form action="" class="login_form">
+        <img class="logo" src="~/images/logo.png" alt="Cavero Logo" width="50" height="50">
+        <h1 class="login_title">Sign in</h1>
 
-            <div class="login_input">
-                <div class="login_box">
-                    <input type="email" asp-for="Input.Email" placeholder="Email" required class="login_input">
-                    <i class="ri-mail-fill"></i>
-                </div>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+        <div class="login_register">
+            Don't have an account yet? <a href="./Register">Sign up!</a>
+        </div>
 
-                <div class="login_box">
-                    <input type="password" asp-for="Input.Password" placeholder="Password" required class="login_input">
-                    <i class="ri-lock-2-fill"></i>
-                </div>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
+        <div class="login_input">
+            <div class="login_box">
+                <input type="email" asp-for="Input.Email" placeholder="Email" required class="login_input">
+                <i class="ri-mail-fill"></i>
+            </div>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
 
+            <div class="login_box">
+                <input type="password" asp-for="Input.Password" placeholder="Password" required class="login_input">
+                <i class="ri-lock-2-fill"></i>
+            </div>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+        </div>
+
+        <div class="login_check">
+            <div class="login_check-box">
+                <label asp-for="Input.RememberMe" class="form-label">
+                    <input class="form-check-input" asp-for="Input.RememberMe"/>
+                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                </label>
             </div>
 
-            <div class="login_check">
-                <div class="login_check-box">
-                    <label asp-for="Input.RememberMe" class="form-label">
-                        <input class="form-check-input" asp-for="Input.RememberMe" />
-                        @Html.DisplayNameFor(m => m.Input.RememberMe)
-                    </label>
-                </div>
+            <a asp-page="./ForgotPassword" class="login_forgot">Forgot Password?</a>
+        </div>
 
-                <a asp-page="./ForgotPassword" class="login_forgot">Forgot Password?</a>
-            </div>
+        <button type="submit" class="login_button">&rarr; Login</button>
 
-            <button type="submit" class="login_button">Login</button>
-
-            <div class="login_register">
-                Don't have an account? <a href="./Register">Register</a>
-            </div>
-        </form>
-    </div>
+    </form>
+</div>
 </body>
 
 @section Scripts {
