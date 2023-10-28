@@ -174,9 +174,8 @@
 
 /* Animated Login button */
 .login_button:active {
-    /* Set time duration to your needs */
     animation: gradient 150ms;
-    background: #803689; /* Change the background color to purple */
+    background: #803689;
     color: #fff;
     box-shadow: none;
 }
