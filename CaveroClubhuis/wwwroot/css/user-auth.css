@@ -172,6 +172,35 @@
 }
 
 
+/* Animated Login button */
+.login_button:active {
+    /* Set time duration to your needs */
+    animation: gradient 150ms;
+    background: #803689; /* Change the background color to purple */
+    color: #fff;
+    box-shadow: none;
+}
+
+@keyframes gradient {
+    0% {
+        background: radial-gradient(circle at center, rgba(128, 54, 137, 0) 0%, #fff 0%, #fff 100%);
+    }
+    25% {
+        background: radial-gradient(circle at center, rgba(128, 54, 137, 0.3) 24%, #fff 25%, #fff 100%);
+    }
+    50% {
+        background: radial-gradient(circle at center, rgba(128, 54, 137, 0.5) 49%, #fff 50%, #fff 100%);
+    }
+    75% {
+        background: radial-gradient(circle at center, rgba(128, 54, 137, 0.8) 74%, #fff 75%, #fff 100%);
+    }
+    100% {
+        color: #fff;
+        background: radial-gradient(circle at center, #803689 99%, #fff 100%, #fff 100%);
+    }
+}
+
+/* Animated Gradient backround */
 .css-selector {
     background: linear-gradient(154deg, #803689, #a870b2, #d3a1db, #efd7f1);
     background-size: 800% 800%;
