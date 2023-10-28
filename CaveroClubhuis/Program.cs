@@ -33,11 +33,18 @@ using (var serviceScope = app.Services.CreateScope())
 
 
 
-
-app.MapGet("/", () =>
+app.MapGet("/", (HttpContext ctx) =>
 {
-    return Results.Redirect("/Identity/Account/Login");
+    if (ctx.User.Identity.IsAuthenticated)
+    {
+        return Results.Redirect("/Index");
+    }
+    else
+    {
+        return Results.Redirect("/Identity/Account/Login");
+    }
 });
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

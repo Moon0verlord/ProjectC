@@ -3,6 +3,9 @@
 
 @{
     ViewData["Title"] = "Log in";
+    Layout = "_EmptyLayout.cshtml";
+    // TODO create a new font family
+    // TODO make box bigger on bigger screens
 }
 
 <head>
@@ -32,9 +35,16 @@
             display: grid;
             align-items: center;
         }
+        
+        .logo {
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 30px;
+
+        }
+        
 
         .login_form {
-            position: relative;
             margin-inline: 1.5rem;
             background-color: hsl(0,0%,98%);
             border: 2px solid hsla(0,0%,100%, .7);
@@ -153,7 +163,7 @@
 <body style="background-color:#803689">
 <div class="login">
     <!--image-->
-    <form action="" class="login_form">
+    <form method="post" action="" class="login_form">
         <img class="logo" src="~/images/logo.png" alt="Cavero Logo" width="50" height="50">
         <h1 class="login_title">Sign in</h1>
 
@@ -183,12 +193,10 @@
                     @Html.DisplayNameFor(m => m.Input.RememberMe)
                 </label>
             </div>
-
             <a asp-page="./ForgotPassword" class="login_forgot">Forgot Password?</a>
         </div>
 
         <button type="submit" class="login_button">&rarr; Login</button>
-
     </form>
 </div>
 </body>
