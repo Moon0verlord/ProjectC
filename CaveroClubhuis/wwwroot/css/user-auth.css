@@ -170,3 +170,17 @@
 .smaller-input {
     width: 45%;
 }
+
+
+.css-selector {
+    background: linear-gradient(154deg, #803689, #a870b2, #d3a1db, #efd7f1);
+    background-size: 800% 800%;
+
+    animation: GradientBackground 36s ease infinite;
+}
+
+@keyframes GradientBackground {
+    0%{background-position:2% 0%}
+    50%{background-position:99% 100%}
+    100%{background-position:2% 0%}
+}
