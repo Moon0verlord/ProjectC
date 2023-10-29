@@ -179,7 +179,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private CaveroUser CreateUser()
+    
         // nieuwe method voor email verzenden met bool kijken of succesvol
         private async Task<bool> SendEmailAsync(string email, string subject, string confirmLink) 
         {
@@ -209,7 +209,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
 
         }
 
-        private IdentityUser CreateUser()
+        private CaveroUser CreateUser()
         {
             try
             {
@@ -244,7 +244,6 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
                 }
                body = body.Replace("URL", urlLink);
             return body;
-            
         }
     }
 }
