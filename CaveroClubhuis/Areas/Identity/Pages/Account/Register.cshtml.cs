@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
@@ -19,6 +22,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using System.IO;
+using Microsoft.Extensions.Hosting.Internal;
+using Microsoft.AspNetCore.Hosting;
+//using MyApp.Communication.SMTP;
+using System.Configuration;
 
 namespace CaveroClubhuis.Areas.Identity.Pages.Account
 {
@@ -146,8 +154,10 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    // gemaakte sender aanroepen
+                    await SendEmailAsync(Input.Email, "Verifieer uw Clubhuis account",
+                       $"{BodyVerificationEmail(callbackUrl)}"
+                       );
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
@@ -170,6 +180,36 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
         }
 
         private CaveroUser CreateUser()
+        // nieuwe method voor email verzenden met bool kijken of succesvol
+        private async Task<bool> SendEmailAsync(string email, string subject, string confirmLink) 
+        {
+            try
+            {
+                MailMessage message = new MailMessage();
+                SmtpClient smtpClient = new SmtpClient();
+                message.From = new MailAddress("noreplycavero@gmail.com");
+                message.To.Add(email);
+                message.Subject = subject;
+                message.IsBodyHtml = true;
+                message.Body = confirmLink;
+
+                smtpClient.Port = 587;
+                smtpClient.Host = "smtp.gmail.com";
+
+                smtpClient.EnableSsl = true;
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new NetworkCredential("noreplycavero@gmail.com", "tbtmeubeppicuaoo");
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.Send(message);
+                return true;
+            }
+            catch (Exception) { return false; }
+
+
+
+        }
+
+        private IdentityUser CreateUser()
         {
             try
             {
@@ -190,6 +230,21 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
             return (IUserEmailStore<CaveroUser>)_userStore;
+        }
+
+        private string BodyVerificationEmail(string urlLink)
+        {
+            string root = "wwwroot";
+            string file = "emailVerification.html";
+            string FullPath = Path.Combine(root, file);
+                string body = string.Empty;
+                using (StreamReader reader = new StreamReader(FullPath))
+                {
+                    body = reader.ReadToEnd();
+                }
+               body = body.Replace("URL", urlLink);
+            return body;
+            
         }
     }
 }

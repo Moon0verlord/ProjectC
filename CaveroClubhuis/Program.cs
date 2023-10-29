@@ -2,6 +2,9 @@ using CaveroClubhuis.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using CaveroClubhuis.Data;
+using CaveroClubhuis.Controllers;
+
+
 using Npgsql.Replication.TestDecoding;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +21,8 @@ builder.Services.AddDefaultIdentity<CaveroUser>(options => options.SignIn.Requir
 
 
 builder.Services.AddRazorPages();
+
+AccountController acc = new AccountController(builder.Environment);
 
 var app = builder.Build();
 
