@@ -227,8 +227,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
                 {
                     body = reader.ReadToEnd();
                 }
-               body = body.Replace("{URL}", urlLink);
-           // body = body.Replace("{Cavero_heel}", "C:\\Users\\megan\\source\\repos\\ProjectC\\CaveroClubhuis\\wwwroot\\images\\cavero_heel.jpg");
+               body = body.Replace("URL", urlLink);
             return body;
             
         }
