@@ -37,7 +37,7 @@ using (var serviceScope = app.Services.CreateScope())
 }
 
 
-
+// redirects user based on authentication
 app.MapGet("/", (HttpContext ctx) =>
 {
     if (ctx.User.Identity.IsAuthenticated)
