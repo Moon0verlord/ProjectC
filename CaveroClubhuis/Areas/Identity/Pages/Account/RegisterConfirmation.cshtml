@@ -1,0 +1,31 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+    Layout = "_EmptyLayout.cshtml";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- link for remixicons icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" />
+    <link rel="stylesheet" href="~/css/user-auth.css" />
+</head>
+
+<body class="css-selector">
+    <div class="login">
+        <form method="post" action="" class="login_form">
+            <img class="logo" src="~/images/logo.png" alt="Cavero Logo" width="50" height="50">
+            <h1 class="login_title">Your account has been successfully created</h1>
+            <div class="confirmation-message">
+                <p>We've sent you a verification link to your email
+                    address. Please check your inbox and verify your email address.</p>
+            </div>
+        </form>
+    </div>
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
