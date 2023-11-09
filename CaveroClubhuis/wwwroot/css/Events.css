@@ -1,0 +1,47 @@
+﻿.Evenementen {
+    width: 100%;
+    background-color: #E5E9F2;
+    height: 100% 10px;
+    /* dit zorgt ervoor dat margin in de child classes ook werkt */
+    overflow: auto;
+}
+#titel {
+    font-size: 26px;
+}
+.kaart {
+    margin-top: 1000px;
+    background-color: #803689;
+    border-radius: 40px;
+    width: 80%;
+    height: 320px;
+    margin: 0 auto;
+    margin-top: 50px;
+    /* dit zorgt ervoor dat margin in de child classes ook werkt */
+    overflow: auto;
+}
+.kaart h2 {
+    margin-top: 25px;
+}
+.kaart h2, h3, #beschijving {
+    color: #FFFFFF;
+    font-size: 26px;
+    margin-left: 5%;
+}
+button {
+    float: right;
+    background-color: #FFFFFF;
+    border-radius: 45px;
+    width: 210px;
+    height: 70px;
+    margin-right: 20px;
+}
+button p {
+    color: #47525E;
+    font-size: 26px;
+    margin-top: 10px;
+}
+/* Select the element with a title attribute equal to "manage" */
+a[title="Manage"] {
+    /* Your CSS styles here */
+   margin-top: 17px;
+}
