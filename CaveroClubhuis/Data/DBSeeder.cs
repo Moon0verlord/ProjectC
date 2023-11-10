@@ -13,6 +13,7 @@ public class DBSeeder
         // Check if the database is already seeded
         if (context.Events.Any())
         {
+            Console.WriteLine("Events table has already seeded.");
             return;
         }
         
@@ -24,7 +25,8 @@ public class DBSeeder
                 Title = "Why Bald People?",
                 Description = "Exploring baldness and its effects on the human psyche",
                 Date = DateTime.UtcNow.Date.AddDays(10),
-                Time = DateTime.UtcNow.AddHours(10),
+                StartTime = DateTime.UtcNow.AddHours(2).TimeOfDay,
+                EndTime = DateTime.UtcNow.AddHours(4).TimeOfDay,
                 UserId = GetRandomUserId(context),
                 Location = "Online",
                 Approval = true
@@ -34,7 +36,8 @@ public class DBSeeder
                 Title = "Capitol Visit",
                 Description = "We will be visiting the capitol to convince the government to ban baldness",
                 Date = DateTime.UtcNow.Date.AddDays(2),
-                Time = DateTime.UtcNow.AddHours(2),
+                StartTime = DateTime.UtcNow.AddHours(8).TimeOfDay,
+                EndTime = DateTime.UtcNow.AddHours(10).TimeOfDay,
                 UserId = GetRandomUserId(context),
                 Location = "Den Haag",
                 Approval = false
@@ -44,7 +47,8 @@ public class DBSeeder
                 Title = "Spawning Yakub",
                 Description = "We will be attempting the summoning of Yakub.",
                 Date = DateTime.UtcNow.Date.AddDays(5),
-                Time = DateTime.UtcNow.AddHours(4),
+                StartTime = DateTime.UtcNow.AddHours(5).TimeOfDay,
+                EndTime = DateTime.UtcNow.AddHours(6).TimeOfDay,
                 UserId = GetRandomUserId(context),
                 Location = "Arabia",
                 Approval = true
@@ -54,7 +58,8 @@ public class DBSeeder
                 Title = "Joining the war on drugs",
                 Description = "We will be joining the war on drugs. by selling drugs.",
                 Date = DateTime.UtcNow.Date.AddDays(1),
-                Time = DateTime.UtcNow.AddHours(8),
+                StartTime = DateTime.UtcNow.AddHours(3).TimeOfDay,
+                EndTime = DateTime.UtcNow.AddHours(4).TimeOfDay,
                 UserId = GetRandomUserId(context),
                 Location = "The streets",
                 Approval = false
@@ -64,7 +69,8 @@ public class DBSeeder
                 Title = "Tax Fraud part 2",
                 Description = "We will be committing tax fraud. again.",
                 Date = DateTime.UtcNow.Date.AddDays(7),
-                Time = DateTime.UtcNow.AddHours(5),
+                StartTime = DateTime.UtcNow.AddHours(6).TimeOfDay,
+                EndTime = DateTime.UtcNow.AddHours(8).TimeOfDay,
                 UserId = GetRandomUserId(context),
                 Location = "Belastingdienst HQ",
                 Approval = true
@@ -74,20 +80,45 @@ public class DBSeeder
         context.SaveChanges();
     }
     
-    // Seed your database with initial in-office entries
+    // Seed your database with initial in-office entry
     public static void InitializeInOffice(CaveroClubhuisContext context)
     {
         var inOfficeEntry = new InOffice
         {
             UserId = GetRandomUserId(context),
             CheckInDate = DateTime.UtcNow,
-            RecurringDays = "Monday, Wednesday, Friday"
         };
         context.InOffice.Add(inOfficeEntry);
         context.SaveChanges();
     }
     
-    // Seed your database with initial reviews
+    // Seed your database with initial event participant
+    public static void InitializeEventParticipants(CaveroClubhuisContext context)
+    {
+        var eventParticipant = new EventParticipants
+        {
+            UserId = GetRandomUserId(context),
+            EventId = GetRamdomEventId(context),
+            ResponseStatus = Responses.Going,
+        };
+        context.EventParticipants.Add(eventParticipant);
+        context.SaveChanges();
+    }
+    
+    // Seed your database with initial recurring check-in
+    public static void InitializeRecurringCheckIn(CaveroClubhuisContext context)
+    {
+        var recurringCheckIn = new RecurringCheckIn
+        {
+            UserId = GetRandomUserId(context),
+            CheckInTime = DateTime.UtcNow.AddHours(2).TimeOfDay,
+            DayOfWeek = DayOfWeek.Monday.ToString(),
+        };
+        context.RecurringCheckIns.Add(recurringCheckIn);
+        context.SaveChanges();
+    }
+    
+    // Seed your database with initial review
     public static void InitializeReviews(CaveroClubhuisContext context)
     {
         var Review = new EventReviews()
@@ -128,10 +159,10 @@ public class DBSeeder
     }
     
     // Get the time of the An in the database
-    public static DateTime GetEventTime(CaveroClubhuisContext dbContext)
+    public static TimeSpan GetEventTime(CaveroClubhuisContext dbContext)
     {
         var events = dbContext.Events
             .SingleOrDefault(e => e.Id == 1);
-            return events!.Time;
+            return events!.StartTime;
     }
 }

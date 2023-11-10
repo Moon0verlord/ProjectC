@@ -12,6 +12,7 @@ public class CaveroClubhuisContext : IdentityDbContext<CaveroUser>
     public DbSet<EventParticipants> EventParticipants { get; set; }
     public DbSet<EventReviews> EventReviews { get; set; }
     public DbSet<InOffice> InOffice { get; set; }
+    public DbSet<RecurringCheckIn> RecurringCheckIns { get; set; }
 
     public CaveroClubhuisContext(DbContextOptions<CaveroClubhuisContext> options)
         : base(options)
@@ -39,11 +40,11 @@ public class CaveroClubhuisContext : IdentityDbContext<CaveroUser>
         builder.Entity<IdentityUserLogin<string>>().ToTable("ExternalLogins");
         builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
         builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
-        // Adding custom tables to the database
-        builder.Entity<Events>()
-            .HasOne(e => e.User)
-            .WithMany()
-            .HasForeignKey(e => e.UserId);
+        // making response status a string
+        builder.HasPostgresEnum<Responses>();
+        builder.Entity<EventParticipants>()
+            .Property(e => e.ResponseStatus)
+            .HasConversion<string>();
         
     }
 }

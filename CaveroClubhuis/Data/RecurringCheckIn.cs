@@ -1,24 +1,28 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CaveroClubhuis.Areas.Identity.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace CaveroClubhuis.Data;
 
-
-public class InOffice
-{    
+public class RecurringCheckIn
+{
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int InOfficeId { get; set; } // Primary key
+    public int RecurringCheckInId { get; set; } // Primary key
 
     [Required]
     public string UserId { get; set; }
 
-    // Date & Time is stored in UTC Timezone
+    // Day of the week (e.g., "Friday")
     [Required]
-    public DateTime CheckInDate { get; set; }
+    public string DayOfWeek { get; set; }
     
+    [Required]
+    public TimeSpan CheckInTime { get; set; }
+
+    // Optional: End date for the recurrence
+    public DateTime? EndDate { get; set; }
+
     [ForeignKey("UserId")]
     public CaveroUser User { get; set; }
 }
