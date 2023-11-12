@@ -188,6 +188,16 @@
     margin-bottom: 1rem;
 }
 
+.reset_password_form {
+    margin-inline: 1.5rem;
+    background-color: hsl(0,0%,98%);
+    border: 2px solid hsla(0,0%,100%, .7);
+    padding: 2.5rem 1rem;
+    color: #000000;
+    border-radius: 1rem;
+    box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.5);
+}
+
 
 /* Animated Login button */
 .login_button:active {
