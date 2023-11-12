@@ -22,7 +22,8 @@
     .login_form {
         width: 600px;
         padding-inline: 4rem;
-        height: 700px;
+        height: auto;
+        max-height: 750px;
     }
 
     .login_title {
@@ -62,6 +63,7 @@
     color: #000000;
     border-radius: 1rem;
     box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.5);
+    max-height: 750px;
 }
 
 .login_title {
@@ -175,7 +177,7 @@
 
 
 .smaller-input {
-    width: 88%;
+    width: 98%;
 }
 
 .confirmation-message {

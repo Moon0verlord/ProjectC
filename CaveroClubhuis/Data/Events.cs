@@ -15,13 +15,19 @@ public class Events
     public string Title { get; set; }
 
     [Required]
+    [MaxLength(500)]
     public string Description { get; set; }
     // Date & Time is stored in UTC Timezone
+    
     [Required]
     public DateTime Date { get; set; }
     // Date & Time is stored in UTC Timezone
+    
     [Required]
-    public DateTime Time { get; set; }
+    public TimeSpan StartTime { get; set; }
+    
+    [Required]
+    public TimeSpan EndTime { get; set; }
 
     [Required]
     [ForeignKey("User")]

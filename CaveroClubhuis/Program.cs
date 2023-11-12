@@ -34,10 +34,12 @@ using (var serviceScope = app.Services.CreateScope())
     //DBSeeder.InitializeEvents(dbContext); 
     //DBSeeder.InitializeInOffice(dbContext);
     //DBSeeder.InitializeReviews(dbContext);
+    //DBSeeder.InitializeRecurringCheckIn(dbContext);
+    //DBSeeder.InitializeEventParticipants(dbContext);
 }
 
 
-
+// redirects user based on authentication
 app.MapGet("/", (HttpContext ctx) =>
 {
     if (ctx.User.Identity.IsAuthenticated)

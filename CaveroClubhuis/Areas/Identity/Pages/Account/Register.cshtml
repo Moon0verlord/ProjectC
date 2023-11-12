@@ -11,6 +11,7 @@
     <!-- link for remixicons icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" />
     <link rel="stylesheet" href="~/css/user-auth.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
 </head>
 
 
@@ -46,13 +47,14 @@
                 <input type="password" asp-for="Input.Password" placeholder="Password" required class="login_input">
                 <i class="ri-lock-2-fill"></i>
             </div>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
 
             <div class="login_box">
                 <input type="password" asp-for="Input.ConfirmPassword" placeholder="Confirm Password" required class="login_input">
                 <i class="ri-lock-2-fill"></i>
             </div>
-
-            <span asp-validation-for="Input.Password" class="text-danger"></span>
+            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            
         </div>
         <button type="submit" class="login_button">&rarr; Sign Up</button>
     </form>
