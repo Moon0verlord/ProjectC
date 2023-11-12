@@ -1,7 +1,10 @@
 ﻿.Evenementen {
-    width: 100%;
+    margin-left: 255px;
+    margin-top: 220px;
+    width: 82%;
     background-color: #E5E9F2;
-    height: 100% 10px;
+    height: 100%;
+    border-radius: 30px;
     /* dit zorgt ervoor dat margin in de child classes ook werkt */
     overflow: auto;
 }
