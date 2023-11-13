@@ -22,13 +22,19 @@ namespace CaveroClubhuis.Pages
             _layoutTools = layoutTools;
 
         }
+        public List<Events> EventsList { get; set; }
         public void OnGet()
         {
             // get name of user
             var userId = _userManager.GetUserId(User);
             (FirstName, LastName) = _layoutTools.LoadName(userId);
+            EventsList = FetchEvents();
         }
-
+        public List<Events> FetchEvents()
+        {
+            // Fetch all events from the database
+            return _context.Events.ToList();
+        }
 
     }
 }
