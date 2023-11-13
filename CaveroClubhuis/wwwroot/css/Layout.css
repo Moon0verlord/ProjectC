@@ -1,4 +1,52 @@
-﻿.background {
+﻿@media screen and (min-width: 1024px) and (max-width: 1440px) {
+
+    .sidebar.sidebar { /* Increased specificity */
+        max-width: 280px;
+    }
+
+    .Headertxt {
+        margin-left: 30px;
+        font-size: 48px;
+    }
+
+    .page-content {
+        margin: 10px;
+    }
+
+    .settings, .profile, .check-in, .menu-bar, .notification-container {
+        transform: scale(0.9);
+    }
+    
+    .check-in.check-in {
+        margin-left: 0px;
+    }
+    
+    .profile.profile{
+        margin-left: 0px;
+    }
+    
+    .cavero-logo.cavero-logo{
+        padding: 18px;
+    }
+
+    .profile_picture {
+
+        width: 45px;
+        height: 45px;
+    }
+
+    .menu-buttons {
+        margin-left: 30px; 
+    }
+    
+    .menu-bar.menu-bar {
+        margin-top: 155px;
+    }
+    
+}
+
+
+.background {
     background-color: #f2f0f8;
     display: flex;
     flex-direction: row;
