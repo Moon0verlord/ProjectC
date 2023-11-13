@@ -13,7 +13,7 @@
         margin: 10px;
     }
 
-    .settings, .profile, .check-in, .menu-bar, .notification-container {
+    .settings, .profile, .check-in, .menu-bar, .notification-container,.Log-out {
         transform: scale(0.9);
     }
     
@@ -22,7 +22,7 @@
     }
 
     .Log-out.Log-out {
-        margin-left: 0px;
+        margin-left: 10px;
     }
     
     .profile.profile{
@@ -68,6 +68,14 @@
     border-radius: 0 10px 10px 0;
     max-width: 328px;
     height: 100vh;
+}
+
+.Logout-F{
+    display: flex;
+    margin:0;
+    padding:0;
+    border:0;
+    
 }
 
 .Headertxt{
