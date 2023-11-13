@@ -1,7 +1,7 @@
 ﻿.Evenementen {
     width: 82%;
     background-color: #f2f0f8;
-    height: 67vh;
+    height: 56vh;
     border-radius: 30px;
     /* dit zorgt ervoor dat margin in de child classes ook werkt */
     overflow: auto;
