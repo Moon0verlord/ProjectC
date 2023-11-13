@@ -21,4 +21,6 @@ public class InOffice
     
     [ForeignKey("UserId")]
     public CaveroUser User { get; set; }
+    
+    public DateTime? CheckOutDate { get; set; }
 }

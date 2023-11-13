@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using CaveroClubhuis.Data;
 using CaveroClubhuis.Controllers;
-
-
+using CaveroClubhuis.Pages.Shared;
 using Npgsql.Replication.TestDecoding;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +17,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<CaveroUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<CaveroClubhuisContext>();
+
+// Add custom services
+builder.Services.AddScoped<LayoutTools>();
 
 
 builder.Services.AddRazorPages();
@@ -51,6 +53,8 @@ app.MapGet("/", (HttpContext ctx) =>
         return Results.Redirect("/Identity/Account/Login");
     }
 });
+
+
 
 
 // Configure the HTTP request pipeline.

@@ -1,0 +1,204 @@
+﻿.background {
+    background-color: #f2f0f8;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+    height: 100vh;
+
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: #803689;
+    border-radius: 0 10px 10px 0;
+    max-width: 328px;
+    height: 100vh;
+}
+
+.Headertxt{
+    margin-top: 40px;
+    margin-left: 40px;
+    width: calc(328 - 100vw);
+    color: #000;
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Arial;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: -0.2px;
+}
+
+.page-content{
+    margin-top : 20px;
+    flex-grow: 1;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+
+.top-sidebar {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    padding: 5px;
+}
+
+.settings {
+    margin-top: 15px;
+    margin-left: 5px;
+    background-color: transparent;
+    border-color: transparent;
+    width: 144px;
+    top: 823px;
+    left: 25px;
+    font-family: "Inter", Helvetica, serif;
+    font-weight: 600;
+    color: #b1b3b4;
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: -0.2px;
+    line-height: 32px;
+    white-space: nowrap;
+}
+
+/* Need to find another way of doing this */
+.settingsspace{
+    margin-left: 5px;
+    margin-top: auto;
+
+}
+
+
+.line-2 {
+    opacity: 0.5;
+    background-color: #b1b3b4;
+    width: calc(100vw);
+    height: 2px;
+    left: 328px;
+    top: 121px;
+    object-fit: cover;
+}
+
+.line-3 {
+    opacity: 0.5;
+    background-color: #b1b3b4;
+    max-width: 90%;
+    height: 2px;
+    top: 785px;
+    object-fit: cover;
+}
+
+.cavero-logo {
+    align-items: center;
+    left: 50px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile {
+    margin-top: 20px;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    width: 284px;
+    height: 95px;
+    top: 170px;
+    left: 17px;
+    background-color: #d9d9d9;
+    border-radius: 13px;
+}
+
+.profile_picture {
+    margin-left: 20px;
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #b1b3b4;
+}
+
+.profile_text {
+    margin-left: 10px;
+    width: 150px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.check-in {
+    margin-top: 100px;
+    margin-left: 20px;
+    width: 284px;
+    height: 54px;
+    top: 320px;
+    left: 9%;
+    font-weight: bold;
+    white-space: nowrap;
+    border-radius: 13px;
+    border-color: transparent;
+    background-color: #d9d9d9;
+}
+
+.check-in:active {
+    animation: gradient 150ms;
+    background: #ffffff;
+    color: #000000;
+    box-shadow: none;
+}
+
+.notification {
+    width: 94px;
+    height: 90px;
+    top: 14px;
+    left: 1323px;
+    background-color: #d9d9d9;
+    border-radius: 47px/45px;
+    border: 2px solid #000000;
+}
+
+/* Need to find another way of doing this */
+.notification-container {
+    margin-top :20px;
+    margin-left: 78vw;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.menu-bar {
+    margin-top: 200px;
+    margin-left: 80px;
+    max-width: 1058px;
+    height: 89px;
+    display: flex;
+    justify-content: flex-start;
+    background-color: #ffffff;
+    border-radius: 13px;
+    border: 2px solid #d9d9d9;
+    align-items: center;
+}
+
+.menu-buttons {
+    width: 145px;
+    height: 41px;
+    border-radius: 25px;
+    border-color: transparent;
+    background-color: #803689;
+    color: white;
+    margin-left: 50px;
+    box-shadow: 1px 4px 16px #d6dbe3;
+
+}
