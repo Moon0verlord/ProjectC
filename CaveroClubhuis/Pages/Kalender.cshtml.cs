@@ -13,22 +13,28 @@ namespace CaveroClubhuis.Pages
         private readonly LayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
-        
-        
-        public KalenderModel(CaveroClubhuisContext context,UserManager<CaveroUser> userManager, LayoutTools layoutTools)
+
+
+        public KalenderModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, LayoutTools layoutTools)
         {
             _context = context;
             _userManager = userManager;
             _layoutTools = layoutTools;
 
         }
+        public List<Events> EventsList { get; set; }
         public void OnGet()
         {
             // get name of user
             var userId = _userManager.GetUserId(User);
             (FirstName, LastName) = _layoutTools.LoadName(userId);
+            EventsList = FetchEvents();
         }
-        
+        public List<Events> FetchEvents()
+        {
+            // Fetch all events from the database
+            return _context.Events.ToList();
+        }
 
     }
 }
