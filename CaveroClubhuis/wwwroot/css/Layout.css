@@ -1,4 +1,56 @@
-﻿.background {
+﻿@media screen and (min-width: 1024px) and (max-width: 1440px) {
+
+    .sidebar.sidebar { /* Increased specificity */
+        max-width: 280px;
+    }
+
+    .Headertxt {
+        margin-left: 30px;
+        font-size: 48px;
+    }
+
+    .page-content {
+        margin: 10px;
+    }
+
+    .settings, .profile, .check-in, .menu-bar, .notification-container {
+        transform: scale(0.9);
+    }
+    
+    .check-in.check-in {
+        margin-left: 0px;
+    }
+
+    .Log-out.Log-out {
+        margin-left: 0px;
+    }
+    
+    .profile.profile{
+        margin-left: 0px;
+    }
+    
+    .cavero-logo.cavero-logo{
+        padding: 18px;
+    }
+
+    .profile_picture {
+
+        width: 45px;
+        height: 45px;
+    }
+
+    .menu-buttons {
+        margin-left: 30px; 
+    }
+    
+    .menu-bar.menu-bar {
+        margin-top: 155px;
+    }
+    
+}
+
+
+.background {
     background-color: #f2f0f8;
     display: flex;
     flex-direction: row;
@@ -150,6 +202,27 @@
     border-radius: 13px;
     border-color: transparent;
     background-color: #d9d9d9;
+}
+
+.Log-out{
+    margin-top: 100px;
+    margin-left: 20px;
+    width: 284px;
+    height: 54px;
+    top: 320px;
+    left: 9%;
+    font-weight: bold;
+    white-space: nowrap;
+    border-radius: 13px;
+    border-color: transparent;
+    background-color: #d9d9d9;
+}
+
+
+.check-in:hover {
+    background: #ffffff;
+    color: #000000;
+    box-shadow: none;
 }
 
 .check-in:active {

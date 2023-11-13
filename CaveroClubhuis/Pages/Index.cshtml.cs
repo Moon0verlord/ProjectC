@@ -1,7 +1,8 @@
-﻿using CaveroClubhuis.Areas.Identity.Data;
+using CaveroClubhuis.Areas.Identity.Data;
 using CaveroClubhuis.Data;
 using CaveroClubhuis.Pages.Shared;
 using Microsoft.AspNetCore.Identity;
+using CaveroClubhuis.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -37,6 +38,4 @@ public class IndexModel : PageModel
 
         
     }
-    
-    
 }
