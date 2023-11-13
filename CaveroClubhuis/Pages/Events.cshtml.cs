@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using CaveroClubhuis.Data;
 using CaveroClubhuis.Pages.Shared;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CaveroClubhuis.Pages
 {
@@ -16,6 +17,8 @@ namespace CaveroClubhuis.Pages
         private readonly LayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
+        
+        public bool IsUserCheckedIn { get; private set; }
 
         
         
@@ -40,6 +43,15 @@ namespace CaveroClubhuis.Pages
         public IList<Events> FetchEvents()
         {
             return _context.Events.ToList();
+        }
+        
+        
+        public async Task<IActionResult> OnPostToggleCheckInAsync()
+        {
+            var userId = _userManager.GetUserId(User);
+            _layoutTools.ToggleCheckIn(userId);
+
+            return RedirectToPage();
         }
     }
 }

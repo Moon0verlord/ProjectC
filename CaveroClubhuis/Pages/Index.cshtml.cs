@@ -18,6 +18,7 @@ public class IndexModel : PageModel
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
     public int PeopleCount { get; private set; }
+    public bool IsUserCheckedIn { get; private set; }
 
 
     public IndexModel(ILogger<IndexModel> logger,CaveroClubhuisContext context,UserManager<CaveroUser> userManager, LayoutTools layoutTools)
@@ -35,7 +36,16 @@ public class IndexModel : PageModel
         // get name of user
         var userId = _userManager.GetUserId(User);
         (FirstName, LastName) = _layoutTools.LoadName(userId);
-
-        
+        IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
     }
+    
+    public async Task<IActionResult> OnPostToggleCheckInAsync()
+    {
+        var userId = _userManager.GetUserId(User);
+        _layoutTools.ToggleCheckIn(userId);
+
+        return RedirectToPage();
+    }
+    
+
 }
