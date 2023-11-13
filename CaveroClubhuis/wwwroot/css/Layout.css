@@ -200,6 +200,27 @@
     background-color: #d9d9d9;
 }
 
+.Log-out{
+    margin-top: 100px;
+    margin-left: 20px;
+    width: 284px;
+    height: 54px;
+    top: 320px;
+    left: 9%;
+    font-weight: bold;
+    white-space: nowrap;
+    border-radius: 13px;
+    border-color: transparent;
+    background-color: #d9d9d9;
+}
+
+
+.check-in:hover {
+    background: #ffffff;
+    color: #000000;
+    box-shadow: none;
+}
+
 .check-in:active {
     animation: gradient 150ms;
     background: #ffffff;
