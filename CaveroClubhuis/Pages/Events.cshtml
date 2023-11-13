@@ -1,5 +1,6 @@
 ﻿@page
-@model EventsModel
+@using System.Runtime.InteropServices.JavaScript
+@model CaveroClubhuis.Pages.EventsModel
 @{
     ViewData["Title"] = "Evenementen";
 }
@@ -7,25 +8,19 @@
     <link rel="stylesheet" href="~/css/Events.css" />
 </head>
 <body>
-    <h1 id="titel">Evenementen</h1>
-    <div class="Evenementen">
+<div class="Evenementen">
+    @foreach (var eventItem in Model.EventsList)
+    {
         <div class="kaart">
-            <h2>Paintball middag</h2>
-            <h3>00/00/2023, 00:00</h3>
+            <h2>@eventItem.Title</h2> 
+            <h3>@eventItem.Date.ToString("dd-MM-yy"), @eventItem.StartTime.ToString(@"hh\:mm")</h3> 
             <p id="beschijving">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut scelerisque laoreet elementum. Aliquam ligula magna, viverra in ex a, fermentum accumsan leo.
+                @eventItem.Description 
             </p>
             <button><p>Deelnemers</p></button>
             <button><p>Aanmelden</p></button>
         </div>
-        <div class="kaart">
-            <h2>Halloween party!</h2>
-            <h3>00/00/2023, 00:00</h3>
-            <p id="beschijving">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut scelerisque laoreet elementum. Aliquam ligula magna, viverra in ex a, fermentum accumsan leo.
-            </p>
-            <button><p>Deelnemers</p></button>
-            <button><p>Aanmelden</p></button>
-        </div>
-    </div>
+    }
+</div>
 </body>
+

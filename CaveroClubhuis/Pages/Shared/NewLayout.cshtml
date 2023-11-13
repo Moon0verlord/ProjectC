@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CaveroClubhuis</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" />
+    <link rel="stylesheet" href="~/css/Layout.css" asp-append-version="true" />
+</head>
+<body>
+<div class="background">
+
+    <div class="sidebar">
+
+        <header class="top-sidebar">
+            <div class="cavero-logo">
+                <img src="~/images/Cavero_white.png" width="250" height="auto"/>
+            </div>
+            <h1 class="Headertxt">@ViewData["Title"]</h1>
+        </header>
+
+        <div class="line-2"></div>
+
+        <div class="profile">
+            <img class="profile_picture" src="~/images/An.jpeg"/>
+            <div class="profile_text"> @Model.FirstName @Model.LastName</div>
+        </div>
+
+        <button class="check-in">
+            <i class="ri-login-circle-line"></i>
+            Check - in
+        </button>
+
+        <form class="form-inline" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+            <button type="submit" class="check-in">
+                <i class="ri-logout-circle-line"></i>
+                Log-out
+            </button>
+        </form>
+
+
+        <div class="settingsspace"></div>
+        <div class="line-3"></div>
+        <button class="settings">
+            <img src="~/images/settings.png" width="50" height="auto"/>
+            Settings
+        </button>
+    </div>
+
+    <div class="main-content">
+        <div class="menu-bar">
+            <a href="/">
+                <button class="menu-buttons">
+                    <img src="~/images/Home_Icon2.png" width="25" height="auto"/>
+                    Home
+                </button>
+            </a>
+            <a href="/Kalender">
+                <button class="menu-buttons">
+                    <img src="~/images/Calender_Icon.png" width="25" height="auto"/>
+                    Calendar
+                </button>
+            </a>
+            <a href="/MyEvents">
+                <button class="menu-buttons">
+                    <img src="~/images/Event_Icon.png" width="25" height="auto"/>
+                    My events
+                </button>
+            </a>
+            <a href="/">
+                <button class="menu-buttons">
+                    <img src="~/images/News.png" width="25" height="auto"/>
+                    News
+                </button>
+            </a>
+        </div>
+
+        <div class="page-content">
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+</div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
