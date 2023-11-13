@@ -32,6 +32,8 @@ namespace CaveroClubhuis.Pages
             var userId = _userManager.GetUserId(User);
             (FirstName, LastName) = _layoutTools.LoadName(userId);
             EventsList = FetchEvents();
+            IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
+
         }
         public List<Events> FetchEvents()
         {

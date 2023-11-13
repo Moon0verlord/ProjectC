@@ -27,7 +27,7 @@
             <div class="profile_text"> @Model.FirstName @Model.LastName</div>
         </div>
 
-        <form asp-page="/Index" asp-page-handler="ToggleCheckIn" method="post">
+        <form class="Logout-F" asp-page-handler="ToggleCheckIn" method="post">
             @if (Model.IsUserCheckedIn)
             {
                 <button type="submit" class="check-in">
