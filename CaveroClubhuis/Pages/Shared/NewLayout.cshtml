@@ -27,12 +27,25 @@
             <div class="profile_text"> @Model.FirstName @Model.LastName</div>
         </div>
 
-        <button class="check-in">
-            <i class="ri-login-circle-line"></i>
-            Check - in
-        </button>
+        <form class="Logout-F" asp-page-handler="ToggleCheckIn" method="post">
+            @if (Model.IsUserCheckedIn)
+            {
+                <button type="submit" class="check-in">
+                    <i class="ri-logout-circle-line"></i>
+                    Check - out
+                </button>
+            }
+            else
+            {
+                <button type="submit" class="check-in">
+                    <i class="ri-login-circle-line"></i>
+                    Check - in
+                </button>
+            }
+        </form>
 
-        <form class="" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+
+        <form class="Logout-F" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
             <button type="submit" class="Log-out">
                 <i class="ri-logout-circle-line"></i>
                 Log-out
@@ -43,7 +56,7 @@
         <div class="settingsspace"></div>
         <div class="line-3"></div>
         <button class="settings">
-            <img src="~/images/settings.png" width="50" height="auto"/>
+            <img src="~/images/settings.png" width="50" height="47"/>
             Settings
         </button>
     </div>

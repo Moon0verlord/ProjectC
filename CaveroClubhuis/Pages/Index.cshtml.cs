@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using CaveroClubhuis.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 
 namespace CaveroClubhuis.Pages;
 
@@ -18,6 +19,7 @@ public class IndexModel : PageModel
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
     public int PeopleCount { get; private set; }
+    public bool IsUserCheckedIn { get; private set; }
 
 
     public IndexModel(ILogger<IndexModel> logger,CaveroClubhuisContext context,UserManager<CaveroUser> userManager, LayoutTools layoutTools)
@@ -30,12 +32,23 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-        var peopleCount = _context.InOffice.Count();
-        
+        //DateTimeOffset dateTimeOffset = DateTimeOffset.Now;
+        var now = DateTimeOffset.UtcNow;
+        PeopleCount = _context.InOffice.AsEnumerable().Where(x => !x.CheckOutDate.HasValue || now <= TimeZoneInfo.ConvertTimeToUtc((DateTime)x.CheckOutDate.Value, TimeZoneInfo.Utc)).Count();
         // get name of user
         var userId = _userManager.GetUserId(User);
         (FirstName, LastName) = _layoutTools.LoadName(userId);
+        IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
 
-        
     }
+
+    public async Task<IActionResult> OnPostToggleCheckInAsync()
+    {
+        var userId = _userManager.GetUserId(User);
+        _layoutTools.ToggleCheckIn(userId);
+
+        return RedirectToPage();
+    }
+    
+
 }

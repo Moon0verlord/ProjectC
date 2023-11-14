@@ -39,15 +39,36 @@ public class LayoutTools
         _context.SaveChanges();
     }
     
-    public void CheckOut(string userid)
+    public void CheckOut(string userId)
     {
-        var inOfficeEntry = new InOffice
+        var inOfficeRecord = _context.InOffice
+            .FirstOrDefault(io => io.UserId == userId && io.CheckOutDate == null);
+
+        if (inOfficeRecord != null)
         {
-            UserId = userid,
-            CheckOutDate = DateTime.UtcNow,
-        };
-        _context.InOffice.Add(inOfficeEntry);
-        _context.SaveChanges();
+            inOfficeRecord.CheckOutDate = DateTime.UtcNow;
+            _context.SaveChanges();
+        }
     }
+    
+    public bool IsUserCheckedIn(string userId)
+    {
+        return _context.InOffice.Any(io => io.UserId == userId && io.CheckOutDate == null);
+    }
+    
+    public void ToggleCheckIn(string userId)
+    {
+        var currentStatus = IsUserCheckedIn(userId);
+
+        if (currentStatus)
+        {
+            CheckOut(userId);
+        }
+        else
+        {
+            CheckIn(userId);
+        }
+    }
+
 
 }
