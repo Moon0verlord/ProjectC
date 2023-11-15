@@ -2,6 +2,7 @@
 @model CaveroClubhuis.Pages.IndexModel
 @{
     ViewData["Title"] = "Homepage";
+    
 }
 
 <head>
@@ -11,7 +12,7 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Dit is de clubhuis app van Cavero.</p>
-    <ejs-button id="element" content="Button"></ejs-button>
+    <div class="col-lg-12 control-section" id="target">
     <div style="width: 300px; height: 75px; padding-left: 25px; padding-right: 25px; padding-top: 16px; padding-bottom: 16px; background: #803689; border-radius: 20px; justify-content: flex-start; align-items: center; gap: 16px; display: inline-flex">
         <div style="width: 27px; height: 25px; position: relative">
             <i class="ri-group-fill" style="color: white; font-size: 25px; position: absolute; left: 0; top: -7px;"></i>
@@ -22,7 +23,60 @@
         </div>
         <div style="width: 2px; height: 40px; background-color: white; margin: 0 8px;"></div> <!-- White divider -->
         <div style="display: inline-flex; gap: 8px; white-space: nowrap;">
-            <div style="text-align: center; color: white; font-size: 17px; font-family: Arial; font-weight: 400; line-height: 20px; letter-spacing: 0.50px; word-wrap: break-word">People in office</div>
+                    <ejs-button id="targetButton" content="Caverianen in de loods" cssClass="custom-button"></ejs-button>
+                <ejs-dialog id='dialog' header="Caverianen in de loods" enableResize="true" cssClass="custom-dialog" showCloseIcon="true" visible="false"  width="500px">
+                        <e-content-template>
+                            <ejs-grid id="Grid" dataSource="@Model.People" width="470">
+                                <e-grid-columns>
+                                    <e-grid-column field="FirstName" headerText="Voornaam" textAlign="Center" width="40"></e-grid-column>
+                                    <e-grid-column field="LastName" headerText="Achternaam" textAlign="Center" width="40"></e-grid-column>
+                                    <e-grid-column field="Team" headerText="Team" textAlign="Center" width="40"></e-grid-column>
+
+                                </e-grid-columns>
+                            </ejs-grid>
+
+                        </e-content-template>
+                    </ejs-dialog>
+                </div>
+                <script>
+                    window.onload = function () {
+                        document.getElementById('targetButton').onclick = function () {
+                            var dialog = document.getElementById("dialog").ej2_instances[0];
+                            dialog.show();
+                        }
+                    }
+
+
+                </script>
         </div>
     </div>
+
 </div>
+    <style>
+        .custom-button {
+            /* button custom kleuren geven */
+            background-color: white;
+            color: #803689;
+        }
+
+    .e-dialog .e-dlg-header {
+       
+        font-size: 20px;
+        font-weight: normal;
+        position: relative:
+    }
+
+    .e-dialog .e-dlg-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+        #target {
+            height: 100%;
+            min-height: 250px;
+            width: 90%;
+        }
+
+
+      
+    </style>
