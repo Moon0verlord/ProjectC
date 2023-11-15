@@ -4,6 +4,8 @@ using CaveroClubhuis.Data;
 using CaveroClubhuis.Pages.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 
 namespace CaveroClubhuis.Pages
 {
@@ -11,6 +13,7 @@ namespace CaveroClubhuis.Pages
     {
         
         public IList<Events> EventsList { get; set; }
+        public IList<Events> oldEvents { get; set; }
         
         private readonly CaveroClubhuisContext _context;
         private readonly UserManager<CaveroUser> _userManager;
@@ -34,6 +37,7 @@ namespace CaveroClubhuis.Pages
         public void OnGet()
         {
             EventsList = FetchEvents();
+            oldEvents = OldEvents();
             var userId = _userManager.GetUserId(User);
             (FirstName, LastName) = _layoutTools.LoadName(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
@@ -44,7 +48,30 @@ namespace CaveroClubhuis.Pages
         
         public IList<Events> FetchEvents()
         {
-            return _context.Events.ToList();
+            //make it to where it only takes the events later then the current date
+
+            DateTime currentDateTime = DateTime.UtcNow - TimeSpan.FromHours(12);
+
+            // Filter the data to get events after the current datetime
+            var filteredEvents = _context.Events
+                .Where(e => e.Date > currentDateTime)
+                .ToList();
+
+            return filteredEvents;
+        }
+
+        public IList<Events> OldEvents()
+        {
+            //make it to where it only takes the events later then the current date
+
+            DateTime currentDateTime = DateTime.UtcNow - TimeSpan.FromHours(12);
+
+            // Filter the data to get events after the current datetime
+            var filteredEvents = _context.Events
+                .Where(e => e.Date <= currentDateTime)
+                .ToList();
+
+            return filteredEvents;
         }
         
         

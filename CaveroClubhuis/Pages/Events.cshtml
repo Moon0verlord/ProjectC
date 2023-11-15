@@ -8,19 +8,39 @@
     <link rel="stylesheet" href="~/css/Events.css" />
 </head>
 <body>
-<div class="Evenementen">
-    @foreach (var eventItem in Model.EventsList)
-    {
-        <div class="kaart">
-            <h2>@eventItem.Title</h2> 
-            <h3>@eventItem.Date.ToString("dd-MM-yy"), @eventItem.StartTime.ToString(@"hh\:mm")</h3> 
-            <p id="beschijving">
-                @eventItem.Description 
-            </p>
-            <button><p>Deelnemers</p></button>
-            <button><p>Aanmelden</p></button>
+    <div class="Wrapper">
+        <div class="Evenementen">
+            <h2 class="Title">Opkomende evenementen</h2>
+            <hr class="titleLine" />
+            @foreach (var eventItem in Model.EventsList)
+                {
+            <div class="kaart">
+                <h2>@eventItem.Title</h2>
+                <h3>@eventItem.Date.ToString("dd-MM-yy"), @eventItem.StartTime.ToString(@"hh\:mm")</h3>
+                <p id="beschijving">
+                    @eventItem.Description
+                </p>
+                <button><p>Deelnemers</p></button>
+                <button><p>Aanmelden</p></button>
+            </div>
+                }
         </div>
-    }
-</div>
+        <div class="Evenementen">
+            <h2 class="Title">Verlopen evenementen</h2>
+            <hr class="titleLine" />
+            @foreach (var eventItem in Model.oldEvents)
+                {
+            <div class="kaart">
+                <h2>@eventItem.Title</h2>
+                <h3>@eventItem.Date.ToString("dd-MM-yy"), @eventItem.StartTime.ToString(@"hh\:mm")</h3>
+                <p id="beschijving">
+                    @eventItem.Description
+                </p>
+                <button><p>Deelnemers</p></button>
+                <button><p>Aanmelden</p></button>
+            </div>
+                }
+        </div>
+    </div>
 </body>
 
