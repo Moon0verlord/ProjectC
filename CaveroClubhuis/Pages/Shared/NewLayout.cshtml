@@ -45,12 +45,21 @@
         </form>
 
 
-        <form class="Logout-F" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-            <button type="submit" class="Log-out">
-                <i class="ri-logout-circle-line"></i>
-                Log-out
-            </button>
-        </form>
+@{
+        if (User.Identity?.IsAuthenticated ?? false)
+        {
+            <form class="Logout-F" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                <button type="submit" class="Log-out">
+                    <i class="ri-logout-circle-line"></i>
+                    Log-out
+                </button>
+            </form>
+        }
+        else
+        {
+            <p>You have successfully logged out of the application.</p>
+        }
+    }
 
  
         <div class="settingsspace"></div>
