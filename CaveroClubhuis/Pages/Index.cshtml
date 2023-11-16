@@ -54,6 +54,11 @@
         top: 30%!important;
     }
 
+    .e-pager .e-currentitem {
+        background: #803689;
+        
+    }
+   
   
 </style>
 
@@ -74,7 +79,8 @@
                 <ejs-button id="targetButton" content="Caverianen in de loods" cssClass="custom-button"></ejs-button>
                 <ejs-dialog id='dialog' header="Caverianen in de loods"  target="#targetButton" showCloseIcon="true" visible="false" width="500px" >
                     <e-content-template>
-                        <ejs-grid id="Grid" dataSource="@Model.People" width="470">
+                        <ejs-grid id="Grid" dataSource="@Model.People" width="470" allowPaging="true">
+                            <e-grid-pagesettings pageSize="10" ></e-grid-pagesettings>
                             <e-grid-columns>
                                 <e-grid-column field="FirstName" headerText="Voornaam" textAlign="Center" width="40"></e-grid-column>
                                 <e-grid-column field="LastName" headerText="Achternaam" textAlign="Center" width="40"></e-grid-column>
