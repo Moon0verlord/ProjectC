@@ -54,7 +54,7 @@ namespace CaveroClubhuis.Pages
 
             // Filter the data to get events after the current datetime
             var filteredEvents = _context.Events
-                .Where(e => e.Date > currentDateTime)
+                .Where(e => e.Date > currentDateTime) 
                 .ToList();
 
             return filteredEvents;
