@@ -21,6 +21,8 @@ public class IndexModel : PageModel
     public int PeopleCount { get; private set; }
     public bool IsUserCheckedIn { get; private set; }
 
+    public List<PersonInfo> People { get; private set; }
+
 
     public IndexModel(ILogger<IndexModel> logger,CaveroClubhuisContext context,UserManager<CaveroUser> userManager, LayoutTools layoutTools)
     {
@@ -39,7 +41,31 @@ public class IndexModel : PageModel
         var userId = _userManager.GetUserId(User);
         (FirstName, LastName) = _layoutTools.LoadName(userId);
         IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
+        People = CheckInOverview();
 
+    }
+
+    public List<PersonInfo> CheckInOverview()
+    {
+        var now = DateTimeOffset.UtcNow;
+        var people = _context.InOffice
+        .Join(
+            _context.Users,
+            i => i.UserId,
+            c => c.Id,
+            (i, c) => new { InOffice = i, CaveroUser = c }
+        )
+        .AsEnumerable() 
+        .Where(ti => !ti.InOffice.CheckOutDate.HasValue || now <= TimeZoneInfo.ConvertTimeToUtc(ti.InOffice.CheckOutDate.Value, TimeZoneInfo.Utc))
+        .Select(ti => new PersonInfo
+        {
+            FirstName = ti.CaveroUser.FirstName,
+            LastName = ti.CaveroUser.LastName,
+            Team = ti.CaveroUser.Team
+        })
+        .ToList();
+        return people;
+        
     }
 
     public async Task<IActionResult> OnPostToggleCheckInAsync()
@@ -51,4 +77,10 @@ public class IndexModel : PageModel
     }
     
 
+}
+public class PersonInfo
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Team { get; set; }
 }
