@@ -10,14 +10,13 @@
 </head>
 
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        height: 100vh; 
+    .container1 {
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        max-width: 500px;
     }
 
     .custom-button {
@@ -38,13 +37,30 @@
         overflow: auto;
     }
 
+    .e-dialog .e-dlg-content {
+        overflow-y: auto;
+        
+    }
+
+    .e-dialog
+    {
+        position: center;}
+    #dialog{
+        position:fixed;
+       
+        transform: translate(-50%, -50%);
+        /*important gebruiken om custom css te overwriten*/
+        left: 60% !important;
+        top: 30%!important;
+    }
+
   
 </style>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Dit is de clubhuis app van Cavero.</p>
-    <div id='container'>
+    <div id='container1'>
         <div style="width: 300px; height: 75px; padding-left: 25px; padding-right: 25px; padding-top: 16px; padding-bottom: 16px; background: #803689; border-radius: 20px; justify-content: flex-start; align-items: center; gap: 16px; display: inline-flex">
             <div style="width: 27px; height: 25px; position: relative">
                 <i class="ri-group-fill" style="color: white; font-size: 25px; position: absolute; left: 0; top: -7px;"></i>
@@ -56,7 +72,7 @@
             <div style="width: 2px; height: 40px; background-color: white; margin: 0 8px;"></div> <!-- White divider -->
             <div style="display: inline-flex; gap: 8px; white-space: nowrap;">
                 <ejs-button id="targetButton" content="Caverianen in de loods" cssClass="custom-button"></ejs-button>
-                <ejs-dialog id='dialog' header="Caverianen in de loods" enableResize="true" cssClass="custom-dialog" target="#targetButton" showCloseIcon="true" visible="false" width="500px" >
+                <ejs-dialog id='dialog' header="Caverianen in de loods"  target="#targetButton" showCloseIcon="true" visible="false" width="500px" >
                     <e-content-template>
                         <ejs-grid id="Grid" dataSource="@Model.People" width="470">
                             <e-grid-columns>
