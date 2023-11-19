@@ -54,7 +54,7 @@ app.MapGet("/", (HttpContext ctx) =>
     }
 });
 
-
+Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mgo+DSMBMAY9C3t2VlhhQlJCfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn9Sd0FjXX9ecHNRQWVe");
 
 
 // Configure the HTTP request pipeline.

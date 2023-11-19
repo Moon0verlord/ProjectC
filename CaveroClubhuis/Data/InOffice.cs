@@ -23,4 +23,9 @@ public class InOffice
     public CaveroUser User { get; set; }
     
     public DateTime? CheckOutDate { get; set; }
+    
+    public string? DayOfWeek { get; set; }
+    
+    // Indicates if the check-in is part of a recurring pattern
+    public bool? IsRecurring { get; set; }
 }

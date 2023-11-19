@@ -1,6 +1,6 @@
 ﻿@media screen and (min-width: 1024px) and (max-width: 1440px) {
 
-    .sidebar.sidebar { /* Increased specificity */
+    .sidebar.sidebar {
         max-width: 280px;
     }
 
@@ -50,6 +50,95 @@
 }
 
 
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+    .sidebar.sidebar {
+        display: none;
+        position: fixed; 
+        width: 40%; 
+        height: 100%;
+        z-index: 100; 
+    }
+    
+    .header-container.header-container {
+        left: 0;
+    }
+    
+    .profile_text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .profile.profile{
+        margin-left: 0px;
+    }
+    
+    .check-in.check-in{
+        margin-left: 0px;
+    }
+    
+    .Log-out.Log-out{
+        margin-left: 0px;
+    }
+    
+    .sidebar-overlay{
+        z-index: 101;
+    }
+
+    .settings.settings {
+        font-size: 0; 
+        line-height: 0; 
+    }
+    .settings img {
+        display: inline-block; 
+        width: 50px; 
+        height: 47px; 
+    }
+
+    .sidebar.sidebar {
+        /* Adjustments for smaller screens */
+        z-index: 102; /* Ensure it's on top on smaller screens */
+    }
+
+    .header-container.header-container {
+        /* Adjustments for smaller screens */
+        z-index: 100; /* Below the sidebar on smaller screens */
+    }
+    
+    .ri-menu-2-line {
+        display: block; /* Show hamburger icon on small screens */
+        cursor: pointer;
+        font-size: 3rem;
+        
+    }
+    .cavero-logo.desktop-logo {
+        display: none;
+    }
+
+    /* Show mobile logo */
+    .cavero-logo.mobile-logo {
+        display: block; 
+    }
+    
+    .Headertxt.Headertxt {
+        margin-left: 0;
+        padding-right: 65px;
+        font-size: 48px;
+
+    }
+    
+}
+
+/* Larger screen styles */
+@media screen and (min-width: 769px) {
+    .ri-menu-2-line {
+        display: none; /* Hide hamburger icon on larger screens */
+    }
+    
+}
+
+
+
 .background {
     background-color: #f2f0f8;
     display: flex;
@@ -68,7 +157,34 @@
     border-radius: 0 10px 10px 0;
     max-width: 328px;
     height: 100vh;
+    z-index: 102;
 }
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+
+.header-container {
+    position: fixed;
+    top: 0;
+    left: 328px;
+    right: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    z-index: 101;
+}
+
+
 
 .Logout-F{
     display: flex;
@@ -119,7 +235,7 @@
     margin-left: 5px;
     background-color: transparent;
     border-color: transparent;
-    width: 144px;
+    max-width: 144px;
     top: 823px;
     left: 25px;
     font-family: "Inter", Helvetica, serif;
@@ -167,12 +283,26 @@
     justify-content: space-between;
 }
 
+.cavero-logo .desktop-logo {
+    display: block; 
+    max-width: 100%; 
+    height: auto; 
+}
+
+
+.cavero-logo .mobile-logo {
+    display: none;
+    max-width: 100%; 
+    height: auto; 
+}
+
+
 .profile {
     margin-top: 20px;
     margin-left: 20px;
     display: flex;
     align-items: center;
-    width: 284px;
+    max-width: 284px;
     height: 95px;
     top: 170px;
     left: 17px;
@@ -283,6 +413,7 @@
     border-radius: 13px;
     border: 2px solid #d9d9d9;
     align-items: center;
+    overflow: auto;
 }
 
 .menu-buttons {

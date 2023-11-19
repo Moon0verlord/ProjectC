@@ -7,100 +7,143 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" />
     <link rel="stylesheet" href="~/css/Layout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/23.1.44/bootstrap4.css" />
+    <script src="https://cdn.syncfusion.com/ej2/23.1.44/dist/ej2.min.js"></script>
 </head>
 <body>
-<div class="background">
-
-    <div class="sidebar">
-
-        <header class="top-sidebar">
-            <div class="cavero-logo">
-                <img src="~/images/Cavero_white.png" width="250" height="auto"/>
-            </div>
+    <div class="background">
+        <div class="header-container">
+            <div class="ri-menu-2-line" onclick="toggleSidebar()"></div>
             <h1 class="Headertxt">@ViewData["Title"]</h1>
-        </header>
-
-        <div class="line-2"></div>
-
-        <div class="profile">
-            <img class="profile_picture" src="~/images/An.jpeg"/>
-            <div class="profile_text"> @Model.FirstName @Model.LastName</div>
         </div>
 
-        <form class="Logout-F" asp-page-handler="ToggleCheckIn" method="post">
-            @if (Model.IsUserCheckedIn)
-            {
-                <button type="submit" class="check-in">
-                    <i class="ri-logout-circle-line"></i>
-                    Check - out
-                </button>
-            }
-            else
-            {
-                <button type="submit" class="check-in">
-                    <i class="ri-login-circle-line"></i>
-                    Check - in
-                </button>
-            }
-        </form>
+        <div class="sidebar-overlay" onclick="closeSidebar()"></div>
 
 
-        <form class="Logout-F" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-            <button type="submit" class="Log-out">
-                <i class="ri-logout-circle-line"></i>
-                Log-out
+        <div class="sidebar">
+            
+            <div class="cavero-logo">
+                <img src="~/images/Cavero_white.png" alt="Cavero Logo" class="desktop-logo"/>
+                <img src="~/images/logo2.png" alt="Cavero Mobile Logo" class="mobile-logo" style="display: none;"/>
+                </div>
+            
+            <div class="line-2"></div>
+
+
+            <div class="profile">
+                <img class="profile_picture" src="~/images/An.jpeg"/>
+                <div class="profile_text"> @Model.FirstName @Model.LastName</div>
+            </div>
+
+
+            <form class="Logout-F" asp-page-handler="ToggleCheckIn" method="post">
+                @if (Model.IsUserCheckedIn)
+                {
+                    <button type="submit" class="check-in">
+                        <i class="ri-logout-circle-line"></i>
+                        Check - out
+                    </button>
+                }
+                else
+                {
+                    <button type="submit" class="check-in">
+                        <i class="ri-login-circle-line"></i>
+                        Check - in
+                    </button>
+                }
+            </form>
+
+
+            @{
+                if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    <form class="Logout-F" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                        <button type="submit" class="Log-out">
+                            <i class="ri-logout-circle-line"></i>
+                            Log-out
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <p>You have successfully logged out of the application.</p>
+                }
+            }
+
+            <div class="settingsspace"></div>
+            <div class="line-3"></div>
+            <button class="settings">
+                <img src="~/images/settings.png" width="50" height="47"/>
+                Settings
             </button>
-        </form>
-
- 
-        <div class="settingsspace"></div>
-        <div class="line-3"></div>
-        <button class="settings">
-            <img src="~/images/settings.png" width="50" height="47"/>
-            Settings
-        </button>
-    </div>
-
-    <div class="main-content">
-        <div class="menu-bar">
-            <a href="/">
-                <button class="menu-buttons">
-                    <img src="~/images/Home_Icon2.png" width="25" height="auto"/>
-                    Home
-                </button>
-            </a>
-            <a href="/Kalender">
-                <button class="menu-buttons">
-                    <img src="~/images/Calender_Icon.png" width="25" height="auto"/>
-                    Calendar
-                </button>
-            </a>
-            <a href="/Events">
-                <button class="menu-buttons">
-                    <img src="~/images/Event_Icon.png" width="25" height="auto"/>
-                    Events
-                </button>
-            </a>
-            <a href="/">
-                <button class="menu-buttons">
-                    <img src="~/images/News.png" width="25" height="auto"/>
-                    News
-                </button>
-            </a>
         </div>
 
-        <div class="page-content">
-            <main role="main">
-                @RenderBody()
-            </main>
+
+        <div class="main-content">
+
+            <div class="menu-bar">
+                <a href="/">
+                    <button class="menu-buttons">
+                        <img src="~/images/Home_Icon2.png" width="25" height="auto"/>
+                        Home
+                    </button>
+                </a>
+                <a href="/Kalender">
+                    <button class="menu-buttons">
+                        <img src="~/images/Calender_Icon.png" width="25" height="auto"/>
+                        Calendar
+                    </button>
+                </a>
+                <a href="/Events">
+                    <button class="menu-buttons">
+                        <img src="~/images/Event_Icon.png" width="25" height="auto"/>
+                        Events
+                    </button>
+                </a>
+                <a href="/">
+                    <button class="menu-buttons">
+                        <img src="~/images/News.png" width="25" height="auto"/>
+                        News
+                    </button>
+                </a>
+            </div>
+
+
+            <div class="page-content">
+                <main role="main">
+                    @RenderBody()
+                </main>
+            </div>
         </div>
     </div>
-</div>
+
+
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.querySelector('.sidebar');
+            var overlay = document.querySelector('.sidebar-overlay');
+            if (sidebar.style.display === "block") {
+                sidebar.style.display = "none";
+                overlay.style.display = "none";
+            } else {
+                sidebar.style.display = "block";
+                overlay.style.display = "block";
+            }
+        }
+
+        function closeSidebar() {
+            var sidebar = document.querySelector('.sidebar');
+            var overlay = document.querySelector('.sidebar-overlay');
+            sidebar.style.display = "none";
+            overlay.style.display = "none";
+        }
+    </script>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+    <ejs-scripts></ejs-scripts>
 </body>
 </html>
