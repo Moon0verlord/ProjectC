@@ -6,9 +6,11 @@ using CaveroClubhuis.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CaveroClubhuis.Pages;
 
+[Authorize]
 public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
