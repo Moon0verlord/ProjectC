@@ -2,11 +2,13 @@ using CaveroClubhuis.Areas.Identity.Data;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using CaveroClubhuis.Data;
 using CaveroClubhuis.Pages.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CaveroClubhuis.Pages
 {
+    [Authorize]
     public class EventsModel : PageModel
     {
         
