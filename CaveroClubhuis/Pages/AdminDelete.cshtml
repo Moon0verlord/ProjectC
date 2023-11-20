@@ -1,0 +1,115 @@
+﻿@page
+@model CaveroClubhuis.Pages.AdminDeleteModel
+@{
+    var DialogButtons1 = new ButtonModel() { isPrimary = true, cssClass = "confirm-button", content = "Bevestig" };
+    var DialogButtons2 = new ButtonModel() { content = "Annuleer", cssClass = "e-flat" };
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<style>
+    .confirm-button {
+        background-color:  #803689 !important;
+        border-color: #803689 !important;
+        color: white !important;
+    }
+
+    .container1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        max-width: 500px;
+    }
+
+    .e-dialog {
+        position: center;
+    }
+    #dialog {
+        position: fixed;
+        transform: translate(-50%, -50%);
+        /*important gebruiken om custom css te overwriten*/
+        left: 60% !important;
+        top: 30% !important;
+    }
+
+    .e-dialog .e-dlg-header {
+        font-size: 20px;
+        font-weight: normal;
+        position: relative;
+    }
+
+    .e-dialog .e-dlg-content {
+        display: flex;
+        flex-direction: column;
+        min-height: 200px;
+        overflow: auto;
+    }
+
+    .e-dialog .e-dlg-content {
+        overflow-y: auto;
+    }
+
+ 
+    /* Add custom styling for the select element */
+    #selectedEvent {
+        width:400px ;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      
+    }
+
+</style>
+<div class="text-center">
+    <div id='container' style="height:400px;">
+        <ejs-button id="targetButton" content="Open Dialog"></ejs-button>
+     <ejs-dialog id="dialog" header="Verwijder evenement" visible="false" showCloseIcon="true" target="#targetButton" width="500px">
+                <e-content-template>
+
+        <form id="delete" class="make-event" method="post" asp-page-handler="Delete">
+            <div>
+                <label for="selectedEvents">Selecteer een of meerdere evenementen om te verwijderen</label>
+            </div>
+            <div>
+                        <select id="selectedEvent" asp-for="SelectedEvents">
+                            <option value="">-- Selecteer een evenement --</option>
+                            @foreach (var eventItem in Model.EventsNames)
+                            {
+                                <option value="@eventItem.Id">@eventItem.Title</option>
+                            }
+                        </select>
+            </div>
+            <div>
+                        <input type="submit" class="confirm-button" value="Bevestig keuze">
+            </div>
+        </form>
+        </e-content-template>
+        </ejs-dialog>
+        </div>
+
+
+    <script>
+        window.onload = function () {
+            var dialog = document.getElementById("dialog").ej2_instances[0];
+
+            document.getElementById('targetButton').onclick = function () {
+                // Set the dialog target to the button and position it above
+                dialog.target = '#targetButton';
+                dialog.position = { X: 'center', Y: 'top' };
+                dialog.show();
+            };
+
+            window.onresize = function () {
+                // Ensure the dialog is repositioned when the window is resized
+                dialog.refreshPosition();
+            };
+        };
+    </script>
+
+</div>
+   
