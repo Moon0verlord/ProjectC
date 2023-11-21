@@ -35,7 +35,7 @@
   else
   {
         <div id='container' style="height:400px;">
-             <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" showCloseIcon="true" target="#container" width="500px">
+            <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" showCloseIcon="true" target="#container" width="500px" >
             <e-content-template>
                  <form id="change" class ="make-event" method="post" style="display:flex;" asp-page-handler="ChangeEvent">
                 <!-- Add the make event inputs here-->
@@ -84,6 +84,11 @@
                 dialog.refreshPosition();
             };
         };
+
+    function onDialogClose() {
+        // Redirect to the home page
+        window.location.href = '/Index'; 
+    }
     </script>
 
     <style>
