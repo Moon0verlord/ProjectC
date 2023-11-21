@@ -7,17 +7,17 @@
     @if(Model.EventChoice == null)
     {
     <div id='container' style="height:400px;">
-        <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" showCloseIcon="true" target="#container" width="500px">
+        <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" showCloseIcon="true" target="#container" width="500px" >
             <e-content-template>
 
                 <form id="ask-input" method="post" asp-page-handler="AskInput">
                     <div>
-                        <label for="selectedEvents">Selecteer een of meerdere evenementen om te verwijderen</label>
+                        <label for="selectedEvents">Selecteer een evenement om te wijzigen</label>
                     </div>
                     <div>
-                        <select id="selectedEvent" asp-for="SelectedEvents">
+                        <select id="selectedEvent" asp-for="SelectedEvents" size="4">
                             <option value="">-- Selecteer een evenement --</option>
-                            @foreach (var eventItem in Model.EventsNames)
+                            @foreach (var eventItem in Model.Events)
                             {
                                 <option value="@eventItem.Id">@eventItem.Title</option>
                             }
@@ -65,6 +65,7 @@
                         <span asp-validation-for="location" class="error-message"></span>
                         <input type="text" id="location" value="@Model.location" asp-for="location">
 
+                        
                         <input type="submit" value="Opslaan">
             </form>
                 </e-content-template>
@@ -86,7 +87,11 @@
     </script>
 
     <style>
-
+    .confirm-button {
+        background-color: #803689 !important;
+        border-color: #803689 !important;
+        color: white !important;
+    }
     .make-event {
         flex-wrap: wrap; /* Wrap the elements */
         flex-direction: column;
@@ -108,7 +113,8 @@
     }
 
     .make-event label {
-        margin-left: 20%;
+        margin-left: 10%;
+        position: center;
         font-size: 15px;
         font-weight: bolder;
         color: #b1b3b4;

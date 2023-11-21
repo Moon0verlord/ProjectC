@@ -47,10 +47,12 @@ namespace CaveroClubhuis.Pages
 
         public Events EventChoice { get; set; }
 
+        public int EventID { get; set; }
+
         [BindProperty]
         public string Title { get; set; }
 
-        public List<Events> EventsNames { get; set; }
+        public List<Events> Events { get; set; }
         public AdminChangeModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, LayoutTools layoutTools)
         {
             _context = context;
@@ -61,7 +63,7 @@ namespace CaveroClubhuis.Pages
 
         public void OnGet()
         {
-            EventsNames = FetchEventsName();
+            Events = FetchEvents();
             var userId = _userManager.GetUserId(User);
             (FirstName, LastName) = _layoutTools.LoadName(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
@@ -73,15 +75,26 @@ namespace CaveroClubhuis.Pages
         public IActionResult OnPostChangeEvent()
         {
 
-            Console.WriteLine("test");
+           // de id van de tempdata in een variabele zetten voor opzoeken juiste event
+            int id = (int)TempData["EnteredEventID"];
+         
 
-
-            return RedirectToPage("./AdminDelete"); // Redirect naar page weer
+            var eventToUpdate = _context.Events.First(x => x.Id == id);
+            
+          
+            eventToUpdate.Title=title; 
+            eventToUpdate.Description=description;
+            eventToUpdate.Date = date.ToUniversalTime();
+            eventToUpdate.StartTime = startTime;
+            eventToUpdate.EndTime = endTime;
+            eventToUpdate.Location = location;
+            _context.SaveChanges();
+            return RedirectToPage("./Index"); // Redirect naar page weer
         }
         public IActionResult OnPostAskInput()
         {
 
-            Console.WriteLine("test");
+            Console.WriteLine("test22");
             EventChoice = _context.Events
                  .Where(e => SelectedEvents.Contains(e.Id))
                  .FirstOrDefault();
@@ -92,15 +105,20 @@ namespace CaveroClubhuis.Pages
             startTime = EventChoice.StartTime;
             endTime = EventChoice.EndTime;
             location= EventChoice.Location;
+            EventID = EventChoice.Id;
+             // omdat properties gereset werden tempdata om de id op te slaan
+            TempData["EnteredEventID"] = EventChoice.Id;
 
-
-            Console.WriteLine(EventChoice.Title);
-        
+            // weer id enzo neerzetten want hij gaat nog niet langs onget
+            var userId = _userManager.GetUserId(User);
+            (FirstName, LastName) = _layoutTools.LoadName(userId);
+            IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
+            // return Page ipv Redirectpage zodat niet alles refreshed en start van het begin
             return Page(); // Redirect naar page weer
         }
 
 
-        public List<Events> FetchEventsName()
+        public List<Events> FetchEvents()
         {
             return _context.Events.Select(x => x).ToList();
         }
