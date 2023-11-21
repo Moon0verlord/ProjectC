@@ -18,7 +18,13 @@ namespace CaveroClubhuis.Pages
 
     public bool IsUserCheckedIn { get; private set; }
         [BindProperty]
-        public List<int> SelectedEvents { get; set; } 
+        public List<int> SelectedEvents { get; set; }
+
+        [BindProperty]
+        public List<int> SelectedEvent { get; set; }
+
+        [BindProperty]
+        public string Title { get; set; }
 
         public List<Events> EventsNames { get; set; }
         public AdminDeleteModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, LayoutTools layoutTools)
@@ -47,17 +53,15 @@ namespace CaveroClubhuis.Pages
             var fullEvents = _context.Events
                    .Where(e => SelectedEvents.Contains(e.Id))
                    .ToList();
-            Console.WriteLine("test");
-            foreach (var item in SelectedEvents)
-            {
-                Console.WriteLine(item);
-            }
+          
             _context.RemoveRange(fullEvents);
             _context.SaveChanges();
         
            
             return RedirectToPage("./AdminDelete"); // Redirect naar page weer
         }
+
+    
 
 
         public List<Events> FetchEventsName()

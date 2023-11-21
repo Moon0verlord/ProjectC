@@ -71,7 +71,7 @@
      <ejs-dialog id="dialog" header="Verwijder evenement" visible="false" showCloseIcon="true" target="#targetButton" width="500px">
                 <e-content-template>
 
-        <form id="delete" class="make-event" method="post" asp-page-handler="Delete">
+        <form id="delete" method="post" asp-page-handler="Delete">
             <div>
                 <label for="selectedEvents">Selecteer een of meerdere evenementen om te verwijderen</label>
             </div>
@@ -90,7 +90,12 @@
         </form>
         </e-content-template>
         </ejs-dialog>
+   
+   
         </div>
+
+    
+
 
 
     <script>
