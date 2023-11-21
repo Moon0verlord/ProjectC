@@ -1,7 +1,18 @@
 ﻿/* kalender.css */
-
+html, body {
+    overflow-x: hidden; /* zorgt ervoor dat de pagina niet scroll able is side-ways */
+    overflow: hidden;
+}
 #calendar {
+    margin-left: 10px;
+    margin-right: 10px;
     background-color: #f2f0f8; /* achtergrond kleur van de agenda */
+    height: 700px;
+    text-align: center;
+    overflow-y: scroll;
+    scrollbar-width: auto;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 #calendar .fc-toolbar {
