@@ -1,4 +1,5 @@
 ﻿@page
+@using System.Runtime.InteropServices.JavaScript
 @model KalenderModel
 @{
     ViewData["Title"] = "Kalender";
@@ -8,16 +9,29 @@
     <link rel="stylesheet" href="~/css/kalender.css" />
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridWeek',
-                firstDay: 1, // zorgt ervoor dat de week op maandag begint (standaard is zondag)
-                locale: 'nl', // zorgt ervoor dat het een nederlandse agenda na doet (dagen/tijd)
-                events: @Html.Raw(Json.Serialize(Model.EventsList.Select(e => new { title = e.Title, start = e.Date.ToString("yyyy-MM-dd") + 'T' + e.StartTime, end = e.Date.ToString("yyyy-MM-dd") + 'T' + e.EndTime })))
-            });
-            calendar.render();
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        var initialView = window.innerWidth <= 768 ? 'dayGridDay' : 'dayGridWeek';
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: initialView,
+            firstDay: 1,
+            locale: 'nl',
+            events: @Html.Raw(Json.Serialize(Model.EventsList.Select(e => new { title = e.Title, start = e.Date.ToString("yyyy-MM-dd") + 'T' + e.StartTime, end = e.Date.ToString("yyyy-MM-dd") + 'T' + e.EndTime })))
         });
+
+        calendar.render();
+
+        // wnr de wdith evengroot is als de mobile version maak er een day grid van
+        window.addEventListener('resize', function () {
+            var newInitialView = window.innerWidth <= 768 ? 'dayGridDay' : 'dayGridWeek';
+
+            if (newInitialView !== initialView) {
+                initialView = newInitialView;
+                calendar.changeView(newInitialView);
+            }
+        });
+    });
     </script>
 </head>
 <div id='calendar'></div>
