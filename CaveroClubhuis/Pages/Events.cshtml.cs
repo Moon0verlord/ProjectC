@@ -14,6 +14,8 @@ namespace CaveroClubhuis.Pages
         
         public IList<Events> EventsList { get; set; }
         public IList<Events> oldEvents { get; set; }
+        public IList<CaveroUser> UsersList { get; set; }
+
         
         private readonly CaveroClubhuisContext _context;
         private readonly UserManager<CaveroUser> _userManager;
@@ -36,6 +38,7 @@ namespace CaveroClubhuis.Pages
         
         public void OnGet()
         {
+            //var atendees = getUsersPerEvent();
             EventsList = FetchEvents();
             oldEvents = OldEvents();
             var userId = _userManager.GetUserId(User);
@@ -73,6 +76,21 @@ namespace CaveroClubhuis.Pages
 
             return filteredEvents;
         }
+
+        /*public IList<CaveroUser> getUsersPerEvent()
+        {
+            // first get all the event id's then link it with the EventParticipants table after that link the EventParticipants table with the CaveroUser table to get the users
+            var eventIds = _context.Events
+                .Select(e => e.Id)
+                .ToList();
+            var eventParticipants = _context.EventParticipants
+                .Where(ep => eventIds.Contains(ep.EventId))
+                .ToList();
+            var users = _context.Users
+                .Where(u => eventParticipants.Select(ep => ep.UserId).Contains(u.Id))
+                .ToList();
+            return users;
+        }*/
         
         
         public async Task<IActionResult> OnPostToggleCheckInAsync()
