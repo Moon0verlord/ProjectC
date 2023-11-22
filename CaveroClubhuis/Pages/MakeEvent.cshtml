@@ -1,0 +1,62 @@
+﻿@page
+@model CaveroClubhuis.Pages.MakeEventModel
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
+</head>
+
+<body>
+    <div class="main-body">
+        <div class="admin-bar">
+            <!-- Buttons for the admin-->
+            <a href="/Admin">
+                <button id="makeButton" class="admin-button" style="background-color: #803689; color: white;">
+                    Event aanmaken
+                </button>
+            </a>
+            <a href="/AdminChange">
+                <button id="changeButton" class="admin-button"">
+                    Event aanpassen
+                </button>
+            </a>
+            <a href="/AdminDelete">
+                <button id="removeButton" class="admin-button">
+                    Event verwijderen
+                </button>
+            </a>
+        </div>
+
+        <div>
+            <form id="make" class="make-event" method="post" style="display:flex;" asp-page-handler="MakeEvent">
+                <!-- Add the make event inputs here-->
+                <label for="title">Titel</label>
+                <span asp-validation-for="title" class="error-message"></span>
+                <input type="text" id="title" placeholder="titel" maxlength="20" asp-for="title">
+
+                <label for="description">Omschrijving</label>
+                <span asp-validation-for="description" class="error-message"></span>
+                <textarea type="text" id="description" placeholder="omschrijving" maxlength="200" asp-for="description"></textarea>
+
+                <label for="date">Datum</label>
+                <span asp-validation-for="date" class="error-message"></span>
+                <input type="date" id="date" asp-for="date">
+
+                <label for="startTime">Start tijd</label>
+                <span asp-validation-for="startTime" class="error-message"></span>
+                <input type="time" id="startTime" asp-for="startTime">
+
+                <label for="endTime">Eind tijd</label>
+                <span asp-validation-for="endTime" class="error-message"></span>
+                <input type="time" id="endTime" asp-for="endTime">
+
+                <label for="location">Locatie</label>
+                <span asp-validation-for="location" class="error-message"></span>
+                <input type="text" id="location" placeholder="locatie" asp-for="location">
+
+                <input type="submit" value="Opslaan">
+            </form>
+        </div>
+</body>
