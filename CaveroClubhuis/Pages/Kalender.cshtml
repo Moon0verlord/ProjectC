@@ -1,10 +1,37 @@
 ﻿@page
+@using System.Runtime.InteropServices.JavaScript
 @model KalenderModel
 @{
     ViewData["Title"] = "Kalender";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Kalender</h1>
-    <p>Hier komt de kalender</p>
-</div>
+<head>
+    <link rel="stylesheet" href="~/css/kalender.css" />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        var initialView = window.innerWidth <= 768 ? 'dayGridDay' : 'dayGridWeek';
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: initialView,
+            firstDay: 1,
+            locale: 'nl',
+            events: @Html.Raw(Json.Serialize(Model.EventsList.Select(e => new { title = e.Title, start = e.Date.ToString("yyyy-MM-dd") + 'T' + e.StartTime, end = e.Date.ToString("yyyy-MM-dd") + 'T' + e.EndTime })))
+        });
+
+        calendar.render();
+
+        // wnr de wdith evengroot is als de mobile version maak er een day grid van
+        window.addEventListener('resize', function () {
+            var newInitialView = window.innerWidth <= 768 ? 'dayGridDay' : 'dayGridWeek';
+
+            if (newInitialView !== initialView) {
+                initialView = newInitialView;
+                calendar.changeView(newInitialView);
+            }
+        });
+    });
+    </script>
+</head>
+<div id='calendar'></div>

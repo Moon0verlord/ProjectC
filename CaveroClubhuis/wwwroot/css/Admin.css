@@ -1,0 +1,116 @@
+﻿.admin-bar {
+    display: inline-block;
+    float: left;
+    margin-left: 80px;
+    margin-right: 100px;
+    max-width: 120px;
+    height: 300px;
+    background-color: #ffffff;
+    border-radius: 13px;
+    border: 2px solid #d9d9d9;
+}
+
+.admin-button {
+    margin-top: 20px;
+    margin-left: 8px;
+    border-radius: 5px;
+    max-width: 100px;
+    border-color: transparent;
+    background-color: #b1b3b4;
+}
+
+    .admin-button:hover {
+        border-color: #803689;
+    }
+
+.make-event {
+    flex-wrap: wrap; /* Wrap the elements */
+    flex-direction: column;
+    margin-top: 10px;
+    max-width: 500px;
+    min-height: 350px;
+    background-color: #ffffff;
+    border-radius: 13px;
+    border: 2px solid #d9d9d9;
+}
+
+
+.error-message {
+    max-width: 40%;
+    display: block;
+    float: left;
+    margin-left: 20%;
+    color: red;
+}
+
+.make-event label {
+    margin-left: 20%;
+    font-size: 15px;
+    font-weight: bolder;
+    color: #b1b3b4;
+}
+
+.make-event input {
+    float: left;
+    margin-left: 23%;
+    border-radius: 5px;
+    border: 2px solid #d9d9d9;
+    outline: none;
+}
+
+        .make-event input:hover {
+            border-color: #803689;
+        }
+    .make-event textarea:hover {
+        border-color: #803689;
+    }
+
+        .make-event input[type="text"] {
+            width: 50%;
+        }
+
+.make-event input[type="submit"] {
+    margin-left: 40%;
+    width: 100px;
+    border-radius: 20px;
+    background-color: #803689;
+    color: white;
+}
+
+    .make-event input[type="submit"]:focus {
+        width: 100px;
+        border-radius: 20px;
+        background-color: #b1b3b4;
+        color: black;
+    }
+
+
+        .make-event input[type="time"] {
+            width: 30%;
+        }
+        .make-event input[type="date"] {
+            width: 30%;
+        }
+
+            .make-event input:focus {
+                border: 2px solid #803689;
+            }
+
+.make-event textarea {
+    margin-left: 23%;
+    width: 50%;
+    height: 59px;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    resize: none;
+    border: 2px solid #d9d9d9;
+}
+
+        .make-event textarea:focus {
+            border: 2px solid #803689;
+        }
+
+    .make-event textarea::-webkit-scrollbar {
+        width: 0px;
+    }

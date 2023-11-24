@@ -12,7 +12,6 @@ public class CaveroClubhuisContext : IdentityDbContext<CaveroUser>
     public DbSet<EventParticipants> EventParticipants { get; set; }
     public DbSet<EventReviews> EventReviews { get; set; }
     public DbSet<InOffice> InOffice { get; set; }
-    public DbSet<RecurringCheckIn> RecurringCheckIns { get; set; }
 
     public CaveroClubhuisContext(DbContextOptions<CaveroClubhuisContext> options)
         : base(options)

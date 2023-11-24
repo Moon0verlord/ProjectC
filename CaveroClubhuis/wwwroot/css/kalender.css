@@ -1,0 +1,44 @@
+﻿/* kalender.css */
+html, body {
+    overflow-x: hidden; /* zorgt ervoor dat de pagina niet scroll able is side-ways */
+    overflow: hidden;
+}
+#calendar {
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #f2f0f8; /* achtergrond kleur van de agenda */
+    height: 700px;
+    text-align: center;
+    overflow-y: scroll;
+    scrollbar-width: auto;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+#calendar .fc-toolbar {
+    background-color: #803689; /* head kleur */
+    color: #fff; /* tekst kleur van de head*/
+}
+
+#calendar .fc-header-toolbar button {
+    color: #fff; /* kleur van de buttons */
+}
+
+#calendar .fc-dayGridWeek {
+    background-color: #fff; /* kleuur van de weken */
+    border: 1px solid #ddd; /* geef het eeen border */
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+    #calendar .fc-dayGridWeek th {
+        background-color: #333; /* week header */
+        color: #fff; /* week header kleur (tekst) */
+    }
+
+#calendar .fc-event {
+    background-color: #4285f4; /* background kleur van de event */
+    color: #fff; /* tekst kleur van de event */
+    border: 1px solid #4285f4; /* kleur van border */
+    border-radius: 3px;
+}

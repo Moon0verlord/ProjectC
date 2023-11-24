@@ -105,18 +105,8 @@ public class DBSeeder
         context.SaveChanges();
     }
     
-    // Seed your database with initial recurring check-in
-    public static void InitializeRecurringCheckIn(CaveroClubhuisContext context)
-    {
-        var recurringCheckIn = new RecurringCheckIn
-        {
-            UserId = GetRandomUserId(context),
-            CheckInTime = DateTime.UtcNow.AddHours(2).TimeOfDay,
-            DayOfWeek = DayOfWeek.Monday.ToString(),
-        };
-        context.RecurringCheckIns.Add(recurringCheckIn);
-        context.SaveChanges();
-    }
+
+
     
     // Seed your database with initial review
     public static void InitializeReviews(CaveroClubhuisContext context)
