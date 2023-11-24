@@ -17,25 +17,11 @@
         color: white !important;
     }
 
-    .container1 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        height: 100vh;
-        max-width: 500px;
-    }
 
     .e-dialog {
         position: center;
     }
-    #dialog {
-        position: fixed;
-        transform: translate(-50%, -50%);
-        /*important gebruiken om custom css te overwriten*/
-        left: 60% !important;
-        top: 30% !important;
-    }
+  
 
     .e-dialog .e-dlg-header {
         font-size: 20px;
@@ -68,7 +54,7 @@
 <div class="text-center">
     <div id='container' style="height:400px;">
         <ejs-button id="targetButton" content="Open Dialog"></ejs-button>
-     <ejs-dialog id="dialog" header="Verwijder evenement" visible="false" showCloseIcon="true" target="#targetButton" width="500px">
+     <ejs-dialog id="dialog" header="Verwijder evenement" visible="false" showCloseIcon="true" target="#container" width="500px">
                 <e-content-template>
 
         <form id="delete" method="post" asp-page-handler="Delete">
@@ -84,11 +70,21 @@
                             }
                         </select>
             </div>
-            <div>
-                        <input type="submit" class="confirm-button" value="Bevestig keuze">
-            </div>
+           
+                        
+           
+                    <ejs-dialog id="dialog2" header="Bevestig verwijdering evenementen" visible="false" target="#container" showCloseIcon="true" content="Weet je zeker dat je de gekozen evenementen wilt verwijderen?"width="500px">
+                        <e-dialog-buttons>
+                            <e-dialog-dialogbutton buttonModel="DialogButtons1"  click="submitForm"></e-dialog-dialogbutton>
+                            <e-dialog-dialogbutton buttonModel="DialogButtons2" click="showDialog1"></e-dialog-dialogbutton>
+                        </e-dialog-buttons>
+                    </ejs-dialog>
+
         </form>
         </e-content-template>
+            <e-dialog-buttons>
+                <e-dialog-dialogbutton buttonModel="DialogButtons1" click="showDialog2"></e-dialog-dialogbutton>
+            </e-dialog-buttons>
         </ejs-dialog>
    
    
@@ -114,6 +110,28 @@
                 dialog.refreshPosition();
             };
         };
+
+        function showDialog2() {
+            var dialog = document.getElementById('dialog').ej2_instances[0];
+            dialog.hide();  // Hide the first dialog
+            var dialog2 = document.getElementById('dialog2').ej2_instances[0];
+            dialog2.position = dialog.position;
+            dialog2.show(); // Show the second dialog
+        }
+        function submitForm() {
+            // Perform any additional actions you need before submitting the form
+            document.getElementById('delete').submit();
+        }
+
+        function showDialog1()
+        {
+            var dialog2 = document.getElementById('dialog2').ej2_instances[0];
+            dialog2.hide();  // Hide the first dialog
+            var dialog = document.getElementById('dialog').ej2_instances[0];
+            dialog.position = dialog2.position;
+            dialog.show(); // Show the second dialog
+        }
+
     </script>
 
 </div>

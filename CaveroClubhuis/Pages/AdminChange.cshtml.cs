@@ -43,6 +43,7 @@ namespace CaveroClubhuis.Pages
         public DateTime date { get; set; }
 
         [BindProperty]
+        [Required(ErrorMessage = "Veld moet ingevuld worden")]
         public List<int> SelectedEvents { get; set; }
 
         public Events EventChoice { get; set; }

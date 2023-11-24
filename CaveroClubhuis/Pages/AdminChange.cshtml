@@ -14,17 +14,20 @@
                     <div>
                         <label for="selectedEvents">Selecteer een evenement om te wijzigen</label>
                     </div>
-                    <div>
-                        <select id="selectedEvent" asp-for="SelectedEvents" size="4">
+                        <div>
+                            <span asp-validation-for="SelectedEvents" class="error-message"></span>
+                            <select id="selectedEvent" asp-for="SelectedEvents" onchange="enableSubmitButton()">
+                              
                             <option value="">-- Selecteer een evenement --</option>
                             @foreach (var eventItem in Model.Events)
                             {
                                 <option value="@eventItem.Id">@eventItem.Title</option>
                             }
                         </select>
+                           
                     </div>
                     <div>
-                        <input type="submit" class="confirm-button" value="Bevestig keuze">
+                            <input type="submit" class="confirm-button" value="Bevestig keuze" id="submitButton" disabled>
                     </div>
                 </form>
             </e-content-template>
@@ -89,6 +92,14 @@
         // Redirect to the home page
         window.location.href = '/Index'; 
     }
+    function enableSubmitButton() {
+        var selectedEvent = document.getElementById("selectedEvent");
+        var submitButton = document.getElementById("submitButton");
+
+        // Enable the submit button if an option is selected
+        submitButton.disabled = selectedEvent.value === "";
+    }
+   
     </script>
 
     <style>
