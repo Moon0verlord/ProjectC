@@ -40,6 +40,10 @@
         overflow-y: auto;
     }
 
+    .error-message {
+        color: red;
+    }
+
  
     /* conatiner event aanpassen */
     #selectedEvent {
@@ -48,6 +52,10 @@
         border: 1px solid #ccc;
         border-radius: 4px;
       
+    }
+    #dialog2
+    {
+        width:400px !important;
     }
 
 </style>
@@ -70,7 +78,7 @@
                             }
                         </select>
             </div>
-           
+                    <div><span id="error-message" class="error-message"></span></div>
                         
            
                     <ejs-dialog id="dialog2" header="Bevestig verwijdering evenementen" visible="false" target="#container" showCloseIcon="true" content="Weet je zeker dat je de gekozen evenementen wilt verwijderen?"width="500px">
@@ -112,12 +120,22 @@
         };
 
         function showDialog2() {
+        var errorMessageElement = document.getElementById("error-message");
+        var selectedEvent = document.getElementById('selectedEvent');
+            if (selectedEvent.value !== "" ) {
+            errorMessageElement.innerText = "";
             var dialog = document.getElementById('dialog').ej2_instances[0];
             dialog.hide();  // Hide the first dialog
             var dialog2 = document.getElementById('dialog2').ej2_instances[0];
             dialog2.position = dialog.position;
             dialog2.show(); // Show the second dialog
+        } else {
+            // Show an alert or error message indicating that a selection is required
+
+                errorMessageElement.innerText = "Selecteer één evenement om verder te gaan";
         }
+            }
+
         function submitForm() {
             // Perform any additional actions you need before submitting the form
             document.getElementById('delete').submit();

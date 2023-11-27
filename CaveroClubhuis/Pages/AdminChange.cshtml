@@ -10,13 +10,13 @@
         <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" showCloseIcon="true" target="#container" width="500px" >
             <e-content-template>
 
-                <form id="ask-input" method="post" asp-page-handler="AskInput">
+                    <form id="ask-input" method="post" asp-page-handler="AskInput" onsubmit="return validateForm()">
                     <div>
                         <label for="selectedEvents">Selecteer een evenement om te wijzigen</label>
                     </div>
                         <div>
-                            <span asp-validation-for="SelectedEvents" class="error-message"></span>
-                            <select id="selectedEvent" asp-for="SelectedEvents" onchange="enableSubmitButton()">
+                            
+                            <select id="selectedEvent" asp-for="SelectedEvents" >
                               
                             <option value="">-- Selecteer een evenement --</option>
                             @foreach (var eventItem in Model.Events)
@@ -26,9 +26,12 @@
                         </select>
                            
                     </div>
-                    <div>
-                            <input type="submit" class="confirm-button" value="Bevestig keuze" id="submitButton" disabled>
-                    </div>
+                        <div>
+                            <span id="error-message" class="error-message"></span>
+                        </div>
+                        <div>
+                            <input type="submit" class="confirm-button" value="Bevestig keuze" id="submitButton">
+                        </div>
                 </form>
             </e-content-template>
         </ejs-dialog>
@@ -44,29 +47,29 @@
                 <!-- Add the make event inputs here-->
                 
                     <label for="title">Titel</label>
-                    <span asp-validation-for="title" class="error-message"></span>
-                    <input type="text" id="title" value="@Model.EventChoice.Title" maxlength="20" asp-for="title">
+                  
+                        <input type="text" id="title" value="@Model.EventChoice.Title" maxlength="20" asp-for="title" required>
               
               
                         <label for="description">Omschrijving</label>
-                        <span asp-validation-for="description" class="error-message"></span>
-                        <textarea type="text" id="description" value="@Model.description" maxlength="200" asp-for="description"></textarea>
+                        
+                        <textarea type="text" id="description" value="@Model.description" maxlength="200" asp-for="description" required></textarea>
                         
                         <label for="date">Datum</label>
-                        <span asp-validation-for="date" class="error-message"></span>
-                        <input type="date" id="date" value="@Model.date.ToString("yyyy-MM-dd")" asp-for="date">
+                      
+                        <input type="date" id="date" value="@Model.date.ToString("yyyy-MM-dd")" asp-for="date" required>
 
                         <label for="startTime">Start tijd</label>
-                        <span asp-validation-for="startTime" class="error-message"></span>
-                        <input type="time" id="startTime" value="@Model.startTime.ToString("hh\\:mm")" asp-for="startTime">
+
+                        <input type="time" id="startTime" value="@Model.startTime.ToString("hh\\:mm")" asp-for="startTime" required>
 
                         <label for="endTime">Eind tijd</label>
-                        <span asp-validation-for="endTime" class="error-message"></span>
-                        <input type="time" id="endTime" value="@Model.endTime.ToString("hh\\:mm")" asp-for="endTime">
+
+                        <input type="time" id="endTime" value="@Model.endTime.ToString("hh\\:mm")" asp-for="endTime" required>
 
                         <label for="location">Locatie</label>
-                        <span asp-validation-for="location" class="error-message"></span>
-                        <input type="text" id="location" value="@Model.location" asp-for="location">
+
+                        <input type="text" id="location" value="@Model.location" asp-for="location" required>
 
                         
                         <input type="submit" value="Opslaan">
@@ -92,12 +95,20 @@
         // Redirect to the home page
         window.location.href = '/Index'; 
     }
-    function enableSubmitButton() {
-        var selectedEvent = document.getElementById("selectedEvent");
-        var submitButton = document.getElementById("submitButton");
+ 
+    function validateForm() {
+        var selectedEvent = document.getElementById("selectedEvent").value;
+        var errorMessageElement = document.getElementById("error-message");
 
-        // Enable the submit button if an option is selected
-        submitButton.disabled = selectedEvent.value === "";
+        if (selectedEvent === "" && selectedEvent.selectedOptions.length === 1) {
+            // Display the error message within the form
+            errorMessageElement.innerText = "Selecteer één evenement om verder te gaan";
+            return false; // Prevent form submission
+        }
+
+        // If validation passes, clear the error message and allow form submission
+        errorMessageElement.innerText = "";
+        return true;
     }
    
     </script>
@@ -121,10 +132,6 @@
 
 
     .error-message {
-        max-width: 40%;
-        display: block;
-        float: left;
-        margin-left: 20%;
         color: red;
     }
 

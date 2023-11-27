@@ -20,7 +20,7 @@ namespace CaveroClubhuis.Pages
 
         [BindProperty]
         [Required(ErrorMessage = "Veld moet ingevuld worden")]
-        public string title { get; set; }
+        public string? title { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "Veld moet ingevuld worden")]
@@ -81,8 +81,15 @@ namespace CaveroClubhuis.Pages
          
 
             var eventToUpdate = _context.Events.First(x => x.Id == id);
-            
-          
+            if (!ModelState.IsValid)
+            {
+
+                var userId = _userManager.GetUserId(User);
+                (FirstName, LastName) = _layoutTools.LoadName(userId!);
+                IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
+                return Page();
+            }
+
             eventToUpdate.Title=title; 
             eventToUpdate.Description=description;
             eventToUpdate.Date = date.ToUniversalTime();
@@ -90,6 +97,7 @@ namespace CaveroClubhuis.Pages
             eventToUpdate.EndTime = endTime;
             eventToUpdate.Location = location;
             _context.SaveChanges();
+            ModelState.Clear();
             return RedirectToPage("./Index"); // Redirect naar page weer
         }
         public IActionResult OnPostAskInput()
