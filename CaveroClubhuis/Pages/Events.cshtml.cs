@@ -14,7 +14,8 @@ namespace CaveroClubhuis.Pages
         
         public IList<Events> EventsList { get; set; }
         public IList<Events> oldEvents { get; set; }
-        public IList<CaveroUser> UsersList { get; set; }
+        public IList<CaveroUser> Atendees { get; set; }
+        public IList<EventParticipants> AllParticipants { get; set; }
 
         
         private readonly CaveroClubhuisContext _context;
@@ -38,7 +39,8 @@ namespace CaveroClubhuis.Pages
         
         public void OnGet()
         {
-            //var atendees = getUsersPerEvent();
+            AllParticipants = getAllParticipants();
+            Atendees = getUsersPerEvent();
             EventsList = FetchEvents();
             oldEvents = OldEvents();
             var userId = _userManager.GetUserId(User);
@@ -48,14 +50,22 @@ namespace CaveroClubhuis.Pages
             
         }
         
+
+        public IList<EventParticipants> getAllParticipants() {
+            var eventIds = _context.Events
+                .Select(e => e.Id)
+                .ToList();
+            var eventParticipants = _context.EventParticipants
+                .Where(ep => eventIds.Contains(ep.EventId))
+                .ToList();
+            return eventParticipants;
+        }
         
         public IList<Events> FetchEvents()
         {
-            //make it to where it only takes the events later then the current date
-
+            // Filter the data to get events after the current datetime
             DateTime currentDateTime = DateTime.UtcNow - TimeSpan.FromHours(12);
 
-            // Filter the data to get events after the current datetime
             var filteredEvents = _context.Events
                 .Where(e => e.Date > currentDateTime) 
                 .ToList();
@@ -65,11 +75,9 @@ namespace CaveroClubhuis.Pages
 
         public IList<Events> OldEvents()
         {
-            //make it to where it only takes the events later then the current date
-
             DateTime currentDateTime = DateTime.UtcNow - TimeSpan.FromHours(12);
 
-            // Filter the data to get events after the current datetime
+            // Filter the data to get events before the current datetime
             var filteredEvents = _context.Events
                 .Where(e => e.Date <= currentDateTime)
                 .ToList();
@@ -77,20 +85,15 @@ namespace CaveroClubhuis.Pages
             return filteredEvents;
         }
 
-        /*public IList<CaveroUser> getUsersPerEvent()
+        public IList<CaveroUser> getUsersPerEvent()
         {
             // first get all the event id's then link it with the EventParticipants table after that link the EventParticipants table with the CaveroUser table to get the users
-            var eventIds = _context.Events
-                .Select(e => e.Id)
-                .ToList();
-            var eventParticipants = _context.EventParticipants
-                .Where(ep => eventIds.Contains(ep.EventId))
-                .ToList();
+            var eventParticipants = getAllParticipants();
             var users = _context.Users
                 .Where(u => eventParticipants.Select(ep => ep.UserId).Contains(u.Id))
                 .ToList();
             return users;
-        }*/
+        }
         
         
         public async Task<IActionResult> OnPostToggleCheckInAsync()

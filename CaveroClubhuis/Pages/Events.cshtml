@@ -17,10 +17,15 @@
                 @foreach (var eventItem in Model.EventsList)
                 {
                 <div class="kaart">
-                    <h2>@eventItem.Title</h2>
+                    <h2>@eventItem.Title ID:@eventItem.Id</h2>
                     <h3>@eventItem.Date.ToString("dd-MM-yy"), @eventItem.StartTime.ToString(@"hh\:mm")</h3>
                     <p id="beschijving">
                         @eventItem.Description
+
+                        @foreach (var participant in Model.AllParticipants)
+                        {
+                            <p>@participant.EventId</p>
+                        }
                     </p>
 
                     <button class="openModalBtn" data-modal-id="modal1_@eventItem.Id">Aanmelden</button>
@@ -36,8 +41,19 @@
                         <div class="modal-content">
                             <h5 class="modal-title">@eventItem.Title</h5>
                             <span class="close">&times;</span>
-                            <!--print here the antendees per event-->
-                            
+                            @foreach (var participant in Model.AllParticipants)
+                            {
+                                if (participant.EventId == eventItem.Id)
+                                {
+                                    foreach (var atendee in Model.Atendees)
+                                    {
+                                        if (atendee.Id == participant.UserId)
+                                        {
+                                            <p>@atendee.FirstName @atendee.LastName</p>
+                                        }
+                                    }
+                                }
+                            }
                         </div>
                     </div>
                 </div>
