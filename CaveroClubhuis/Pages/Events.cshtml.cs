@@ -67,7 +67,7 @@ namespace CaveroClubhuis.Pages
             DateTime currentDateTime = DateTime.UtcNow - TimeSpan.FromHours(12);
 
             var filteredEvents = _context.Events
-                .Where(e => e.Date > currentDateTime) 
+                .Where(e => e.Date > currentDateTime).OrderBy(e => e.Date)
                 .ToList();
 
             return filteredEvents;
@@ -79,7 +79,7 @@ namespace CaveroClubhuis.Pages
 
             // Filter the data to get events before the current datetime
             var filteredEvents = _context.Events
-                .Where(e => e.Date <= currentDateTime)
+                .Where(e => e.Date <= currentDateTime).OrderBy(e => e.Date)
                 .ToList();
 
             return filteredEvents;

@@ -140,3 +140,8 @@ a[title="Manage"] {
         cursor: pointer;
     }
 
+.flexbox {
+    display: flex;
+justify-content: space-between;
+}
+

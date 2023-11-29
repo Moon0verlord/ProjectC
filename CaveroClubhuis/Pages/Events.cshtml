@@ -19,14 +19,7 @@
                 <div class="kaart">
                     <h2>@eventItem.Title ID:@eventItem.Id</h2>
                     <h3>@eventItem.Date.ToString("dd-MM-yy"), @eventItem.StartTime.ToString(@"hh\:mm")</h3>
-                    <p id="beschijving">
-                        @eventItem.Description
-
-                        @foreach (var participant in Model.AllParticipants)
-                        {
-                            <p>@participant.EventId</p>
-                        }
-                    </p>
+                    <p id="beschijving">@eventItem.Description</p>
 
                     <button class="openModalBtn" data-modal-id="modal1_@eventItem.Id">Aanmelden</button>
                     <div id="modal1_@eventItem.Id" class="modal">
@@ -39,8 +32,10 @@
                     <button class="openModalBtn" data-modal-id="modal2_@eventItem.Id">Deelnemers</button>
                     <div id="modal2_@eventItem.Id" class="modal">
                         <div class="modal-content">
-                            <h5 class="modal-title">@eventItem.Title</h5>
-                            <span class="close">&times;</span>
+                            <div class="flexbox">
+                                <h5 class="modal-title">@eventItem.Title</h5>
+                                <span class="close">&times;</span>
+                            </div>
                             @foreach (var participant in Model.AllParticipants)
                             {
                                 if (participant.EventId == eventItem.Id)
