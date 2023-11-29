@@ -205,9 +205,6 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
                 return true;
             }
             catch (Exception) { return false; }
-
-
-
         }
 
         private CaveroUser CreateUser()

@@ -63,12 +63,33 @@
         width: 80% !important;
         
     }
+
+
+    #element {
+        position: fixed;
+        transform: translate(-50%, -50%);
+        /*important gebruiken om custom css te overwriten*/
+        left: 60% !important;
+        top: 40% !important;
+  
+    }
   
 </style>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Dit is de clubhuis app van Cavero.</p>
+    @if (TempData["DeleteSuccess"] != null)
+    {
+        <ejs-toast id="element" title="Verwijderd" content=" @TempData["DeleteSuccess"]" ></ejs-toast>
+    }
+    @if (TempData["ChangeSuccess"] != null)
+    {
+        <ejs-toast id="element" title="Gewijzigd" content=" @TempData["ChangeSuccess"]"></ejs-toast>
+    }
+
+
+
     <div id='container1'>
         <div style="width: 300px; height: 75px; padding-left: 25px; padding-right: 25px; padding-top: 16px; padding-bottom: 16px; background: #803689; border-radius: 20px; justify-content: flex-start; align-items: center; gap: 16px; display: inline-flex">
             <div style="width: 27px; height: 25px; position: relative">
@@ -110,6 +131,14 @@
                         dialog.refreshPosition();
                     };
                 };
+            </script>
+            <script type="text/javascript">
+                setTimeout(
+                    () => {
+                        var toastObj = document.getElementById('element').ej2_instances[0];
+                        toastObj.target = document.body;
+                        toastObj.show();
+                    }, 1000);
             </script>
         </div>
     </div>

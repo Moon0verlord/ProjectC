@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace CaveroClubhuis.Pages
 {
@@ -18,9 +19,11 @@ namespace CaveroClubhuis.Pages
 
     public bool IsUserCheckedIn { get; private set; }
         [BindProperty]
+        [Required(ErrorMessage = "Veld moet ingevuld worden")]
         public List<int> SelectedEvents { get; set; }
 
         [BindProperty]
+        [Required(ErrorMessage = "Veld moet ingevuld worden")]
         public List<int> SelectedEvent { get; set; }
 
         [BindProperty]
@@ -41,24 +44,27 @@ namespace CaveroClubhuis.Pages
             var userId = _userManager.GetUserId(User);
             (FirstName, LastName) = _layoutTools.LoadName(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
-
+            
 
         }
 
       
         public IActionResult OnPostDelete()
         {
-                
-                // verwijder event uit database
+          
+            // verwijder event uit database
             var fullEvents = _context.Events
                    .Where(e => SelectedEvents.Contains(e.Id))
                    .ToList();
-          
+           
+
+           
             _context.RemoveRange(fullEvents);
             _context.SaveChanges();
-        
+            // notificatie opslaan
+            TempData["DeleteSuccess"] = "Evenement is succesvol verwijderd";
            
-            return RedirectToPage("./AdminDelete"); // Redirect naar page weer
+            return RedirectToPage("./Index"); // Redirect naar page weer
         }
 
     

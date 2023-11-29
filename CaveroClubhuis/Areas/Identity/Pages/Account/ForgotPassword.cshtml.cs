@@ -75,8 +75,8 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
 
                 await SendEmailAsync(
                     Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    "Wachtwoord resetten",
+                    $"{BodyVerificationEmail(callbackUrl)}");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
@@ -110,6 +110,20 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
 
 
 
+        }
+
+        private string BodyVerificationEmail(string urlLink)
+        {
+            string root = "wwwroot";
+            string file = "forgotEmail.html";
+            string FullPath = Path.Combine(root, file);
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(FullPath))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("URL", urlLink);
+            return body;
         }
     }
 }

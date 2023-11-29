@@ -1,9 +1,11 @@
 ﻿@page
 @model CaveroClubhuis.Pages.AdminDeleteModel
+@using Newtonsoft.Json
 @{
     var DialogButtons1 = new ButtonModel() { isPrimary = true, cssClass = "confirm-button", content = "Bevestig" };
     var DialogButtons2 = new ButtonModel() { content = "Annuleer", cssClass = "e-flat" };
 }
+
 @if (TempData["ErrorMessage"] != null)
 {
     <div class="alert alert-danger">
@@ -47,7 +49,7 @@
  
     /* conatiner event aanpassen */
     #selectedEvent {
-        width:400px ;
+        width:500px ;
         padding: 8px;
         border: 1px solid #ccc;
         border-radius: 4px;
@@ -55,35 +57,37 @@
     }
     #dialog2
     {
-        width:400px !important;
+        width:550px !important;
+
     }
+
+    .e-dropdownbase .e-list-item.e-item-focus, .e-dropdownbase .e-list-item.e-active, .e-dropdownbase .e-list-item.e-active.e-hover, .e-dropdownbase .e-list-item.e-hover {
+        background-color: #803689 !important;
+        color: white !important;
+    }
+
+   
+
 
 </style>
 <div class="text-center">
     <div id='container' style="height:400px;">
         <ejs-button id="targetButton" content="Open Dialog"></ejs-button>
-     <ejs-dialog id="dialog" header="Verwijder evenement" visible="false" showCloseIcon="true" target="#container" width="500px">
+     <ejs-dialog id="dialog" header="Verwijder evenement" visible="false" showCloseIcon="true" target="#container" width="550px">
                 <e-content-template>
 
         <form id="delete" method="post" asp-page-handler="Delete">
             <div>
-                <label for="selectedEvents">Selecteer een of meerdere evenementen om te verwijderen</label>
-            </div>
-            <div>
-                        <select id="selectedEvent" asp-for="SelectedEvents">
-                            <option value="">-- Selecteer een evenement --</option>
-                            @foreach (var eventItem in Model.EventsNames)
-                            {
-                                <option value="@eventItem.Id">@eventItem.Title</option>
-                            }
-                        </select>
-            </div>
+                        <ejs-dropdownlist id="selectedEvent" dataSource="@Model.EventsNames" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.SelectedEvents">
+                        <e-dropdownlist-fields text="Title" value = "Id"></e-dropdownlist-fields>
+                    </ejs-dropdownlist>
+                    <p></p>
+                    <p>Selecteer een evenement om te verwijderen</p>
+                    </div>
                     <div><span id="error-message" class="error-message"></span></div>
-                        
-           
                     <ejs-dialog id="dialog2" header="Bevestig verwijdering evenementen" visible="false" target="#container" showCloseIcon="true" content="Weet je zeker dat je de gekozen evenementen wilt verwijderen?"width="500px">
                         <e-dialog-buttons>
-                            <e-dialog-dialogbutton buttonModel="DialogButtons1"  click="submitForm"></e-dialog-dialogbutton>
+                            <e-dialog-dialogbutton buttonModel="DialogButtons1"  click="submitForm" id="submit-button"></e-dialog-dialogbutton>
                             <e-dialog-dialogbutton buttonModel="DialogButtons2" click="showDialog1"></e-dialog-dialogbutton>
                         </e-dialog-buttons>
                     </ejs-dialog>
@@ -91,30 +95,28 @@
         </form>
         </e-content-template>
             <e-dialog-buttons>
-                <e-dialog-dialogbutton buttonModel="DialogButtons1" click="showDialog2"></e-dialog-dialogbutton>
+                <e-dialog-dialogbutton buttonModel="DialogButtons1" click="showDialog2"></e-dialog-dialogbutton> 
             </e-dialog-buttons>
         </ejs-dialog>
    
    
         </div>
 
-    
 
 
 
+  
     <script>
         window.onload = function () {
             var dialog = document.getElementById("dialog").ej2_instances[0];
 
             document.getElementById('targetButton').onclick = function () {
-                // Set the dialog target to the button and position it above
-                dialog.target = '#targetButton';
-                dialog.position = { X: 'center', Y: 'top' };
+               
                 dialog.show();
             };
 
             window.onresize = function () {
-                // Ensure the dialog is repositioned when the window is resized
+                // make it responsive when the window is resized
                 dialog.refreshPosition();
             };
         };
@@ -122,7 +124,8 @@
         function showDialog2() {
         var errorMessageElement = document.getElementById("error-message");
         var selectedEvent = document.getElementById('selectedEvent');
-            if (selectedEvent.value !== "" ) {
+            if (selectedEvent.value !== "" ) // check if there is a value or not
+            {
             errorMessageElement.innerText = "";
             var dialog = document.getElementById('dialog').ej2_instances[0];
             dialog.hide();  // Hide the first dialog
@@ -130,15 +133,18 @@
             dialog2.position = dialog.position;
             dialog2.show(); // Show the second dialog
         } else {
-            // Show an alert or error message indicating that a selection is required
+            // Show error message if no event is selected
 
                 errorMessageElement.innerText = "Selecteer één evenement om verder te gaan";
         }
             }
 
         function submitForm() {
-            // Perform any additional actions you need before submitting the form
+            // manually submit the form when button is pressed
             document.getElementById('delete').submit();
+
+         
+    
         }
 
         function showDialog1()
@@ -149,6 +155,14 @@
             dialog.position = dialog2.position;
             dialog.show(); // Show the second dialog
         }
+
+        // Function to allow filtering with jquery
+        function onfiltering(e) {
+            var query = new ej.data.Query();
+            query = (e.text !== '') ? query.where('Title', 'startswith', e.text, true) : query;
+            e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.EventsNames)), query);
+        }
+       
 
     </script>
 

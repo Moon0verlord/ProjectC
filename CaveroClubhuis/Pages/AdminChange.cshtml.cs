@@ -92,18 +92,19 @@ namespace CaveroClubhuis.Pages
 
             eventToUpdate.Title=title; 
             eventToUpdate.Description=description;
-            eventToUpdate.Date = date.ToUniversalTime();
+            eventToUpdate.Date = DateTime.SpecifyKind(date, DateTimeKind.Utc);
             eventToUpdate.StartTime = startTime;
             eventToUpdate.EndTime = endTime;
             eventToUpdate.Location = location;
             _context.SaveChanges();
             ModelState.Clear();
+            TempData["ChangeSuccess"] = "Evenement is succesvol gewijzigd";
             return RedirectToPage("./Index"); // Redirect naar page weer
         }
         public IActionResult OnPostAskInput()
         {
 
-            Console.WriteLine("test22");
+          
             EventChoice = _context.Events
                  .Where(e => SelectedEvents.Contains(e.Id))
                  .FirstOrDefault();
