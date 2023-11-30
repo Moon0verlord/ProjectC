@@ -23,11 +23,13 @@ namespace CaveroClubhuis.Pages
         private readonly LayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
-        
+        [BindProperty(SupportsGet = true)]
+        public int EventId { get; set; }
+
         public bool IsUserCheckedIn { get; private set; }
 
-        
-        
+
+
         public EventsModel(CaveroClubhuisContext context,UserManager<CaveroUser> userManager, LayoutTools layoutTools)
         {
             _context = context;
@@ -64,7 +66,7 @@ namespace CaveroClubhuis.Pages
         public IList<Events> FetchEvents()
         {
             // Filter the data to get events after the current datetime
-            DateTime currentDateTime = DateTime.UtcNow - TimeSpan.FromHours(12);
+            DateTime currentDateTime = DateTime.UtcNow + TimeSpan.FromHours(1);
 
             var filteredEvents = _context.Events
                 .Where(e => e.Date > currentDateTime).OrderBy(e => e.Date)
@@ -75,11 +77,11 @@ namespace CaveroClubhuis.Pages
 
         public IList<Events> OldEvents()
         {
-            DateTime currentDateTime = DateTime.UtcNow - TimeSpan.FromHours(12);
+            DateTime currentDateTime = DateTime.UtcNow + TimeSpan.FromHours(1);
 
             // Filter the data to get events before the current datetime
             var filteredEvents = _context.Events
-                .Where(e => e.Date <= currentDateTime).OrderBy(e => e.Date)
+                .Where(e => e.Date <= currentDateTime).OrderByDescending(e => e.Date)
                 .ToList();
 
             return filteredEvents;
@@ -87,7 +89,7 @@ namespace CaveroClubhuis.Pages
 
         public IList<CaveroUser> getUsersPerEvent()
         {
-            // first get all the event id's then link it with the EventParticipants table after that link the EventParticipants table with the CaveroUser table to get the users
+            // Get all the participants
             var eventParticipants = getAllParticipants();
             var users = _context.Users
                 .Where(u => eventParticipants.Select(ep => ep.UserId).Contains(u.Id))
@@ -101,6 +103,20 @@ namespace CaveroClubhuis.Pages
             var userId = _userManager.GetUserId(User);
             _layoutTools.ToggleCheckIn(userId);
 
+            return RedirectToPage();
+        }
+
+        // add user to event when button is clicked
+        public async Task<IActionResult> OnPostDelete()
+        {
+            var userId = _userManager.GetUserId(User);
+            var eventParticipant = new EventParticipants
+            {
+                EventId = EventId, // Use the EventId property to get the value
+                UserId = userId
+            };
+            _context.EventParticipants.Add(eventParticipant);
+            _context.SaveChanges();
             return RedirectToPage();
         }
     }

@@ -9,6 +9,8 @@
 </head>
 <body>
     <div class="Wrapper">
+
+        <!-- Opkomende Evenementen-->
         <div class="Evenementen">
             <div class="StickyHeader">
                 <h2 class="Title">Opkomende evenementen</h2>
@@ -21,7 +23,11 @@
                     <h3>@eventItem.Date.ToString("dd-MM-yy"), @eventItem.StartTime.ToString(@"hh\:mm")</h3>
                     <p id="beschijving">@eventItem.Description</p>
 
-                    <button class="openModalBtn" data-modal-id="modal1_@eventItem.Id">Aanmelden</button>
+                    <!--Aanmelden button-->
+                    <form method="post" asp-page-handler="Delete">
+                        <input type="hidden" name="eventId" value="@eventItem.Id" />
+                        <button type="submit" class="openModalBtn" data-modal-id="modal1_@eventItem.Id">Aanmelden</button>
+                    </form>
                     <div id="modal1_@eventItem.Id" class="modal">
                         <div class="modal-content">
                             <h5 class="modal-title">@eventItem.Title</h5>
@@ -29,6 +35,8 @@
                             <p>U bent nu aangemeld voor: @eventItem.Title op @eventItem.Date.ToString("dd-MM-yy") om @eventItem.StartTime.ToString(@"hh\:mm")</p>
                         </div>
                     </div>
+
+                    <!--Deelnemers button-->
                     <button class="openModalBtn" data-modal-id="modal2_@eventItem.Id">Deelnemers</button>
                     <div id="modal2_@eventItem.Id" class="modal">
                         <div class="modal-content">
@@ -37,23 +45,25 @@
                                 <span class="close">&times;</span>
                             </div>
                             @foreach (var participant in Model.AllParticipants)
-                            {
-                                if (participant.EventId == eventItem.Id)
                                 {
-                                    foreach (var atendee in Model.Atendees)
+                                    if (participant.EventId == eventItem.Id)
                                     {
-                                        if (atendee.Id == participant.UserId)
+                                        foreach (var atendee in Model.Atendees)
                                         {
-                                            <p>@atendee.FirstName @atendee.LastName</p>
+                                            if (atendee.Id == participant.UserId)
+                                            {
+                            <p>@atendee.FirstName @atendee.LastName</p>
+                                            }
                                         }
                                     }
                                 }
-                            }
                         </div>
                     </div>
                 </div>
                 }
             </div>
+
+            <!-- Verlopen Evenementen-->
             <div class="Evenementen">
                 <div class="StickyHeader">
                     <h2 class="Title">Verlopen evenementen</h2>
@@ -67,6 +77,8 @@
                     <p id="beschijving">
                         @eventItem.Description
                     </p>
+
+                    <!--Feedback button-->
                     <button class="openModalBtn" data-modal-id="modal3_@eventItem.Id">Feedback</button>
                     <div id="modal3_@eventItem.Id" class="modal">
                         <div class="modal-content">
