@@ -24,6 +24,24 @@
             firstDay: 1,
             locale: 'nl',
             events: @Html.Raw(Json.Serialize(Model.EventsList.Select(e => new { title = e.Title, start = e.Date.ToString("yyyy-MM-dd") + 'T' + e.StartTime, end = e.Date.ToString("yyyy-MM-dd") + 'T' + e.EndTime }))),
+            eventContent: function (arg) {
+                var title = arg.event.title;
+
+                // formateer start tijd zodat het voor nederlands gebruik is
+                var startTime = new Date(arg.event.start);
+                var formattedStartTime = startTime.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+
+                // formateer eind tijd zodat het voor nederlands gebruik is
+                var endTime = new Date(arg.event.end);
+                var formattedEndTime = endTime.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+                // hier mee kan je de html van de content van een event aanpassen
+                return {
+                    html: '<div class="fc-content">' +
+                        '<div class="fc-title">' + title + '</div>' +
+                        '<div class="fc-time">' + formattedStartTime + ' - ' + formattedEndTime + '</div>' +
+                        '</div>'
+                };
+            }
         });
 
         calendar.render();
