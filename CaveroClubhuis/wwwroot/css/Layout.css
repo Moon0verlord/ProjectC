@@ -4,7 +4,7 @@
         max-width: 250px;
     }
 
-    .sidebar-menu-button.sidebar-menu-button, .Log-out.Log-out, .check-in.check-in {
+    .sidebar-menu-button.sidebar-menu-button, .Log-out.Log-out, .check-in.check-in{
         transform: scale(0.9);
     }
     
@@ -26,15 +26,52 @@
         margin-right: 10px;
     }
     
+    .Logout-F.Logout-F{
+        margin-right: 10px;
+    }
+    
+    .Headertxt.Headertxt{
+        font-size: 50px;
+    }
+    
 }
 
 
+@media screen and (min-width: 1368px) and (max-width: 1824px) {
+    .sidebar {
+        max-width: 250px;
+    }
 
+    .sidebar-menu-button, .Log-out, .check-in {
+        transform: scale(0.9);
+    }
 
+    .cavero-logo {
+        max-width: 60%;
+        margin-left: 10px;
+    }
 
+    .cavero-logo .desktop-logo {
+        max-width: 50%;
+        margin-left: 10px;
+    }
 
+    .sidebar a {
+        margin-right: 10px;
+    }
 
+    .profile {
+        margin-right: 10px;
+    }
 
+    .Logout-F.Logout-F{
+        margin-right: 10px;
+    }
+
+    .Headertxt.Headertxt{
+        font-size: 50px;
+    }
+}
 
 
 .background {
