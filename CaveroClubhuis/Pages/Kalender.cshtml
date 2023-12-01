@@ -8,23 +8,29 @@
 <head>
     <link rel="stylesheet" href="~/css/kalender.css" />
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         var calendarEl = document.getElementById('calendar');
-        var initialView = window.innerWidth <= 768 ? 'dayGridDay' : 'dayGridWeek';
+        var initialView = window.innerWidth <= 768 ? 'timeGridDay' : 'timeGridWeek';
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
+            headerToolbar: {
+                start: 'dayGridMonth,timeGridWeek,timeGridDay',
+                center: 'title',
+                end: 'today,prev,next'
+            },
             initialView: initialView,
             firstDay: 1,
             locale: 'nl',
-            events: @Html.Raw(Json.Serialize(Model.EventsList.Select(e => new { title = e.Title, start = e.Date.ToString("yyyy-MM-dd") + 'T' + e.StartTime, end = e.Date.ToString("yyyy-MM-dd") + 'T' + e.EndTime })))
+            events: @Html.Raw(Json.Serialize(Model.EventsList.Select(e => new { title = e.Title, start = e.Date.ToString("yyyy-MM-dd") + 'T' + e.StartTime, end = e.Date.ToString("yyyy-MM-dd") + 'T' + e.EndTime }))),
         });
 
         calendar.render();
 
-        // wnr de wdith evengroot is als de mobile version maak er een day grid van
+        // switch de calender based op scerm grote
         window.addEventListener('resize', function () {
-            var newInitialView = window.innerWidth <= 768 ? 'dayGridDay' : 'dayGridWeek';
+            var newInitialView = window.innerWidth <= 768 ? 'timeGridDay' : 'timeGridWeek';
 
             if (newInitialView !== initialView) {
                 initialView = newInitialView;
@@ -33,5 +39,6 @@
         });
     });
     </script>
+
 </head>
 <div id='calendar'></div>

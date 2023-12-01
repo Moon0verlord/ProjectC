@@ -3,11 +3,12 @@ html, body {
     overflow-x: hidden; /* zorgt ervoor dat de pagina niet scroll able is side-ways */
     overflow: hidden;
 }
+/* achtergrond kleur van de agenda */
 #calendar {
     margin-left: 10px;
     margin-right: 10px;
     background-color: #f2f0f8; /* achtergrond kleur van de agenda */
-    height: 700px;
+    height: 65vh; /* zorgt ervoor dat de kalender duidelijk te zien is op ieder scherm */
     text-align: center;
     overflow-y: scroll;
     scrollbar-width: auto;
@@ -18,10 +19,19 @@ html, body {
 #calendar .fc-toolbar {
     background-color: #803689; /* head kleur */
     color: #fff; /* tekst kleur van de head*/
+    text-align: center;
+    font-size: 14px; /* kleinere font zodat mobile niet cluster fuck is */
 }
 
+.fc-toolbar text {
+    margin-left: 100px;
+}
+#calendar .fc-toolbar-title {
+    font-size: 18px; /* font van title kleiner zodat mobile niet fucked is */
+}
 #calendar .fc-header-toolbar button {
     color: #fff; /* kleur van de buttons */
+    font-size: 12px; /* kleinere buttons zodat mobile niet cluster fuck is */
 }
 
 #calendar .fc-dayGridWeek {
@@ -29,16 +39,23 @@ html, body {
     border: 1px solid #ddd; /* geef het eeen border */
     border-radius: 5px;
     margin: 10px 0;
+    font-size: 12px; /* kleinere font zodat mobile niet cluster fuck is */
 }
 
-    #calendar .fc-dayGridWeek th {
-        background-color: #333; /* week header */
-        color: #fff; /* week header kleur (tekst) */
-    }
+#calendar .fc-dayGridWeek th {
+    background-color: #333; /* week header */
+    color: #fff; /* week header kleur (tekst) */
+    font-size: 12px; /* kleinere font zodat mobile niet cluster fuck is */
+}
 
 #calendar .fc-event {
     background-color: #4285f4; /* background kleur van de event */
     color: #fff; /* tekst kleur van de event */
     border: 1px solid #4285f4; /* kleur van border */
     border-radius: 3px;
+    font-size: 12px; /* kleinere font zodat mobile niet cluster fuck is */
+}
+
+.fc-event:hover + .fc-event {
+    display: block;
 }
