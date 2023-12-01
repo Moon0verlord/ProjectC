@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using CaveroClubhuis.Areas.Identity.Data
+@inject SignInManager<CaveroUser> SignInManager
+@inject UserManager<CaveroUser> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -13,12 +18,13 @@
 <body>
     <div class="background">
         <div class="header-container">
-            <div class="ri-menu-2-line" onclick="toggleSidebar()"></div>
+             <div class="hamburger-menu-icon">
+                    <img src="path_to_hamburger_icon.svg" alt="Menu"/>
+                </div>
             <h1 class="Headertxt">@ViewData["Title"]</h1>
         </div>
 
-        <div class="sidebar-overlay" onclick="closeSidebar()"></div>
-
+        
 
         <div class="sidebar">
             
@@ -37,28 +43,42 @@
             
             <a href="/">
                     <button class="sidebar-menu-button">
-                       <i class="ri-home-5-line align-icon" style="font-size: 25px; padding-top: 5px;"></i> Home
-
+                       <img src="~/images/home.svg" width="25" height="auto"/>
+                         <span class="button-text">Home</span>
                     </button>
                 </a>
                 <a href="/Kalender">
                     <button class="sidebar-menu-button">
-                        <img src="~/images/Calender_Icon.png" width="25" height="auto"/>
-                        Calendar
+                        <img src="~/images/calendar.svg" width="25" height="auto"/>
+                         <span class="button-text">Kalender</span>
                     </button>
                 </a>
                 <a href="/Events">
                     <button class="sidebar-menu-button">
-                        <img src="~/images/Event_Icon.png" width="25" height="auto"/>
-                        Events
+                        <img src="~/images/event.svg" width="25" height="auto"/>
+                         <span class="button-text">Evenementen</span>
                     </button>
                 </a>
-                <a href="/">
-                    <button class="sidebar-menu-button">
-                        <img src="~/images/News.png" width="25" height="auto"/>
-                        News
-                    </button>
-                </a>
+            <a href="/Team">
+                <button class="sidebar-menu-button">
+                    <img src="~/images/group.svg" width="25" height="auto"/>
+                     <span class="button-text">Team Space</span>
+                </button>
+            </a>
+            
+            @if (SignInManager.IsSignedIn(User))
+            {
+                var user = await UserManager.GetUserAsync(User);
+                if (await UserManager.IsInRoleAsync(user, "Admin"))
+                {
+                    <a href="/Admin">
+                        <button class="sidebar-menu-button">
+                            <img src="~/images/admin.svg" width="25" height="auto"/>
+                            Admin Panel
+                        </button>
+                    </a>
+                }
+            }
 
 
             <form class="Logout-F" asp-page-handler="ToggleCheckIn" method="post">
@@ -77,14 +97,13 @@
                     </button>
                 }
             </form>
-
-
+            
             @{
                 if (User.Identity?.IsAuthenticated ?? false)
                 {
                     <form class="Logout-F" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
                         <button type="submit" class="Log-out">
-                            <i class="ri-logout-circle-line"></i>
+                           <img src="~/images/log-out.svg" width="25" height="auto"/>
                             Log-out
                         </button>
                     </form>
@@ -95,14 +114,10 @@
                 }
             }
 
-            <a href="/Admin">
-                <button>Admin</button>
-            </a>
-
             <div class="settingsspace"></div>
             <div class="line-3"></div>
             <button class="settings">
-                <img src="~/images/settings.png" width="50" height="47"/>
+                <img src="~/images/settings.svg" width="50" height="47"/>
                 Settings
             </button>
         </div>
@@ -120,28 +135,14 @@
     </div>
 
 
-    <script>
-        function toggleSidebar() {
-            var sidebar = document.querySelector('.sidebar');
-            var overlay = document.querySelector('.sidebar-overlay');
-            if (sidebar.style.display === "block") {
-                sidebar.style.display = "none";
-                overlay.style.display = "none";
-            } else {
-                sidebar.style.display = "block";
-                overlay.style.display = "block";
-            }
-        }
+<script>document.querySelector('.hamburger-menu-icon').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('open');
+            document.querySelector('.sidebar-overlay').classList.toggle('active');
+        });
+        </script>
 
-        function closeSidebar() {
-            var sidebar = document.querySelector('.sidebar');
-            var overlay = document.querySelector('.sidebar-overlay');
-            sidebar.style.display = "none";
-            overlay.style.display = "none";
-        }
-    </script>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 

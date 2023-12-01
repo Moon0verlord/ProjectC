@@ -1,142 +1,15 @@
-﻿@media screen and (min-width: 1024px) and (max-width: 1440px) {
-
-    .sidebar.sidebar {
-        max-width: 280px;
-    }
-
-    .Headertxt {
-        margin-left: 30px;
-        font-size: 48px;
-    }
-
-    .page-content {
-        margin: 10px;
-    }
-    
-    .settings, .profile, .check-in, .menu-bar, .notification-container,.Log-out {
-        transform: scale(0.9);
-    }
-    
-    .check-in.check-in {
-        margin-left: 0px;
-    }
-
-    .Log-out.Log-out {
-        margin-left: 10px;
-    }
-    
-    .profile.profile{
-        margin-left: 0px;
-    }
-    
-    .cavero-logo.cavero-logo{
-        padding: 18px;
-    }
-
-    .profile_picture {
-
-        width: 45px;
-        height: 45px;
-    }
-
-    .menu-buttons {
-        margin-left: 30px; 
-    }
-    
-    .menu-bar.menu-bar {
-        margin-top: 155px;
-    }
-    
+﻿/* Base styles for mobile */
+.hamburger-menu-icon {
+    display: none; /* Hidden by default */
 }
-
 
 /* Mobile styles */
 @media screen and (max-width: 768px) {
-    .sidebar.sidebar {
-        display: none;
-        position: fixed; 
-        width: 40%; 
-        height: 100%;
-        z-index: 100; 
-    }
-    
-    .header-container.header-container {
-        left: 0;
-    }
-    
-    .profile_text {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    
-    .profile.profile{
-        margin-left: 0px;
-    }
-    
-    .check-in.check-in{
-        margin-left: 0px;
-    }
-    
-    .Log-out.Log-out{
-        margin-left: 0px;
-    }
-    
-    .sidebar-overlay{
-        z-index: 101;
-    }
-
-    .settings.settings {
-        font-size: 0; 
-        line-height: 0; 
-    }
-    .settings img {
-        display: inline-block; 
-        width: 50px; 
-        height: 47px; 
-    }
-
-    .sidebar.sidebar {
-        /* Adjustments for smaller screens */
-        z-index: 102; /* Ensure it's on top on smaller screens */
-    }
-
-    .header-container.header-container {
-        /* Adjustments for smaller screens */
-        z-index: 100; /* Below the sidebar on smaller screens */
-    }
-    
-    .ri-menu-2-line {
-        display: block; /* Show hamburger icon on small screens */
-        cursor: pointer;
-        font-size: 3rem;
-        
-    }
-    .cavero-logo.desktop-logo {
-        display: none;
-    }
-
-    /* Show mobile logo */
-    .cavero-logo.mobile-logo {
-        display: block; 
-    }
-    
-    .Headertxt.Headertxt {
-        margin-left: 0;
-        padding-right: 65px;
-        font-size: 48px;
-
+    .hamburger-menu-icon {
+        display: block; /* Show hamburger icon on mobile */
     }
     
 }
-
-/* Larger screen styles */
-@media screen and (min-width: 769px) {
-    .ri-menu-2-line {
-        display: none; /* Hide hamburger icon on larger screens */
-    }
-    
-}
-
 
 
 .background {
@@ -180,10 +53,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     z-index: 101;
 }
-
 
 
 .Logout-F{
@@ -191,7 +62,6 @@
     margin:0;
     padding:0;
     border:0;
-    
 }
 
 .Headertxt{
@@ -233,6 +103,7 @@
 .settings {
     margin-top: 15px;
     margin-left: 5px;
+    margin-bottom: 20px;
     background-color: transparent;
     border-color: transparent;
     max-width: 144px;
@@ -250,8 +121,8 @@
 
 /* Need to find another way of doing this */
 .settingsspace{
-    margin-left: 5px;
     margin-top: auto;
+    margin-left: 5px;
     margin-bottom: auto;
 }
 
@@ -329,7 +200,7 @@
 }
 
 .check-in {
-    margin-top: 100px;
+    margin-top: 50px;
     margin-left: 20px;
     width: 284px;
     height: 54px;
@@ -343,7 +214,7 @@
 }
 
 .Log-out{
-    margin-top: 100px;
+    margin-top: 50px;
     margin-left: 20px;
     width: 284px;
     height: 54px;
@@ -383,53 +254,19 @@
     box-shadow: none;
 }
 
-.notification {
-    width: 94px;
-    height: 90px;
-    top: 14px;
-    left: 1323px;
-    background-color: #d9d9d9;
-    border-radius: 47px/45px;
-    border: 2px solid #000000;
+.sidebar a {
+    text-decoration: none; /* Removes underline */
 }
 
-/* Need to find another way of doing this */
-.notification-container {
-    margin-top :20px;
-    margin-left: 78vw;
-    display: flex;
-    justify-content: space-between;
-    
-}
-
-.menu-bar {
-    margin-top: 200px;
-    margin-left: 80px;
-    max-width: 1058px;
-    height: 89px;
-    display: flex;
-    justify-content: flex-start;
-    background-color: #ffffff;
-    border-radius: 13px;
-    border: 2px solid #d9d9d9;
-    align-items: center;
-    overflow: auto;
-}
-
-.menu-buttons {
-    width: 145px;
-    height: 41px;
-    border-radius: 25px;
-    border-color: transparent;
-    background-color: #803689;
-    color: white;
-    margin-left: 50px;
-    box-shadow: 1px 4px 16px #d6dbe3;
-
+.button-text {
+    margin-left: 10px; /* Add space to the left of the text */
 }
 
 
 .sidebar-menu-button {
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
     margin-top: 50px;
     margin-left: 20px;
     width: 284px;
@@ -445,10 +282,11 @@
 }
 .sidebar-menu-button:hover {
     /* Styling for hover state */
-    background: rgba( 255, 255, 255, 0.25 );
-    box-shadow: 0 8px 32px 0 rgba(128, 31, 135, 0.37);
-    backdrop-filter: blur( 13px );
-    -webkit-backdrop-filter: blur( 13px );
+    /* Existing hover styling */
+    background: rgba(255, 255, 255, 0.25);
     border-radius: 10px;
+
+    /* Inverting colors on hover */
+    filter: invert(100%);
 }
 
