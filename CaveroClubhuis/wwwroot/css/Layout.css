@@ -1,4 +1,7 @@
-﻿@media screen and (min-width: 1368px) and (max-width: 1824px), screen and (min-resolution: 2dppx){
+﻿
+
+    /* Targets HDPI laptops  */
+@media screen and (min-width: 1368px) and (max-width: 1824px), screen and (min-resolution: 2dppx){
     
     .sidebar.sidebar {
         max-width: 250px;
@@ -37,6 +40,7 @@
 }
 
 
+    /* Targets MDPI laptops  */
 @media screen and (min-width: 1368px) and (max-width: 1824px) {
     .sidebar {
         max-width: 250px;
