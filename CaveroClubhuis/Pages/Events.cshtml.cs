@@ -130,7 +130,7 @@ namespace CaveroClubhuis.Pages
         }
     }
 
-        // add user to event when button is clicked but check if user is already in the event using the equals method
+        // add user to event when button is clicked but check if user is already in the event
         public async Task<IActionResult> OnPostAdd()
         {
             var userId = _userManager.GetUserId(User);
@@ -150,7 +150,7 @@ namespace CaveroClubhuis.Pages
                 _context.EventParticipants.Add(eventParticipant);
                 await _context.SaveChangesAsync();
             }
-            await Task.Delay(TimeSpan.FromSeconds(3)); // Delay for 3 seconds (adjust as needed)
+            await Task.Delay(TimeSpan.FromSeconds(3)); 
             return RedirectToPage();
         }
 
@@ -167,7 +167,7 @@ namespace CaveroClubhuis.Pages
                 _context.EventParticipants.Remove(participantToRemove);
                 await _context.SaveChangesAsync();
             }
-            await Task.Delay(TimeSpan.FromSeconds(3)); // Delay for 3 seconds (adjust as needed)
+            await Task.Delay(TimeSpan.FromSeconds(3)); 
             return RedirectToPage();
         }
     }
