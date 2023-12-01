@@ -210,7 +210,7 @@
 }
 
 .page-content{
-    margin-top : 20px;
+    margin-top : 200px;
     flex-grow: 1;
 }
 
@@ -427,3 +427,28 @@
     box-shadow: 1px 4px 16px #d6dbe3;
 
 }
+
+
+.sidebar-menu-button {
+    margin-top: 50px;
+    margin-left: 20px;
+    width: 284px;
+    height: 54px;
+    top: 320px;
+    left: 9%;
+    font-weight: bold;
+    white-space: nowrap;
+    border-radius: 13px;
+    border-color: transparent;
+    background-color: #d9d9d9;
+    transition: 0.3s;
+}
+.sidebar-menu-button:hover {
+    /* Styling for hover state */
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba(128, 31, 135, 0.37);
+    backdrop-filter: blur( 13px );
+    -webkit-backdrop-filter: blur( 13px );
+    border-radius: 10px;
+}
+

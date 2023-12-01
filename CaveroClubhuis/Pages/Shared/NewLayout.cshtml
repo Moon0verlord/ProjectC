@@ -34,6 +34,31 @@
                 <img class="profile_picture" src="~/images/An.jpeg"/>
                 <div class="profile_text"> @Model.FirstName @Model.LastName</div>
             </div>
+            
+            <a href="/">
+                    <button class="sidebar-menu-button">
+                       <i class="ri-home-5-line align-icon" style="font-size: 25px; padding-top: 5px;"></i> Home
+
+                    </button>
+                </a>
+                <a href="/Kalender">
+                    <button class="sidebar-menu-button">
+                        <img src="~/images/Calender_Icon.png" width="25" height="auto"/>
+                        Calendar
+                    </button>
+                </a>
+                <a href="/Events">
+                    <button class="sidebar-menu-button">
+                        <img src="~/images/Event_Icon.png" width="25" height="auto"/>
+                        Events
+                    </button>
+                </a>
+                <a href="/">
+                    <button class="sidebar-menu-button">
+                        <img src="~/images/News.png" width="25" height="auto"/>
+                        News
+                    </button>
+                </a>
 
 
             <form class="Logout-F" asp-page-handler="ToggleCheckIn" method="post">
@@ -85,34 +110,7 @@
 
         <div class="main-content">
 
-            <div class="menu-bar">
-                <a href="/">
-                    <button class="menu-buttons">
-                        <img src="~/images/Home_Icon2.png" width="25" height="auto"/>
-                        Home
-                    </button>
-                </a>
-                <a href="/Kalender">
-                    <button class="menu-buttons">
-                        <img src="~/images/Calender_Icon.png" width="25" height="auto"/>
-                        Calendar
-                    </button>
-                </a>
-                <a href="/Events">
-                    <button class="menu-buttons">
-                        <img src="~/images/Event_Icon.png" width="25" height="auto"/>
-                        Events
-                    </button>
-                </a>
-                <a href="/">
-                    <button class="menu-buttons">
-                        <img src="~/images/News.png" width="25" height="auto"/>
-                        News
-                    </button>
-                </a>
-            </div>
-
-
+            
             <div class="page-content">
                 <main role="main">
                     @RenderBody()
