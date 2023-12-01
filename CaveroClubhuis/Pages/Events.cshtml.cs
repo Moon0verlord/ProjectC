@@ -25,6 +25,7 @@ namespace CaveroClubhuis.Pages
         public string LastName { get; private set; }
         [BindProperty(SupportsGet = true)]
         public int EventId { get; set; }
+        public string UserId { get; set; }
 
         public bool IsUserCheckedIn { get; private set; }
 
@@ -106,17 +107,67 @@ namespace CaveroClubhuis.Pages
             return RedirectToPage();
         }
 
-        // add user to event when button is clicked
-        public async Task<IActionResult> OnPostDelete()
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            EventParticipants other = (EventParticipants)obj;
+
+            return EventId == other.EventId && UserId == other.UserId;
+        }
+
+        public override int GetHashCode()
+    {
+        unchecked
+        {
+            int hash = 17;
+            hash = hash * 23 + EventId.GetHashCode();
+            hash = hash * 23 + UserId.GetHashCode();
+            return hash;
+        }
+    }
+
+        // add user to event when button is clicked but check if user is already in the event using the equals method
+        public async Task<IActionResult> OnPostAdd()
         {
             var userId = _userManager.GetUserId(User);
-            var eventParticipant = new EventParticipants
+
+            // Check if the user is already a participant in the event
+            bool userAlreadyParticipant = getAllParticipants()
+                .Any(ep => ep.EventId == EventId && ep.UserId == userId);
+
+            if (!userAlreadyParticipant)
             {
-                EventId = EventId, // Use the EventId property to get the value
-                UserId = userId
-            };
-            _context.EventParticipants.Add(eventParticipant);
-            _context.SaveChanges();
+                var eventParticipant = new EventParticipants
+                {
+                    EventId = EventId,
+                    UserId = userId
+                };
+
+                _context.EventParticipants.Add(eventParticipant);
+                await _context.SaveChangesAsync();
+            }
+            await Task.Delay(TimeSpan.FromSeconds(3)); // Delay for 3 seconds (adjust as needed)
+            return RedirectToPage();
+        }
+
+        public async Task<IActionResult> OnPostLeave(int eventId)
+        {
+            var userId = _userManager.GetUserId(User);
+
+            // Find and remove the user from the participants list of the event
+            var participantToRemove = _context.EventParticipants
+                .FirstOrDefault(ep => ep.EventId == eventId && ep.UserId == userId);
+
+            if (participantToRemove != null)
+            {
+                _context.EventParticipants.Remove(participantToRemove);
+                await _context.SaveChangesAsync();
+            }
+            await Task.Delay(TimeSpan.FromSeconds(3)); // Delay for 3 seconds (adjust as needed)
             return RedirectToPage();
         }
     }
