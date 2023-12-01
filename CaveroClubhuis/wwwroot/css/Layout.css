@@ -1,20 +1,31 @@
-﻿/* Laptop screens (typically between 1024px and 1440px in width) */
-@media screen and (min-width: 1024px) and (max-width: 1440px) {
+﻿@media screen and (min-width: 1368px) and (max-width: 1824px), screen and (min-resolution: 2dppx){
+    
     .sidebar.sidebar {
         max-width: 250px;
     }
 
     .sidebar-menu-button.sidebar-menu-button, .Log-out.Log-out, .check-in.check-in {
-        width: 250px; /* Adjust button width to match the sidebar */
-        height: 45px; /* Smaller height for the buttons */
-        font-size: 14px; /* Smaller font size if needed */
-        /* Adjust padding or margins as needed */
+        transform: scale(0.9);
+    }
+    
+    .cavero-logo .cavero-logo{
+        max-width: 60%;
+        margin-left: 10px;
+    }
+    
+    .cavero-logo .desktop-logo {
+        max-width: 60%;
+        margin-left: 10px;
     }
 
-
-    .sidebar-menu-button .button-text {
-
+    .sidebar a {
+    margin-right: 10px;
     }
+    
+    .profile{
+        margin-right: 10px;
+    }
+    
 }
 
 
@@ -166,13 +177,6 @@
 }
 
 
-.cavero-logo .mobile-logo {
-    display: none;
-    max-width: 100%; 
-    height: auto; 
-}
-
-
 .profile {
     margin-top: 20px;
     margin-left: 20px;
@@ -261,6 +265,7 @@
 
 .sidebar a {
     text-decoration: none;
+    display: flex;
 }
 
 .button-text {

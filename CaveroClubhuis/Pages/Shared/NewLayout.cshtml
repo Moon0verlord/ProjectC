@@ -76,24 +76,6 @@
                     </a>
                 }
             }
-
-
-            <form class="Logout-F" asp-page-handler="ToggleCheckIn" method="post">
-                @if (Model.IsUserCheckedIn)
-                {
-                    <button type="submit" class="check-in">
-                        <i class="ri-logout-circle-line"></i>
-                        Check - out
-                    </button>
-                }
-                else
-                {
-                    <button type="submit" class="check-in">
-                        <i class="ri-login-circle-line"></i>
-                        Check - in
-                    </button>
-                }
-            </form>
             
             @{
                 if (User.Identity?.IsAuthenticated ?? false)
