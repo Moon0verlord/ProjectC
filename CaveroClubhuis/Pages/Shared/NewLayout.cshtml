@@ -116,17 +116,33 @@
     </div>
 
 
-<script>document.querySelector('.hamburger-menu-icon').addEventListener('click', function () {
-            document.querySelector('.sidebar').classList.toggle('open');
-            document.querySelector('.sidebar-overlay').classList.toggle('active');
-        });
-        </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+    const hamburgerIcon = document.querySelector('.hamburger-menu-icon');
+
+    hamburgerIcon.addEventListener('click', function () {
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('active');
+        document.documentElement.style.overflow = 'hidden';
+    });
+
+    overlay.addEventListener('click', function (event) {
+        if (event.target === overlay) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            document.documentElement.style.overflow = 'auto';
+        }
+    });
+});
+</script>
+
 
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
     <ejs-scripts></ejs-scripts>
 </body>
