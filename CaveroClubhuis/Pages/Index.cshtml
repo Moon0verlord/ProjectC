@@ -7,75 +7,32 @@
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" />
+    <link rel="stylesheet" href="~/css/index.css"/>
 </head>
 
-<style>
-    .container1 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        height: 100vh;
-        max-width: 500px;
-    }
 
-    .custom-button {
-        background-color: white;
-        color: #803689;
-    }
-
-    .e-dialog .e-dlg-header {
-        font-size: 20px;
-        font-weight: normal;
-        position: relative;
-    }
-
-    .e-dialog .e-dlg-content {
-        display: flex;
-        flex-direction: column;
-        min-height: 200px; 
-        overflow: auto;
-    }
-
-    .e-dialog .e-dlg-content {
-        overflow-y: auto;
-        
-    }
-
-    .e-dialog
-    {
-        position: center;}
-    #dialog{
-        position:fixed;
-       
-        transform: translate(-50%, -50%);
-        /*important gebruiken om custom css te overwriten*/
-        left: 60% !important;
-        top: 30%!important;
-    }
-
-  
-</style>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Dit is de clubhuis app van Cavero.</p>
-                <form class="Logout-F" asp-page-handler="ToggleCheckIn" method="post">
-                    @if (Model.IsUserCheckedIn)
-                    {
-                        <button type="submit" class="check-in">
-                            <i class="ri-logout-circle-line"></i>
-                            Check - out
-                        </button>
-                    }
-                    else
-                    {
-                        <button type="submit" class="check-in">
-                            <i class="ri-login-circle-line"></i>
-                            Check - in
-                        </button>
-                    }
-                </form>
+    
+    <div class="check-inWidget">
+        <p>Inchecken</p>
+        Selecteer een datum:
+        
+        <ejs-datepicker id="datepicker" bind-Value="@Model.SelectedDate" renderdaycell="onRenderCell"></ejs-datepicker>
+
+        
+        <form method="post" asp-page-handler="CheckIn">
+            <input type="hidden" asp-for="SelectedDate" />
+            <button type="submit" class="check-in">
+                <i class="ri-login-circle-line"></i>
+                Check - in
+            </button>
+        </form>
+
+    </div>
+    
     <div id='container1'>
         <div style="width: 300px; height: 75px; padding-left: 25px; padding-right: 25px; padding-top: 16px; padding-bottom: 16px; background: #803689; border-radius: 20px; justify-content: flex-start; align-items: center; gap: 16px; display: inline-flex">
             <div style="width: 27px; height: 25px; position: relative">
@@ -118,6 +75,16 @@
                     };
                 };
             </script>
+            
+            
+            <script>
+            function onRenderCell(args) {
+                if (args.date.getDay() == 0 || args.date.getDay() == 6) {
+                    args.isDisabled = true;
+                }
+            }
+            </script>
+            
         </div>
     </div>
 </div>

@@ -1,0 +1,79 @@
+﻿
+.container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 500px;
+}
+
+.custom-button {
+    background-color: white;
+    color: #803689;
+}
+
+.e-dialog .e-dlg-header {
+    font-size: 20px;
+    font-weight: normal;
+    position: relative;
+}
+
+.e-dialog .e-dlg-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    overflow: auto;
+}
+
+.e-dialog .e-dlg-content {
+    overflow-y: auto;
+
+}
+
+.e-dialog
+{
+    position: center;}
+#dialog{
+    position:fixed;
+
+    transform: translate(-50%, -50%);
+    /*important gebruiken om custom css te overwriten*/
+    left: 60% !important;
+    top: 30%!important;
+}
+
+.check-inWidget {
+    display: flex;
+    background-color: #7f3688;
+    flex-direction: column;
+    height: 220px;
+    width: 420px;
+    color: white;
+    border-radius: 10px;
+    margin: 0 auto;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.check-inWidget p {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-right : 250px;
+}
+
+
+.check-in {
+    margin-top: 40px;
+    margin-left: 5px;
+    width: 184px;
+    height: 34px;
+    top: 320px;
+    left: 9%;
+    white-space: nowrap;
+    border-radius: 13px;
+    border-color: transparent;
+    background-color: #d9d9d9;
+}

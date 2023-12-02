@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using Syncfusion.EJ2.Calendars;
 
 namespace CaveroClubhuis.Pages;
 
@@ -22,10 +23,14 @@ public class IndexModel : PageModel
     public string LastName { get; private set; }
     public int PeopleCount { get; private set; }
     public bool IsUserCheckedIn { get; private set; }
-
     public List<PersonInfo> People { get; private set; }
+    
+    public DateTime SelectedDate { get; set; }
 
-
+    DatePicker DatePickerValue = new DatePicker();
+    
+    
+    
     public IndexModel(ILogger<IndexModel> logger,CaveroClubhuisContext context,UserManager<CaveroUser> userManager, LayoutTools layoutTools)
     {
         _logger = logger;
@@ -69,15 +74,31 @@ public class IndexModel : PageModel
         return people;
         
     }
+    
 
-    public async Task<IActionResult> OnPostToggleCheckInAsync()
+    public void CheckIn(string userid, DateTime date)
     {
-        var userId = _userManager.GetUserId(User);
-        _layoutTools.ToggleCheckIn(userId);
-
-        return RedirectToPage();
+        var inOfficeEntry = new InOffice
+        {
+            UserId = userid,
+            CheckInDate = date,
+            IsRecurring = false
+        };
+        _context.InOffice.Add(inOfficeEntry);
+        _context.SaveChanges();
     }
     
+    public IActionResult OnPostCheckIn()
+    {
+        var userId = _userManager.GetUserId(User);
+        CheckIn(userId, SelectedDate);
+
+        // Optionally, you can perform other logic or redirect the user.
+        return RedirectToPage();
+    }
+
+
+
 
 }
 public class PersonInfo
