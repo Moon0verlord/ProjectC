@@ -18,16 +18,18 @@
 <body>
     <div class="background">
         <div class="header-container">
+            <button class="hamburger-menu-icon">
+            <img src="~/images/menu-hamburger.svg" alt="Menu">
+            </button>
             <h1 class="Headertxt">@ViewData["Title"]</h1>
         </div>
 
         
-
+        <div class="sidebar-overlay"></div>
         <div class="sidebar">
             
             <div class="cavero-logo">
                 <img src="~/images/Cavero_white.png" alt="Cavero Logo" class="desktop-logo"/>
-                <img src="~/images/logo2.png" alt="Cavero Mobile Logo" class="mobile-logo" style="display: none;"/>
                 </div>
             
             <div class="line-2"></div>
@@ -114,7 +116,7 @@
     </div>
 
 
-<script>document.querySelector('.hamburger-menu-icon').addEventListener('click', function() {
+<script>document.querySelector('.hamburger-menu-icon').addEventListener('click', function () {
             document.querySelector('.sidebar').classList.toggle('open');
             document.querySelector('.sidebar-overlay').classList.toggle('active');
         });

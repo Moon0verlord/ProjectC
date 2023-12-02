@@ -1,6 +1,6 @@
 ﻿
 
-    /* Targets HDPI laptops  */
+/* Targets HDPI laptops  */
 @media screen and (min-width: 1368px) and (max-width: 1824px), screen and (min-resolution: 2dppx){
     
     .sidebar.sidebar {
@@ -40,7 +40,7 @@
 }
 
 
-    /* Targets MDPI laptops  */
+/* Targets MDPI laptops  */
 @media screen and (min-width: 1368px) and (max-width: 1824px) {
     .sidebar {
         max-width: 250px;
@@ -75,7 +75,79 @@
     .Headertxt.Headertxt{
         font-size: 50px;
     }
+
+    .header-container.header-container{
+        left: 250px;
+    }
 }
+
+/* Mobile devices  */
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+    }
+    
+    .sidebar-menu-button.sidebar-menu-button, .Log-out.Log-out, .check-in.check-in{
+        transform: scale(0.8);
+    }
+    
+    .header-container.header-container{
+        left: 0;
+    }
+
+    .main-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        width: 100%;
+    }
+
+    .page-content {
+        margin-top: 200px;
+        flex-grow: 1;
+        width: 100%;
+    }
+
+
+    .hamburger-menu-icon {
+        display: block;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 200;
+    }
+    
+}
+
+.hamburger-menu-icon {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 200;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
 
 
 .background {
