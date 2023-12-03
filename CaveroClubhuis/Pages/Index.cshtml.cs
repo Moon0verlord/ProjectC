@@ -91,7 +91,6 @@ public class IndexModel : PageModel
 
         if (existingCheckIn != null)
         {
-            // User is already checked in on this date
             return false;
         }
 
@@ -105,6 +104,25 @@ public class IndexModel : PageModel
         _context.SaveChanges();
         return true;
     }
+    
+    public bool RecurringCheckIn(string userid, DateTime SelectedDate, string dayOfWeek)
+    {
+        DateTime utcDate = TimeZoneInfo.ConvertTimeToUtc(SelectedDate);
+        
+        var inOfficeEntry = new InOffice
+        {
+            UserId = userid,
+            CheckInDate = utcDate,
+            IsRecurring = true,
+            DayOfWeek = dayOfWeek
+        };
+        _context.InOffice.Add(inOfficeEntry);
+        _context.SaveChanges();
+        return true;
+    }
+    
+    
+    
 
     public IActionResult OnPostCheckIn()
     {
@@ -122,8 +140,7 @@ public class IndexModel : PageModel
             TempData["ErrorMessage"] = "You are already checked in on this date.";
             return RedirectToPage();
         }
-
-        // Other logic
+        
         return RedirectToPage();
     }
 
