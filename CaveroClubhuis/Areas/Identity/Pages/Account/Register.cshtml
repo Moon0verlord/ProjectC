@@ -19,21 +19,21 @@
 <div class="login">
     <form method="post" action="" class="login_form">
         <img class="logo" src="~/images/logo.png" alt="Cavero Logo" width="50" height="50">
-        <h1 class="login_title">Sign Up</h1>
+        <h1 class="login_title">Registreer</h1>
         
                 <div class="login_register">
-                    Already have an account? <a href="./Login">Sign in!</a>
+                    Heb je al een account? <a href="./Login">Log hier in!</a>
                 </div>
         <div class="login_input">
             
     <div class = "name-fields">        
             <div class="login_box">
-                <input type="text" asp-for="Input.FirstName" placeholder="First Name" required class="login_input smaller-input">
+                <input type="text" asp-for="Input.FirstName" placeholder="Voornaam" required class="login_input smaller-input">
                 <i class="ri-user-fill"></i>
             </div>
             
             <div class="login_box">
-                <input type="text" asp-for="Input.LastName" placeholder="Last Name" required class="login_input smaller-input">
+                <input type="text" asp-for="Input.LastName" placeholder="Achternaam" required class="login_input smaller-input">
                 <i class="ri-user-fill"></i>
             </div>
     </div>
@@ -44,19 +44,19 @@
             <span asp-validation-for="Input.Email" class="text-danger"></span>
 
             <div class="login_box">
-                <input type="password" asp-for="Input.Password" placeholder="Password" required class="login_input">
+                <input type="password" asp-for="Input.Password" placeholder="Wachtwoord" required class="login_input">
                 <i class="ri-lock-2-fill"></i>
             </div>
             <span asp-validation-for="Input.Password" class="text-danger"></span>
 
             <div class="login_box">
-                <input type="password" asp-for="Input.ConfirmPassword" placeholder="Confirm Password" required class="login_input">
+                <input type="password" asp-for="Input.ConfirmPassword" placeholder="Bevestig wachtwoord" required class="login_input">
                 <i class="ri-lock-2-fill"></i>
             </div>
             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             
         </div>
-        <button type="submit" class="login_button">&rarr; Sign Up</button>
+        <button type="submit" class="login_button">&rarr; Registreren</button>
     </form>
 </div>
 </body>

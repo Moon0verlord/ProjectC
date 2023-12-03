@@ -18,10 +18,10 @@
 <div class="login">
     <form method="post" action="" class="login_form">
         <img class="logo" src="~/images/logo.png" alt="Cavero Logo" width="50" height="50">
-        <h1 class="login_title">Sign in</h1>
+        <h1 class="login_title">Log in</h1>
 
         <div class="login_register">
-            Don't have an account yet? <a href="./Register">Sign up!</a>
+            Nog geen account? <a href="./Register">Registreer hier!</a>
         </div>
 
         <div class="login_input">
@@ -32,7 +32,7 @@
             <span asp-validation-for="Input.Email" class="text-danger"></span>
 
             <div class="login_box">
-                <input type="password" asp-for="Input.Password" placeholder="Password" required class="login_input">
+                <input type="password" asp-for="Input.Password" placeholder="Wachtwoord" required class="login_input">
                 <i class="ri-lock-2-fill"></i>
             </div>
             <span asp-validation-for="Input.Password" class="text-danger"></span>
@@ -46,9 +46,9 @@
                     @Html.DisplayNameFor(m => m.Input.RememberMe)
                 </label>
             </div>
-            <a asp-page="./ForgotPassword" class="login_forgot">Forgot Password?</a>
+            <a asp-page="./ForgotPassword" class="login_forgot">Wachtwoord vergeten?</a>
         </div>
-        <button type="submit" class="login_button">&rarr; Login</button>
+        <button type="submit" class="login_button">&rarr; Inloggen</button>
     </form>
 </div>
 </body>
