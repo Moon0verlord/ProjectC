@@ -2,7 +2,11 @@
 @model CaveroClubhuis.Pages.IndexModel
 @{
     ViewData["Title"] = "Homepage";
-    
+
+}
+<!--dit zorgt voor de kleuren waarin je randomized-->
+@{
+    var colors = new[] { "#CFE1FF", "#FFDCDC", "#98FB98", "#FFD700", "#87CEFA", "#FFA07A", "#DDA0DD", "#00FA9A", "#FF6347", "#40E0D0" };
 }
 
 <head>
@@ -10,6 +14,10 @@
 </head>
 
 <style>
+    body {
+        position: relative; /* indien andere css word gefucked door dit geef maruf aan :D */
+    }
+
     .container1 {
         display: flex;
         justify-content: center;
@@ -33,28 +41,81 @@
     .e-dialog .e-dlg-content {
         display: flex;
         flex-direction: column;
-        min-height: 200px; 
+        min-height: 200px;
         overflow: auto;
     }
 
     .e-dialog .e-dlg-content {
         overflow-y: auto;
-        
     }
 
-    .e-dialog
-    {
-        position: center;}
-    #dialog{
-        position:fixed;
-       
+    .e-dialog {
+        position: center;
+    }
+
+    #dialog {
+        position: fixed;
         transform: translate(-50%, -50%);
         /*important gebruiken om custom css te overwriten*/
         left: 60% !important;
-        top: 30%!important;
+        top: 30% !important;
+    }
+    /* style voor de upcomming events */
+    .upcomming {
+        position: absolute;
+        bottom: 0;
+        right: 0;
     }
 
-  
+    .Wrapper {
+        overflow: hidden;
+        background-color: #FFFFFF;
+        width: 70%;
+        border-radius: 13px;
+        border: 1px #9D9FA1 solid;
+    }
+
+    .StickyHeader {
+        position: sticky;
+        position: -webkit-sticky;
+        top: 0;
+        background-color: #FFFFFF;
+    }
+
+    .Evenementen {
+        height: 56vh;
+        border-radius: 30px;
+        overflow: auto;
+        float: left;
+    }
+
+    .kaart {
+        margin-top: 50px; /* margin top */
+        background-color: #803689;
+        border-radius: 30px;
+        width: 80%;
+        height: 200px;
+        margin: 0 auto;
+    }
+
+    .kaart h2 {
+        margin-top: 25px;
+        font-size: 20px;
+        color: black;
+        margin-left: 5%;
+    }
+
+    .kaart h3 {
+        color: black;
+        font-size: 12px;
+        margin-left: 5%;
+    }
+
+    .kaart #beschijving {
+        color: black;
+        font-size: 16px;
+        margin-left: 5%;
+    }
 </style>
 
 <div class="text-center">
@@ -72,7 +133,7 @@
             <div style="width: 2px; height: 40px; background-color: white; margin: 0 8px;"></div> <!-- White divider -->
             <div style="display: inline-flex; gap: 8px; white-space: nowrap;">
                 <ejs-button id="targetButton" content="Caverianen in de loods" cssClass="custom-button"></ejs-button>
-                <ejs-dialog id='dialog' header="Caverianen in de loods"  target="#targetButton" showCloseIcon="true" visible="false" width="500px" >
+                <ejs-dialog id='dialog' header="Caverianen in de loods" target="#targetButton" showCloseIcon="true" visible="false" width="500px">
                     <e-content-template>
                         <ejs-grid id="Grid" dataSource="@Model.People" width="470">
                             <e-grid-columns>
@@ -101,6 +162,29 @@
                     };
                 };
             </script>
+        </div>
+    </div>
+    <div class="upcomming">
+        <div class="Wrapper">
+            <div class="Evenementen">
+                <div class="StickyHeader">
+                    <h2 class="Title">Opkomend</h2>
+                    <hr class="titleLine" />
+                </div>
+                @foreach (var eventItem in Model.EventsList)
+{
+                var randomIndex = new Random().Next(0, colors.Length);
+                var randomColor = colors[randomIndex];
+
+                <div class="kaart" style="background-color: @randomColor;">
+                    <h2>@eventItem.Title</h2>
+                    <h3>@eventItem.Date.ToString("dd-MM-yy"), @eventItem.StartTime.ToString(@"hh\:mm")</h3>
+                    <p id="beschijving">
+                        @eventItem.Description
+                    </p>
+                </div>
+}
+            </div>
         </div>
     </div>
 </div>

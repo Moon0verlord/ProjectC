@@ -24,6 +24,7 @@ public class IndexModel : PageModel
     public bool IsUserCheckedIn { get; private set; }
 
     public List<PersonInfo> People { get; private set; }
+    public IList<Events> EventsList { get; set; }
 
 
     public IndexModel(ILogger<IndexModel> logger,CaveroClubhuisContext context,UserManager<CaveroUser> userManager, LayoutTools layoutTools)
@@ -44,9 +45,10 @@ public class IndexModel : PageModel
         (FirstName, LastName) = _layoutTools.LoadName(userId);
         IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
         People = CheckInOverview();
+        // krijg alle events
+        EventsList = FetchEvents();
 
     }
-
     public List<PersonInfo> CheckInOverview()
     {
         var now = DateTimeOffset.UtcNow;
@@ -77,7 +79,23 @@ public class IndexModel : PageModel
 
         return RedirectToPage();
     }
-    
+    public List<Events> FetchEvents()
+    {
+        DateTime today = DateTime.UtcNow.Date;
+        DateTime endOfWeek = today.AddDays(6); // hierdoor is zondag de laatste dag
+        // maak een case om te kijken welke dag het is en op basis daarvan bereken je door tot de zondag van de week indien het zondag is return niks
+
+        // navragen of dit goed is of dat we 6 dagen van vandaag kijken of dat we tot einde van de week van de dag kijken
+
+        // Fetch events van deze week
+        var upcomingEvents = _context.Events
+            .Where(e => e.Date >= today && e.Date <= endOfWeek) // met de >= today zorg je dat je de events na vandaag neemt tot 6 dagen in de toekomst
+            .OrderBy(e => e.Date)  // order by date
+            .ToList();
+
+        return upcomingEvents;
+    }
+
 
 }
 public class PersonInfo
