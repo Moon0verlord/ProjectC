@@ -2,13 +2,15 @@
 @model CaveroClubhuis.Pages.IndexModel
 @{
     ViewData["Title"] = "Homepage";
-    
+    var minDate= new DateTime(2023,1,1, 12,00,00);
 }
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" />
     <link rel="stylesheet" href="~/css/index.css"/>
+    <link rel="stylesheet" href="/npm/flatpickr/dist/flatpickr.min.css"/>
 </head>
+
 
 
 
@@ -16,17 +18,6 @@
     <h1 class="display-4">Welcome</h1>
     <p>Dit is de clubhuis app van Cavero.</p>
     
-    <div class="check-inWidget">
-        <p>Inchecken</p>
-        Selecteer een datum:
-        <form method="post" asp-page-handler="CheckIn">
-            <ejs-datetimepicker id="datetimepicker" name="SelectedDate" value="@Model.SelectedDate" renderdaycell="onRenderCell"></ejs-datetimepicker>
-            <button type="submit" class="check-in">
-                <i class="ri-login-circle-line"></i>
-                Check - in
-            </button>
-        </form>
-    </div>
     
     <div id='container1'>
         <div style="width: 300px; height: 75px; padding-left: 25px; padding-right: 25px; padding-top: 16px; padding-bottom: 16px; background: #803689; border-radius: 20px; justify-content: flex-start; align-items: center; gap: 16px; display: inline-flex">
@@ -71,6 +62,25 @@
                 };
             </script>
             
+            <script>
+                window.onload = function() {
+                    flatpickr("#datePicker", {
+                        enableTime: true,
+                        dateFormat: "d-m-Y H:i",
+                        minDate: new Date(@Model.MinDate.Year, @Model.MinDate.Month - 1, @Model.MinDate.Day, @Model.MinDate.Hour, @Model.MinDate.Minute),
+                        disable: [
+                            function(date) {
+
+                                return (date.getDay() === 0 || date.getDay() === 6);
+                            }
+                        ],
+                        onRenderCell: onRenderCell
+                    });
+                };
+            </script>
+
+            
+            <script src="/npm/flatpickr/dist/flatpickr.js"></script>
             
             <script>
             function onRenderCell(args) {
@@ -82,4 +92,17 @@
             
         </div>
     </div>
+    
+        <div class="check-inWidget">
+            <p>Inchecken</p>
+            <div class="line"></div>
+            Selecteer een datum:
+            <form method="post" asp-page-handler="CheckIn">
+                    <input type="text" id="datePicker" class="flatpickr" name="SelectedDate" placeholder="Please Select Date">
+                <button type="submit" class="check-in">
+                    <i class="ri-login-circle-line"></i>
+                    Check - in
+                </button>
+            </form>
+        </div>
 </div>

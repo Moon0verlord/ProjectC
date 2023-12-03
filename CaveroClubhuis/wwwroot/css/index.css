@@ -51,7 +51,7 @@
     width: 420px;
     color: white;
     border-radius: 10px;
-    margin: 0 auto;
+    margin-left: 30px;
     border: 2px solid rgba(0, 0, 0, 0.15);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -60,7 +60,7 @@
 .check-inWidget p {
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     margin-right : 250px;
 }
 
@@ -76,4 +76,14 @@
     border-radius: 13px;
     border-color: transparent;
     background-color: #d9d9d9;
+}
+
+
+.line {
+    opacity: 0.5;
+    background-color: #b1b3b4;
+    height: 2px;
+    left: 328px;
+    top: 121px;
+    object-fit: cover;
 }

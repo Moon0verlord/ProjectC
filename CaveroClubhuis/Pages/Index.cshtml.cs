@@ -25,8 +25,11 @@ public class IndexModel : PageModel
     public int PeopleCount { get; private set; }
     public bool IsUserCheckedIn { get; private set; }
     public List<PersonInfo> People { get; private set; }
+    public DateTime MinDate { get; set; }
     
+    [BindProperty]
     public DateTime SelectedDate { get; set; }
+
     
     public IndexModel(ILogger<IndexModel> logger,CaveroClubhuisContext context,UserManager<CaveroUser> userManager, LayoutTools layoutTools)
     {
@@ -46,6 +49,8 @@ public class IndexModel : PageModel
         (FirstName, LastName) = _layoutTools.LoadName(userId);
         IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
         People = CheckInOverview();
+        MinDate = new DateTime(2023, 1, 1, 12, 0, 0);
+        SelectedDate = DateTime.Now;
 
     }
 
@@ -75,11 +80,11 @@ public class IndexModel : PageModel
 
     public void CheckIn(string userid, DateTime SelectedDate)
     {
-        Console.WriteLine(SelectedDate);
+        DateTime utcDate = TimeZoneInfo.ConvertTimeToUtc(SelectedDate);
         var inOfficeEntry = new InOffice
         {
             UserId = userid,
-            CheckInDate = SelectedDate,
+            CheckInDate = utcDate,
             IsRecurring = false
         };
         _context.InOffice.Add(inOfficeEntry);
@@ -88,13 +93,19 @@ public class IndexModel : PageModel
     
     public IActionResult OnPostCheckIn()
     {
-        
+        if (!ModelState.IsValid)
+        {
+            Console.WriteLine("Model is not valid");
+            return Page();
+        }
+
         var userId = _userManager.GetUserId(User);
         CheckIn(userId, SelectedDate);
 
-        // Optionally, you can perform other logic or redirect the user.
+        // Other logic
         return RedirectToPage();
     }
+
     
 }
 public class PersonInfo
@@ -102,30 +113,4 @@ public class PersonInfo
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Team { get; set; }
-}
-
-
-public class DateTimePicker
-{
-    [Required(ErrorMessage = "Please enter the value")]
-    public DateTime? value { get; set; }
-
-}
-
-public class HomeController : Controller
-{
-    private DateTimePicker DateTimePickerValue;
-    public ActionResult Index()
-    {
-        DateTimePickerValue.value =  new DateTime(2020, 03, 03, 10, 00, 00);
-        return View(DateTimePickerValue);
-    }
-    [HttpPost]
-    public ActionResult Index(DateTimePicker model)
-    {
-
-        DateTimePickerValue.value = model.value;
-        Console.WriteLine($"TIMEEEEEEEEEEEEE{model.value}");
-        return View(DateTimePickerValue);
-    }
 }
