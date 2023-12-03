@@ -19,18 +19,13 @@
     <div class="check-inWidget">
         <p>Inchecken</p>
         Selecteer een datum:
-        
-        <ejs-datepicker id="datepicker" bind-Value="@Model.SelectedDate" renderdaycell="onRenderCell"></ejs-datepicker>
-
-        
         <form method="post" asp-page-handler="CheckIn">
-            <input type="hidden" asp-for="SelectedDate" />
+            <ejs-datetimepicker id="datetimepicker" name="SelectedDate" value="@Model.SelectedDate" renderdaycell="onRenderCell"></ejs-datetimepicker>
             <button type="submit" class="check-in">
                 <i class="ri-login-circle-line"></i>
                 Check - in
             </button>
         </form>
-
     </div>
     
     <div id='container1'>
