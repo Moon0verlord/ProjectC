@@ -12,8 +12,6 @@
 </head>
 
 
-
-
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Dit is de clubhuis app van Cavero.</p>
@@ -45,39 +43,43 @@
             </div>
             
             <script>
-                window.onload = function () {
-                    var dialog = document.getElementById("dialog").ej2_instances[0];
-
-                    document.getElementById('targetButton').onclick = function () {
-                        // Set the dialog target to the button and position it above
-                        dialog.target = '#targetButton';
-                        dialog.position = { X: 'center', Y: 'top' };
-                        dialog.show();
-                    };
-
-                    window.onresize = function () {
-                        // Ensure the dialog is repositioned when the window is resized
-                        dialog.refreshPosition();
-                    };
+            window.onload = function () {
+                // Code from your first window.onload function
+                var dialog = document.getElementById("dialog").ej2_instances[0];
+            
+                document.getElementById('targetButton').onclick = function () {
+                    dialog.target = '#targetButton';
+                    dialog.position = { X: 'center', Y: 'top' };
+                    dialog.show();
                 };
+            
+                window.onresize = function () {
+                    dialog.refreshPosition();
+                };
+            
+                // Code from your second window.onload function
+                flatpickr("#datePicker", {
+                    enableTime: true,
+                    dateFormat: "d-m-Y H:i",
+                    minDate: new Date(@Model.MinDate.Year, @Model.MinDate.Month - 1, @Model.MinDate.Day, @Model.MinDate.Hour, @Model.MinDate.Minute),
+                    disable: [
+                        function(date) {
+                            return (date.getDay() === 0 || date.getDay() === 6);
+                        }
+                    ],
+                    onRenderCell: onRenderCell
+                });
+            };
+            
+            function onRenderCell(args) {
+                if (args.date.getDay() == 0 || args.date.getDay() == 6) {
+                    args.isDisabled = true;
+                }
+            }
+
             </script>
             
-            <script>
-                window.onload = function() {
-                    flatpickr("#datePicker", {
-                        enableTime: true,
-                        dateFormat: "d-m-Y H:i",
-                        minDate: new Date(@Model.MinDate.Year, @Model.MinDate.Month - 1, @Model.MinDate.Day, @Model.MinDate.Hour, @Model.MinDate.Minute),
-                        disable: [
-                            function(date) {
 
-                                return (date.getDay() === 0 || date.getDay() === 6);
-                            }
-                        ],
-                        onRenderCell: onRenderCell
-                    });
-                };
-            </script>
 
             
             <script src="/npm/flatpickr/dist/flatpickr.js"></script>
@@ -97,6 +99,12 @@
             <p>Inchecken</p>
             <div class="line"></div>
             Selecteer een datum:
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="error-message">
+                    @TempData["ErrorMessage"]
+                </div>
+            }
             <form method="post" asp-page-handler="CheckIn">
                     <input type="text" id="datePicker" class="flatpickr" name="SelectedDate" placeholder="Please Select Date">
                 <button type="submit" class="check-in">

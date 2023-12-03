@@ -26,6 +26,7 @@ public class IndexModel : PageModel
     public bool IsUserCheckedIn { get; private set; }
     public List<PersonInfo> People { get; private set; }
     public DateTime MinDate { get; set; }
+    public string ErrorMessage { get; set; }
     
     [BindProperty]
     public DateTime SelectedDate { get; set; }
@@ -51,6 +52,10 @@ public class IndexModel : PageModel
         People = CheckInOverview();
         MinDate = new DateTime(2023, 1, 1, 12, 0, 0);
         SelectedDate = DateTime.Now;
+        if (TempData["ErrorMessage"] != null)
+        {
+            ErrorMessage = TempData["ErrorMessage"].ToString();
+        }
 
     }
 
@@ -78,9 +83,18 @@ public class IndexModel : PageModel
     }
     
 
-    public void CheckIn(string userid, DateTime SelectedDate)
+    public bool CheckIn(string userid, DateTime SelectedDate)
     {
         DateTime utcDate = TimeZoneInfo.ConvertTimeToUtc(SelectedDate);
+        var existingCheckIn = _context.InOffice
+            .FirstOrDefault(io => io.UserId == userid && io.CheckInDate.Date == utcDate.Date);
+
+        if (existingCheckIn != null)
+        {
+            // User is already checked in on this date
+            return false;
+        }
+
         var inOfficeEntry = new InOffice
         {
             UserId = userid,
@@ -89,8 +103,9 @@ public class IndexModel : PageModel
         };
         _context.InOffice.Add(inOfficeEntry);
         _context.SaveChanges();
+        return true;
     }
-    
+
     public IActionResult OnPostCheckIn()
     {
         if (!ModelState.IsValid)
@@ -100,7 +115,13 @@ public class IndexModel : PageModel
         }
 
         var userId = _userManager.GetUserId(User);
-        CheckIn(userId, SelectedDate);
+        bool checkInSuccessful = CheckIn(userId, SelectedDate);
+
+        if (!checkInSuccessful)
+        {
+            TempData["ErrorMessage"] = "You are already checked in on this date.";
+            return RedirectToPage();
+        }
 
         // Other logic
         return RedirectToPage();

@@ -87,3 +87,17 @@
     top: 121px;
     object-fit: cover;
 }
+
+
+.error-message {
+    color: #ff0000; /* Red color for the text */
+    background-color: #ffecec; /* Light red background */
+    border: 1px solid #ff0000; /* Red border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center; /* Center the text */
+    font-size: 1em; /* Adjust the font size as needed */
+    font-weight: bold; /* Make the font bold */
+}
