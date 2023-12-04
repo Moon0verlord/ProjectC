@@ -109,10 +109,6 @@
     border: 2px solid #803689;
 }
 
-.make-event-form input:focus {
-    border: 2px solid #803689;
-    border-radius: 34px;
-}
 
 /*
 .error-message {

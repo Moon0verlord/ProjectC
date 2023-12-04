@@ -4,6 +4,7 @@
 @{
     var DialogButtons1 = new ButtonModel() { isPrimary = true, cssClass = "confirm-button", content = "Bevestig" };
     var DialogButtons2 = new ButtonModel() { content = "Annuleer", cssClass = "e-flat" };
+ViewData["Title"] = "Admin";
 }
 
 @if (TempData["ErrorMessage"] != null)
@@ -22,7 +23,7 @@
 
     .e-dialog {
         text-align: center; /* Horizontal centering */
-        display: flex;
+        display: flex; 
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -94,7 +95,7 @@
 
             <form id="delete" method="post" asp-page-handler="Delete">
                 <div>
-                    <ejs-dropdownlist id="selectedEvent" dataSource="@Model.EventsNames" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.SelectedEvents" style="min-width: 300px;">
+                    <ejs-dropdownlist id="selectedEvent" dataSource="@Model.EventsNames" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.SelectedEvents" style="width: 300px;">
                         <e-dropdownlist-fields text="Title" value="Id"></e-dropdownlist-fields>
                     </ejs-dropdownlist>
                     <p></p>
@@ -181,3 +182,4 @@
 
 </script>
 
+</div>

@@ -2,6 +2,7 @@
 @model CaveroClubhuis.Pages.AdminChangeModel
 @{
     var DialogButtons1 = new ButtonModel() { isPrimary = true, cssClass = "confirm-button", content = "Bevestig" };
+ViewData["Title"] = "Admin";
 }
 @using Newtonsoft.Json
 
@@ -30,12 +31,14 @@
 
     @if(Model.EventChoice == null)
     {
-            <div id='container' style="height:350px;" class="make-event">
-                <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" target="#container" style="min-height:350px; border-radius: 13px; box-shadow: none;  border: 2px solid #d9d9d9;
- overflow-y: auto;" width="450px">
-                    <e-content-template>
+        <div id='container' style="height:350px;" class="make-event">
 
-                        <form id="ask-input" method="post" class="make-event-form" asp-page-handler="AskInput" onsubmit="validateForm">
+            <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" target="#container" style="min-height:350px; border-radius: 13px; box-shadow: none;  border: 2px solid #d9d9d9;
+ overflow-y: auto;" width="450px">
+                <e-content-template>
+
+                    <form id="ask-input" method="post" asp-page-handler="AskInput" onsubmit="validateForm">
+                        <div>
                             <ejs-dropdownlist id="selectedEvent" dataSource="@Model.Events" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.SelectedEvents" style="width: 300px;">
                                 <e-dropdownlist-fields text="Title" value="Id"></e-dropdownlist-fields>
                             </ejs-dropdownlist>
@@ -43,67 +46,76 @@
                             <p>Selecteer een evenement om te wijzigen</p>
 
                             <div><span id="error-message" class="error-messageDialog"></span></div>
+                        </div>
+                    </form>
 
+                </e-content-template>
+                <e-dialog-buttons>
+                    <e-dialog-dialogbutton buttonModel="DialogButtons1" click="submitForm" id="submit-button"></e-dialog-dialogbutton>
+                </e-dialog-buttons>
+            </ejs-dialog>
+        </div>
+
+
+                        
+                        }
+
+                        else
+                        {
+<div class="make-event">
+                        <form id="change" class="make-event-form" method="post" style="display:flex;" asp-page-handler="ChangeEvent">
+                            <!-- Add the make event inputs here-->
+
+                            <label for="title">Titel</label>
+
+                            <input type="text" id="title" value="@Model.EventChoice.Title" maxlength="20" asp-for="title" required>
+
+
+                            <label for="description">Omschrijving</label>
+
+                            <textarea type="text" id="description" value="@Model.description" maxlength="200" asp-for="description" required></textarea>
+
+                            <label for="date">Datum</label>
+
+                            <input type="date" id="date" value="@Model.date.ToString("yyyy-MM-dd")" asp-for="date" required>
+
+                            <label for="startTime">Start tijd</label>
+
+                            <input type="time" id="startTime" value="@Model.startTime.ToString("hh\\:mm")" asp-for="startTime" required>
+
+                            <label for="endTime">Eind tijd</label>
+
+                            <input type="time" id="endTime" value="@Model.endTime.ToString("hh\\:mm")" asp-for="endTime" required>
+
+                            <label for="location">Locatie</label>
+
+                            <input type="text" id="location" value="@Model.location" asp-for="location" required>
+
+
+                            <input type="submit" value="Opslaan">
                         </form>
-                    </e-content-template>
-                    <e-dialog-buttons>
-                        <e-dialog-dialogbutton buttonModel="DialogButtons1" click="submitForm" id="submit-button"></e-dialog-dialogbutton>
-                    </e-dialog-buttons>
-                </ejs-dialog>
-            </div>
-     }
+    </div>
+                        }
+                        <script>
+                            window.onload = function () {
 
-  else
-  {
-    <form id="change" class="make-event-form" method="post" style="display:flex;" asp-page-handler="ChangeEvent">
-        <!-- Add the make event inputs here-->
+                                var dialogElement = document.getElementById("dialog");
 
-        <label for="title">Titel</label>
+                                if (dialogElement) {
+                                    var dialog = dialogElement.ej2_instances[0];
 
-        <input type="text" id="title" value="@Model.EventChoice.Title" maxlength="20" asp-for="title" required>
-
-
-        <label for="description">Omschrijving</label>
-
-        <textarea type="text" id="description" value="@Model.description" maxlength="200" asp-for="description" required></textarea>
-
-        <label for="date">Datum</label>
-
-        <input type="date" id="date" value="@Model.date.ToString("yyyy-MM-dd")" asp-for="date" required>
-
-        <label for="startTime">Start tijd</label>
-
-        <input type="time" id="startTime" value="@Model.startTime.ToString("hh\\:mm")" asp-for="startTime" required>
-
-        <label for="endTime">Eind tijd</label>
-
-        <input type="time" id="endTime" value="@Model.endTime.ToString("hh\\:mm")" asp-for="endTime" required>
-
-        <label for="location">Locatie</label>
-
-        <input type="text" id="location" value="@Model.location" asp-for="location" required>
-
-
-        <input type="submit" value="Opslaan">
-    </form>
-  }
-    <script>
-        window.onload = function () {
-            var dialog = document.getElementById("dialog").ej2_instances[0];
-
-        
-
-            window.onresize = function () {
-                // Make dialog responsive
-                dialog.refreshPosition();
+                                    window.onresize = function () {
+                                        // Make dialog responsive
+                                        dialog.refreshPosition();
+                                    };
             };
         };
 
     function onDialogClose() {
         // Redirect to the home page
-        window.location.href = '/Index'; 
+        window.location.href = '/Index';
     }
- 
+
     function submitForm() {
         var errorMessageElement = document.getElementById("error-message");
         var selectedEvent = document.getElementById('selectedEvent');
@@ -112,7 +124,7 @@
             errorMessageElement.innerText = "";
             // manually submit the form when button is pressed
             document.getElementById('ask-input').submit();
-           
+
         } else {
             // Show error message if no event is selected
             errorMessageElement.innerText = "Selecteer één evenement om verder te gaan";
@@ -126,57 +138,61 @@
         query = (e.text !== '') ? query.where('Title', 'startswith', e.text, true) : query;
         e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Events)), query);
     }
-   
-    </script>
 
-    <style>
-        .confirm-button {
-            background-color: #803689 !important;
-            border-color: #803689 !important;
-            color: white !important;
-        }
+                        </script>
 
-
-        .e-dialog {
-            text-align: center; /* Horizontal centering */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
+                        <style>
+                            .confirm-button {
+                                background-color: #803689 !important;
+                                border-color: #803689 !important;
+                                color: white !important;
+                            }
 
 
-            .e-dialog .e-dlg-header {
-                width: 340px;
-                font-size: 20px;
-                font-weight: normal;
-                position: relative;
-            }
+                            .e-dialog {
+                                text-align: center; /* Horizontal centering */
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                                height: 100%;
+                            }
 
-            .e-dialog .e-dlg-content {
-                display: flex;
-                flex-direction: column;
-                min-height: 200px;
-                overflow: auto;
-            }
+                            #selectedEvent_popup {
+                                width: 500px !important; /* Use !important if necessary */
+                            }
 
-            .e-dialog .e-dlg-content {
-                overflow-y: auto;
-            }
 
-        .error-message {
-            color: red;
-        }
+                            .e-dialog .e-dlg-header {
+                                width: 340px;
+                                font-size: 20px;
+                                font-weight: normal;
+                                position: relative;
+                            }
 
-        #dialog1 {
-            width: 550px !important;
-        }
+                            .e-dialog .e-dlg-content {
+                                display: flex;
+                                flex-direction: column;
+                                min-height: 200px;
+                                overflow: auto;
+                            }
 
-        .e-dropdownbase .e-list-item.e-item-focus, .e-dropdownbase .e-list-item.e-active, .e-dropdownbase .e-list-item.e-active.e-hover, .e-dropdownbase .e-list-item.e-hover {
-            background-color: #803689 !important;
-            color: white !important;
-        }
-        </style>
+                            .e-dialog .e-dlg-content {
+                                overflow-y: auto;
+                            }
 
-       
+                            .error-messageDialog {
+                                color: red;
+                            }
+
+                            #dialog1 {
+                                width: 550px !important;
+                            }
+
+                            .e-dropdownbase .e-list-item.e-item-focus, .e-dropdownbase .e-list-item.e-active, .e-dropdownbase .e-list-item.e-active.e-hover, .e-dropdownbase .e-list-item.e-hover {
+                                background-color: #803689 !important;
+                                color: white !important;
+                            }
+                        </style>
+
+
