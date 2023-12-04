@@ -1,32 +1,9 @@
 ﻿@page
 @model CaveroClubhuis.Pages.AdminChangeModel
 @{
-ViewData["Title"] = "Admin";
+    var DialogButtons1 = new ButtonModel() { isPrimary = true, cssClass = "confirm-button", content = "Bevestig" };
 }
-
-<head>
-    <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
-</head>
-
-<div class="admin-bar">
-    <!-- Buttons for the admin-->
-    <a href="/MakeEvent">
-        <button id="makeButton" class="admin-button">
-            Event aanmaken
-        </button>
-    </a>
-    <a href="/AdminChange">
-        <button id="changeButton" class="admin-button" style="background-color: #803689; color: white;">
-            Event aanpassen
-        </button>
-    </a>
-    <a href="/AdminDelete">
-        <button id="removeButton" class="admin-button">
-            Event verwijderen
-        </button>
-    </a>
-</div>
-
+@using Newtonsoft.Json
 <div class="text-center">
     @if(Model.EventChoice == null)
     {
@@ -34,24 +11,20 @@ ViewData["Title"] = "Admin";
         <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" showCloseIcon="true" target="#container" width="500px" >
             <e-content-template>
 
-                <form id="ask-input" method="post" asp-page-handler="AskInput">
-                    <div>
-                        <label for="selectedEvents">Selecteer een evenement om te wijzigen</label>
-                    </div>
-                    <div>
-                        <select id="selectedEvent" asp-for="SelectedEvents" size="4">
-                            <option value="">-- Selecteer een evenement --</option>
-                            @foreach (var eventItem in Model.Events)
-                            {
-                                <option value="@eventItem.Id">@eventItem.Title</option>
-                            }
-                        </select>
-                    </div>
-                    <div>
-                        <input type="submit" class="confirm-button" value="Bevestig keuze">
-                    </div>
+                    <form id="ask-input" method="post" asp-page-handler="AskInput" onsubmit="validateForm">
+                        <ejs-dropdownlist id="selectedEvent" dataSource="@Model.Events" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.SelectedEvents">
+                            <e-dropdownlist-fields text="Title" value="Id"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+                        <p></p>
+                        <p>Selecteer een evenement om te wijzigen</p>
+        
+        <div><span id="error-message" class="error-message"></span></div>
+                       
                 </form>
             </e-content-template>
+                <e-dialog-buttons>
+                    <e-dialog-dialogbutton buttonModel="DialogButtons1" click="submitForm" id="submit-button"></e-dialog-dialogbutton>
+                </e-dialog-buttons>
         </ejs-dialog>
         </div>
      }
@@ -65,29 +38,29 @@ ViewData["Title"] = "Admin";
                 <!-- Add the make event inputs here-->
                 
                     <label for="title">Titel</label>
-                    <span asp-validation-for="title" class="error-message"></span>
-                    <input type="text" id="title" value="@Model.EventChoice.Title" maxlength="20" asp-for="title">
+                  
+                        <input type="text" id="title" value="@Model.EventChoice.Title" maxlength="20" asp-for="title" required>
               
               
                         <label for="description">Omschrijving</label>
-                        <span asp-validation-for="description" class="error-message"></span>
-                        <textarea type="text" id="description" value="@Model.description" maxlength="200" asp-for="description"></textarea>
+                        
+                        <textarea type="text" id="description" value="@Model.description" maxlength="200" asp-for="description" required></textarea>
                         
                         <label for="date">Datum</label>
-                        <span asp-validation-for="date" class="error-message"></span>
-                        <input type="date" id="date" value="@Model.date.ToString("yyyy-MM-dd")" asp-for="date">
+                      
+                        <input type="date" id="date" value="@Model.date.ToString("yyyy-MM-dd")" asp-for="date" required>
 
                         <label for="startTime">Start tijd</label>
-                        <span asp-validation-for="startTime" class="error-message"></span>
-                        <input type="time" id="startTime" value="@Model.startTime.ToString("hh\\:mm")" asp-for="startTime">
+
+                        <input type="time" id="startTime" value="@Model.startTime.ToString("hh\\:mm")" asp-for="startTime" required>
 
                         <label for="endTime">Eind tijd</label>
-                        <span asp-validation-for="endTime" class="error-message"></span>
-                        <input type="time" id="endTime" value="@Model.endTime.ToString("hh\\:mm")" asp-for="endTime">
+
+                        <input type="time" id="endTime" value="@Model.endTime.ToString("hh\\:mm")" asp-for="endTime" required>
 
                         <label for="location">Locatie</label>
-                        <span asp-validation-for="location" class="error-message"></span>
-                        <input type="text" id="location" value="@Model.location" asp-for="location">
+
+                        <input type="text" id="location" value="@Model.location" asp-for="location" required>
 
                         
                         <input type="submit" value="Opslaan">
@@ -104,7 +77,7 @@ ViewData["Title"] = "Admin";
         
 
             window.onresize = function () {
-                // Ensure the dialog is repositioned when the window is resized
+                // Make dialog responsive
                 dialog.refreshPosition();
             };
         };
@@ -113,6 +86,35 @@ ViewData["Title"] = "Admin";
         // Redirect to the home page
         window.location.href = '/Index'; 
     }
+ 
+    function submitForm() {
+        var errorMessageElement = document.getElementById("error-message");
+        var selectedEvent = document.getElementById('selectedEvent');
+        if (selectedEvent.value !== "") // check if there is a value or not
+        {
+            errorMessageElement.innerText = "";
+            // manually submit the form when button is pressed
+            document.getElementById('ask-input').submit();
+           
+        } else {
+            // Show error message if no event is selected
+
+            errorMessageElement.innerText = "Selecteer één evenement om verder te gaan";
+        }
+        
+
+
+
+    }
+
+
+    // Function to allow filtering with jquery
+    function onfiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('Title', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Events)), query);
+    }
+   
     </script>
 
     <style>
@@ -134,10 +136,6 @@ ViewData["Title"] = "Admin";
 
 
     .error-message {
-        max-width: 40%;
-        display: block;
-        float: left;
-        margin-left: 20%;
         color: red;
     }
 
@@ -215,6 +213,11 @@ ViewData["Title"] = "Admin";
         .make-event textarea::-webkit-scrollbar {
             width: 0px;
         }
+
+    .e-dropdownbase .e-list-item.e-item-focus, .e-dropdownbase .e-list-item.e-active, .e-dropdownbase .e-list-item.e-active.e-hover, .e-dropdownbase .e-list-item.e-hover {
+        background-color: #803689 !important;
+        color: white !important;
+    }
         </style>
 
        

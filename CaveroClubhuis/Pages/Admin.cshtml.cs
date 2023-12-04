@@ -43,10 +43,6 @@ namespace CaveroClubhuis.Pages
         [Required(ErrorMessage = "Veld moet ingevuld worden")]
         public DateTime date { get; set; }
 
-        public string makeDisplay { get; private set; }
-
-        public string errorMessage { get; private set; } = "";
-
         public AdminModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, LayoutTools layoutTools)
         {
             _context = context;
@@ -54,36 +50,22 @@ namespace CaveroClubhuis.Pages
             _layoutTools = layoutTools;
 
         }
+
         public IActionResult? OnGet()
         {
-            //check if user is admin if not return to home page
-            if (!checkAdmin()) return RedirectToPage("/Index");
-
             // get name of user
             var userId = _userManager.GetUserId(User);
             (FirstName, LastName) = _layoutTools.LoadName(userId!);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
 
+            //check if user is admin if not return to home page
+            if (!_layoutTools.checkAdmin(userId)) return RedirectToPage("/Index");
 
-            makeDisplay = "none";
             return null!;
-        }
-
-        public bool checkAdmin()
-        {
-            //Return true if the user is an admin else return false
-            var userId = _userManager.GetUserId(User);
-            string role = (from r in _context.Roles
-                           where r.Id == (_context.UserRoles.Where(x => x.UserId == userId).Select(x => x.RoleId).FirstOrDefault())
-                           select r.Name).FirstOrDefault()!;
-            if (role == "Admin") return true;
-            else return false;
-               
         }
 
         public IActionResult? OnPostMakeEvent() {
             if (!ModelState.IsValid) {
-                makeDisplay = "flex";
 
                 var userId = _userManager.GetUserId(User);
                 (FirstName, LastName) = _layoutTools.LoadName(userId!);

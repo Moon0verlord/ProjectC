@@ -20,7 +20,7 @@ namespace CaveroClubhuis.Pages
 
         [BindProperty]
         [Required(ErrorMessage = "Veld moet ingevuld worden")]
-        public string title { get; set; }
+        public string? title { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "Veld moet ingevuld worden")]
@@ -43,6 +43,7 @@ namespace CaveroClubhuis.Pages
         public DateTime date { get; set; }
 
         [BindProperty]
+        [Required(ErrorMessage = "Veld moet ingevuld worden")]
         public List<int> SelectedEvents { get; set; }
 
         public Events EventChoice { get; set; }
@@ -61,13 +62,16 @@ namespace CaveroClubhuis.Pages
             SelectedEvents = new List<int>();
         }
 
-        public void OnGet()
+        public IActionResult? OnGet()
         {
-            Events = FetchEvents();
             var userId = _userManager.GetUserId(User);
+            if (!_layoutTools.checkAdmin(userId)) return RedirectToPage("/Index");
+
+            Events = FetchEvents();
             (FirstName, LastName) = _layoutTools.LoadName(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
-           
+
+            return null!;
 
         }
 
@@ -80,21 +84,30 @@ namespace CaveroClubhuis.Pages
          
 
             var eventToUpdate = _context.Events.First(x => x.Id == id);
-            
-          
+            if (!ModelState.IsValid)
+            {
+
+                var userId = _userManager.GetUserId(User);
+                (FirstName, LastName) = _layoutTools.LoadName(userId!);
+                IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
+                return Page();
+            }
+
             eventToUpdate.Title=title; 
             eventToUpdate.Description=description;
-            eventToUpdate.Date = date.ToUniversalTime();
+            eventToUpdate.Date = DateTime.SpecifyKind(date, DateTimeKind.Utc);
             eventToUpdate.StartTime = startTime;
             eventToUpdate.EndTime = endTime;
             eventToUpdate.Location = location;
             _context.SaveChanges();
+            ModelState.Clear();
+            TempData["ChangeSuccess"] = "Evenement is succesvol gewijzigd";
             return RedirectToPage("./Index"); // Redirect naar page weer
         }
         public IActionResult OnPostAskInput()
         {
 
-            Console.WriteLine("test22");
+          
             EventChoice = _context.Events
                  .Where(e => SelectedEvents.Contains(e.Id))
                  .FirstOrDefault();
