@@ -31,9 +31,9 @@
 <div class="make-event">
     @if(Model.EventChoice == null)
     {
-            <div id='container' style="height:15px; overflow: visible;">
-                <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" target="#container" minHeight="350px" style="border-radius: 20px; box-shadow: none;  border: 2px solid #d9d9d9;
-        overflow-y: auto;" width="450px">
+            <div id='container' style="height:350px; overflow: visible;">
+                <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" target="#container" style="min-height: 349px; border-radius: 13px; box-shadow: none;  border-color: transparent;
+        overflow-y: auto;" width="446px">
                     <e-content-template>
 
                         <form id="ask-input" method="post" class="make-event-form" asp-page-handler="AskInput" onsubmit="validateForm">
@@ -43,7 +43,7 @@
                             <p></p>
                             <p>Selecteer een evenement om te wijzigen</p>
 
-                            <div><span id="error-message" class="error-message"></span></div>
+                            <div><span id="error-message" class="error-messageDialog"></span></div>
 
                         </form>
                     </e-content-template>
@@ -144,7 +144,7 @@
     }
 
 
-    .error-message {
+    .error-messageDialog {
         color: red;
     }
 
