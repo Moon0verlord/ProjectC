@@ -25,6 +25,7 @@
 
 .make-event {
     display: flex;
+    flex-direction:column;
     margin-top: 10px;
     max-width: 450px;
     min-height: 350px;

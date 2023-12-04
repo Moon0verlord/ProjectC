@@ -4,72 +4,91 @@
     var DialogButtons1 = new ButtonModel() { isPrimary = true, cssClass = "confirm-button", content = "Bevestig" };
 }
 @using Newtonsoft.Json
-<div class="text-center">
+
+<head>
+    <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
+</head>
+
+<div class="admin-bar">
+    <!-- Buttons for the admin-->
+    <a href="/MakeEvent">
+        <button id="makeButton" class="admin-button">
+            Event aanmaken
+        </button>
+    </a>
+    <a href="/AdminChange">
+        <button id="changeButton" class="admin-button">
+            Event aanpassen
+        </button>
+    </a>
+    <a href="/AdminDelete">
+        <button id="removeButton" class="admin-button">
+            Event verwijderen
+        </button>
+    </a>
+</div>
+
+<div class="make-event">
     @if(Model.EventChoice == null)
     {
-    <div id='container' style="height:400px;">
-        <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" showCloseIcon="true" target="#container" width="500px" >
-            <e-content-template>
+            <div id='container' style="height:15px; overflow: visible;">
+                <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" target="#container" minHeight="350px" style="border-radius: 20px; box-shadow: none;  border: 2px solid #d9d9d9;
+        overflow-y: auto;" width="450px">
+                    <e-content-template>
 
-                    <form id="ask-input" method="post" asp-page-handler="AskInput" onsubmit="validateForm">
-                        <ejs-dropdownlist id="selectedEvent" dataSource="@Model.Events" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.SelectedEvents">
-                            <e-dropdownlist-fields text="Title" value="Id"></e-dropdownlist-fields>
-                        </ejs-dropdownlist>
-                        <p></p>
-                        <p>Selecteer een evenement om te wijzigen</p>
-        
-        <div><span id="error-message" class="error-message"></span></div>
-                       
-                </form>
-            </e-content-template>
-                <e-dialog-buttons>
-                    <e-dialog-dialogbutton buttonModel="DialogButtons1" click="submitForm" id="submit-button"></e-dialog-dialogbutton>
-                </e-dialog-buttons>
-        </ejs-dialog>
-        </div>
+                        <form id="ask-input" method="post" class="make-event-form" asp-page-handler="AskInput" onsubmit="validateForm">
+                            <ejs-dropdownlist id="selectedEvent" dataSource="@Model.Events" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.SelectedEvents">
+                                <e-dropdownlist-fields text="Title" value="Id"></e-dropdownlist-fields>
+                            </ejs-dropdownlist>
+                            <p></p>
+                            <p>Selecteer een evenement om te wijzigen</p>
+
+                            <div><span id="error-message" class="error-message"></span></div>
+
+                        </form>
+                    </e-content-template>
+                    <e-dialog-buttons>
+                        <e-dialog-dialogbutton buttonModel="DialogButtons1" click="submitForm" id="submit-button"></e-dialog-dialogbutton>
+                    </e-dialog-buttons>
+                </ejs-dialog>
+            </div>
      }
-     
+
   else
   {
-        <div id='container' style="height:400px;">
-            <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" showCloseIcon="true" target="#container" width="500px" >
-            <e-content-template>
-                 <form id="change" class ="make-event" method="post" style="display:flex;" asp-page-handler="ChangeEvent">
-                <!-- Add the make event inputs here-->
-                
-                    <label for="title">Titel</label>
-                  
-                        <input type="text" id="title" value="@Model.EventChoice.Title" maxlength="20" asp-for="title" required>
-              
-              
-                        <label for="description">Omschrijving</label>
-                        
-                        <textarea type="text" id="description" value="@Model.description" maxlength="200" asp-for="description" required></textarea>
-                        
-                        <label for="date">Datum</label>
-                      
-                        <input type="date" id="date" value="@Model.date.ToString("yyyy-MM-dd")" asp-for="date" required>
+    <form id="change" class="make-event-form" method="post" style="display:flex;" asp-page-handler="ChangeEvent">
+        <!-- Add the make event inputs here-->
 
-                        <label for="startTime">Start tijd</label>
+        <label for="title">Titel</label>
 
-                        <input type="time" id="startTime" value="@Model.startTime.ToString("hh\\:mm")" asp-for="startTime" required>
+        <input type="text" id="title" value="@Model.EventChoice.Title" maxlength="20" asp-for="title" required>
 
-                        <label for="endTime">Eind tijd</label>
 
-                        <input type="time" id="endTime" value="@Model.endTime.ToString("hh\\:mm")" asp-for="endTime" required>
+        <label for="description">Omschrijving</label>
 
-                        <label for="location">Locatie</label>
+        <textarea type="text" id="description" value="@Model.description" maxlength="200" asp-for="description" required></textarea>
 
-                        <input type="text" id="location" value="@Model.location" asp-for="location" required>
+        <label for="date">Datum</label>
 
-                        
-                        <input type="submit" value="Opslaan">
-            </form>
-                </e-content-template>
-            </ejs-dialog>
-        </div>
+        <input type="date" id="date" value="@Model.date.ToString("yyyy-MM-dd")" asp-for="date" required>
+
+        <label for="startTime">Start tijd</label>
+
+        <input type="time" id="startTime" value="@Model.startTime.ToString("hh\\:mm")" asp-for="startTime" required>
+
+        <label for="endTime">Eind tijd</label>
+
+        <input type="time" id="endTime" value="@Model.endTime.ToString("hh\\:mm")" asp-for="endTime" required>
+
+        <label for="location">Locatie</label>
+
+        <input type="text" id="location" value="@Model.location" asp-for="location" required>
+
+
+        <input type="submit" value="Opslaan">
+    </form>
   }
-        </div>
+</div>
     <script>
         window.onload = function () {
             var dialog = document.getElementById("dialog").ej2_instances[0];
@@ -123,101 +142,13 @@
         border-color: #803689 !important;
         color: white !important;
     }
-    .make-event {
-        flex-wrap: wrap; /* Wrap the elements */
-        flex-direction: column;
-        margin-top: 10px;
-        max-width: 500px;
-        min-height: 350px;
-        background-color: #ffffff;
-        border-radius: 13px;
-        border: 2px solid #d9d9d9;
-    }
 
 
     .error-message {
         color: red;
     }
 
-    .make-event label {
-        margin-left: 10%;
-        position: center;
-        font-size: 15px;
-        font-weight: bolder;
-        color: #b1b3b4;
-    }
 
-    .make-event input {
-        float: left;
-        margin-left: 23%;
-        border-radius: 5px;
-        border: 2px solid #d9d9d9;
-        outline: none;
-    }
-
-        .make-event input:hover {
-            border-color: #803689;
-        }
-
-    .make-event textarea:hover {
-        border-color: #803689;
-    }
-
-    .make-event input[type="text"] {
-        width: 50%;
-    }
-
-    .make-event input[type="submit"] {
-        margin-left: 40%;
-        width: 100px;
-        border-radius: 20px;
-        background-color: #803689;
-        color: white;
-    }
-
-        .make-event input[type="submit"]:focus {
-            width: 100px;
-            border-radius: 20px;
-            background-color: #b1b3b4;
-            color: black;
-        }
-
-
-    .make-event input[type="time"] {
-        width: 30%;
-    }
-
-    .make-event input[type="date"] {
-        width: 30%;
-    }
-
-    .make-event input:focus {
-        border: 2px solid #803689;
-    }
-
-    .make-event textarea {
-        margin-left: 23%;
-        width: 50%;
-        height: 59px;
-        padding: 5px;
-        border-radius: 5px;
-        outline: none;
-        resize: none;
-        border: 2px solid #d9d9d9;
-    }
-
-        .make-event textarea:focus {
-            border: 2px solid #803689;
-        }
-
-        .make-event textarea::-webkit-scrollbar {
-            width: 0px;
-        }
-
-    .e-dropdownbase .e-list-item.e-item-focus, .e-dropdownbase .e-list-item.e-active, .e-dropdownbase .e-list-item.e-active.e-hover, .e-dropdownbase .e-list-item.e-hover {
-        background-color: #803689 !important;
-        color: white !important;
-    }
         </style>
 
        
