@@ -10,14 +10,14 @@ using System.ComponentModel.DataAnnotations;
 namespace CaveroClubhuis.Pages
 {
     public class AdminDeleteModel : PageModel
-    { 
-    private readonly CaveroClubhuisContext _context;
-    private readonly UserManager<CaveroUser> _userManager;
-    private readonly LayoutTools _layoutTools;
-    public string FirstName { get; private set; }
-    public string LastName { get; private set; }
+    {
+        private readonly CaveroClubhuisContext _context;
+        private readonly UserManager<CaveroUser> _userManager;
+        private readonly LayoutTools _layoutTools;
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
 
-    public bool IsUserCheckedIn { get; private set; }
+        public bool IsUserCheckedIn { get; private set; }
         [BindProperty]
         [Required(ErrorMessage = "Veld moet ingevuld worden")]
         public List<int> SelectedEvents { get; set; }
@@ -50,26 +50,26 @@ namespace CaveroClubhuis.Pages
             return null!;
         }
 
-      
+
         public IActionResult OnPostDelete()
         {
-          
+
             // verwijder event uit database
             var fullEvents = _context.Events
                    .Where(e => SelectedEvents.Contains(e.Id))
                    .ToList();
-           
 
-           
+
+
             _context.RemoveRange(fullEvents);
             _context.SaveChanges();
             // notificatie opslaan
             TempData["DeleteSuccess"] = "Evenement is succesvol verwijderd";
-           
+
             return RedirectToPage("./Index"); // Redirect naar page weer
         }
 
-    
+
 
 
         public List<Events> FetchEventsName()

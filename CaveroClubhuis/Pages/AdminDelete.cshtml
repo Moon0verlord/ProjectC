@@ -8,110 +8,125 @@
 
 @if (TempData["ErrorMessage"] != null)
 {
-    <div class="alert alert-danger">
-        @TempData["ErrorMessage"]
-    </div>
+<div class="alert alert-danger">
+    @TempData["ErrorMessage"]
+</div>
 }
 <style>
     .confirm-button {
-        background-color:  #803689 !important;
+        background-color: #803689 !important;
         border-color: #803689 !important;
         color: white !important;
     }
 
 
     .e-dialog {
-        position: center;
-    }
-  
-
-    .e-dialog .e-dlg-header {
-        font-size: 20px;
-        font-weight: normal;
-        position: relative;
-    }
-
-    .e-dialog .e-dlg-content {
+        text-align: center; /* Horizontal centering */
         display: flex;
         flex-direction: column;
-        min-height: 200px;
-        overflow: auto;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
     }
 
-    .e-dialog .e-dlg-content {
-        overflow-y: auto;
-    }
+
+        .e-dialog .e-dlg-header {
+            width: 340px;
+            font-size: 20px;
+            font-weight: normal;
+            position: relative;
+        }
+
+        .e-dialog .e-dlg-content {
+            display: flex;
+            flex-direction: column;
+            min-height: 200px;
+            overflow: auto;
+        }
+
+        .e-dialog .e-dlg-content {
+            overflow-y: auto;
+        }
 
     .error-message {
         color: red;
     }
 
- 
-    /* conatiner event aanpassen */
-    #selectedEvent {
-        width:500px ;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      
-    }
-    #dialog2
-    {
-        width:550px !important;
 
+    #dialog2 {
+        width: 550px !important;
     }
 
     .e-dropdownbase .e-list-item.e-item-focus, .e-dropdownbase .e-list-item.e-active, .e-dropdownbase .e-list-item.e-active.e-hover, .e-dropdownbase .e-list-item.e-hover {
         background-color: #803689 !important;
         color: white !important;
     }
-
-   
-
-
 </style>
-<div class="text-center">
-    <div id='container' style="height:400px;">
-        <ejs-button id="targetButton" content="Open Dialog"></ejs-button>
-     <ejs-dialog id="dialog" header="Verwijder evenement" visible="false" showCloseIcon="true" target="#container" width="550px">
-                <e-content-template>
 
-        <form id="delete" method="post" asp-page-handler="Delete">
-            <div>
-                        <ejs-dropdownlist id="selectedEvent" dataSource="@Model.EventsNames" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.SelectedEvents">
-                        <e-dropdownlist-fields text="Title" value = "Id"></e-dropdownlist-fields>
+<head>
+    <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
+</head>
+
+<div class="admin-bar">
+    <!-- Buttons for the admin-->
+    <a href="/MakeEvent">
+        <button id="makeButton" class="admin-button">
+            Event aanmaken
+        </button>
+    </a>
+    <a href="/AdminChange">
+        <button id="changeButton" class="admin-button">
+            Event aanpassen
+        </button>
+    </a>
+    <a href="/AdminDelete">
+        <button id="removeButton" class="admin-button">
+            Event verwijderen
+        </button>
+    </a>
+</div>
+
+<div id='container' style="height:350px;" class="make-event">
+
+    <ejs-dialog id="dialog" header="Verwijder evenement" visible="true" target="#container" style="min-height:350px; border-radius: 13px; box-shadow: none;  border: 2px solid #d9d9d9;
+ overflow-y: auto;" width="450px">
+        <e-content-template>
+
+            <form id="delete" method="post" asp-page-handler="Delete">
+                <div>
+                    <ejs-dropdownlist id="selectedEvent" dataSource="@Model.EventsNames" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.SelectedEvents">
+                        <e-dropdownlist-fields text="Title" value="Id"></e-dropdownlist-fields>
                     </ejs-dropdownlist>
                     <p></p>
                     <p>Selecteer een evenement om te verwijderen</p>
-                    </div>
-                    <div><span id="error-message" class="error-message"></span></div>
-                    <ejs-dialog id="dialog2" header="Bevestig verwijdering evenementen" visible="false" target="#container" showCloseIcon="true" content="Weet je zeker dat je de gekozen evenementen wilt verwijderen?"width="500px">
-                        <e-dialog-buttons>
-                            <e-dialog-dialogbutton buttonModel="DialogButtons1"  click="submitForm" id="submit-button"></e-dialog-dialogbutton>
-                            <e-dialog-dialogbutton buttonModel="DialogButtons2" click="showDialog1"></e-dialog-dialogbutton>
-                        </e-dialog-buttons>
-                    </ejs-dialog>
+                </div>
+                <div><span id="error-message" class="error-message"></span></div>
+                <ejs-dialog id="dialog2" header="Bevestig verwijdering evenementen" visible="false" target="#container" showCloseIcon="true" content="Weet je zeker dat je de gekozen evenementen wilt verwijderen?" width="500px">
+                    <e-dialog-buttons>
+                        <e-dialog-dialogbutton buttonModel="DialogButtons1" click="submitForm" id="submit-button"></e-dialog-dialogbutton>
+                        <e-dialog-dialogbutton buttonModel="DialogButtons2" click="showDialog1"></e-dialog-dialogbutton>
+                    </e-dialog-buttons>
+                </ejs-dialog>
 
-        </form>
+            </form>
         </e-content-template>
-            <e-dialog-buttons>
-                <e-dialog-dialogbutton buttonModel="DialogButtons1" click="showDialog2"></e-dialog-dialogbutton> 
-            </e-dialog-buttons>
-        </ejs-dialog>
-   
-   
-        </div>
+        <e-dialog-buttons>
+            <e-dialog-dialogbutton buttonModel="DialogButtons1" click="showDialog2"></e-dialog-dialogbutton>
+        </e-dialog-buttons>
+    </ejs-dialog>
+
+
+</div>
 
 
 
 
-  
-    <script>
+<script>
         window.onload = function () {
             var dialog = document.getElementById("dialog").ej2_instances[0];
 
             document.getElementById('targetButton').onclick = function () {
-               
+
                 dialog.show();
             };
 
@@ -143,8 +158,8 @@
             // manually submit the form when button is pressed
             document.getElementById('delete').submit();
 
-         
-    
+
+
         }
 
         function showDialog1()
@@ -162,9 +177,8 @@
             query = (e.text !== '') ? query.where('Title', 'startswith', e.text, true) : query;
             e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.EventsNames)), query);
         }
-       
 
-    </script>
+
+</script>
 
 </div>
-   

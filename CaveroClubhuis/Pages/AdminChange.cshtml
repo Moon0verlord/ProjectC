@@ -138,6 +138,33 @@
         color: white !important;
     }
 
+        .e-dialog {
+            text-align: center; /* Horizontal centering */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+
+
+            .e-dialog .e-dlg-header {
+                width: 340px;
+                font-size: 20px;
+                font-weight: normal;
+            }
+
+            .e-dialog .e-dlg-content {
+                display: flex;
+                flex-direction: column;
+                min-height: 200px;
+                overflow: auto;
+            }
+
+            .e-dialog .e-dlg-content {
+                overflow-y: auto;
+            }
 
     .error-messageDialog {
         color: red;
