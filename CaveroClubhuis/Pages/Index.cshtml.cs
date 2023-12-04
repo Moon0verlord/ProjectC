@@ -119,25 +119,25 @@ public class IndexModel : PageModel
     
     
 
-    // public IActionResult OnPostCheckIn()
-    // {
-    //     if (!ModelState.IsValid)
-    //     {
-    //         Console.WriteLine("Model is not valid");
-    //         return Page();
-    //     }
-    //
-    //     var userId = _userManager.GetUserId(User);
-    //     bool checkInSuccessful = RecurringCheckIn(userId, StartDate,EndDate,daysofweek);
-    //
-    //     if (!checkInSuccessful)
-    //     {
-    //         TempData["ErrorMessage"] = "You are already checked in on this date.";
-    //         return RedirectToPage();
-    //     }
-    //     
-    //     return RedirectToPage();
-    // }
+    public IActionResult OnPostCheckIn()
+    {
+        if (!ModelState.IsValid)
+        {
+            Console.WriteLine("Model is not valid");
+            return Page();
+        }
+    
+        var userId = _userManager.GetUserId(User);
+        bool checkInSuccessful = RecurringCheckIn(userId, StartDate,EndDate,daysofweek);
+    
+        if (!checkInSuccessful)
+        {
+            TempData["ErrorMessage"] = "You are already checked in on this date.";
+            return RedirectToPage();
+        }
+        
+        return RedirectToPage();
+    }
 
     
 }

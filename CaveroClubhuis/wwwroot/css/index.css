@@ -47,8 +47,8 @@
     display: flex;
     background-color: #7f3688;
     flex-direction: column;
-    height: 220px;
-    width: 420px;
+    height: 260px;
+    width: 500px;
     color: white;
     border-radius: 10px;
     margin-left: 30px;
@@ -61,7 +61,6 @@
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 5px;
-    margin-right : 250px;
 }
 
 
@@ -80,6 +79,7 @@
 
 
 .line {
+    margin-bottom: 10px;
     opacity: 0.5;
     background-color: #b1b3b4;
     height: 2px;
@@ -90,14 +90,14 @@
 
 
 .error-message {
-    color: #ff0000; /* Red color for the text */
-    background-color: #ffecec; /* Light red background */
-    border: 1px solid #ff0000; /* Red border */
-    border-radius: 5px; /* Rounded corners */
+    color: #ff0000; 
+    background-color: #ffecec; 
+    border: 1px solid #ff0000; 
+    border-radius: 5px; 
     padding: 10px;
     margin-top: 10px;
     margin-bottom: 20px;
-    text-align: center; /* Center the text */
-    font-size: 1em; /* Adjust the font size as needed */
-    font-weight: bold; /* Make the font bold */
+    text-align: center;
+    font-size: 1em; 
+    font-weight: bold;
 }

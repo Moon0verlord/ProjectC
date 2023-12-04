@@ -42,23 +42,35 @@
                 </ejs-dialog>
             </div>
             
-            <script>
+        <script>
             window.onload = function () {
-                // Code from your first window.onload function
                 var dialog = document.getElementById("dialog").ej2_instances[0];
-            
+
                 document.getElementById('targetButton').onclick = function () {
                     dialog.target = '#targetButton';
                     dialog.position = { X: 'center', Y: 'top' };
                     dialog.show();
                 };
-            
+
                 window.onresize = function () {
                     dialog.refreshPosition();
                 };
-            
-                // Code from your second window.onload function
-                flatpickr("#datePicker", {
+
+                // Initialize the start date picker
+                flatpickr("#startDatePicker", {
+                    enableTime: true,
+                    dateFormat: "d-m-Y H:i",
+                    minDate: new Date(@Model.MinDate.Year, @Model.MinDate.Month - 1, @Model.MinDate.Day, @Model.MinDate.Hour, @Model.MinDate.Minute),
+                    disable: [
+                        function(date) {
+                            return (date.getDay() === 0 || date.getDay() === 6);
+                        }
+                    ],
+                    onRenderCell: onRenderCell
+                });
+
+                // Initialize the end date picker
+                flatpickr("#endDatePicker", {
                     enableTime: true,
                     dateFormat: "d-m-Y H:i",
                     minDate: new Date(@Model.MinDate.Year, @Model.MinDate.Month - 1, @Model.MinDate.Day, @Model.MinDate.Hour, @Model.MinDate.Minute),
@@ -70,14 +82,13 @@
                     onRenderCell: onRenderCell
                 });
             };
-            
+
             function onRenderCell(args) {
                 if (args.date.getDay() == 0 || args.date.getDay() == 6) {
                     args.isDisabled = true;
                 }
             }
-
-            </script>
+        </script>
             
 
 
@@ -95,22 +106,23 @@
         </div>
     </div>
     
-        <div class="check-inWidget">
-            <p>Inchecken</p>
-            <div class="line"></div>
-            Selecteer een datum:
-            @if (TempData["ErrorMessage"] != null)
-            {
-                <div class="error-message">
-                    @TempData["ErrorMessage"]
-                </div>
-            }
-            <form method="post" asp-page-handler="CheckIn">
-                    <input type="text" id="datePicker" class="flatpickr" name="SelectedDate" placeholder="Please Select Date">
-                <button type="submit" class="check-in">
-                    <i class="ri-login-circle-line"></i>
-                    Check - in
-                </button>
-            </form>
-        </div>
+    <div class="check-inWidget">
+        <p>Setup Recurring check-in</p>
+        <div class="line"></div>
+        Select a start and end date for the recurring check-in:
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="error-message">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+        <form method="post" asp-page-handler="CheckIn">
+            <input type="text" id="startDatePicker" class="flatpickr" name="StartDate" placeholder="Please Select Start Date">
+            <input type="text" id="endDatePicker" class="flatpickr" name="EndDate" placeholder="Please Select End Date">
+            <button type="submit" class="check-in">
+                <i class="ri-login-circle-line"></i>
+                Check - in
+            </button>
+        </form>
+    </div>
 </div>
