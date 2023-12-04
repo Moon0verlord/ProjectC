@@ -1,15 +1,73 @@
-﻿/* Targets laptops  */
-@media screen and (min-width: 1280px) and (max-width: 1824px) {
+﻿@media screen and (min-width: 1368px) and (max-width: 1824px) {
     .sidebar.sidebar {
         max-width: 250px;
     }
 
-    .sidebar-menu-button, .Log-out, .check-in {
+    .sidebar-menu-button, .Log-out, .check-in-1 {
+        transform: scale(0.9);
+    }
+
+    .sidebar-menu-button.sidebar-menu-button, .Log-out, .check-in-1, .check-out.check-out {
+        margin-top: 20px;
+    }
+
+    .cavero-logo {
+        max-width: 80%;
+        margin-left: 10px;
+    }
+
+    .cavero-logo .desktop-logo {
+        max-width: 50%;
+        margin-left: 10px;
+    }
+
+    .sidebar a {
+        margin-right: 10px;
+    }
+
+    .profile {
+        margin-right: 10px;
+    }
+
+    .Logout-F.Logout-F{
+        margin-right: 10px;
+    }
+
+    .Headertxt.Headertxt{
+        font-size: 50px;
+    }
+
+    .header-container.header-container{
+        left: 250px;
+    }
+
+    .profile.profile{
+        height: 80px;
+    }
+}
+
+
+
+
+/* Targets smoller laptops  */
+@media screen and (max-width: 1280px)  {
+    .sidebar.sidebar {
+        max-width: 250px;
+    }
+
+    .sidebar-menu-button, .Log-out, .check-in-1 {
         transform: scale(0.9);
     }
     
-    .sidebar-menu-button.sidebar-menu-button{
+    .sidebar-menu-button.sidebar-menu-button, .Log-out, .check-in-1.check-in-1, .check-out.check-out {
         margin-top: 20px;
+        width: 200px ;
+        height: 45px ;
+    }
+    
+    .Log-out.Log-out{
+        width: 200px ;
+        height: 45px ;
     }
     
     .cavero-logo {
@@ -41,10 +99,11 @@
     .header-container.header-container{
         left: 250px;
     }
+    
+    .profile.profile{
+        height: 80px;
+    }
 }
-
-
-
 
 
 /* Mobile devices  */
@@ -60,6 +119,10 @@
         background-color: #803689;
         border-radius: 0 10px 10px 0;
         z-index: 102;
+    }
+    
+    .sidebar-menu-button, .Log-out, .check-in, .profile {
+        transform: scale(0.9);
     }
 
     .sidebar.open {
@@ -396,13 +459,32 @@
 }
 
 .check-in-1 {
-    margin-top: 50px;
-    width: 124px;
-    height: 34px;
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 284px;
+    height: 54px;
+    top: 320px;
+    left: 9%;
     font-weight: bold;
     white-space: nowrap;
     border-radius: 13px;
     border-color: transparent;
-    background-color: #ff0000;
+    background-color: #79dc6e;
+}
+
+
+
+.check-out{
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 284px;
+    height: 54px;
+    top: 320px;
+    left: 9%;
+    font-weight: bold;
+    white-space: nowrap;
+    border-radius: 13px;
+    border-color: transparent;
+    background-color: #ef5252;
 }
 
