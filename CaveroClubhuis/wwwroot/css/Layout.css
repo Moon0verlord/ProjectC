@@ -1,55 +1,17 @@
-﻿
-
-/* Targets HDPI laptops  */
-@media screen and (min-width: 1368px) and (max-width: 1824px), screen and (min-resolution: 2dppx){
-    
+﻿/* Targets laptops  */
+@media screen and (min-width: 1280px) and (max-width: 1824px) {
     .sidebar.sidebar {
-        max-width: 250px;
-    }
-
-    .sidebar-menu-button.sidebar-menu-button, .Log-out.Log-out, .check-in.check-in{
-        transform: scale(0.9);
-    }
-    
-    .cavero-logo .cavero-logo{
-        max-width: 60%;
-        margin-left: 10px;
-    }
-    
-    .cavero-logo .desktop-logo {
-        max-width: 60%;
-        margin-left: 10px;
-    }
-
-    .sidebar a {
-    margin-right: 10px;
-    }
-    
-    .profile{
-        margin-right: 10px;
-    }
-    
-    .Logout-F.Logout-F{
-        margin-right: 10px;
-    }
-    
-    .Headertxt.Headertxt{
-        font-size: 50px;
-    }
-    
-}
-
-
-/* Targets MDPI laptops  */
-@media screen and (min-width: 1368px) and (max-width: 1824px) {
-    .sidebar {
         max-width: 250px;
     }
 
     .sidebar-menu-button, .Log-out, .check-in {
         transform: scale(0.9);
     }
-
+    
+    .sidebar-menu-button.sidebar-menu-button{
+        margin-top: 20px;
+    }
+    
     .cavero-logo {
         max-width: 80%;
         margin-left: 10px;
@@ -80,6 +42,10 @@
         left: 250px;
     }
 }
+
+
+
+
 
 /* Mobile devices  */
 @media screen and (max-width: 768px) {
@@ -427,5 +393,16 @@
     border-radius: 10px;
     
     filter: invert(100%);
+}
+
+.check-in-1 {
+    margin-top: 50px;
+    width: 124px;
+    height: 34px;
+    font-weight: bold;
+    white-space: nowrap;
+    border-radius: 13px;
+    border-color: transparent;
+    background-color: #ff0000;
 }
 

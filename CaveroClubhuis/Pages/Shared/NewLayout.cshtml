@@ -38,24 +38,23 @@
             <div class="profile">
                 <img class="profile_picture" src="~/images/An.jpeg"/>
                 <div class="profile_text"> @Model.FirstName @Model.LastName</div>
-            </div>
-            
                 <form class="Logout-F" asp-page-handler="ToggleCheckIn" method="post">
                     @if (Model.IsUserCheckedIn)
                     {
-                        <button type="submit" class="check-in">
+                        <button type="submit" class="check-in-1">
                             <i class="ri-logout-circle-line"></i>
                             Check - out
-                        </button>
+                            </button>
                     }
                     else
                     {
-                        <button type="submit" class="check-in">
+                        <button type="submit" class="check-in-1">
                             <i class="ri-login-circle-line"></i>
                             Check - in
-                        </button>
+                            </button>
                     }
-                </form>        
+                    </form>     
+            </div>
             
             <a href="/">
                     <button class="sidebar-menu-button">
