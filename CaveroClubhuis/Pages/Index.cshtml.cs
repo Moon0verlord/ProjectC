@@ -29,7 +29,12 @@ public class IndexModel : PageModel
     public string ErrorMessage { get; set; }
     
     [BindProperty]
-    public DateTime SelectedDate { get; set; }
+    public DateTime StartDate { get; set; }
+    [BindProperty]
+    public DateTime EndDate { get; set; }
+    
+    [BindProperty]
+    public string daysofweek { get; set; }
 
     
     public IndexModel(ILogger<IndexModel> logger,CaveroClubhuisContext context,UserManager<CaveroUser> userManager, LayoutTools layoutTools)
@@ -49,9 +54,11 @@ public class IndexModel : PageModel
         var userId = _userManager.GetUserId(User);
         (FirstName, LastName) = _layoutTools.LoadName(userId);
         IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
+        
         People = CheckInOverview();
         MinDate = new DateTime(2023, 1, 1, 12, 0, 0);
-        SelectedDate = DateTime.Now;
+        StartDate = DateTime.Now;
+        EndDate = DateTime.Now;
         if (TempData["ErrorMessage"] != null)
         {
             ErrorMessage = TempData["ErrorMessage"].ToString();
@@ -82,37 +89,17 @@ public class IndexModel : PageModel
         
     }
     
-
-    public bool CheckIn(string userid, DateTime SelectedDate)
-    {
-        DateTime utcDate = TimeZoneInfo.ConvertTimeToUtc(SelectedDate);
-        var existingCheckIn = _context.InOffice
-            .FirstOrDefault(io => io.UserId == userid && io.CheckInDate.Date == utcDate.Date);
-
-        if (existingCheckIn != null)
-        {
-            return false;
-        }
-
-        var inOfficeEntry = new InOffice
-        {
-            UserId = userid,
-            CheckInDate = utcDate,
-            IsRecurring = false
-        };
-        _context.InOffice.Add(inOfficeEntry);
-        _context.SaveChanges();
-        return true;
-    }
     
-    public bool RecurringCheckIn(string userid, DateTime SelectedDate, string dayOfWeek)
+    public bool RecurringCheckIn(string userid, DateTime Start, DateTime End, string dayOfWeek)
     {
-        DateTime utcDate = TimeZoneInfo.ConvertTimeToUtc(SelectedDate);
+        DateTime utcStartDate = TimeZoneInfo.ConvertTimeToUtc(Start);
+        DateTime utcEndDate = TimeZoneInfo.ConvertTimeToUtc(End);
         
         var inOfficeEntry = new InOffice
         {
             UserId = userid,
-            CheckInDate = utcDate,
+            CheckInDate = utcStartDate,
+            CheckOutDate = utcEndDate,
             IsRecurring = true,
             DayOfWeek = dayOfWeek
         };
@@ -122,27 +109,35 @@ public class IndexModel : PageModel
     }
     
     
-    
-
-    public IActionResult OnPostCheckIn()
+    public async Task<IActionResult> OnPostToggleCheckInAsync()
     {
-        if (!ModelState.IsValid)
-        {
-            Console.WriteLine("Model is not valid");
-            return Page();
-        }
-
         var userId = _userManager.GetUserId(User);
-        bool checkInSuccessful = CheckIn(userId, SelectedDate);
+        _layoutTools.ToggleCheckIn(userId);
 
-        if (!checkInSuccessful)
-        {
-            TempData["ErrorMessage"] = "You are already checked in on this date.";
-            return RedirectToPage();
-        }
-        
         return RedirectToPage();
     }
+    
+    
+
+    // public IActionResult OnPostCheckIn()
+    // {
+    //     if (!ModelState.IsValid)
+    //     {
+    //         Console.WriteLine("Model is not valid");
+    //         return Page();
+    //     }
+    //
+    //     var userId = _userManager.GetUserId(User);
+    //     bool checkInSuccessful = RecurringCheckIn(userId, StartDate,EndDate,daysofweek);
+    //
+    //     if (!checkInSuccessful)
+    //     {
+    //         TempData["ErrorMessage"] = "You are already checked in on this date.";
+    //         return RedirectToPage();
+    //     }
+    //     
+    //     return RedirectToPage();
+    // }
 
     
 }

@@ -33,6 +33,7 @@ public class LayoutTools
         var inOfficeEntry = new InOffice
         {
             UserId = userid,
+            IsRecurring = false,
             CheckInDate = DateTime.UtcNow,
         };
         _context.InOffice.Add(inOfficeEntry);

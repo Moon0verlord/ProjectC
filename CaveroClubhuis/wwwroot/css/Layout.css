@@ -3,7 +3,7 @@
         max-width: 250px;
     }
 
-    .sidebar-menu-button, .Log-out, .check-in-1 {
+    .sidebar-menu-button, .Log-out, .check-in-1, .check-out {
         transform: scale(0.9);
     }
 
