@@ -5,22 +5,25 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace CaveroClubhuis.Pages
 {
     public class AdminDeleteModel : PageModel
-    { 
-    private readonly CaveroClubhuisContext _context;
-    private readonly UserManager<CaveroUser> _userManager;
-    private readonly LayoutTools _layoutTools;
-    public string FirstName { get; private set; }
-    public string LastName { get; private set; }
+    {
+        private readonly CaveroClubhuisContext _context;
+        private readonly UserManager<CaveroUser> _userManager;
+        private readonly LayoutTools _layoutTools;
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
 
-    public bool IsUserCheckedIn { get; private set; }
+        public bool IsUserCheckedIn { get; private set; }
         [BindProperty]
+        [Required(ErrorMessage = "Veld moet ingevuld worden")]
         public List<int> SelectedEvents { get; set; }
 
         [BindProperty]
+        [Required(ErrorMessage = "Veld moet ingevuld worden")]
         public List<int> SelectedEvent { get; set; }
 
         [BindProperty]
@@ -35,33 +38,38 @@ namespace CaveroClubhuis.Pages
             SelectedEvents = new List<int>();
         }
 
-        public void OnGet()
+        public IActionResult? OnGet()
         {
-            EventsNames = FetchEventsName();
             var userId = _userManager.GetUserId(User);
+            if (!_layoutTools.checkAdmin(userId)) return RedirectToPage("/Index");
+
+            EventsNames = FetchEventsName();
             (FirstName, LastName) = _layoutTools.LoadName(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
 
-
+            return null!;
         }
 
-      
+
         public IActionResult OnPostDelete()
         {
-                
-                // verwijder event uit database
+
+            // verwijder event uit database
             var fullEvents = _context.Events
                    .Where(e => SelectedEvents.Contains(e.Id))
                    .ToList();
-          
+
+
+
             _context.RemoveRange(fullEvents);
             _context.SaveChanges();
-        
-           
-            return RedirectToPage("./AdminDelete"); // Redirect naar page weer
+            // notificatie opslaan
+            TempData["DeleteSuccess"] = "Evenement is succesvol verwijderd";
+
+            return RedirectToPage("./Index"); // Redirect naar page weer
         }
 
-    
+
 
 
         public List<Events> FetchEventsName()
