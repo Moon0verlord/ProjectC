@@ -89,20 +89,7 @@
                 }
             }
         </script>
-            
-
-
-            
-            <script src="/npm/flatpickr/dist/flatpickr.js"></script>
-            
-            <script>
-            function onRenderCell(args) {
-                if (args.date.getDay() == 0 || args.date.getDay() == 6) {
-                    args.isDisabled = true;
-                }
-            }
-            </script>
-            
+        <script src="/npm/flatpickr/dist/flatpickr.js"></script>
         </div>
     </div>
     
@@ -116,7 +103,7 @@
                 @TempData["ErrorMessage"]
             </div>
         }
-        <form method="post" asp-page-handler="CheckIn">
+        <form method="post" asp-page-handler="RecurringCheck">
             <input type="text" id="startDatePicker" class="flatpickr" name="StartDate" placeholder="Please Select Start Date">
             <input type="text" id="endDatePicker" class="flatpickr" name="EndDate" placeholder="Please Select End Date">
             <button type="submit" class="check-in">
@@ -125,4 +112,5 @@
             </button>
         </form>
     </div>
+    
 </div>

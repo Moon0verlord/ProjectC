@@ -90,10 +90,11 @@ public class IndexModel : PageModel
     }
     
     
-    public bool RecurringCheckIn(string userid, DateTime Start, DateTime End, string dayOfWeek)
+    public void RecurringCheckIn(string userid, DateTime Start, DateTime End, string dayOfWeek)
     {
         DateTime utcStartDate = TimeZoneInfo.ConvertTimeToUtc(Start);
         DateTime utcEndDate = TimeZoneInfo.ConvertTimeToUtc(End);
+        dayOfWeek = "Monday";
         
         var inOfficeEntry = new InOffice
         {
@@ -105,7 +106,6 @@ public class IndexModel : PageModel
         };
         _context.InOffice.Add(inOfficeEntry);
         _context.SaveChanges();
-        return true;
     }
     
     
@@ -118,27 +118,14 @@ public class IndexModel : PageModel
     }
     
     
-
-    public IActionResult OnPostCheckIn()
+    public async Task<IActionResult> OnPostRecurringCheckAsync()
     {
-        if (!ModelState.IsValid)
-        {
-            Console.WriteLine("Model is not valid");
-            return Page();
-        }
-    
+        Console.WriteLine("Recurring Check");
         var userId = _userManager.GetUserId(User);
-        bool checkInSuccessful = RecurringCheckIn(userId, StartDate,EndDate,daysofweek);
-    
-        if (!checkInSuccessful)
-        {
-            TempData["ErrorMessage"] = "You are already checked in on this date.";
-            return RedirectToPage();
-        }
+        RecurringCheckIn(userId, StartDate, EndDate, daysofweek);
         
         return RedirectToPage();
     }
-
     
 }
 public class PersonInfo
