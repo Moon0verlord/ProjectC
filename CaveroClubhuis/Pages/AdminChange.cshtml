@@ -28,16 +28,15 @@
     </a>
 </div>
 
-<div class="make-event">
     @if(Model.EventChoice == null)
     {
-            <div id='container' style="height:350px; overflow: visible;">
-                <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" target="#container" style="min-height: 349px; border-radius: 13px; box-shadow: none;  border-color: transparent;
-        overflow-y: auto;" width="446px">
+            <div id='container' style="height:350px;" class="make-event">
+                <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" target="#container" style="min-height:350px; border-radius: 13px; box-shadow: none;  border: 2px solid #d9d9d9;
+ overflow-y: auto;" width="450px">
                     <e-content-template>
 
                         <form id="ask-input" method="post" class="make-event-form" asp-page-handler="AskInput" onsubmit="validateForm">
-                            <ejs-dropdownlist id="selectedEvent" dataSource="@Model.Events" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.SelectedEvents">
+                            <ejs-dropdownlist id="selectedEvent" dataSource="@Model.Events" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.SelectedEvents" style="width: 300px;">
                                 <e-dropdownlist-fields text="Title" value="Id"></e-dropdownlist-fields>
                             </ejs-dropdownlist>
                             <p></p>
@@ -88,7 +87,6 @@
         <input type="submit" value="Opslaan">
     </form>
   }
-</div>
     <script>
         window.onload = function () {
             var dialog = document.getElementById("dialog").ej2_instances[0];
@@ -132,11 +130,12 @@
     </script>
 
     <style>
-    .confirm-button {
-        background-color: #803689 !important;
-        border-color: #803689 !important;
-        color: white !important;
-    }
+        .confirm-button {
+            background-color: #803689 !important;
+            border-color: #803689 !important;
+            color: white !important;
+        }
+
 
         .e-dialog {
             text-align: center; /* Horizontal centering */
@@ -148,11 +147,11 @@
         }
 
 
-
             .e-dialog .e-dlg-header {
                 width: 340px;
                 font-size: 20px;
                 font-weight: normal;
+                position: relative;
             }
 
             .e-dialog .e-dlg-content {
@@ -166,9 +165,18 @@
                 overflow-y: auto;
             }
 
-    .error-messageDialog {
-        color: red;
-    }
+        .error-message {
+            color: red;
+        }
+
+        #dialog1 {
+            width: 550px !important;
+        }
+
+        .e-dropdownbase .e-list-item.e-item-focus, .e-dropdownbase .e-list-item.e-active, .e-dropdownbase .e-list-item.e-active.e-hover, .e-dropdownbase .e-list-item.e-hover {
+            background-color: #803689 !important;
+            color: white !important;
+        }
         </style>
 
        

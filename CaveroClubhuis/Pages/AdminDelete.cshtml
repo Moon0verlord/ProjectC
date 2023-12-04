@@ -94,7 +94,7 @@
 
             <form id="delete" method="post" asp-page-handler="Delete">
                 <div>
-                    <ejs-dropdownlist id="selectedEvent" dataSource="@Model.EventsNames" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.SelectedEvents">
+                    <ejs-dropdownlist id="selectedEvent" dataSource="@Model.EventsNames" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.SelectedEvents" style="min-width: 300px;">
                         <e-dropdownlist-fields text="Title" value="Id"></e-dropdownlist-fields>
                     </ejs-dropdownlist>
                     <p></p>
@@ -181,4 +181,3 @@
 
 </script>
 
-</div>
