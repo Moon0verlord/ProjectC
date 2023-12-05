@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using CaveroClubhuis.Areas.Identity.Data
+@inject SignInManager<CaveroUser> SignInManager
+@inject UserManager<CaveroUser> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -13,18 +18,18 @@
 <body>
     <div class="background">
         <div class="header-container">
-            <div class="ri-menu-2-line" onclick="toggleSidebar()"></div>
+            <button class="hamburger-menu-icon">
+            <img src="~/images/menu-hamburger.svg" alt="Menu">
+            </button>
             <h1 class="Headertxt">@ViewData["Title"]</h1>
         </div>
 
-        <div class="sidebar-overlay" onclick="closeSidebar()"></div>
-
-
+        
+        <div class="sidebar-overlay"></div>
         <div class="sidebar">
             
             <div class="cavero-logo">
                 <img src="~/images/Cavero_white.png" alt="Cavero Logo" class="desktop-logo"/>
-                <img src="~/images/logo2.png" alt="Cavero Mobile Logo" class="mobile-logo" style="display: none;"/>
                 </div>
             
             <div class="line-2"></div>
@@ -34,32 +39,69 @@
                 <img class="profile_picture" src="~/images/An.jpeg"/>
                 <div class="profile_text"> @Model.FirstName @Model.LastName</div>
             </div>
-
-
+            
             <form class="Logout-F" asp-page-handler="ToggleCheckIn" method="post">
                 @if (Model.IsUserCheckedIn)
                 {
-                    <button type="submit" class="check-in">
+                    <button type="submit" class="check-out">
                         <i class="ri-logout-circle-line"></i>
                         Check - out
-                    </button>
+                        </button>
                 }
                 else
                 {
-                    <button type="submit" class="check-in">
+                    <button type="submit" class="check-in-1">
                         <i class="ri-login-circle-line"></i>
                         Check - in
-                    </button>
+                        </button>
                 }
-            </form>
-
-
+                </form>   
+            
+            <a href="/">
+                    <button class="sidebar-menu-button">
+                       <img src="~/images/home.svg" width="25" height="auto"/>
+                         <span class="button-text">Home</span>
+                    </button>
+                </a>
+                <a href="/Kalender">
+                    <button class="sidebar-menu-button">
+                        <img src="~/images/calendar.svg" width="25" height="auto"/>
+                         <span class="button-text">Kalender</span>
+                    </button>
+                </a>
+                <a href="/Events">
+                    <button class="sidebar-menu-button">
+                        <img src="~/images/event.svg" width="25" height="auto"/>
+                         <span class="button-text">Evenementen</span>
+                    </button>
+                </a>
+            <a href="/Team">
+                <button class="sidebar-menu-button">
+                    <img src="~/images/group.svg" width="25" height="auto"/>
+                     <span class="button-text">Team Space</span>
+                </button>
+            </a>
+            
+            @if (SignInManager.IsSignedIn(User))
+            {
+                var user = await UserManager.GetUserAsync(User);
+                if (await UserManager.IsInRoleAsync(user, "Admin"))
+                {
+                    <a href="/Admin">
+                        <button class="sidebar-menu-button">
+                            <img src="~/images/admin.svg" width="25" height="auto"/>
+                            Admin Panel
+                        </button>
+                    </a>
+                }
+            }
+            
             @{
                 if (User.Identity?.IsAuthenticated ?? false)
                 {
                     <form class="Logout-F" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
                         <button type="submit" class="Log-out">
-                            <i class="ri-logout-circle-line"></i>
+                           <img src="~/images/log-out.svg" width="25" height="auto"/>
                             Log-out
                         </button>
                     </form>
@@ -70,14 +112,10 @@
                 }
             }
 
-            <a href="/Admin">
-                <button>Admin</button>
-            </a>
-
             <div class="settingsspace"></div>
             <div class="line-3"></div>
             <button class="settings">
-                <img src="~/images/settings.png" width="50" height="47"/>
+                <img src="~/images/settings.svg" width="50" height="47"/>
                 Settings
             </button>
         </div>
@@ -85,34 +123,7 @@
 
         <div class="main-content">
 
-            <div class="menu-bar">
-                <a href="/">
-                    <button class="menu-buttons">
-                        <img src="~/images/Home_Icon2.png" width="25" height="auto"/>
-                        Home
-                    </button>
-                </a>
-                <a href="/Kalender">
-                    <button class="menu-buttons">
-                        <img src="~/images/Calender_Icon.png" width="25" height="auto"/>
-                        Calendar
-                    </button>
-                </a>
-                <a href="/Events">
-                    <button class="menu-buttons">
-                        <img src="~/images/Event_Icon.png" width="25" height="auto"/>
-                        Events
-                    </button>
-                </a>
-                <a href="/">
-                    <button class="menu-buttons">
-                        <img src="~/images/News.png" width="25" height="auto"/>
-                        News
-                    </button>
-                </a>
-            </div>
-
-
+            
             <div class="page-content">
                 <main role="main">
                     @RenderBody()
@@ -122,31 +133,33 @@
     </div>
 
 
-    <script>
-        function toggleSidebar() {
-            var sidebar = document.querySelector('.sidebar');
-            var overlay = document.querySelector('.sidebar-overlay');
-            if (sidebar.style.display === "block") {
-                sidebar.style.display = "none";
-                overlay.style.display = "none";
-            } else {
-                sidebar.style.display = "block";
-                overlay.style.display = "block";
-            }
-        }
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+    const hamburgerIcon = document.querySelector('.hamburger-menu-icon');
 
-        function closeSidebar() {
-            var sidebar = document.querySelector('.sidebar');
-            var overlay = document.querySelector('.sidebar-overlay');
-            sidebar.style.display = "none";
-            overlay.style.display = "none";
-        }
-    </script>
+    hamburgerIcon.addEventListener('click', function () {
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('active');
+        document.documentElement.style.overflow = 'hidden';
+    });
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    overlay.addEventListener('click', function (event) {
+        if (event.target === overlay) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            document.documentElement.style.overflow = 'auto';
+        }
+    });
+});
+</script>
+
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
     <ejs-scripts></ejs-scripts>
 </body>

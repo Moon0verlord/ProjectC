@@ -2,7 +2,7 @@
 @model CaveroClubhuis.Pages.IndexModel
 @{
     ViewData["Title"] = "Homepage";
-
+    var minDate= new DateTime(2023,1,1, 12,00,00);
 }
 <!--dit zorgt voor de kleuren waarin je randomized-->
 @{
@@ -11,6 +11,8 @@
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" />
+    <link rel="stylesheet" href="~/css/index.css"/>
+    <link rel="stylesheet" href="/npm/flatpickr/dist/flatpickr.min.css"/>
 </head>
 
 <style>
@@ -121,6 +123,8 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Dit is de clubhuis app van Cavero.</p>
+    
+    
     <div id='container1'>
         <div style="width: 300px; height: 75px; padding-left: 25px; padding-right: 25px; padding-top: 16px; padding-bottom: 16px; background: #803689; border-radius: 20px; justify-content: flex-start; align-items: center; gap: 16px; display: inline-flex">
             <div style="width: 27px; height: 25px; position: relative">
@@ -145,17 +149,55 @@
                     </e-content-template>
                 </ejs-dialog>
             </div>
-            <script>
-                window.onload = function () {
-                    var dialog = document.getElementById("dialog").ej2_instances[0];
+            
+        <script>
+            window.onload = function () {
+                var dialog = document.getElementById("dialog").ej2_instances[0];
 
-                    document.getElementById('targetButton').onclick = function () {
-                        // Set the dialog target to the button and position it above
-                        dialog.target = '#targetButton';
-                        dialog.position = { X: 'center', Y: 'top' };
-                        dialog.show();
-                    };
+                document.getElementById('targetButton').onclick = function () {
+                    dialog.target = '#targetButton';
+                    dialog.position = { X: 'center', Y: 'top' };
+                    dialog.show();
+                };
 
+                window.onresize = function () {
+                    dialog.refreshPosition();
+                };
+
+                // Initialize the start date picker
+                flatpickr("#startDatePicker", {
+                    enableTime: true,
+                    dateFormat: "d-m-Y H:i",
+                    minDate: new Date(@Model.MinDate.Year, @Model.MinDate.Month - 1, @Model.MinDate.Day, @Model.MinDate.Hour, @Model.MinDate.Minute),
+                    disable: [
+                        function(date) {
+                            return (date.getDay() === 0 || date.getDay() === 6);
+                        }
+                    ],
+                    onRenderCell: onRenderCell
+                });
+
+                // Initialize the end date picker
+                flatpickr("#endDatePicker", {
+                    enableTime: true,
+                    dateFormat: "d-m-Y H:i",
+                    minDate: new Date(@Model.MinDate.Year, @Model.MinDate.Month - 1, @Model.MinDate.Day, @Model.MinDate.Hour, @Model.MinDate.Minute),
+                    disable: [
+                        function(date) {
+                            return (date.getDay() === 0 || date.getDay() === 6);
+                        }
+                    ],
+                    onRenderCell: onRenderCell
+                });
+            };
+
+            function onRenderCell(args) {
+                if (args.date.getDay() == 0 || args.date.getDay() == 6) {
+                    args.isDisabled = true;
+                }
+            }
+        </script>
+        <script src="/npm/flatpickr/dist/flatpickr.js"></script>
                     window.onresize = function () {
                         // Ensure the dialog is repositioned when the window is resized
                         dialog.refreshPosition();
@@ -187,4 +229,25 @@
             </div>
         </div>
     </div>
+    
+    <div class="check-inWidget">
+        <p>Setup Recurring check-in</p>
+        <div class="line"></div>
+        Select a start and end date for the recurring check-in:
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="error-message">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+        <form method="post" asp-page-handler="RecurringCheck">
+            <input type="text" id="startDatePicker" class="flatpickr" name="StartDate" placeholder="Please Select Start Date">
+            <input type="text" id="endDatePicker" class="flatpickr" name="EndDate" placeholder="Please Select End Date">
+            <button type="submit" class="check-in">
+                <i class="ri-login-circle-line"></i>
+                Check - in
+            </button>
+        </form>
+    </div>
+    
 </div>

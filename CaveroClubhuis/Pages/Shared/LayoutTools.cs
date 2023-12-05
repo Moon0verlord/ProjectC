@@ -26,13 +26,14 @@ public class LayoutTools
 
         return user != null ? (user.FirstName, user.LastName) : (null, null);
     }
-
+    
 
     public void CheckIn(string userid)
     {
         var inOfficeEntry = new InOffice
         {
             UserId = userid,
+            IsRecurring = false,
             CheckInDate = DateTime.UtcNow,
         };
         _context.InOffice.Add(inOfficeEntry);

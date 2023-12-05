@@ -25,7 +25,6 @@ namespace CaveroClubhuis.Pages
             _context = context;
             _userManager = userManager;
             _layoutTools = layoutTools;
-
         }
         public List<Events> EventsList { get; set; }
         public void OnGet()
