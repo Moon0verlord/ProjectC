@@ -44,6 +44,10 @@
     .profile.profile{
         height: 80px;
     }
+    
+    .page-content.page-content{
+        margin-top: 135px;
+    }
 }
 
 
@@ -102,6 +106,10 @@
     
     .profile.profile{
         height: 80px;
+    }
+
+    .page-content.page-content{
+        margin-top: 135px;
     }
 }
 

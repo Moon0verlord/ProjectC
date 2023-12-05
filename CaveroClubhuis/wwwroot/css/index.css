@@ -1,4 +1,41 @@
-﻿
+﻿@media screen and (min-width: 1368px) and (max-width: 1824px) {
+
+
+    .check-inWidget {
+        transform: scale(0.8);
+        margin-left: 0px;
+    }
+
+    .wrapper {
+        transform: scale(0.8);
+    }
+
+
+}
+
+
+@media screen and (max-width: 1280px) {
+    .check-inWidget {
+        transform: scale(0.7);
+        margin-left: 0px;
+    }
+
+    .wrapper {
+        width: 64%
+    }
+
+    .wrapper {
+        transform: scale(0.8);
+    }
+    
+    
+    
+}
+
+
+
+
+
 .container1 {
     display: flex;
     justify-content: center;
@@ -100,4 +137,109 @@
     text-align: center;
     font-size: 1em; 
     font-weight: bold;
+}
+
+
+
+body {
+    position: relative; /* indien andere css word gefucked door dit geef maruf aan :D */
+}
+
+.container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 500px;
+}
+
+.custom-button {
+    background-color: white;
+    color: #803689;
+}
+
+.e-dialog .e-dlg-header {
+    font-size: 20px;
+    font-weight: normal;
+    position: relative;
+}
+
+.e-dialog .e-dlg-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    overflow: auto;
+}
+
+.e-dialog .e-dlg-content {
+    overflow-y: auto;
+}
+
+.e-dialog {
+    position: center;
+}
+
+#dialog {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    /*important gebruiken om custom css te overwriten*/
+    left: 60% !important;
+    top: 30% !important;
+}
+/* style voor de upcoming events */
+.upcomming {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.Wrapper {
+    overflow: hidden;
+    background-color: #FFFFFF;
+    width: 70%;
+    border-radius: 13px;
+    border: 1px #9D9FA1 solid;
+}
+
+.StickyHeader {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    background-color: #FFFFFF;
+}
+
+.Evenementen {
+    height: 50vh;
+    border-radius: 30px;
+    overflow: auto;
+    float: left;
+}
+
+.kaart {
+    margin-top: 50px; /* margin top */
+    background-color: #803689;
+    border-radius: 30px;
+    width: 94%;
+    height: 111px;
+    margin: 0 auto;
+}
+
+.kaart h2 {
+    margin-top: 25px;
+    font-size: 20px;
+    color: black;
+    margin-left: 5%;
+}
+
+.kaart h3 {
+    color: black;
+    font-size: 12px;
+    margin-left: 5%;
+}
+
+.kaart #beschijving {
+    color: black;
+    font-size: 16px;
+    margin-left: 5%;
 }
