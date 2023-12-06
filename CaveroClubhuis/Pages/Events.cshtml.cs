@@ -14,7 +14,8 @@ namespace CaveroClubhuis.Pages
         
         public IList<Events> EventsList { get; set; }
         public IList<Events> oldEvents { get; set; }
-        public IList<CaveroUser> UsersList { get; set; }
+        public IList<CaveroUser> Atendees { get; set; }
+        public IList<EventParticipants> AllParticipants { get; set; }
 
         
         private readonly CaveroClubhuisContext _context;
@@ -22,23 +23,25 @@ namespace CaveroClubhuis.Pages
         private readonly LayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
-        
+        [BindProperty(SupportsGet = true)]
+        public int EventId { get; set; }
+        public string UserId { get; set; }
+
         public bool IsUserCheckedIn { get; private set; }
 
-        
-        
+
+
         public EventsModel(CaveroClubhuisContext context,UserManager<CaveroUser> userManager, LayoutTools layoutTools)
         {
             _context = context;
             _userManager = userManager;
             _layoutTools = layoutTools;
-            
-
         }
         
         public void OnGet()
         {
-            //var atendees = getUsersPerEvent();
+            AllParticipants = getAllParticipants();
+            Atendees = getUsersPerEvent();
             EventsList = FetchEvents();
             oldEvents = OldEvents();
             var userId = _userManager.GetUserId(User);
@@ -48,16 +51,24 @@ namespace CaveroClubhuis.Pages
             
         }
         
+
+        public IList<EventParticipants> getAllParticipants() {
+            var eventIds = _context.Events
+                .Select(e => e.Id)
+                .ToList();
+            var eventParticipants = _context.EventParticipants
+                .Where(ep => eventIds.Contains(ep.EventId))
+                .ToList();
+            return eventParticipants;
+        }
         
         public IList<Events> FetchEvents()
         {
-            //make it to where it only takes the events later then the current date
-
-            DateTime currentDateTime = DateTime.UtcNow - TimeSpan.FromHours(12);
-
             // Filter the data to get events after the current datetime
+            DateTime currentDateTime = DateTime.UtcNow + TimeSpan.FromHours(1);
+
             var filteredEvents = _context.Events
-                .Where(e => e.Date > currentDateTime) 
+                .Where(e => e.Date > currentDateTime).OrderBy(e => e.Date)
                 .ToList();
 
             return filteredEvents;
@@ -65,32 +76,25 @@ namespace CaveroClubhuis.Pages
 
         public IList<Events> OldEvents()
         {
-            //make it to where it only takes the events later then the current date
+            DateTime currentDateTime = DateTime.UtcNow + TimeSpan.FromHours(1);
 
-            DateTime currentDateTime = DateTime.UtcNow - TimeSpan.FromHours(12);
-
-            // Filter the data to get events after the current datetime
+            // Filter the data to get events before the current datetime
             var filteredEvents = _context.Events
-                .Where(e => e.Date <= currentDateTime)
+                .Where(e => e.Date <= currentDateTime).OrderByDescending(e => e.Date)
                 .ToList();
 
             return filteredEvents;
         }
 
-        /*public IList<CaveroUser> getUsersPerEvent()
+        public IList<CaveroUser> getUsersPerEvent()
         {
-            // first get all the event id's then link it with the EventParticipants table after that link the EventParticipants table with the CaveroUser table to get the users
-            var eventIds = _context.Events
-                .Select(e => e.Id)
-                .ToList();
-            var eventParticipants = _context.EventParticipants
-                .Where(ep => eventIds.Contains(ep.EventId))
-                .ToList();
+            // Get all the participants
+            var eventParticipants = getAllParticipants();
             var users = _context.Users
                 .Where(u => eventParticipants.Select(ep => ep.UserId).Contains(u.Id))
                 .ToList();
             return users;
-        }*/
+        }
         
         
         public async Task<IActionResult> OnPostToggleCheckInAsync()
@@ -98,6 +102,70 @@ namespace CaveroClubhuis.Pages
             var userId = _userManager.GetUserId(User);
             _layoutTools.ToggleCheckIn(userId);
 
+            return RedirectToPage();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            EventParticipants other = (EventParticipants)obj;
+
+            return EventId == other.EventId && UserId == other.UserId;
+        }
+
+        public override int GetHashCode()
+    {
+        unchecked
+        {
+            int hash = 17;
+            hash = hash * 23 + EventId.GetHashCode();
+            hash = hash * 23 + UserId.GetHashCode();
+            return hash;
+        }
+    }
+
+        // add user to event when button is clicked but check if user is already in the event
+        public async Task<IActionResult> OnPostAdd()
+        {
+            var userId = _userManager.GetUserId(User);
+
+            // Check if the user is already a participant in the event
+            bool userAlreadyParticipant = getAllParticipants()
+                .Any(ep => ep.EventId == EventId && ep.UserId == userId);
+
+            if (!userAlreadyParticipant)
+            {
+                var eventParticipant = new EventParticipants
+                {
+                    EventId = EventId,
+                    UserId = userId
+                };
+
+                _context.EventParticipants.Add(eventParticipant);
+                await _context.SaveChangesAsync();
+            }
+            await Task.Delay(TimeSpan.FromSeconds(3)); 
+            return RedirectToPage();
+        }
+
+        public async Task<IActionResult> OnPostLeave(int eventId)
+        {
+            var userId = _userManager.GetUserId(User);
+
+            // Find and remove the user from the participants list of the event
+            var participantToRemove = _context.EventParticipants
+                .FirstOrDefault(ep => ep.EventId == eventId && ep.UserId == userId);
+
+            if (participantToRemove != null)
+            {
+                _context.EventParticipants.Remove(participantToRemove);
+                await _context.SaveChangesAsync();
+            }
+            await Task.Delay(TimeSpan.FromSeconds(3)); 
             return RedirectToPage();
         }
     }

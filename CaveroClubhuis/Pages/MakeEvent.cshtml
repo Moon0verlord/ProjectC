@@ -3,10 +3,10 @@
 @{
     ViewData["Title"] = "Admin";
 }
-
 <head>
     <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
 </head>
+
 
 <body>
     <div class="main-body">
@@ -29,8 +29,8 @@
             </a>
         </div>
 
-        <div>
-            <form id="make" class="make-event" method="post" style="display:flex;" asp-page-handler="MakeEvent">
+        <div class="make-event">
+            <form id="make" method="post" class="make-event-form" asp-page-handler="MakeEvent">
                 <!-- Add the make event inputs here-->
                 <label for="title">Titel</label>
                 <span asp-validation-for="title" class="error-message"></span>
@@ -42,15 +42,20 @@
 
                 <label for="date">Datum</label>
                 <span asp-validation-for="date" class="error-message"></span>
-                <input type="date" id="date" asp-for="date">
+                <input type="date" id="date" asp-for="date" oninput="changeTimes('startTime', false); changeTimes('endTime', false)" value="">
+
 
                 <label for="startTime">Start tijd</label>
                 <span asp-validation-for="startTime" class="error-message"></span>
-                <input type="time" id="startTime" asp-for="startTime">
+                <select id="startTime" asp-for="startTime" oninput="changeTimes('endTime', true)">
+                    <option value="@Model.startTime">Selecteer een datum</option>
+                </select>
 
                 <label for="endTime">Eind tijd</label>
                 <span asp-validation-for="endTime" class="error-message"></span>
-                <input type="time" id="endTime" asp-for="endTime">
+                <select id="endTime" asp-for="endTime">
+                    <option value="@Model.endTime">Selecteer een datum</option>
+                </select>
 
                 <label for="location">Locatie</label>
                 <span asp-validation-for="location" class="error-message"></span>
@@ -60,3 +65,52 @@
             </form>
         </div></div>
 </body>
+
+
+<script>
+    function changeTimes(elementId, YTime) {
+
+        var selectElement = document.getElementById(elementId);
+        selectElement.innerHTML = '';
+
+        submitForm(YTime ,function (responseText) {
+            var dataArray = JSON.parse(responseText);
+
+            //add the first option to the select
+            var option = document.createElement('option');
+            option.value = "@Model.endTime";
+            option.text = "Selecteer een optie";
+            selectElement.appendChild(option);
+
+            //add the other times to the select
+            dataArray.forEach(function (item) {
+                option = document.createElement('option');
+                option.value = item; // Set the value of the option to the item
+                option.textContent = item; // Set the text content of the option to the item
+                selectElement.appendChild(option);
+            });
+        });
+    }
+
+    function submitForm(Ytime, callback) {
+        var dateValue = document.getElementById('date').value;
+        var timeValue = timeValue = document.getElementById('startTime').value;
+
+
+            // Use AJAX to send the data to the Razor Page handler
+            var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/MakeEvent?handler=ProcessInput&date=' + dateValue + '&time=' + timeValue, true);
+
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 400) {
+                    // Handle the response if needed
+                    callback(xhr.responseText);
+                } else {
+                    // Handle errors
+                    console.error(xhr.statusText);
+                }
+            };
+
+            xhr.send();
+        }
+</script>

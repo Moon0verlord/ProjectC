@@ -16,10 +16,13 @@ builder.Services.AddDbContext<CaveroClubhuisContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<CaveroUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<CaveroClubhuisContext>();
+
 
 // Add custom services
 builder.Services.AddScoped<LayoutTools>();
+
 
 
 builder.Services.AddRazorPages();
@@ -32,6 +35,7 @@ var app = builder.Build();
 using (var serviceScope = app.Services.CreateScope())
 {
     var serviceProvider = serviceScope.ServiceProvider;
+    // database seeding
     var dbContext = serviceProvider.GetRequiredService<CaveroClubhuisContext>();
     //DBSeeder.InitializeEvents(dbContext); 
     //DBSeeder.InitializeInOffice(dbContext);

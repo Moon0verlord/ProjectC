@@ -1,0 +1,245 @@
+﻿@media screen and (min-width: 1368px) and (max-width: 1824px) {
+
+
+    .check-inWidget {
+        transform: scale(0.8);
+        margin-left: 0px;
+    }
+
+    .wrapper {
+        transform: scale(0.8);
+    }
+
+
+}
+
+
+@media screen and (max-width: 1280px) {
+    .check-inWidget {
+        transform: scale(0.7);
+        margin-left: 0px;
+    }
+
+    .wrapper {
+        width: 64%
+    }
+
+    .wrapper {
+        transform: scale(0.8);
+    }
+    
+    
+    
+}
+
+
+
+
+
+.container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 500px;
+}
+
+.custom-button {
+    background-color: white;
+    color: #803689;
+}
+
+.e-dialog .e-dlg-header {
+    font-size: 20px;
+    font-weight: normal;
+    position: relative;
+}
+
+.e-dialog .e-dlg-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    overflow: auto;
+}
+
+.e-dialog .e-dlg-content {
+    overflow-y: auto;
+
+}
+
+.e-dialog
+{
+    position: center;}
+#dialog{
+    position:fixed;
+
+    transform: translate(-50%, -50%);
+    /*important gebruiken om custom css te overwriten*/
+    left: 60% !important;
+    top: 30%!important;
+}
+
+.check-inWidget {
+    display: flex;
+    background-color: #7f3688;
+    flex-direction: column;
+    height: 260px;
+    width: 500px;
+    color: white;
+    border-radius: 10px;
+    margin-left: 30px;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.check-inWidget p {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+
+.check-in {
+    margin-top: 40px;
+    margin-left: 5px;
+    width: 184px;
+    height: 34px;
+    top: 320px;
+    left: 9%;
+    white-space: nowrap;
+    border-radius: 13px;
+    border-color: transparent;
+    background-color: #d9d9d9;
+}
+
+
+.line {
+    margin-bottom: 10px;
+    opacity: 0.5;
+    background-color: #b1b3b4;
+    height: 2px;
+    left: 328px;
+    top: 121px;
+    object-fit: cover;
+}
+
+
+.error-message {
+    color: #ff0000; 
+    background-color: #ffecec; 
+    border: 1px solid #ff0000; 
+    border-radius: 5px; 
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1em; 
+    font-weight: bold;
+}
+
+
+
+body {
+    position: relative; /* indien andere css word gefucked door dit geef maruf aan :D */
+}
+
+.container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 500px;
+}
+
+.custom-button {
+    background-color: white;
+    color: #803689;
+}
+
+.e-dialog .e-dlg-header {
+    font-size: 20px;
+    font-weight: normal;
+    position: relative;
+}
+
+.e-dialog .e-dlg-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    overflow: auto;
+}
+
+.e-dialog .e-dlg-content {
+    overflow-y: auto;
+}
+
+.e-dialog {
+    position: center;
+}
+
+#dialog {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    /*important gebruiken om custom css te overwriten*/
+    left: 60% !important;
+    top: 30% !important;
+}
+/* style voor de upcoming events */
+.upcomming {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.Wrapper {
+    overflow: hidden;
+    background-color: #FFFFFF;
+    width: 70%;
+    border-radius: 13px;
+    border: 1px #9D9FA1 solid;
+}
+
+.StickyHeader {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    background-color: #FFFFFF;
+}
+
+.Evenementen {
+    height: 50vh;
+    border-radius: 30px;
+    overflow: auto;
+    float: left;
+}
+
+.kaart {
+    margin-top: 50px; /* margin top */
+    background-color: #803689;
+    border-radius: 30px;
+    width: 94%;
+    height: 111px;
+    margin: 0 auto;
+}
+
+.kaart h2 {
+    margin-top: 25px;
+    font-size: 20px;
+    color: black;
+    margin-left: 5%;
+}
+
+.kaart h3 {
+    color: black;
+    font-size: 12px;
+    margin-left: 5%;
+}
+
+.kaart #beschijving {
+    color: black;
+    font-size: 16px;
+    margin-left: 5%;
+}

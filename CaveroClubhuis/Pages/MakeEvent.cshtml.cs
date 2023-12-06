@@ -53,27 +53,15 @@ namespace CaveroClubhuis.Pages
 
         public IActionResult? OnGet()
         {
+            var userId = _userManager.GetUserId(User);
             //check if user is admin if not return to home page
-            if (!checkAdmin()) return RedirectToPage("/Index");
+            if (!_layoutTools.checkAdmin(userId)) return RedirectToPage("/Index");
 
             // get name of user
-            var userId = _userManager.GetUserId(User);
             (FirstName, LastName) = _layoutTools.LoadName(userId!);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
 
             return null!;
-        }
-
-        public bool checkAdmin()
-        {
-            //Return true if the user is an admin else return false
-            var userId = _userManager.GetUserId(User);
-            string role = (from r in _context.Roles
-                           where r.Id == (_context.UserRoles.Where(x => x.UserId == userId).Select(x => x.RoleId).FirstOrDefault())
-                           select r.Name).FirstOrDefault()!;
-            if (role == "Admin") return true;
-            else return false;
-
         }
 
         public IActionResult? OnPostMakeEvent()

@@ -24,17 +24,93 @@
     }
 
 .make-event {
-    flex-wrap: wrap; /* Wrap the elements */
-    flex-direction: column;
+    display: flex;
+    flex-direction:column;
     margin-top: 10px;
-    max-width: 500px;
-    min-height: 350px;
+    max-width: 450px;
+    max-height: 350px;
     background-color: #ffffff;
     border-radius: 13px;
     border: 2px solid #d9d9d9;
+    overflow-y: auto;
+}
+.make-event-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+
+}
+
+    .make-event-form input,
+    .make-event-form select {
+        margin-left: 75px;
+        min-height: 23px;
+        box-sizing: border-box;
+        border: 2px solid #b1b3b4;
+        border-radius: 3px;
+    }
+        .make-event-form select:invalid,
+        .make-event-form select option[value=""] {
+            color: #b1b3b4;
+        }
+
+        .make-event-form input[type="date"] {
+            min-height: 23px;
+        }
+        .make-event-form input[type="submit"] {
+            margin-top: 10px;
+            min-height: 30px;
+            border-radius: 10px;
+            background-color: #803689;
+            color: white;
+        }
+    .make-event-form label {
+        margin-left: 75px;
+        min-height: 23px;
+        box-sizing: border-box;
+        color: #666666;
+        margin-top: 5px;
+        font-weight: 500;
+    }
+
+    .make-event-form textarea {
+        margin-left: 75px;
+        min-height: 50px;
+        box-sizing: border-box;
+        resize: none;
+        border: 2px solid #b1b3b4;
+        border-radius: 3px;
+    }
+
+.error-message {
+    margin-left: 75px;
+    color: red; 
+}
+
+.make-event::-webkit-scrollbar {
+    width: 10px;
+    margin-left: -100px;
+}
+
+.make-event::-webkit-scrollbar-track {
+    background: #f2f0f8;
+}
+
+.make-event::-webkit-scrollbar-thumb {
+    background-color: #b1b3b4;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
 }
 
 
+.make-event-form textarea:hover,
+.make-event-form select:hover,
+.make-event-form input:hover {
+    border: 2px solid #803689;
+}
+
+
+/*
 .error-message {
     max-width: 40%;
     display: block;
@@ -114,3 +190,12 @@
     .make-event textarea::-webkit-scrollbar {
         width: 0px;
     }
+
+
+.make-event select {
+    border: 2px solid #d9d9d9;
+}
+.make-event select:focus {
+    border: 2px solid #803689;
+}
+*/

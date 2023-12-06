@@ -1,8 +1,10 @@
 ﻿@page
 @model CaveroClubhuis.Pages.AdminChangeModel
 @{
+    var DialogButtons1 = new ButtonModel() { isPrimary = true, cssClass = "confirm-button", content = "Bevestig" };
 ViewData["Title"] = "Admin";
 }
+@using Newtonsoft.Json
 
 <head>
     <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
@@ -27,194 +29,170 @@ ViewData["Title"] = "Admin";
     </a>
 </div>
 
-<div class="text-center">
     @if(Model.EventChoice == null)
     {
-    <div id='container' style="height:400px;">
-        <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" showCloseIcon="true" target="#container" width="500px" >
-            <e-content-template>
+        <div id='container' style="height:350px;" class="make-event">
 
-                <form id="ask-input" method="post" asp-page-handler="AskInput">
-                    <div>
-                        <label for="selectedEvents">Selecteer een evenement om te wijzigen</label>
-                    </div>
-                    <div>
-                        <select id="selectedEvent" asp-for="SelectedEvents" size="4">
-                            <option value="">-- Selecteer een evenement --</option>
-                            @foreach (var eventItem in Model.Events)
-                            {
-                                <option value="@eventItem.Id">@eventItem.Title</option>
-                            }
-                        </select>
-                    </div>
-                    <div>
-                        <input type="submit" class="confirm-button" value="Bevestig keuze">
-                    </div>
-                </form>
-            </e-content-template>
-        </ejs-dialog>
-        </div>
-     }
-     
-  else
-  {
-        <div id='container' style="height:400px;">
-            <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" showCloseIcon="true" target="#container" width="500px" >
-            <e-content-template>
-                 <form id="change" class ="make-event" method="post" style="display:flex;" asp-page-handler="ChangeEvent">
-                <!-- Add the make event inputs here-->
-                
-                    <label for="title">Titel</label>
-                    <span asp-validation-for="title" class="error-message"></span>
-                    <input type="text" id="title" value="@Model.EventChoice.Title" maxlength="20" asp-for="title">
-              
-              
-                        <label for="description">Omschrijving</label>
-                        <span asp-validation-for="description" class="error-message"></span>
-                        <textarea type="text" id="description" value="@Model.description" maxlength="200" asp-for="description"></textarea>
-                        
-                        <label for="date">Datum</label>
-                        <span asp-validation-for="date" class="error-message"></span>
-                        <input type="date" id="date" value="@Model.date.ToString("yyyy-MM-dd")" asp-for="date">
+            <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" target="#container" style="min-height:350px; border-radius: 13px; box-shadow: none;  border: 2px solid #d9d9d9;
+ overflow-y: auto;" width="450px">
+                <e-content-template>
 
-                        <label for="startTime">Start tijd</label>
-                        <span asp-validation-for="startTime" class="error-message"></span>
-                        <input type="time" id="startTime" value="@Model.startTime.ToString("hh\\:mm")" asp-for="startTime">
+                    <form id="ask-input" method="post" asp-page-handler="AskInput" onsubmit="validateForm">
+                        <div>
+                            <ejs-dropdownlist id="selectedEvent" dataSource="@Model.Events" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.SelectedEvents" style="width: 300px;">
+                                <e-dropdownlist-fields text="Title" value="Id"></e-dropdownlist-fields>
+                            </ejs-dropdownlist>
+                            <p></p>
+                            <p>Selecteer een evenement om te wijzigen</p>
 
-                        <label for="endTime">Eind tijd</label>
-                        <span asp-validation-for="endTime" class="error-message"></span>
-                        <input type="time" id="endTime" value="@Model.endTime.ToString("hh\\:mm")" asp-for="endTime">
+                            <div><span id="error-message" class="error-messageDialog"></span></div>
+                        </div>
+                    </form>
 
-                        <label for="location">Locatie</label>
-                        <span asp-validation-for="location" class="error-message"></span>
-                        <input type="text" id="location" value="@Model.location" asp-for="location">
-
-                        
-                        <input type="submit" value="Opslaan">
-            </form>
                 </e-content-template>
+                <e-dialog-buttons>
+                    <e-dialog-dialogbutton buttonModel="DialogButtons1" click="submitForm" id="submit-button"></e-dialog-dialogbutton>
+                </e-dialog-buttons>
             </ejs-dialog>
         </div>
-  }
-        </div>
-    <script>
-        window.onload = function () {
-            var dialog = document.getElementById("dialog").ej2_instances[0];
 
-        
 
-            window.onresize = function () {
-                // Ensure the dialog is repositioned when the window is resized
-                dialog.refreshPosition();
+                        
+                        }
+
+                        else
+                        {
+<div class="make-event">
+                        <form id="change" class="make-event-form" method="post" style="display:flex;" asp-page-handler="ChangeEvent">
+                            <!-- Add the make event inputs here-->
+
+                            <label for="title">Titel</label>
+
+                            <input type="text" id="title" value="@Model.EventChoice.Title" maxlength="20" asp-for="title" required>
+
+
+                            <label for="description">Omschrijving</label>
+
+                            <textarea type="text" id="description" value="@Model.description" maxlength="200" asp-for="description" required></textarea>
+
+                            <label for="date">Datum</label>
+
+                            <input type="date" id="date" value="@Model.date.ToString("yyyy-MM-dd")" asp-for="date" required>
+
+                            <label for="startTime">Start tijd</label>
+
+                            <input type="time" id="startTime" value="@Model.startTime.ToString("hh\\:mm")" asp-for="startTime" required>
+
+                            <label for="endTime">Eind tijd</label>
+
+                            <input type="time" id="endTime" value="@Model.endTime.ToString("hh\\:mm")" asp-for="endTime" required>
+
+                            <label for="location">Locatie</label>
+
+                            <input type="text" id="location" value="@Model.location" asp-for="location" required>
+
+
+                            <input type="submit" value="Opslaan">
+                        </form>
+    </div>
+                        }
+                        <script>
+                            window.onload = function () {
+
+                                var dialogElement = document.getElementById("dialog");
+
+                                if (dialogElement) {
+                                    var dialog = dialogElement.ej2_instances[0];
+
+                                    window.onresize = function () {
+                                        // Make dialog responsive
+                                        dialog.refreshPosition();
+                                    };
             };
         };
 
     function onDialogClose() {
         // Redirect to the home page
-        window.location.href = '/Index'; 
-    }
-    </script>
-
-    <style>
-    .confirm-button {
-        background-color: #803689 !important;
-        border-color: #803689 !important;
-        color: white !important;
-    }
-    .make-event {
-        flex-wrap: wrap; /* Wrap the elements */
-        flex-direction: column;
-        margin-top: 10px;
-        max-width: 500px;
-        min-height: 350px;
-        background-color: #ffffff;
-        border-radius: 13px;
-        border: 2px solid #d9d9d9;
+        window.location.href = '/Index';
     }
 
+    function submitForm() {
+        var errorMessageElement = document.getElementById("error-message");
+        var selectedEvent = document.getElementById('selectedEvent');
+        if (selectedEvent.value !== "") // check if there is a value or not
+        {
+            errorMessageElement.innerText = "";
+            // manually submit the form when button is pressed
+            document.getElementById('ask-input').submit();
 
-    .error-message {
-        max-width: 40%;
-        display: block;
-        float: left;
-        margin-left: 20%;
-        color: red;
-    }
-
-    .make-event label {
-        margin-left: 10%;
-        position: center;
-        font-size: 15px;
-        font-weight: bolder;
-        color: #b1b3b4;
-    }
-
-    .make-event input {
-        float: left;
-        margin-left: 23%;
-        border-radius: 5px;
-        border: 2px solid #d9d9d9;
-        outline: none;
-    }
-
-        .make-event input:hover {
-            border-color: #803689;
+        } else {
+            // Show error message if no event is selected
+            errorMessageElement.innerText = "Selecteer één evenement om verder te gaan";
         }
-
-    .make-event textarea:hover {
-        border-color: #803689;
     }
 
-    .make-event input[type="text"] {
-        width: 50%;
+
+    // Function to allow filtering with jquery
+    function onfiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('Title', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Events)), query);
     }
 
-    .make-event input[type="submit"] {
-        margin-left: 40%;
-        width: 100px;
-        border-radius: 20px;
-        background-color: #803689;
-        color: white;
-    }
+                        </script>
 
-        .make-event input[type="submit"]:focus {
-            width: 100px;
-            border-radius: 20px;
-            background-color: #b1b3b4;
-            color: black;
-        }
+                        <style>
+                            .confirm-button {
+                                background-color: #803689 !important;
+                                border-color: #803689 !important;
+                                color: white !important;
+                            }
 
 
-    .make-event input[type="time"] {
-        width: 30%;
-    }
+                            .e-dialog {
+                                text-align: center; /* Horizontal centering */
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                                height: 100%;
+                            }
 
-    .make-event input[type="date"] {
-        width: 30%;
-    }
+                            #selectedEvent_popup {
+                                width: 500px !important; /* Use !important if necessary */
+                            }
 
-    .make-event input:focus {
-        border: 2px solid #803689;
-    }
 
-    .make-event textarea {
-        margin-left: 23%;
-        width: 50%;
-        height: 59px;
-        padding: 5px;
-        border-radius: 5px;
-        outline: none;
-        resize: none;
-        border: 2px solid #d9d9d9;
-    }
+                            .e-dialog .e-dlg-header {
+                                width: 340px;
+                                font-size: 20px;
+                                font-weight: normal;
+                                position: relative;
+                            }
 
-        .make-event textarea:focus {
-            border: 2px solid #803689;
-        }
+                            .e-dialog .e-dlg-content {
+                                display: flex;
+                                flex-direction: column;
+                                min-height: 200px;
+                                overflow: auto;
+                            }
 
-        .make-event textarea::-webkit-scrollbar {
-            width: 0px;
-        }
-        </style>
+                            .e-dialog .e-dlg-content {
+                                overflow-y: auto;
+                            }
 
-       
+                            .error-messageDialog {
+                                color: red;
+                            }
+
+                            #dialog1 {
+                                width: 550px !important;
+                            }
+
+                            .e-dropdownbase .e-list-item.e-item-focus, .e-dropdownbase .e-list-item.e-active, .e-dropdownbase .e-list-item.e-active.e-hover, .e-dropdownbase .e-list-item.e-hover {
+                                background-color: #803689 !important;
+                                color: white !important;
+                            }
+                        </style>
+
+

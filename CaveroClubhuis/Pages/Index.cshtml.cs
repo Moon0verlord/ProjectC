@@ -6,7 +6,9 @@ using CaveroClubhuis.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
+using Syncfusion.EJ2.Calendars;
 
 namespace CaveroClubhuis.Pages;
 
@@ -22,11 +24,20 @@ public class IndexModel : PageModel
     public string LastName { get; private set; }
     public int PeopleCount { get; private set; }
     public bool IsUserCheckedIn { get; private set; }
-
     public List<PersonInfo> People { get; private set; }
     public IList<Events> EventsList { get; set; }
+    public DateTime MinDate { get; set; }
+    public string ErrorMessage { get; set; }
+    
+    [BindProperty]
+    public DateTime StartDate { get; set; }
+    [BindProperty]
+    public DateTime EndDate { get; set; }
+    
+    [BindProperty]
+    public string daysofweek { get; set; }
 
-
+    
     public IndexModel(ILogger<IndexModel> logger,CaveroClubhuisContext context,UserManager<CaveroUser> userManager, LayoutTools layoutTools)
     {
         _logger = logger;
@@ -44,9 +55,17 @@ public class IndexModel : PageModel
         var userId = _userManager.GetUserId(User);
         (FirstName, LastName) = _layoutTools.LoadName(userId);
         IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
+        
         People = CheckInOverview();
         // krijg alle events
         EventsList = FetchEvents();
+        MinDate = new DateTime(2023, 1, 1, 12, 0, 0);
+        StartDate = DateTime.Now;
+        EndDate = DateTime.Now;
+        if (TempData["ErrorMessage"] != null)
+        {
+            ErrorMessage = TempData["ErrorMessage"].ToString();
+        }
 
     }
     public List<PersonInfo> CheckInOverview()
@@ -71,7 +90,27 @@ public class IndexModel : PageModel
         return people;
         
     }
-
+    
+    
+    public void RecurringCheckIn(string userid, DateTime Start, DateTime End, string dayOfWeek)
+    {
+        DateTime utcStartDate = TimeZoneInfo.ConvertTimeToUtc(Start);
+        DateTime utcEndDate = TimeZoneInfo.ConvertTimeToUtc(End);
+        dayOfWeek = "Monday";
+        
+        var inOfficeEntry = new InOffice
+        {
+            UserId = userid,
+            CheckInDate = utcStartDate,
+            CheckOutDate = utcEndDate,
+            IsRecurring = true,
+            DayOfWeek = dayOfWeek
+        };
+        _context.InOffice.Add(inOfficeEntry);
+        _context.SaveChanges();
+    }
+    
+    
     public async Task<IActionResult> OnPostToggleCheckInAsync()
     {
         var userId = _userManager.GetUserId(User);
@@ -97,6 +136,17 @@ public class IndexModel : PageModel
     }
 
 
+    
+    
+    public async Task<IActionResult> OnPostRecurringCheckAsync()
+    {
+        Console.WriteLine("Recurring Check");
+        var userId = _userManager.GetUserId(User);
+        RecurringCheckIn(userId, StartDate, EndDate, daysofweek);
+        
+        return RedirectToPage();
+    }
+    
 }
 public class PersonInfo
 {
