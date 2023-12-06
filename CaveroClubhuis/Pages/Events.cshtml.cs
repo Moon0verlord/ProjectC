@@ -74,16 +74,29 @@ namespace CaveroClubhuis.Pages
             return filteredEvents;
         }
 
+        // only show event that contain the current user
         public IList<Events> OldEvents()
         {
             DateTime currentDateTime = DateTime.UtcNow + TimeSpan.FromHours(1);
-
-            // Filter the data to get events before the current datetime
+            
             var filteredEvents = _context.Events
-                .Where(e => e.Date <= currentDateTime).OrderByDescending(e => e.Date)
+                .Where(e => e.Date < currentDateTime).OrderBy(e => e.Date)
                 .ToList();
+            var userId = _userManager.GetUserId(User);
+            var userEvents = _context.EventParticipants
+                .Where(ep => ep.UserId == userId)
+                .ToList();
+            var oldEvents = new List<Events>();
+            foreach (var userEvent in userEvents)
+            {
+                var eventToAdd = filteredEvents.Find(e => e.Id == userEvent.EventId);
+                if (eventToAdd != null)
+                {
+                    oldEvents.Add(eventToAdd);
+                }
+            }
+            return oldEvents;
 
-            return filteredEvents;
         }
 
         public IList<CaveroUser> getUsersPerEvent()
