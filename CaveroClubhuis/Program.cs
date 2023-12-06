@@ -42,6 +42,7 @@ using (var serviceScope = app.Services.CreateScope())
     //DBSeeder.InitializeReviews(dbContext);
     //DBSeeder.InitializeRecurringCheckIn(dbContext);
     //DBSeeder.InitializeEventParticipants(dbContext);
+    //DBSeeder.InitializeTeams(dbContext);
 }
 
 
