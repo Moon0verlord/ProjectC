@@ -22,12 +22,18 @@ document.addEventListener("DOMContentLoaded", function () {
     // Loop through each close button and attach click event listeners
     closeButtons.forEach(function (closeBtn) {
         closeBtn.addEventListener("click", function () {
-            var modal = this.parentElement.parentElement;
+            var modal = this.closest('.modal');
             if (modal) {
                 modal.style.display = "none";
+
+                // If the modal is closed, remove the specific class for "Deelnemers" modal
+                if (modal.classList.contains("modal-deelnemers")) {
+                    modal.classList.remove("modal-deelnemers");
+                }
             }
         });
     });
+
 
     // When the user clicks anywhere outside of the modal, close it
     window.addEventListener("click", function (event) {
@@ -38,5 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+
+    // When the user 
 });
 //------------------------------------------------------------------------------------------------------------------
