@@ -30,7 +30,10 @@
 
                     // hier staat de content
                     $('#modal1 .modal-title').text(info.event.title);
-                    $('#modal1 .modal-body').html('<p>druk op aanmelden of op close</p>');
+                    $('#modal1 .modal-body').html('<p>U gaat zich nu aanmelden.<br>Om door te gaan met aanmelden klik op "Aanmelden".<br>Om het het cancelen klik op "Close".</p>');
+
+                    // Hide the close button dynamically
+                    $('#modal1 .close').addClass('cross');
 
                     // aanmeld knop functie
                     $('#modal1 .aanmelden-btn').on('click', function () {
@@ -39,10 +42,11 @@
                         // en sluit het dan
                         $('#modal1').modal('hide');
                     });
+
                     // handle de close button
                     $('#modal1 .btn-secondary').on('click', function () {
                         // niks doen
-                        // en lsuitenb
+                        // en sluiten
                         $('#modal1').modal('hide');
                     });
                 },
