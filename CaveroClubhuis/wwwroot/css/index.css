@@ -32,9 +32,27 @@
     
 }
 
+.e-pager .e-currentitem {
+    background: #803689;
+}
 
+    .e-pager .e-currentitem:hover {
+        background: #803689;
+    }
 
+.peopleOverview {
+    width: 500px;
+    max-width: 700px;
+    min-height: 400px;
+    border-radius: 15px;
+}
 
+@media screen and (max-width: 600px) {
+    /* Adjust styles for smaller screens */
+    .peopleOverview {
+        width: 60%!important;
+    }
+}
 
 .container1 {
     display: flex;
@@ -71,14 +89,7 @@
 .e-dialog
 {
     position: center;}
-#dialog{
-    position:fixed;
 
-    transform: translate(-50%, -50%);
-    /*important gebruiken om custom css te overwriten*/
-    left: 60% !important;
-    top: 30%!important;
-}
 
 .check-inWidget {
     display: flex;
@@ -145,48 +156,8 @@ body {
     position: relative; /* indien andere css word gefucked door dit geef maruf aan :D */
 }
 
-.container1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
-    max-width: 500px;
-}
 
-.custom-button {
-    background-color: white;
-    color: #803689;
-}
 
-.e-dialog .e-dlg-header {
-    font-size: 20px;
-    font-weight: normal;
-    position: relative;
-}
-
-.e-dialog .e-dlg-content {
-    display: flex;
-    flex-direction: column;
-    min-height: 200px;
-    overflow: auto;
-}
-
-.e-dialog .e-dlg-content {
-    overflow-y: auto;
-}
-
-.e-dialog {
-    position: center;
-}
-
-#dialog {
-    position: fixed;
-    transform: translate(-50%, -50%);
-    /*important gebruiken om custom css te overwriten*/
-    left: 60% !important;
-    top: 30% !important;
-}
 /* style voor de upcoming events */
 .upcomming {
     position: absolute;
