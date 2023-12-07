@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CaveroClubhuis.Pages.Shared;
 
+
 public class LayoutTools
 {
     private readonly CaveroClubhuisContext _context;
@@ -15,8 +16,13 @@ public class LayoutTools
         _context = context;
         _userManager = userManager;
     }
-    
-    
+
+
+    /// <summary>
+    /// Loads the first and last name of a user specified by the user ID.
+    /// </summary>
+    /// <param name="userId">The unique identifier of the user.</param>
+    /// <returns>A tuple containing the first and last name of the user, or (null, null) if the user does not exist.</returns>
     public (string FirstName, string LastName) LoadName(string userId)
     {
         var user = _context.Users
@@ -26,8 +32,12 @@ public class LayoutTools
 
         return user != null ? (user.FirstName, user.LastName) : (null, null);
     }
-    
 
+
+    /// <summary>
+    /// Checks in a user to the office.
+    /// </summary>
+    /// <param name="userid">The id of the user to check in.</param>
     public void CheckIn(string userid)
     {
         var inOfficeEntry = new InOffice
@@ -39,7 +49,11 @@ public class LayoutTools
         _context.InOffice.Add(inOfficeEntry);
         _context.SaveChanges();
     }
-    
+
+    /// <summary>
+    /// Checks out a user from the office.
+    /// </summary>
+    /// <param name="userId">The ID of the user.</param>
     public void CheckOut(string userId)
     {
         var inOfficeRecord = _context.InOffice
@@ -51,12 +65,20 @@ public class LayoutTools
             _context.SaveChanges();
         }
     }
-    
+
+    /// <summary>
+    /// Checks if a user is currently checked in.
+    /// </summary>
+    /// <param name="userId">The ID of the user to check.</param>
+    /// <returns>True if the user is checked in, false otherwise.</returns>
     public bool IsUserCheckedIn(string userId)
     {
         return _context.InOffice.Any(io => io.UserId == userId && io.CheckOutDate == null);
     }
-    
+
+    /// Toggles the check-in status of a user identified by their user ID.
+    /// @param userId The unique identifier of the user.
+    /// /
     public void ToggleCheckIn(string userId)
     {
         var currentStatus = IsUserCheckedIn(userId);
@@ -71,9 +93,13 @@ public class LayoutTools
         }
     }
 
+    /// <summary>
+    /// Checks if the user with the given userId is an admin.
+    /// </summary>
+    /// <param name="userId">The unique identifier of the user.</param>
+    /// <returns>True if the user is an admin, otherwise false.</returns>
     public bool checkAdmin(string userId)
     {
-        //Return true if the user is an admin else return false
         string role = (from r in _context.Roles
                        where r.Id == (_context.UserRoles.Where(x => x.UserId == userId).Select(x => x.RoleId).FirstOrDefault())
                        select r.Name).FirstOrDefault()!;
