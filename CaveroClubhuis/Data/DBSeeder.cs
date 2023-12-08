@@ -5,7 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 public class DBSeeder
 {
-    
+    /// <summary>
+    /// Initializes the Events table in the provided CaveroClubhuisContext with initial data, if it is not already seeded.
+    /// </summary>
+    /// <param name="context">The CaveroClubhuisContext to initialize.</param>
     public static void InitializeEvents(CaveroClubhuisContext context)
     {
         context.Database.EnsureCreated();
@@ -17,7 +20,6 @@ public class DBSeeder
             return;
         }
         
-        // Seed database with initial events
         var initialEvents = new Events[]
         {
             new Events
@@ -79,8 +81,12 @@ public class DBSeeder
         context.Events.AddRange(initialEvents);
         context.SaveChanges();
     }
-    
-    // Seed your database with initial in-office entry
+
+
+    /// <summary>
+    /// Initializes a new entry for "In Office" in the database.
+    /// </summary>
+    /// <param name="context">The CaveroClubhuisContext instance representing the database context.</param>
     public static void InitializeInOffice(CaveroClubhuisContext context)
     {
         var inOfficeEntry = new InOffice
@@ -91,8 +97,12 @@ public class DBSeeder
         context.InOffice.Add(inOfficeEntry);
         context.SaveChanges();
     }
-    
-    // Seed your database with initial event participant
+
+
+    /// <summary>
+    /// Initializes a new EventParticipants record in the database with random User and Event ids and a 'Going' response status.
+    /// </summary>
+    /// <param name="context">The CaveroClubhuisContext used for database operations.</param>
     public static void InitializeEventParticipants(CaveroClubhuisContext context)
     {
         var eventParticipant = new EventParticipants
@@ -104,11 +114,16 @@ public class DBSeeder
         context.EventParticipants.Add(eventParticipant);
         context.SaveChanges();
     }
-    
 
 
-    
-    // Seed your database with initial review
+    /// <summary>
+    /// InitializeReviews method is responsible for initializing a new event review in the CaveroClubhuisContext database.
+    /// </summary>
+    /// <param name="context">The CaveroClubhuisContext object representing the database context.</param>
+    /// <remarks>
+    /// This method generates a new EventReviews object with UserId, EventId, and FeedbackText properties set to random values.
+    /// It then adds the new review to the EventReviews DbSet of the provided context and saves the changes to the database using context.SaveChanges().
+    /// </remarks>
     public static void InitializeReviews(CaveroClubhuisContext context)
     {
         var Review = new EventReviews()
@@ -120,8 +135,13 @@ public class DBSeeder
         context.EventReviews.Add(Review);
         context.SaveChanges();
     }
-    
-    // Get a random user id from the database
+
+
+    /// <summary>
+    /// Retrieves a random user id from the database.
+    /// </summary>
+    /// <param name="context">The database context.</param>
+    /// <returns>A random user id.</returns>
     private static string GetRandomUserId(CaveroClubhuisContext context)
     {
         {
@@ -134,8 +154,13 @@ public class DBSeeder
         }
 
     }
-    
-    // Get a random event id from the database
+
+
+    /// <summary>
+    /// Gets a random event ID from the database using the specified CaveroClubhuisContext.
+    /// </summary>
+    /// <param name="context">The CaveroClubhuisContext to get the random event ID.</param>
+    /// <returns>A random event ID.</returns>
     private static int GetRamdomEventId(CaveroClubhuisContext context)
     {
         {
@@ -147,8 +172,13 @@ public class DBSeeder
             return randomEventId;
         }
     }
-    
-    // Get the time of the An in the database
+
+
+    /// <summary>
+    /// Get the start time of a specific event from the provided CaveroClubhuisContext.
+    /// </summary>
+    /// <param name="dbContext">The CaveroClubhuisContext containing the events.</param>
+    /// <returns>The start time of the specified event as a TimeSpan.</returns>
     public static TimeSpan GetEventTime(CaveroClubhuisContext dbContext)
     {
         var events = dbContext.Events
