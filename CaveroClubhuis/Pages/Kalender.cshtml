@@ -17,7 +17,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
             var initialView = window.innerWidth <= 768 ? 'timeGridDay' : 'timeGridWeek';
-
+            
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 headerToolbar: {
                     start: 'dayGridMonth,timeGridWeek,timeGridDay',
@@ -53,6 +53,8 @@
                 initialView: initialView,
                 firstDay: 1,
                 locale: 'nl',
+                contentHeight: "auto",
+                allDaySlot: false, // zorgt ervoor dat de "allday" blokje weg gaat uit de kalender
                 events: @Html.Raw(Json.Serialize(Model.EventsList.Select(e => new { title = e.Title, start = e.Date.ToString("yyyy-MM-dd") + 'T' + e.StartTime, end = e.Date.ToString("yyyy-MM-dd") + 'T' + e.EndTime }))),
                 eventContent: function (arg) {
                     var title = arg.event.title;
