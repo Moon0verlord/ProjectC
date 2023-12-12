@@ -1,50 +1,47 @@
 using CaveroClubhuis.Areas.Identity.Data;
 using CaveroClubhuis.Data;
 using CaveroClubhuis.Pages.Shared;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.CodeAnalysis;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CaveroClubhuis.Pages
 {
-    
-    [Authorize]
-    public class TeamModel : PageModel
+    public class TeamSearchModel : PageModel
     {
-        
+
         private readonly CaveroClubhuisContext _context;
         private readonly UserManager<CaveroUser> _userManager;
         private readonly LayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
-        
+
         public bool IsUserCheckedIn { get; private set; }
 
-     
+
 
         public List<CaveroUser> InOfficeMembers { get; private set; }
 
         public List<CaveroUser> OtherInOfficeMembers { get; private set; }
 
-        public Teams TeamChoice {  get; private set; }
+        public Teams TeamChoice { get; private set; }
 
         public List<Teams> AllTeams { get; private set; }
 
-        public List<int> SearchTeam {  get; private set; }
+        [BindProperty]
+        public List<int> SearchTeam { get; private set; }
 
         public Teams SearchChoice { get; private set; }
-        
-        public TeamModel(CaveroClubhuisContext context,UserManager<CaveroUser> userManager, LayoutTools layoutTools)
+
+        public TeamSearchModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, LayoutTools layoutTools)
         {
             _context = context;
             _userManager = userManager;
             _layoutTools = layoutTools;
-            
+            SearchTeam = new List<int>();
+
         }
-        
+
         public void OnGet()
         {
             var userId = _userManager.GetUserId(User);
@@ -53,49 +50,50 @@ namespace CaveroClubhuis.Pages
             AllTeams = FetchTeams();
             TeamChoice = FetchTeamChoice();
             InOfficeMembers = FetchInOfficeTeamMembers(TeamChoice);
-           
+
 
         }
 
-        public IActionResult OnPostSelect()
+        public IActionResult OnPostAskInput()
         {
-            
-          
-            TempData["EnteredEventID"] = SearchTeam[0];
-
-            // weer id enzo neerzetten want hij gaat nog niet langs onget
-            var userId = _userManager.GetUserId(User);
-            (FirstName, LastName) = _layoutTools.LoadName(userId);
-            IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
-            // return Page ipv Redirectpage zodat niet alles refreshed en start van het begin
-            return Page(); // Redirect naar page weer
-
-        }
-
-        public IActionResult OnPostShow()
-        {
-
-            // de id van de tempdata in een variabele zetten voor opzoeken juiste event
-            int id = (int)TempData["EnteredEventID"];
-
-
-            var team = _context.Teams.First(x => x.Id == id);
-            if (!ModelState.IsValid)
+            Console.WriteLine("tetetet");
+            foreach (var item in SearchTeam)
             {
+                Console.WriteLine("test");
+                Console.WriteLine(item);
+            }
+            // zoek team op
+            var team = _context.Teams.Where(e => SearchTeam.Contains(e.Id))
+                 .FirstOrDefault(); 
 
+            // als team niet bestaat returnen
+            if (team == null)
+            {
+                // Handle the case where the team is not found
+                Console.WriteLine("nullll");
                 var userId = _userManager.GetUserId(User);
-                (FirstName, LastName) = _layoutTools.LoadName(userId!);
-                IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
-                return Page();
+                (FirstName, LastName) = _layoutTools.LoadName(userId);
+                IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
+                return RedirectToPage("./Team");
             }
 
-
+            
+            // Update de dialog met de members
             OtherInOfficeMembers = FetchInOfficeTeamMembers(team);
-            ModelState.Clear();
-           
-            return RedirectToPage("./Team"); // Redirect naar page weer
+             SearchChoice=team;
+            AllTeams = FetchTeams();
+            TeamChoice = FetchTeamChoice();
+            InOfficeMembers = FetchInOfficeTeamMembers(TeamChoice);
+
+            // viewdata aanpassen
+            ViewData["ShowDialog2"] = true;
+            var userId2 = _userManager.GetUserId(User);
+            (FirstName, LastName) = _layoutTools.LoadName(userId2);
+            IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId2);
+            return Page();
         }
 
+       
 
 
         public List<Teams> FetchTeams()
@@ -109,7 +107,7 @@ namespace CaveroClubhuis.Pages
             var userId = _userManager.GetUserId(User);
             var team = _context.Users.Where(x => x.Id == userId).Select(x => x.Team).FirstOrDefault();
             var teamInfo = _context.Teams.Where(x => x.Title == team).Select(x => x).FirstOrDefault();
-            
+
             return teamInfo;
         }
 
@@ -131,8 +129,10 @@ namespace CaveroClubhuis.Pages
             if (team != null)
             {
                 //var members = _context.Users.Where(x => x.Team == TeamChoice.Title).Select(x => x).ToList();
-                var members = (from u in _context.Users join p in _context.InOffice on u.Id equals p.UserId
-                              where u.Team == team.Title select u).ToList();
+                var members = (from u in _context.Users
+                               join p in _context.InOffice on u.Id equals p.UserId
+                               where u.Team == team.Title
+                               select u).ToList();
                 var membersInOffice = InOffice.Where(x => members.Contains(x)).ToList();
 
                 return membersInOffice;

@@ -2,8 +2,55 @@
 @model CaveroClubhuis.Pages.TeamModel
 @{
     ViewData["Title"] = "Team Space";
+    var DialogButtons1 = new ButtonModel() { isPrimary = true, cssClass = "confirm-button", content = "Bevestig" };
+    var DialogButtons2 = new ButtonModel() { content = "Annuleer", cssClass = "e-flat" };
 }
-<div class="text-center">
-    <h1 class="display-4">Team</h1>
-    <p>Hier komt je teamspace</p>
-</div>
+@using Newtonsoft.Json
+<head>
+    <link rel="stylesheet" href="~/css/Events.css" />
+  
+</head>
+<body>
+
+
+        <div class="Evenementen">
+           
+    @if(Model.InOfficeMembers != null)
+    {
+        <div class="StickyHeader">
+            <h2 class="Title">Deze teamleden zijn vandaag op kantoor:</h2>
+            <hr class="titleLine" />
+        </div>
+        @foreach (var person in Model.InOfficeMembers)
+        {
+       
+                <div class="kaart">
+                    <h2>@person.FirstName @person.LastName</h2>
+                    </div>
+           
+        }
+    }
+    else
+    {
+        
+            <h2>Er zijn momenteel geen teamleden op kantoor...</h2>
+       
+    }
+
+  
+    </div>
+    
+    <a href="/TeamSearch">
+        <button id="searchButton" class="admin-button">
+            Teams bekijken
+        </button>
+    </a>
+  
+
+
+    </body>
+
+   
+  
+
+
