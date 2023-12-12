@@ -54,13 +54,13 @@
 
 
 /* Targets smoller laptops  */
-@media screen and (max-width: 1280px)  {
+@media screen and (max-width: 1550px)  {
     .sidebar.sidebar {
-        max-width: 250px;
+        max-width: 215px;
     }
 
     .sidebar-menu-button, .Log-out, .check-in-1 {
-        transform: scale(0.9);
+        transform: scale(0.8);
     }
     
     .sidebar-menu-button.sidebar-menu-button, .Log-out, .check-in-1.check-in-1, .check-out.check-out {
@@ -74,9 +74,10 @@
         height: 45px ;
     }
     
-    .cavero-logo {
+    .cavero-logo.cavero-logo {
         max-width: 80%;
         margin-left: 10px;
+        padding: 15px
     }
 
     .cavero-logo .desktop-logo {

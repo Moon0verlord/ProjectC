@@ -28,7 +28,8 @@
     flex-direction:column;
     margin-top: 10px;
     max-width: 450px;
-    max-height: 350px;
+    min-height: 525px;
+    max-height: 525px;
     background-color: #ffffff;
     border-radius: 13px;
     border: 2px solid #d9d9d9;

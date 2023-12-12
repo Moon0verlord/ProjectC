@@ -27,9 +27,19 @@
                     Event verwijderen
                 </button>
             </a>
+            <a href="/AdminMakeTeam">
+                <button id="TeamButton" class="admin-button">Team aanmaken</button>
+            </a>
         </div>
 
         <div class="make-event">
+            <div class="form-dialog-header">
+                <header>
+                    <div class="maketeam">Evenement aanmaken</div>
+                </header>
+
+                <div class="line"></div>
+            </div>
             <form id="make" method="post" class="make-event-form" asp-page-handler="MakeEvent">
                 <!-- Add the make event inputs here-->
                 <label for="title">Titel</label>
@@ -61,6 +71,7 @@
                 <span asp-validation-for="location" class="error-message"></span>
                 <input type="text" id="location" placeholder="locatie" asp-for="location">
 
+                <div class="explain">Vul de velden in om een evenement te maken</div>
                 <input type="submit" value="Opslaan">
             </form>
         </div></div>
@@ -114,3 +125,30 @@
             xhr.send();
         }
 </script>
+
+<style>
+    .form-dialog-header {
+        display: flex;
+        flex-direction: column; /* Assuming .make-event is a flex container */
+        align-items: center; /* Center items horizontally */
+    }
+
+    .line {
+        height: 1px;
+        width: 370px; /* Set the width to 300px */
+        border-bottom: 1px solid rgba(177, 179, 180, 0.2);
+        ;
+    }
+
+    .form-dialog-header header {
+        padding: 10px;
+        font-size: 20px;
+        font-weight: normal;
+        text-align: center;
+    }
+
+    .explain {
+        margin-left: 75px;
+    }
+
+</style>
