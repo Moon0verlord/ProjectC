@@ -6,8 +6,12 @@
         margin-left: 0px;
     }
 
-    .wrapper {
-        transform: scale(0.8);
+    .Wrapper.Wrapper {
+        width: 55%;
+    }
+    
+    .kaart.kaart #beschijving{
+        font-size: 15px;
     }
 
 
@@ -20,15 +24,9 @@
         margin-left: 0px;
     }
 
-    .wrapper {
-        width: 64%
+    .Wrapper {
+        width: 50%
     }
-
-    .wrapper {
-        transform: scale(0.8);
-    }
-    
-    
     
 }
 

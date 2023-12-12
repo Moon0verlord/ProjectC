@@ -68,6 +68,11 @@ public class IndexModel : PageModel
         }
 
     }
+
+    /// <summary>
+    /// Retrieves a list of PersonInfo objects containing information about people currently checked in.
+    /// </summary>
+    /// <returns>A list of PersonInfo objects.</returns>
     public List<PersonInfo> CheckInOverview()
     {
         var now = DateTimeOffset.UtcNow;
@@ -90,8 +95,16 @@ public class IndexModel : PageModel
         return people;
         
     }
-    
-    
+
+
+    /// <summary>
+    /// Performs recurring check-in for a user within a specified time frame and on a specific day of the week.
+    /// </summary>
+    /// <param name="userid">The ID of the user.</param>
+    /// <param name="Start">The start date and time of the recurring check-in.</param>
+    /// <param name="End">The end date and time of the recurring check-in.</param>
+    /// <param name="dayOfWeek">The day of the week on which the recurring check-in will occur.</param>
+    /// <returns>None.</returns>
     public void RecurringCheckIn(string userid, DateTime Start, DateTime End, string dayOfWeek)
     {
         DateTime utcStartDate = TimeZoneInfo.ConvertTimeToUtc(Start);
@@ -109,8 +122,12 @@ public class IndexModel : PageModel
         _context.InOffice.Add(inOfficeEntry);
         _context.SaveChanges();
     }
-    
-    
+
+
+    /// <summary>
+    /// Method to handle the toggle check-in action in an asynchronous manner.
+    /// </summary>
+    /// <returns>An instance of <see cref="Task<IActionResult>"/> representing the asynchronous operation.</returns>
     public async Task<IActionResult> OnPostToggleCheckInAsync()
     {
         var userId = _userManager.GetUserId(User);
@@ -118,6 +135,7 @@ public class IndexModel : PageModel
 
         return RedirectToPage();
     }
+    
     public List<Events> FetchEvents()
     {
         DateTime today = DateTime.UtcNow.Date;
@@ -136,8 +154,10 @@ public class IndexModel : PageModel
     }
 
 
-    
-    
+    /// <summary>
+    /// Performs a recurring check for a user asynchronously.
+    /// </summary>
+    /// <returns>The <see cref="IActionResult"/> representing the result of the operation.</returns>
     public async Task<IActionResult> OnPostRecurringCheckAsync()
     {
         Console.WriteLine("Recurring Check");
