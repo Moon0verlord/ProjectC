@@ -1,81 +1,108 @@
-﻿.Wrapper {
-    overflow: hidden;
+﻿/*full page*/
+.Wrapper {
+    margin-left: 1%;
 }
 
-.StickyHeader {
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
-    background-color: #f2f0f8;
-}
-
-.Evenementen {
-    width: 50%;
-    background-color: #f2f0f8;
-    height: 56vh;
+/*accordion menu*/
+.Accordion {
+    background-color: #F2F0F8;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 60%;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
     border-radius: 30px;
-    /* dit zorgt ervoor dat margin in de child classes ook werkt */
+}
+
+.active, .Accordion:hover {
+    background-color: #cccccc70;
+}
+
+.flexbox {
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.Title {
+    text-align: center;
+    font-size: 20px;
+}
+
+.titleLine {
+    width: 40%;
+    margin: 0 auto;
+}
+
+.arrow-down {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 20px solid black;
+    transition: transform 0.3s ease;
+    transform: rotate(0deg);
+    margin-left: 8px;
+    position: absolute;
+    right: 0;
+    top: 30%;
+}
+
+.active .arrow-down {
+    transform: rotate(180deg);
+}
+
+/*All event items*/
+.panel {
+    display: none;
+    padding: 10px;
+    width: 60%;
     overflow: auto;
     overflow-y: scroll;
-    scrollbar-width: auto;
-    scrollbar-color: #b1b3b4 #f2f0f8;
-    float: left;
+    max-height: 60vh;
 }
 
-/* Chrome, Edge, and Safari */
-.Evenementen::-webkit-scrollbar {
+.panel::-webkit-scrollbar {
     width: 10px;
 }
 
-.Evenementen::-webkit-scrollbar-track {
+.panel::-webkit-scrollbar-track {
     background: #f2f0f8;
 }
 
-.Evenementen::-webkit-scrollbar-thumb {
+.panel::-webkit-scrollbar-thumb {
     background-color: #b1b3b4;
     border-radius: 10px;
     border: 3px solid #ffffff;
 }
 
-.Title {
-    text-align: center;
-}
-
-.titleLine {
-    width: 60%;
-    margin: 0 auto;
-}
-
-#titel {
-    font-size: 20px;
-}
-
-.kaart {
-    margin-top: 1000px;
+/*single event item*/
+.Evenementen {
     background-color: #803689;
     border-radius: 30px;
-    width: 80%;
-    height: 200px;
-    margin: 0 auto;
-    margin-top: 50px;
-    /* dit zorgt ervoor dat margin in de child classes ook werkt */
-    overflow: auto;
+    margin-bottom: 10px;
+    height: 150px;
 }
 
-.kaart h2 {
-    margin-top: 25px;
+.Evenementen h2 {
+    margin-top: 20px;
     font-size: 20px;
     color: #FFFFFF;
     margin-left: 5%;
 }
 
-.kaart h3 {
+.Evenementen h3 {
     color: #FFFFFF;
     font-size: 12px;
     margin-left: 5%;
 }
 
-.kaart #beschijving {
+.Evenementen #beschijving {
     color: #FFFFFF;
     font-size: 16px;
     margin-left: 5%;
@@ -96,25 +123,21 @@ button p {
     margin-top: 8px;
 }
 
-a[title="Manage"] {
-   margin-top: 17px;
-}
-
+/*pop up inside event item*/
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
-    padding-top: 200px; 
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 200px;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
+    width: 100%;
+    height: 100%;
+    overflow: auto;
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.6);
 }
 
-/* Modal Content */
 .modal-content {
     background-color: #fefefe;
     margin: auto;
@@ -133,15 +156,10 @@ a[title="Manage"] {
     text-align: right;
 }
 
-    .close:hover,
-    .close:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-.flexbox {
-    display: flex;
-justify-content: space-between;
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }
 

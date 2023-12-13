@@ -1,5 +1,36 @@
-﻿// Events
-//------------------------------------------------------------------------------------------------------------------
+﻿var acc = document.getElementsByClassName("Accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            var panel = this.nextElementSibling;
+            var isActive = this.classList.contains("active");
+
+            // Close all accordion panels except the clicked one
+            for (var j = 0; j < acc.length; j++) {
+                if (j !== i) {
+                    acc[j].classList.remove("active");
+                    acc[j].nextElementSibling.style.display = "none";
+                }
+            }
+
+            // Toggle the clicked accordion panel
+            if (isActive) {
+                this.classList.remove("active");
+                panel.style.display = "none";
+            } else {
+                this.classList.add("active");
+                panel.style.display = "block";
+            }
+        });
+
+        // Open the first accordion panel by default
+        if (i === 0) {
+            acc[i].classList.add("active");
+            acc[i].nextElementSibling.style.display = "block";
+        }
+    }
+
 document.addEventListener("DOMContentLoaded", function () {
     // Get all elements with class name "openModalBtn" (buttons that open the modals)
     var buttons = document.querySelectorAll(".openModalBtn");
@@ -44,7 +75,5 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
-
-    // When the user 
-});
-//------------------------------------------------------------------------------------------------------------------
+}
+);

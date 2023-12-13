@@ -11,21 +11,25 @@
 </head>
 <body>
     <div class="Wrapper">
-
-        <!-- Opkomende Evenementen-->
-        <div class="Evenementen">
-            <div class="StickyHeader">
+        <!--Opkomende Evenementen-->
+        <div class="Accordion">
+            <div class="flexbox">
                 <h2 class="Title">Opkomende evenementen</h2>
-                <hr class="titleLine" />
+                <span class="arrow-down"></span>
             </div>
+            <hr class="titleLine" />
+        </div>
+
+        <div class="panel">
+
             @foreach (var eventItem in Model.EventsList)
-                {
-            <div class="kaart">
-                <h2>@eventItem.Title ID:@eventItem.Id</h2>
+        {
+            <div class="Evenementen">
+                <h2>@eventItem.Title</h2>
                 <h3>@eventItem.Date.ToString("dd-MM-yy"), @eventItem.StartTime.ToString(@"hh\:mm")</h3>
                 <p id="beschijving">@eventItem.Description</p>
 
-                <!--Afmelden button-->
+                <!-- Event Participation Buttons -->
                 @if (Model.AllParticipants.Any(ep => ep.EventId == eventItem.Id && ep.UserId == @User.FindFirstValue(ClaimTypes.NameIdentifier)))
                 {
                 <form method="post" asp-page-handler="Leave">
@@ -42,7 +46,6 @@
                 }
                 else
                 {
- <!--Aanmelden button-->
                 <form method="post" asp-page-handler="Add">
                     <input type="hidden" name="eventId" value="@eventItem.Id" />
                     <button type="submit" class="openModalBtn" data-modal-id="modal1_@eventItem.Id">Aanmelden</button>
@@ -56,7 +59,7 @@
                 </div>
                 }
 
-                <!--Deelnemers button-->
+                <!-- Deelnemers Modal -->
                 <button class="openModalBtn" data-modal-id="modal2_@eventItem.Id">Deelnemers</button>
                 <div id="modal2_@eventItem.Id" class="modal">
                     <div class="modal-content">
@@ -65,52 +68,56 @@
                             <span class="close">&times;</span>
                         </div>
                         @foreach (var participant in Model.AllParticipants)
+                        {
+                            if (participant.EventId == eventItem.Id)
+                            {
+                                foreach (var atendee in Model.Atendees)
                                 {
-                                    if (participant.EventId == eventItem.Id)
+                                    if (atendee.Id == participant.UserId)
                                     {
-                                        foreach (var atendee in Model.Atendees)
-                                        {
-                                            if (atendee.Id == participant.UserId)
-                                            {
                         <p>@atendee.FirstName @atendee.LastName</p>
-                                            }
-                                        }
                                     }
                                 }
+                            }
+                        }
                     </div>
                 </div>
-            </div>
-                }
         </div>
+                }
 
-        <!-- Verlopen Evenementen-->
-        <div class="Evenementen">
-            <div class="StickyHeader">
-                <h2 class="Title">Verlopen evenementen</h2>
+
+            </div>
+
+ <!--Verlopen Evenementen-->
+            <div class="Accordion">
+                <div class="flexbox">
+                    <h2 class="Title">Verlopen evenementen</h2>
+                    <span class="arrow-down"></span>
+                </div>
                 <hr class="titleLine" />
             </div>
-            @foreach (var eventItem in Model.oldEvents)
+            <div class="panel">
+                @foreach (var eventItem in Model.oldEvents)
                 {
-            <div class="kaart">
-                <h2>@eventItem.Title</h2>
-                <h3>@eventItem.Date.ToString("dd-MM-yy"), @eventItem.StartTime.ToString(@"hh\:mm")</h3>
-                <p id="beschijving">
-                    @eventItem.Description
-                </p>
+                <div class="Evenementen">
+                    <h2>@eventItem.Title</h2>
+                    <h3>@eventItem.Date.ToString("dd-MM-yy"), @eventItem.StartTime.ToString(@"hh\:mm")</h3>
+                    <p id="beschijving">
+                        @eventItem.Description
+                    </p>
 
-                <!--Feedback button-->
-                <button class="openModalBtn" data-modal-id="modal3_@eventItem.Id">Feedback</button>
-                <div id="modal3_@eventItem.Id" class="modal">
-                    <div class="modal-content">
-                        <h5 class="modal-title">@eventItem.Title</h5>
-                        <span class="close">&times;</span>
-                        <p>feedback button</p>
+                    <!-- Feedback Button -->
+                    <button class="openModalBtn" data-modal-id="modal3_@eventItem.Id">Feedback</button>
+                    <div id="modal3_@eventItem.Id" class="modal">
+                        <div class="modal-content">
+                            <h5 class="modal-title">@eventItem.Title</h5>
+                            <span class="close">&times;</span>
+                            <p>feedback button</p>
+                        </div>
                     </div>
                 </div>
-            </div>
                 }
+            </div>
         </div>
-    </div>
-
 </body>
 
