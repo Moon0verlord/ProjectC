@@ -59,3 +59,28 @@ html, body {
 .fc-event:hover + .fc-event {
     display: block;
 }
+
+.CreateButton {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    width: 200px;
+    height: 45px;
+    top: 320px;
+    left: 9%;
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+    border-radius: 13px;
+    border-color: transparent;
+    background-color: #7f3688;
+    box-shadow: white;
+    transition: 0.3s;
+}
+
+.CreateButton:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+
+    filter: invert(100%);
+}
+
