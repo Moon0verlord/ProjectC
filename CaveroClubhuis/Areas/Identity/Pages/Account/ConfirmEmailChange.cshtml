@@ -1,0 +1,24 @@
+﻿@page
+@model ConfirmEmailChangeModel
+@{
+    ViewData["Title"] = "Bevestiging email wijzigen";
+}
+
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<a asp-area="Identity" asp-page="/Account/Manage/Index">
+    <div class="settingsspace"></div>
+    <div class="line-3"></div>
+    <button class="confirm-button">
+        <img src="~/images/settings.svg" width="50" height="47" />
+        Klik hier om terug te gaan naar instellingen
+    </button>
+</a>
+
+<style>
+    .confirm-button {
+        background-color: #803689 !important;
+        border-color: #803689 !important;
+        color: white !important;
+
+    }</style>

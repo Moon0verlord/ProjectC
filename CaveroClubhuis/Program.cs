@@ -2,7 +2,7 @@ using CaveroClubhuis.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using CaveroClubhuis.Data;
-using CaveroClubhuis.Controllers;
+
 using CaveroClubhuis.Pages.Shared;
 using Npgsql.Replication.TestDecoding;
 
@@ -27,7 +27,7 @@ builder.Services.AddScoped<LayoutTools>();
 
 builder.Services.AddRazorPages();
 
-AccountController acc = new AccountController(builder.Environment);
+
 
 var app = builder.Build();
 
