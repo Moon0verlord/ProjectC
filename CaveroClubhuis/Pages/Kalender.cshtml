@@ -14,11 +14,19 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
+        // hiermee werkt het om naar de model te sturen alleen evenId kan hij nie vinden :( (je kan hardcode een event id meegeven en dan werkt het wel zoals bijv 91 dan zien je in de console van de webbrowser dat het true is resultaat)
+        @* function IsUserJoined(eventId) {
+            var temp = Html.Raw(Json.Serialize(Model.IsUserJoined(eventId)));
+            return temp;
+            } *@
+
+            // maak dit een global var
+            let currentEventId;
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
             var initialView = window.innerWidth <= 768 ? 'timeGridDay' : 'timeGridWeek';
-            
             var calendar = new FullCalendar.Calendar(calendarEl, {
+                scrollTime: '09:00:00',
                 headerToolbar: {
                     start: 'dayGridMonth,timeGridWeek,timeGridDay',
                     center: 'title',
@@ -30,6 +38,23 @@
 
                     // hier staat de content
                     $('#modal1 .modal-title').text(info.event.title);
+                    currentEventId = info.event.id;
+                    console.log('Event ID:', currentEventId);
+                    // het probleem is dat de model niet kan vinden wat de event id is, ik kan het hardcoded meegeven, zoals in de functie helemaal boven
+                    // maar dat is niet de bedoeling, ik wil dat het dynamisch gaat, dus dat het de event id van de event pakt waar je op klikt ( deze zin is door copliot geschreven*)
+
+
+                    //var isUserJoined = IsUserJoined(currentEventId);  // (dit was een test) lukte ook niet
+
+                    // wat je doet is roept de model method op geeft de event id mee en consol logged voor nu of de persoon is aangemeld
+                    // in comments want anders werkt de kalender niet
+                    // if (isUserJoined(currentEventId)) {
+                    //  console.log("je bent aangemeld (going)");
+                    //} else {
+                    // console.log("je bent nog niet aangemeld (not going)");
+                    //}
+
+
                     $('#modal1 .modal-body').html('<p>U gaat zich nu aanmelden.<br>Om door te gaan met aanmelden klik op "Aanmelden".<br>Om het het cancelen klik op "Close".</p>');
 
                     // Hide the close button dynamically
@@ -39,6 +64,8 @@
                     $('#modal1 .aanmelden-btn').on('click', function () {
                         // voor nu console log het
                         console.log('Aanmelden button clicked for event: ' + info.event.title);
+                        // hele slechte oplossing voor nu, scroll naar de gegeven id:
+                        window.location.href = '/Events#' + info.event.id;
                         // en sluit het dan
                         $('#modal1').modal('hide');
                     });
@@ -55,7 +82,13 @@
                 locale: 'nl',
                 contentHeight: "auto",
                 allDaySlot: false, // zorgt ervoor dat de "allday" blokje weg gaat uit de kalender
-                events: @Html.Raw(Json.Serialize(Model.EventsList.Select(e => new { title = e.Title, start = e.Date.ToString("yyyy-MM-dd") + 'T' + e.StartTime, end = e.Date.ToString("yyyy-MM-dd") + 'T' + e.EndTime }))),
+                events: @Html.Raw(Json.Serialize(Model.EventsList.Select(e => new
+            {
+                title = e.Title,
+                start = e.Date.ToString("yyyy-MM-dd") + 'T' + e.StartTime,
+                end = e.Date.ToString("yyyy-MM-dd") + 'T' + e.EndTime,
+                id = e.Id
+            }))),
                 eventContent: function (arg) {
                     var title = arg.event.title;
                     var startTime = new Date(arg.event.start);
@@ -71,9 +104,7 @@
                     };
                 }
             });
-
             calendar.render();
-
             window.addEventListener('resize', function () {
                 var newInitialView = window.innerWidth <= 768 ? 'timeGridDay' : 'timeGridWeek';
 
@@ -97,7 +128,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Modal content goes here</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary aanmelden-btn">Aanmelden</button>

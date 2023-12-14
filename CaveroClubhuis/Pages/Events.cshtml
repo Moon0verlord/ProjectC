@@ -20,7 +20,7 @@
             </div>
             @foreach (var eventItem in Model.EventsList)
                 {
-            <div class="kaart">
+            <div id="@eventItem.Id" class="kaart">
                 <h2>@eventItem.Title ID:@eventItem.Id</h2>
                 <h3>@eventItem.Date.ToString("dd-MM-yy"), @eventItem.StartTime.ToString(@"hh\:mm")</h3>
                 <p id="beschijving">@eventItem.Description</p>
@@ -91,7 +91,7 @@
             </div>
             @foreach (var eventItem in Model.oldEvents)
                 {
-            <div class="kaart">
+            <div id="@eventItem.Id" class="kaart">
                 <h2>@eventItem.Title</h2>
                 <h3>@eventItem.Date.ToString("dd-MM-yy"), @eventItem.StartTime.ToString(@"hh\:mm")</h3>
                 <p id="beschijving">
@@ -113,4 +113,3 @@
     </div>
 
 </body>
-

@@ -16,9 +16,7 @@ namespace CaveroClubhuis.Pages
         private readonly LayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
-        
         public bool IsUserCheckedIn { get; private set; }
-
 
         public KalenderModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, LayoutTools layoutTools)
         {
@@ -41,7 +39,7 @@ namespace CaveroClubhuis.Pages
             // Fetch all events from the database
             return _context.Events.ToList();
         }
-        
+
         public async Task<IActionResult> OnPostToggleCheckInAsync()
         {
             var userId = _userManager.GetUserId(User);
@@ -49,6 +47,19 @@ namespace CaveroClubhuis.Pages
 
             return RedirectToPage();
         }
+
+        public bool IsUserJoined(int eventId)
+        {
+            var userId = _userManager.GetUserId(User);
+            Console.WriteLine("IsUserJoined: " + userId + " " + eventId);
+            // hiermee kijk je dan of de persoon is aangemeld ( werkt is code van jona)
+            bool userAlreadyParticipant = _context.EventParticipants
+                .Any(ep => ep.EventId == eventId && ep.UserId == userId);
+
+            // return true of false
+            return userAlreadyParticipant;
+        }
+
 
     }
 }
