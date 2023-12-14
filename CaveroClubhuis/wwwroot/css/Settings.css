@@ -17,3 +17,6 @@
         color: #ffffff; /* Set the text color for the active state */
         background-color: #6c2e73; /* Set the background color for the active state */
     }
+main {
+    overflow-x: hidden; /* zorgt ervoor dat de pagina niet scroll able is side-ways */
+}
