@@ -145,22 +145,5 @@ a[title="Manage"] {
 justify-content: space-between;
 }
 
-.kaartTeam {
-    margin-top: 1000px;
-    background-color: #803689;
-    border-radius: 30px;
-    width: 80%;
-    height: 200px;
-    margin: 0 auto;
-    margin-top: 50px;
-    /* dit zorgt ervoor dat margin in de child classes ook werkt */
-    overflow: auto;
-}
 
-@media screen and (max-width: 600px) {
-    /* Adjust styles for smaller screens */
-    .kaartTeam {
-        width: 20%; /* You can adjust the width for smaller screens */
-    }
-}
 

@@ -7,12 +7,12 @@
 }
 @using Newtonsoft.Json
 <head>
-    <link rel="stylesheet" href="~/css/Events.css" />
+    <link rel="stylesheet" href="~/css/Team.css" />
   
 </head>
 <body>
 
-
+    <div class="Wrapper">
         <div class="Evenementen">
            
     @if(Model.InOfficeMembers != null)
@@ -39,15 +39,16 @@
 
   
     </div>
-    
+
+    <div class="ButtonContainer">
     <a href="/TeamSearch">
-        <button id="searchButton" class="admin-button">
+        <button id="searchButton" class="confirm-button">
             Teams bekijken
         </button>
     </a>
-  
+  </div>
 
-
+    </div>
     </body>
 
    
