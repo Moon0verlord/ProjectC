@@ -187,3 +187,6 @@ a[title="Manage"] {
     display: flex;
     justify-content: space-between;
 }
+#container {
+    margin-right: 100px !important;
+}
