@@ -13,7 +13,7 @@
 </head>
 
 <body>
-
+    <div class="Wrapper">
     <div class="Evenementen">
 
         @if (Model.InOfficeMembers != null)
@@ -72,37 +72,36 @@
 }
 else
 {
-    <div id='container' style="height:350px;">
-        <ejs-dialog id='dialog' header="Caverianen van het @Model.SearchChoice.Title team" target="#container" visible="true" cssClass="peopleOverview2" >
-            <e-content-template>
-                @if (Model.OtherInOfficeMembers != null)
-                {
-                    <ejs-grid id="Grid" dataSource="@Model.OtherInOfficeMembers" cssClass="peopleGrid" allowPaging="true" e>
-                        
-                        <e-grid-pagesettings pageSize="8"></e-grid-pagesettings>
-                        <e-grid-columns>
-                            <e-grid-column field="FirstName" headerText="Voornaam" textAlign="Center" width="40"></e-grid-column>
-                            <e-grid-column field="LastName" headerText="Achternaam" textAlign="Center" width="40"></e-grid-column>
-                            
-                            
-                        </e-grid-columns>
-                  
-                    </ejs-grid>
-                }
-                else
-                {
-                    <p>Er zijn geen teamleden van dit team op kantoor op het moment</p>
-                }
-                <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-                    <p>Klik op de knop om terug te gaan naar jouw Team pagina</p>
-                    <ejs-button id="targetButton" content="Terug naar Team pagina" cssClass="confirm-button" onclick="returnPage()" style="max-width:250px;"></ejs-button>
-                </div>
-            </e-content-template>
-           
-        </ejs-dialog>
-    </div>
+            <div id='container' style="height:350px;">
+                <ejs-dialog id='dialog' header="Caverianen van het @Model.SearchChoice.Title team" target="#container" visible="true" cssClass="peopleOverview2">
+                    <e-content-template>
+                        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; height: 100%;">
+                            @if (Model.OtherInOfficeMembers != null && Model.OtherInOfficeMembers.Any())
+                            {
+                                <ejs-grid id="Grid" dataSource="@Model.OtherInOfficeMembers" cssClass="peopleGrid" allowPaging="true">
+                                    <e-grid-pagesettings pageSize="8"></e-grid-pagesettings>
+                                    <e-grid-columns>
+                                        <e-grid-column field="FirstName" headerText="Voornaam" textAlign="Center" width="40"></e-grid-column>
+                                        <e-grid-column field="LastName" headerText="Achternaam" textAlign="Center" width="40"></e-grid-column>
+                                    </e-grid-columns>
+                                </ejs-grid>
+                            }
+                            else
+                            {
+
+                                <p>Er zijn geen teamleden van dit team op kantoor op het moment</p>
+
+
+                            }
+                            <ejs-button id="targetButton" content="Terug naar Team pagina" cssClass="confirm-button" onclick="returnPage()"></ejs-button>
+                        </div>
+                    </e-content-template>
+
+                </ejs-dialog>
+            </div>
 
 }
+    </div>
     </div>
 </body>
 
