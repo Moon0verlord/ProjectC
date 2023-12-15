@@ -12,6 +12,7 @@
     <!-- link for remixicons icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" />
     <link rel="stylesheet" href="~/css/user-auth.css"/>
+    
 </head>
 
 <body class="css-selector">
@@ -23,7 +24,7 @@
         <div class="login_register">
             Nog geen account? <a href="./Register">Registreer hier!</a>
         </div>
-
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="login_input">
             <div class="login_box">
                 <input type="email" asp-for="Input.Email" placeholder="Email" required class="login_input">
@@ -36,7 +37,6 @@
                 <i class="ri-lock-2-fill"></i>
             </div>
             <span asp-validation-for="Input.Password" class="text-danger"></span>
-
         </div>
 
         <div class="login_check">
