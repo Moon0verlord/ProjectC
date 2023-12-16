@@ -288,21 +288,28 @@
 
 .settings {
     margin-top: 15px;
-    margin-left: 5px;
+    margin-left: 10px;
     margin-bottom: 20px;
-    background-color: transparent;
-    border-color: transparent;
-    max-width: 144px;
-    top: 823px;
-    left: 25px;
-    font-family: "Inter", Helvetica, serif;
-    font-weight: 600;
-    color: #b1b3b4;
-    font-size: 30px;
-    text-align: center;
-    letter-spacing: -0.2px;
-    line-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 284px;
+    height: 54px;
+    top: 320px;
+    left: 9%;
+    font-weight: bold;
     white-space: nowrap;
+    border-radius: 13px;
+    border-color: transparent;
+    background-color: #d9d9d9;
+    transition: 0.3s;
+}
+
+.settings:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+
+    filter: invert(100%);
 }
 
 /* Need to find another way of doing this */

@@ -1,7 +1,15 @@
 ﻿@page
+@using CaveroClubhuis.Areas.Identity.Data
+@using Syncfusion.EJ2.Buttons
+@using Syncfusion.EJ2.Grids
+@using Syncfusion.EJ2.Popups
+@using Syncfusion.EJ2
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model CaveroClubhuis.Pages.IndexModel
+@inject SignInManager<CaveroUser> SignInManager
+@inject UserManager<CaveroUser> UserManager
 @{
-    ViewData["Title"] = "Homepage";
+    ViewData["Title"] = "Welkom";
     var minDate= new DateTime(2023,1,1, 12,00,00);
 }
 <!--dit zorgt voor de kleuren waarin je randomized-->
