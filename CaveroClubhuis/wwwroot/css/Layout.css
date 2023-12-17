@@ -3,7 +3,7 @@
         max-width: 250px;
     }
 
-    .sidebar-menu-button, .Log-out, .check-in-1, .check-out {
+    .sidebar-menu-button, .Log-out, .check-in-1, .check-out .settings {
         transform: scale(0.9);
     }
 
@@ -48,22 +48,24 @@
     .page-content.page-content{
         margin-top: 135px;
     }
+    
+    
 }
 
 
 
 
 /* Targets smoller laptops  */
-@media screen and (max-width: 1280px)  {
+@media screen and (max-width: 1550px)  {
     .sidebar.sidebar {
         max-width: 250px;
     }
 
-    .sidebar-menu-button, .Log-out, .check-in-1 {
+    .sidebar-menu-button, .Log-out, .check-in-1 .settings {
         transform: scale(0.9);
     }
     
-    .sidebar-menu-button.sidebar-menu-button, .Log-out, .check-in-1.check-in-1, .check-out.check-out {
+    .sidebar-menu-button.sidebar-menu-button, .Log-out, .check-in-1.check-in-1, .check-out.check-out .settings {
         margin-top: 20px;
         width: 200px ;
         height: 45px ;
@@ -77,6 +79,7 @@
     .cavero-logo {
         max-width: 80%;
         margin-left: 10px;
+
     }
 
     .cavero-logo .desktop-logo {
@@ -106,7 +109,7 @@
     
     .profile.profile{
         height: 80px;
-        margin-left: 0;
+        margin-left: 10px;
     }
 
     .page-content.page-content{
