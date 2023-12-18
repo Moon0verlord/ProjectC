@@ -82,30 +82,31 @@
 }
 
 /*single event item*/
-.Evenementen {
+.Evenementen-opkomend, .Evenementen-verlopen {
     background-color: #803689;
     border-radius: 30px;
     margin-bottom: 10px;
-    height: 150px;
+    height: 120px;
 }
 
-.Evenementen h2 {
+.Evenementen-opkomend h2, .Evenementen-verlopen h2 {
     margin-top: 20px;
     font-size: 20px;
     color: #FFFFFF;
     margin-left: 5%;
 }
 
-.Evenementen h3 {
+.Evenementen-opkomend h3, .Evenementen-verlopen h3 {
     color: #FFFFFF;
     font-size: 12px;
     margin-left: 5%;
 }
 
-.Evenementen #beschijving {
+.Evenementen-opkomend #beschijving, .Evenementen-verlopen #beschijving {
     color: #FFFFFF;
     font-size: 16px;
     margin-left: 5%;
+    width: 50%;
 }
 
 button {
@@ -163,3 +164,43 @@ button p {
     cursor: pointer;
 }
 
+.description-button-container-opkomend, .description-button-container-verlopen {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 480px) {
+    .Accordion, .panel, .Evenementen-opkomend, .Evenementen-verlopen {
+        width: 100%;
+    }
+
+        .Evenementen-opkomend {
+            height: 170px;
+        }
+
+        .Evenementen-verlopen {
+            height: 130px;
+        }
+
+        .Evenementen-opkomend h2, .Evenementen-verlopen h2 {
+            font-size: 18px;
+        }
+
+        .Evenementen-opkomend h3, .Evenementen-verlopen h3 {
+            font-size: 11px;
+        }
+
+        .Evenementen-opkomend #beschijving, .Evenementen-verlopen #beschijving {
+            font-size: 14px;
+        }
+
+    .modal-content {
+        width: 90%;
+    }
+
+    .description-button-container-opkomend {
+        display: block;
+    }
+}
