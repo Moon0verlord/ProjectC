@@ -22,17 +22,21 @@ namespace CaveroClubhuis.Pages
         [BindProperty]
         public string EventId { get;  set; }
 
+        public string userID { get; set; }
+
         public KalenderModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, LayoutTools layoutTools)
         {
             _context = context;
             _userManager = userManager;
             _layoutTools = layoutTools;
+            
         }
         public List<Events> EventsList { get; set; }
         public void OnGet()
         {
             // get name of user
             var userId = _userManager.GetUserId(User);
+            userID = userId;
             (FirstName, LastName) = _layoutTools.LoadName(userId);
             EventsList = FetchEvents();
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
@@ -65,7 +69,7 @@ namespace CaveroClubhuis.Pages
             return userAlreadyParticipant;
         }
 
-        public async Task<IActionResult> OnPostAdd()
+        public async Task<IActionResult> OnPostAdd()    //deze functie doet naast toevoegen ook gwn verwijderen
         {
             await Console.Out.WriteLineAsync("AAAAAAAAA");
              Console.WriteLine(EventId);
@@ -79,10 +83,11 @@ namespace CaveroClubhuis.Pages
                 await Console.Out.WriteLineAsync("dd");
             }
             await Console.Out.WriteLineAsync(EventId);
-            // Check if the user is already a participant in the event
+            // Checkoff the user al deelneemt aan event
             bool userAlreadyParticipant = getAllParticipants()
                 .Any(ep => ep.EventId == eventId && ep.UserId == userId);
 
+            // user toevoegen
             if (!userAlreadyParticipant)
             {
                 var eventParticipant = new EventParticipants
@@ -93,6 +98,17 @@ namespace CaveroClubhuis.Pages
 
                 _context.EventParticipants.Add(eventParticipant);
                 await _context.SaveChangesAsync();
+            }
+            else // user afmelden
+            {
+                var participantToRemove = _context.EventParticipants
+                .FirstOrDefault(ep => ep.EventId == eventId && ep.UserId == userId);
+
+                if (participantToRemove != null)
+                {
+                    _context.EventParticipants.Remove(participantToRemove);
+                    await _context.SaveChangesAsync();
+                }
             }
             await Task.Delay(TimeSpan.FromSeconds(3));
             return RedirectToPage();
