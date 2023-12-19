@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Admin";
 }
+@using Newtonsoft.Json
 
 <head>
     <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
@@ -45,17 +46,14 @@
 
                 <div class="line"></div>
             </div>
-            <form id="make" method="post" class="make-event-form" asp-page-handler="RemoveTeam">
-                <select asp-for="chosenTeamID">
-                    <option value=@Model.chosenTeamID>Selecteer een team</option>
-                    @foreach (var item in Model.teams)
-                    {
-                        <option value="@item.Id">@item.Title</option>
-                    }
-                </select>
-                <span asp-validation-for="chosenTeamID" class="error-message"></span>
 
+            <form id="make" method="post" class="remove-team-form" asp-page-handler="RemoveTeam">
+
+                <ejs-dropdownlist id="selectedEvent" dataSource="@Model.teams" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.chosenTeamID" width="325px">
+                    <e-dropdownlist-fields text="Title" value="Id"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
                 <div class="explain">Vul het veld in om een team te maken.</div>
+                <span asp-validation-for="chosenTeamID" class="error-message-remove"></span>
                 <input type="submit" value="opslaan">
             </form>
             
@@ -63,29 +61,47 @@
         </div>
 </body>
 
+<script>
+    function onfiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('Title', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.teams)), query);
+    }
+</script>
+
 <style>
-    .form-dialog-header {
+
+    .remove-team-form {
+        padding: 15px;
+        text-align: center; /* Horizontal centering */
         display: flex;
-        flex-direction: column; /* Assuming .make-event is a flex container */
-        align-items: center; /* Center items horizontally */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
     }
 
-    .line {
-        height: 1px;
-        width: 370px; /* Set the width to 300px */
-        border-bottom: 1px solid rgba(177, 179, 180, 0.2);
-        ;
-    }
-
-    .form-dialog-header header {
-        padding: 10px;
+    .remove-team-form .e-dlg-header {
+        width: 340px;
         font-size: 20px;
         font-weight: normal;
-        text-align: center;
+        position: relative;
     }
 
-    .explain {
-        margin-left: 75px;
+    .remove-team-form .e-dlg-content {
+        display: flex;
+        flex-direction: column;
+        min-height: 200px;
+        overflow: auto;
+    }
+
+    .remove-team-form .e-dlg-content {
+        overflow-y: auto;
+    }
+
+    .e-dropdownbase .e-list-item.e-item-focus, .e-dropdownbase .e-list-item.e-active, .e-dropdownbase .e-list-item.e-active.e-hover, .e-dropdownbase .e-list-item.e-hover {
+        background-color: #803689 !important;
+        color: white !important;
     }
 
 
