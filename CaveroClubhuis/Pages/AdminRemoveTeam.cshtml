@@ -1,5 +1,5 @@
 ﻿@page
-@model CaveroClubhuis.Pages.AdminMakeTeamModel
+@model CaveroClubhuis.Pages.AdminRemoveTeamModel
 @{
     ViewData["Title"] = "Admin";
 }
@@ -28,30 +28,35 @@
                     Event verwijderen
                 </button>
             </a>
-            <a href="/Admin">
-                <button id="TeamButton" class="admin-button" style="background-color: #803689; color: white;">Team aanmaken</button>
+            <a href="/AdminMakeTeam">
+                <button id="TeamButton" class="admin-button">Team aanmaken</button>
+            </a>
+            <a href="/AdminRemoveTeam">
+                <button id="TeamButton" class="admin-button" style="background-color: #803689; color: white;">Team verwijderen</button>
             </a>
 
-            <a href="/AdminRemoveTeam">
-                <button id="TeamButton" class="admin-button">Team verwijderen</button>
-            </a>
         </div>
 
         <div class="make-event">
             <div class="form-dialog-header">
                 <header>
-                    <div class="maketeam">Team aanmaken</div>
+                    <div class="maketeam">Team verwijderen</div>
                 </header>
 
                 <div class="line"></div>
             </div>
-            <form id="make" method="post" class="make-event-form" asp-page-handler="MakeTeam">
-                <!-- Add the make event inputs here-->
-                <label for="title">Titel</label>
-                <span asp-validation-for="title" class="error-message"></span>
-                <input type="text" id="title" placeholder="titel" maxlength="20" asp-for="title">
+            <form id="make" method="post" class="make-event-form" asp-page-handler="RemoveTeam">
+                <select asp-for="chosenTeamID">
+                    <option value=@Model.chosenTeamID>Selecteer een team</option>
+                    @foreach (var item in Model.teams)
+                    {
+                        <option value="@item.Id">@item.Title</option>
+                    }
+                </select>
+                <span asp-validation-for="chosenTeamID" class="error-message"></span>
+
                 <div class="explain">Vul het veld in om een team te maken.</div>
-                <input type="submit" value="Opslaan">
+                <input type="submit" value="opslaan">
             </form>
             
         </div>
