@@ -82,11 +82,6 @@ namespace CaveroClubhuis.Pages
                 IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
                 return Page();
             }
-
-            Console.WriteLine("test date");
-            Console.WriteLine(title);
-           // Console.WriteLine(DateTime.SpecifyKind(new DateTime(date.Year, date.Month, date.Day, 0, 0, 0), DateTimeKind.Utc));
-            //Create a new event with the inputs
             
             var newEvent = new Events
             {

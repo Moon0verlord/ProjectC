@@ -1,0 +1,108 @@
+﻿@page
+@model CaveroClubhuis.Pages.AdminRemoveTeamModel
+@{
+    ViewData["Title"] = "Admin";
+}
+@using Newtonsoft.Json
+
+<head>
+    <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
+</head>
+
+
+<body>
+    <div class="main-body">
+        <div class="admin-bar">
+            <!-- Buttons for the admin-->
+            <a href="/MakeEvent">
+                <button id="makeButton" class="admin-button">
+                    Event aanmaken
+                </button>
+            </a>
+            <a href="/AdminChange">
+                <button id="changeButton" class="admin-button">
+                    Event aanpassen
+                </button>
+            </a>
+            <a href="/AdminDelete">
+                <button id="removeButton" class="admin-button">
+                    Event verwijderen
+                </button>
+            </a>
+            <a href="/AdminMakeTeam">
+                <button id="TeamButton" class="admin-button">Team aanmaken</button>
+            </a>
+            <a href="/AdminRemoveTeam">
+                <button id="TeamButton" class="admin-button" style="background-color: #803689; color: white;">Team verwijderen</button>
+            </a>
+
+        </div>
+
+        <div class="make-event">
+            <div class="form-dialog-header">
+                <header>
+                    <div class="maketeam">Team verwijderen</div>
+                </header>
+
+                <div class="line"></div>
+            </div>
+
+            <form id="make" method="post" class="remove-team-form" asp-page-handler="RemoveTeam">
+
+                <ejs-dropdownlist id="selectedEvent" dataSource="@Model.teams" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.chosenTeamID" width="325px">
+                    <e-dropdownlist-fields text="Title" value="Id"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+                <div class="explain">Vul het veld in om een team te maken.</div>
+                <span asp-validation-for="chosenTeamID" class="error-message-remove"></span>
+                <input type="submit" value="opslaan">
+            </form>
+            
+        </div>
+        </div>
+</body>
+
+<script>
+    function onfiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('Title', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.teams)), query);
+    }
+</script>
+
+<style>
+
+    .remove-team-form {
+        padding: 15px;
+        text-align: center; /* Horizontal centering */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .remove-team-form .e-dlg-header {
+        width: 340px;
+        font-size: 20px;
+        font-weight: normal;
+        position: relative;
+    }
+
+    .remove-team-form .e-dlg-content {
+        display: flex;
+        flex-direction: column;
+        min-height: 200px;
+        overflow: auto;
+    }
+
+    .remove-team-form .e-dlg-content {
+        overflow-y: auto;
+    }
+
+    .e-dropdownbase .e-list-item.e-item-focus, .e-dropdownbase .e-list-item.e-active, .e-dropdownbase .e-list-item.e-active.e-hover, .e-dropdownbase .e-list-item.e-hover {
+        background-color: #803689 !important;
+        color: white !important;
+    }
+
+
+</style>

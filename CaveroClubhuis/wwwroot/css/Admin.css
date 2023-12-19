@@ -4,7 +4,7 @@
     margin-left: 80px;
     margin-right: 100px;
     max-width: 120px;
-    height: 300px;
+    height: 390px;
     background-color: #ffffff;
     border-radius: 13px;
     border: 2px solid #d9d9d9;
@@ -16,7 +16,7 @@
     border-radius: 5px;
     max-width: 100px;
     border-color: transparent;
-    background-color: #b1b3b4;
+    background-color: #d9d9d9;
 }
 
     .admin-button:hover {
@@ -28,7 +28,8 @@
     flex-direction:column;
     margin-top: 10px;
     max-width: 450px;
-    max-height: 350px;
+    min-height: 525px;
+    max-height: 525px;
     background-color: #ffffff;
     border-radius: 13px;
     border: 2px solid #d9d9d9;
@@ -108,6 +109,54 @@
 .make-event-form input:hover {
     border: 2px solid #803689;
 }
+
+.form-dialog-header {
+    display: flex;
+    flex-direction: column; /* Assuming .make-event is a flex container */
+    align-items: center; /* Center items horizontally */
+}
+
+.line {
+    height: 1px;
+    width: 370px; /* Set the width to 300px */
+    border-bottom: 1px solid rgba(177, 179, 180, 0.2);
+    ;
+}
+
+.form-dialog-header header {
+    padding: 10px;
+    font-size: 20px;
+    font-weight: normal;
+    text-align: center;
+}
+
+.explain {
+    margin-left: 75px;
+}
+
+
+.remove-team-form .explain
+{
+    margin-top: 15px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+}
+.remove-team-form input[type="submit"] {
+    border-color: #b1b3b4;
+    width: 200px;
+    margin-top: 10px;
+    min-height: 30px;
+    border-radius: 10px;
+    background-color: #803689;
+    color: white;
+}
+    .remove-team-form input[type="submit"]:hover {
+        border-color: #803689;
+    }
+    .error-message-remove {
+        color: red;
+        margin-bottom: 10px;
+    }
 
 
 /*

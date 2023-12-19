@@ -5,11 +5,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
+using Syncfusion.EJ2.Linq;
 using System.ComponentModel.DataAnnotations;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CaveroClubhuis.Pages
 {
-    public class AdminModel : PageModel
+    public class AdminMakeTeamModel : PageModel
     {
         private readonly CaveroClubhuisContext _context;
         private readonly UserManager<CaveroUser> _userManager;
@@ -19,7 +22,11 @@ namespace CaveroClubhuis.Pages
 
         public bool IsUserCheckedIn { get; private set; }
 
-        public AdminModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, LayoutTools layoutTools)
+        [BindProperty]
+        [Required(ErrorMessage = "Veld moet ingevuld worden")]
+        public string? title { get; set; }
+
+        public AdminMakeTeamModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, LayoutTools layoutTools)
         {
             _context = context;
             _userManager = userManager;
@@ -46,6 +53,24 @@ namespace CaveroClubhuis.Pages
             _layoutTools.ToggleCheckIn(userId);
 
             return RedirectToPage();
+        }
+
+        public IActionResult OnPostMakeTeam()
+        {
+            if (!ModelState.IsValid) { 
+                var userId = _userManager.GetUserId(User);
+                (FirstName, LastName) = _layoutTools.LoadName(userId!);
+                IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
+                return Page();
+            }
+
+            Teams newTeam = new Teams { Title = title };
+
+            _context.Teams.ForEach(i => Console.WriteLine(i));
+            _context.Teams.Add(newTeam);
+            _context.SaveChanges();
+            ModelState.Clear();
+            return RedirectToPage("./Index"); // Redirect naar page weer
         }
     }
 }
