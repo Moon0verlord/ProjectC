@@ -195,8 +195,11 @@ a[title="Manage"] {
         width: 100%;
         float: none;
         position: relative;
-        height: 60vh;
+        height: 50vh;
         margin-bottom: 20px;
+    }
+    .ButtonContainer{
+        height:20vh;
     }
 
     .kaart,
@@ -222,7 +225,7 @@ a[title="Manage"] {
     #titel {
         font-size: 11px;
     }
-    #container{
-        margin-left:100px;
+    #container {
+        margin-left: 100px;
     }
 }

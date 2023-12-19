@@ -11,47 +11,34 @@
   
 </head>
 <body>
-
     <div class="Wrapper">
-        <div class="Evenementen">
-           
-    @if(Model.InOfficeMembers != null)
-    {
-        <div class="StickyHeader">
-            <h2 class="Title">Deze teamleden zijn vandaag op kantoor:</h2>
-            <hr class="titleLine" />
-        </div>
-        @foreach (var person in Model.InOfficeMembers)
-        {
-       
+        <div class="container">
+            <div class="Evenementen">
+                @if(Model.InOfficeMembers != null)
+            {
+                <div class="StickyHeader">
+                    <h2 class="Title">Deze teamleden zijn vandaag op kantoor:</h2>
+                    <hr class="titleLine" />
+                </div>
+                @foreach (var person in Model.InOfficeMembers)
+            {
                 <div class="kaart">
                     <h2>@person.FirstName @person.LastName</h2>
-                    </div>
-           
-        }
-    }
-    else
-    {
-        
-            <h2>Er zijn momenteel geen teamleden op kantoor...</h2>
-       
-    }
-
-  
+                </div>
+            }
+            }
+            else
+            {
+                <h2>Er zijn momenteel geen teamleden op kantoor...</h2>
+            }
+            </div>
+            <div class="ButtonContainer">
+                <a href="/TeamSearch">
+                    <button id="searchButton" class="confirm-button">
+                        Teams bekijken
+                    </button>
+                </a>
+            </div>
+        </div>
     </div>
-
-    <div class="ButtonContainer">
-    <a href="/TeamSearch">
-        <button id="searchButton" class="confirm-button">
-            Teams bekijken
-        </button>
-    </a>
-  </div>
-
-    </div>
-    </body>
-
-   
-  
-
-
+</body>
