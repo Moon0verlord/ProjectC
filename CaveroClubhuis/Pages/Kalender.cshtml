@@ -74,13 +74,13 @@
                     // verander button text op basis van joined of niet
                     if(joined)
                     {
-                        myButton.text('Afmelden');
                         $("#myParagraph").text('Je bent al aangemeld voor dit evenement. Druk op de knop om je hiervoor af te melden.');
+                        myButton.text('Afmelden');
                     }
                     else
                     {
-                        myButton.text('Aanmelden');
                         $("#myParagraph").text('Je bent nog niet aangemeeld voor dit evenement. Druk op de knop om hier aan deel te nemen');
+                        myButton.text('Aanmelden');
                     }
          
        
@@ -97,6 +97,7 @@
                         // en sluiten
                         $('#modal1').modal('hide');
                     });
+                    // handle de aanmneld button
                     $('#submit-button').on('click', function () {
                         // Manually submit the form when the button is pressed
                         console.log("test")
@@ -151,15 +152,20 @@
 <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modal1Label" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <!-- Join Form -->
-            <form id="eventForm" method="post" asp-page-handler="Add">
-                <input type="hidden" asp-for="EventId" name="eventIdInput" id="eventIdInput" />
-                    <button type="submit" id="join-submit-button" class="btn btn-primary aanmelden-btn"></button>
-                <p id="myParagraph">Original Text</p>
-                <div><span id="join-error-message" class="error-messageDialog"></span></div>
-            </form>
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal1Label">Event Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div class="modal-footer">
-               
+                <!-- Join Form -->
+                <form id="eventForm" method="post" asp-page-handler="Add">
+                    <input type="hidden" asp-for="EventId" name="eventIdInput" id="eventIdInput" />
+                    <button type="submit" id="join-submit-button" class="btn btn-primary aanmelden-btn"></button>
+                    <p id="myParagraph">Original Text</p>
+                    <div><span id="join-error-message" class="error-messageDialog"></span></div>
+                </form>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>

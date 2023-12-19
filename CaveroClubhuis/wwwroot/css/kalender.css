@@ -98,3 +98,8 @@ thead {
 .sidebar a:hover {
     text-decoration:none;
 }
+.aanmelden-btn {
+    background-color: red;
+    margin-top: 70px;
+    position: absolute;
+}
