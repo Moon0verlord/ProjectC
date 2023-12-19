@@ -55,9 +55,9 @@
 .kaart {
     margin-top: 1000px;
     background-color: #803689;
-    border-radius: 30px;
+    border-radius: 20px;
     width: 80%;
-    height: 170px;
+    height: 70px;
     margin: 0 auto;
     margin-top: 50px;
     /* dit zorgt ervoor dat margin in de child classes ook werkt */
@@ -223,7 +223,7 @@ a[title="Manage"] {
     .kaart #beschijving,
     button p,
     #titel {
-        font-size: 11px;
+        font-size: 20px;
     }
     #container {
         margin-left: 100px;
