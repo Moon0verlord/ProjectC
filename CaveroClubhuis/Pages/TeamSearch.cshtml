@@ -2,6 +2,7 @@
 @model CaveroClubhuis.Pages.TeamSearchModel
 @{
     var DialogButtons1 = new ButtonModel() { isPrimary = true, cssClass = "confirm-button", content = "Bevestig" };
+    var DialogButtons2 = new ButtonModel() { content = "Ga terug", cssClass = "e-flat" };
     ViewData["Title"] = "Team Space";
  
 }
@@ -45,7 +46,7 @@
 {
     <div id='container' style="height:350px;">
 
-        <ejs-dialog id="dialog" header="Andere teams bekijken" showCloseIcon="true" visible="true" target="#container" style="min-height:350px; border-radius: 13px; box-shadow: none;  border: 2px solid #d9d9d9;
+        <ejs-dialog id="dialog" header="Andere teams bekijken"  visible="true" target="#container" style="min-height:350px; border-radius: 13px; box-shadow: none;  border: 2px solid #d9d9d9;
  overflow-y: auto;" width="450px">
             <e-content-template>
 
@@ -65,7 +66,9 @@
 
             </e-content-template>
             <e-dialog-buttons>
-                <e-dialog-dialogbutton buttonModel="DialogButtons1" click="submitForm" id="submit-button"></e-dialog-dialogbutton>
+              
+                            <e-dialog-dialogbutton buttonModel="DialogButtons2" click="returnPage" id="close-button"></e-dialog-dialogbutton>
+                            <e-dialog-dialogbutton buttonModel="DialogButtons1" click="submitForm" id="submit-button"></e-dialog-dialogbutton>
             </e-dialog-buttons>
         </ejs-dialog>
     </div>
@@ -93,7 +96,7 @@ else
 
 
                             }
-                            <ejs-button id="targetButton" content="Terug naar Team pagina" cssClass="confirm-button" onclick="returnPage()"></ejs-button>
+                            <ejs-button id="targetButton" content="Terug naar Team" cssClass="confirm-button" onclick="returnPage()"></ejs-button>
                         </div>
                     </e-content-template>
 
@@ -156,7 +159,7 @@ else
         background-color: #803689 !important;
         border-color: #803689 !important;
         color: white !important;
-        position:center!important;
+       
     }
 
 
