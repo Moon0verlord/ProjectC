@@ -5,7 +5,8 @@
 }
 .nav-pills .nav-link {
     color: black; /* Set the desired text color */
-    background-color: rgb(217, 217, 217); font-weight: bold
+    background-color: rgb(217, 217, 217); font-weight: bold;
+    margin-bottom: 10px;
 }
 
     .nav-pills .nav-link:hover {
@@ -19,4 +20,5 @@
     }
 main {
     overflow-x: hidden; /* zorgt ervoor dat de pagina niet scroll able is side-ways */
+    margin-left: 10px;
 }
