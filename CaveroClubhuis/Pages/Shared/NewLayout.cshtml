@@ -103,8 +103,8 @@
                 {
                     <form class="Logout-F" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
                         <button type="submit" class="Log-out">
-                            <img src="~/images/log-out.svg" width="25" height="auto"/>
-                            Log-out
+                           <img src="~/images/log-out.svg" width="25" height="auto"/>
+                            Uitloggen
                         </button>
                     </form>
                 }
@@ -114,12 +114,10 @@
                 }
             }
 
-            <div class="settingsspace"></div>
-            <div class="line-3"></div>
-            <a href="/">
-                <button class="settings">
-                    <img src="~/images/settings.svg" width="50" height="47"/>
-                    Settings
+            <a asp-area="Identity" asp-page="/Account/Manage/Index">              
+                <button class="sidebar-menu-button">
+                    <img src="~/images/settings.svg" width="50" height="47" />
+                    Instellingen
                 </button>
             </a>
         </div>

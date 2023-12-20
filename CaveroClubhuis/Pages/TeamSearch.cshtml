@@ -1,0 +1,200 @@
+﻿@page
+@model CaveroClubhuis.Pages.TeamSearchModel
+@{
+    var DialogButtons1 = new ButtonModel() { isPrimary = true, cssClass = "confirm-button", content = "Bevestig" };
+    var DialogButtons2 = new ButtonModel() { content = "Ga terug", cssClass = "e-flat" };
+    ViewData["Title"] = "Team Space";
+ 
+}
+@using Newtonsoft.Json
+<head>
+  
+    <link rel="stylesheet" href="~/css/index.css" />
+    <link rel="stylesheet" href="~/css/Team.css" />
+</head>
+
+<body>
+    <div class="Wrapper">
+    <div class="Evenementen">
+
+        @if (Model.InOfficeMembers != null)
+        {
+            <div class="StickyHeader">
+                <h2 class="Title">Deze teamleden zijn vandaag op kantoor:</h2>
+                <hr class="titleLine" />
+            </div>
+            @foreach (var person in Model.InOfficeMembers)
+            {
+
+                <div class="kaart">
+                    <h2>@person.FirstName @person.LastName</h2>
+                </div>
+
+            }
+        }
+        else
+        {
+
+            <h2>Er zijn momenteel geen teamleden op kantoor...</h2>
+
+        }
+
+
+    </div>
+    <div class="ButtonContainer">
+@if (ViewData["ShowDialog2"] == null)
+{
+    <div id='container' style="height:350px;">
+
+        <ejs-dialog id="dialog" header="Andere teams bekijken"  visible="true" target="#container" style="min-height:350px; border-radius: 13px; box-shadow: none;  border: 2px solid #d9d9d9;
+ overflow-y: auto;" width="450px">
+            <e-content-template>
+
+                <form id="ask-input" method="post" asp-page-handler="AskInput" onsubmit="validateForm">
+                    <div>
+                        <ejs-dropdownlist id="selectedTeam" dataSource="@Model.AllTeams" placeholder="Kies een team" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.SearchTeam" style="width: 300px;">
+                            <e-dropdownlist-fields text="Title" value="Id"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+                        <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                            <p></p>
+                        <p>Selecteer een team om de aanwezigheid te bekijken</p>
+
+                        <div><span id="error-message" class="error-messageDialog"></span></div>
+                    </div>
+                    </div>
+                </form>
+
+            </e-content-template>
+            <e-dialog-buttons>
+              
+                            <e-dialog-dialogbutton buttonModel="DialogButtons2" click="returnPage" id="close-button"></e-dialog-dialogbutton>
+                            <e-dialog-dialogbutton buttonModel="DialogButtons1" click="submitForm" id="submit-button"></e-dialog-dialogbutton>
+            </e-dialog-buttons>
+        </ejs-dialog>
+    </div>
+}
+else
+{
+            <div id='container' style="height:350px;">
+                <ejs-dialog id='dialog' header="Caverianen van het @Model.SearchChoice.Title team" target="#container" visible="true" cssClass="peopleOverview2">
+                    <e-content-template>
+                        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; height: 100%;">
+                            @if (Model.OtherInOfficeMembers != null && Model.OtherInOfficeMembers.Any())
+                            {
+                                <ejs-grid id="Grid" dataSource="@Model.OtherInOfficeMembers" cssClass="peopleGrid" allowPaging="true">
+                                    <e-grid-pagesettings pageSize="8"></e-grid-pagesettings>
+                                    <e-grid-columns>
+                                        <e-grid-column field="FirstName" headerText="Voornaam" textAlign="Center" width="40"></e-grid-column>
+                                        <e-grid-column field="LastName" headerText="Achternaam" textAlign="Center" width="40"></e-grid-column>
+                                    </e-grid-columns>
+                                </ejs-grid>
+                            }
+                            else
+                            {
+
+                                <p>Er zijn geen teamleden van dit team op kantoor op het moment</p>
+
+
+                            }
+                            <ejs-button id="targetButton" content="Terug naar Team" cssClass="confirm-button" onclick="returnPage()"></ejs-button>
+                        </div>
+                    </e-content-template>
+
+                </ejs-dialog>
+            </div>
+
+}
+    </div>
+    </div>
+</body>
+
+
+<script>
+    window.onload = function () {
+        var dialog = document.getElementById("dialog").ej2_instances[0];
+
+    
+            dialog.position = { X: 'center', Y: 'center' };
+            dialog.show();
+        };
+
+    window.onresize = function () {
+        // refresh position dialog
+        var dialog = document.getElementById("dialog").ej2_instances[0];
+        dialog.position = { X: 'center', Y: 'center' };
+        dialog.refreshPosition();
+    };
+
+    function submitForm() {
+        var errorMessageElement = document.getElementById("error-message");
+        var selectedEvent = document.getElementById('selectedTeam');
+        if (selectedEvent.value !== "") // check if there is a value or not
+        {
+            errorMessageElement.innerText = "";
+            // submit the form when button is pressed
+            document.getElementById('ask-input').submit();
+         
+
+        } else {
+            // Show error message if no team is selected
+            errorMessageElement.innerText = "Selecteer één team om verder te gaan";
+        }
+    }
+
+    function returnPage() {
+
+        // Redirect to the team page
+        window.location.href = '/Team';
+    }
+
+    // Function to allow filtering with jQuery
+    function onfiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('Title', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.AllTeams)), query);
+    }
+</script>
+<style>
+    .confirm-button {
+        background-color: #803689 !important;
+        border-color: #803689 !important;
+        color: white !important;
+       
+    }
+
+
+   
+
+        .e-dialog .e-dlg-content {
+            overflow-y: auto;
+        }
+
+    .error-messageDialog {
+        color: red;
+    }
+
+
+  
+
+    .e-dropdownbase .e-list-item.e-item-focus, .e-dropdownbase .e-list-item.e-active, .e-dropdownbase .e-list-item.e-active.e-hover, .e-dropdownbase .e-list-item.e-hover {
+        background-color: #803689 !important;
+        color: white !important;
+    }
+</style>
+<style>
+    .containerbox {
+        display: flex;
+        width: 100%;
+    }
+
+    .left-column {
+        flex: 1;
+        padding: 20px;
+    }
+
+    .right-column {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+    }
+</style>

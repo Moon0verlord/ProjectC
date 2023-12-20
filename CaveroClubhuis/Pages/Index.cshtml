@@ -17,7 +17,7 @@
 
 <div class="text-center">    
     <div id='container1'>
-        <div style="width: 300px; height: 75px; padding-left: 25px; padding-right: 25px; padding-top: 16px; padding-bottom: 16px; background: #803689; border-radius: 20px; justify-content: flex-start; align-items: center; gap: 16px; display: inline-flex">
+        <div style="width: 300px; height: 75px; padding-left: 25px; padding-right: 25px; padding-top: 16px; padding-bottom: 16px; background: #803689; border-radius: 20px; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
             <div style="width: 27px; height: 25px; position: relative">
                 <i class="ri-group-fill" style="color: white; font-size: 25px; position: absolute; left: 0; top: -7px;"></i>
             </div>
@@ -25,12 +25,16 @@
             <div style="flex-direction: column; justify-content: center; align-items: center; gap: 9px; display: inline-flex">
                 <div style="text-align: center; color: white; font-size: 18px; font-family: Arial; font-weight: 400; line-height: 20px; letter-spacing: 0.50px; word-wrap: break-word">@Model.PeopleCount</div>
             </div>
-            <div style="width: 2px; height: 40px; background-color: white; margin: 0 8px;"></div> <!-- White divider -->
+            <div style="width: 2px; height: 40px; background-color: white; margin: 1px;"></div> <!-- White divider -->
             <div style="display: inline-flex; gap: 8px; white-space: nowrap;">
                 <ejs-button id="targetButton" content="Caverianen in de loods" cssClass="custom-button"></ejs-button>
-                <ejs-dialog id='dialog' header="Caverianen in de loods" target="#targetButton" showCloseIcon="true" visible="false" width="500px">
+            </div>
+                <div id='container' style="height:350px;">
+                <ejs-dialog id='dialog' header="Caverianen in de loods"  target="#container" showCloseIcon="true" visible="false" cssClass="peopleOverview" >
                     <e-content-template>
-                        <ejs-grid id="Grid" dataSource="@Model.People" width="470">
+                  
+                        <ejs-grid id="Grid" dataSource="@Model.People" cssClass="peopleGrid" allowPaging="true">
+                            <e-grid-pagesettings pageSize="6" ></e-grid-pagesettings>
                             <e-grid-columns>
                                 <e-grid-column field="FirstName" headerText="Voornaam" textAlign="Center" width="40"></e-grid-column>
                                 <e-grid-column field="LastName" headerText="Achternaam" textAlign="Center" width="40"></e-grid-column>
@@ -39,7 +43,8 @@
                         </ejs-grid>
                     </e-content-template>
                 </ejs-dialog>
-            </div>
+                </div>
+            
             
 
         </div>

@@ -1,0 +1,65 @@
+﻿@page
+@model CaveroClubhuis.Areas.Identity.Pages.Account.Manage.TeamModel
+@{
+    ViewData["Title"] = "Team";
+    ViewData["ActivePage"] = ManageNavPages.Team;
+}
+@using Newtonsoft.Json
+<head>
+    <link rel="stylesheet" href="~/css/Settings.css" />
+    <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/23.1.44/bootstrap4.css" />
+    <script src="https://cdn.syncfusion.com/ej2/23.1.44/dist/ej2.min.js"></script>
+
+</head>
+<div class="content">
+    <h3>@ViewData["Title"] aanpassen</h3>
+    <partial name="_StatusMessage" for="StatusMessage" />
+    <div class="row">
+        <div class="col-md-6">
+           
+            <div class="form-floating mb-3 input-group">
+                <input asp-for="Team" class="form-control" placeholder="Vul uw team in" disabled />
+                <div class="input-group-append">
+                    <span class="h-100 input-group-text text-success font-weight-bold">✓</span>
+                </div>
+                <label asp-for="Team" class="form-label"></label>
+            </div>
+            <form id="team-form" method="post" asp-page-handler="ChangeTeam">
+            <div class="form-floating mb-3 input-group">
+
+                    <ejs-dropdownlist id="selectedTeam" dataSource="@Model.AllTeams" cssClass="form-control" placeholder="Kies een team" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.SelectedTeams">
+                        <e-dropdownlist-fields text="Title" value="Id"></e-dropdownlist-fields>
+                    </ejs-dropdownlist>
+                    <label asp-for="SelectedTeams" class="form-label"></label>
+            </div>
+                <button id="change-team-button" onclick="submitForm()" class="w-100 btn confirm-button">Verander team</button>
+            </form>
+        </div>
+    </div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+        <ejs-scripts></ejs-scripts>
+}
+</div>
+<script>
+    function onfiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('Title', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.AllTeams)), query);
+    }
+
+    function submitForm() {
+        var errorMessageElement = document.getElementById("error-message");
+        var selectedEvent = document.getElementById('selectedTeams');
+        if (selectedEvent.value !== "") // check if there is a value or not
+        {
+            errorMessageElement.innerText = "";
+            // manually submit the form when button is pressed
+            document.getElementById('team-form').submit();
+
+        } else {
+            // Show error message if no event is selected
+            errorMessageElement.innerText = "Selecteer één team om verder te gaan";
+        }
+    }
+</script>
