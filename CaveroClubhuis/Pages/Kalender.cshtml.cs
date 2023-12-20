@@ -32,6 +32,8 @@ namespace CaveroClubhuis.Pages
             
         }
         public List<Events> EventsList { get; set; }
+        
+        
         public void OnGet()
         {
             // get name of user

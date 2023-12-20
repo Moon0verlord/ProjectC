@@ -3,7 +3,7 @@
         max-width: 250px;
     }
 
-    .sidebar-menu-button, .Log-out, .check-in-1, .check-out {
+    .sidebar-menu-button, .Log-out, .check-in-1, .check-out .settings {
         transform: scale(0.9);
     }
 
@@ -59,11 +59,11 @@
         max-width: 215px;
     }
 
-    .sidebar-menu-button, .Log-out, .check-in-1 {
-        transform: scale(0.8);
+    .sidebar-menu-button, .Log-out, .check-in-1 .settings {
+        transform: scale(0.9);
     }
     
-    .sidebar-menu-button.sidebar-menu-button, .Log-out, .check-in-1.check-in-1, .check-out.check-out {
+    .sidebar-menu-button.sidebar-menu-button, .Log-out, .check-in-1.check-in-1, .check-out.check-out .settings {
         margin-top: 20px;
         width: 200px ;
         height: 45px ;
@@ -74,10 +74,11 @@
         height: 45px ;
     }
     
-    .cavero-logo.cavero-logo {
+    .cavero-logo {
         max-width: 80%;
         margin-left: 10px;
         padding: 15px
+
     }
 
     .cavero-logo .desktop-logo {
@@ -107,7 +108,7 @@
     
     .profile.profile{
         height: 80px;
-        margin-left: 0;
+        margin-left: 10px;
     }
 
     .page-content.page-content{
@@ -289,21 +290,28 @@
 
 .settings {
     margin-top: 15px;
-    margin-left: 5px;
+    margin-left: 10px;
     margin-bottom: 20px;
-    background-color: transparent;
-    border-color: transparent;
-    max-width: 144px;
-    top: 823px;
-    left: 25px;
-    font-family: "Inter", Helvetica, serif;
-    font-weight: 600;
-    color: #b1b3b4;
-    font-size: 30px;
-    text-align: center;
-    letter-spacing: -0.2px;
-    line-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 284px;
+    height: 54px;
+    top: 320px;
+    left: 9%;
+    font-weight: bold;
     white-space: nowrap;
+    border-radius: 13px;
+    border-color: transparent;
+    background-color: #d9d9d9;
+    transition: 0.3s;
+}
+
+.settings:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+
+    filter: invert(100%);
 }
 
 /* Need to find another way of doing this */
