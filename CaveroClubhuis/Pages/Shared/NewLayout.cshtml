@@ -29,9 +29,11 @@
         <div class="sidebar">
             
             <div class="cavero-logo">
-                <img src="~/images/Cavero_white.png" alt="Cavero Logo" class="desktop-logo"/>
-                </div>
-            
+                <a href="/index">
+                    <img src="~/images/Cavero_white.png" alt="Cavero Logo" class="desktop-logo"/>
+                </a>
+            </div>
+
             <div class="line-2"></div>
 
 
@@ -39,49 +41,49 @@
                 <img class="profile_picture" src="~/images/An.jpeg"/>
                 <div class="profile_text"> @Model.FirstName @Model.LastName</div>
             </div>
-            
+
             <form class="Logout-F" asp-page-handler="ToggleCheckIn" method="post">
                 @if (Model.IsUserCheckedIn)
                 {
                     <button type="submit" class="check-out">
                         <i class="ri-logout-circle-line"></i>
                         Check - out
-                        </button>
+                    </button>
                 }
                 else
                 {
                     <button type="submit" class="check-in-1">
                         <i class="ri-login-circle-line"></i>
                         Check - in
-                        </button>
+                    </button>
                 }
-                </form>   
-            
+            </form>
+
             <a href="/">
-                    <button class="sidebar-menu-button">
-                       <img src="~/images/home.svg" width="25" height="auto"/>
-                         <span class="button-text">Home</span>
-                    </button>
-                </a>
-                <a href="/Kalender">
-                    <button class="sidebar-menu-button">
-                        <img src="~/images/calendar.svg" width="25" height="auto"/>
-                         <span class="button-text">Kalender</span>
-                    </button>
-                </a>
-                <a href="/Events">
-                    <button class="sidebar-menu-button">
-                        <img src="~/images/event.svg" width="25" height="auto"/>
-                         <span class="button-text">Evenementen</span>
-                    </button>
-                </a>
+                <button class="sidebar-menu-button">
+                    <img src="~/images/home.svg" width="25" height="auto"/>
+                    <span class="button-text">Home</span>
+                </button>
+            </a>
+            <a href="/Kalender">
+                <button class="sidebar-menu-button">
+                    <img src="~/images/calendar.svg" width="25" height="auto"/>
+                    <span class="button-text">Kalender</span>
+                </button>
+            </a>
+            <a href="/Events">
+                <button class="sidebar-menu-button">
+                    <img src="~/images/event.svg" width="25" height="auto"/>
+                    <span class="button-text">Evenementen</span>
+                </button>
+            </a>
             <a href="/Team">
                 <button class="sidebar-menu-button">
                     <img src="~/images/group.svg" width="25" height="auto"/>
-                     <span class="button-text">Team Space</span>
+                    <span class="button-text">Team Space</span>
                 </button>
             </a>
-            
+
             @if (SignInManager.IsSignedIn(User))
             {
                 var user = await UserManager.GetUserAsync(User);
@@ -95,13 +97,13 @@
                     </a>
                 }
             }
-            
+
             @{
                 if (User.Identity?.IsAuthenticated ?? false)
                 {
                     <form class="Logout-F" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
                         <button type="submit" class="Log-out">
-                           <img src="~/images/log-out.svg" width="25" height="auto"/>
+                            <img src="~/images/log-out.svg" width="25" height="auto"/>
                             Log-out
                         </button>
                     </form>
@@ -114,10 +116,12 @@
 
             <div class="settingsspace"></div>
             <div class="line-3"></div>
-            <button class="settings">
-                <img src="~/images/settings.svg" width="50" height="47"/>
-                Settings
-            </button>
+            <a href="/">
+                <button class="settings">
+                    <img src="~/images/settings.svg" width="50" height="47"/>
+                    Settings
+                </button>
+            </a>
         </div>
 
 

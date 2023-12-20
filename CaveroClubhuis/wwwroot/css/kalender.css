@@ -3,6 +3,7 @@ html, body {
     overflow-x: hidden; /* zorgt ervoor dat de pagina niet scroll able is side-ways */
     overflow: hidden;
 }
+
 /* achtergrond kleur van de agenda */
 #calendar {
     margin-left: 10px;
@@ -58,4 +59,46 @@ html, body {
 
 .fc-event:hover + .fc-event {
     display: block;
+}
+.cross {
+    display: none !important;
+}
+
+/* css voor de dagen zodat hij mee scrolt naar beneden */
+thead {
+    position: sticky;
+    top: 30px;
+    background-color: #f2f0f8;
+    z-index: 2; /* zorgt ervoor dat de inhoud boven op alles staat */
+}
+
+.fc-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 2; /* zorgt ervoor dat de inhoud boven op alles staat */
+}
+
+/* jona code voor scroll-bar */
+/* Chrome, Edge, and Safari */
+#calendar::-webkit-scrollbar {
+    width: 10px;
+}
+
+#calendar::-webkit-scrollbar-track {
+    background: #f2f0f8;
+}
+
+#calendar::-webkit-scrollbar-thumb {
+    background-color: #b1b3b4;
+    border-radius: 10px;
+    border: 3px solid #f2f0f8;
+}
+
+/* later kijken om dit in de layout.css te zetten maar omdat alleen kalender dit heeft, hierin laten*/
+.sidebar a:hover {
+    text-decoration:none;
+}
+.aanmelden-btn {
+    margin-top: 70px;
+    position: absolute;
 }
