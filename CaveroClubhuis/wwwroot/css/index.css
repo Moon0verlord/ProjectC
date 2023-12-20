@@ -51,16 +51,28 @@
 @media screen and (max-width: 600px) {
     /* Adjust styles for smaller screens */
     .peopleOverview {
-        width: 60%!important;
+        width: 40%;
     }
 }
+.e-pager div.e-icons.e-pager-default {
+    color: #6c757d;
+
+}
+.e-pager .e-numericitem
+{
+    color:black;
+}
+    .e-pager .e-numericitem.e-focused, .e-pager .e-first.e-focused, .e-pager .e-prev.e-focused, .e-pager .e-next.e-focused, .e-pager .e-last.e-focused, .e-pager .e-mfirst.e-focused, .e-pager .e-mprev.e-focused, .e-pager .e-mnext.e-focused, .e-pager .e-mlast.e-focused {
+        background-color: #803689!important; /* Change this to the desired color */
+        color: #fff; /* Change this to the desired text color */
+    }
 
 .peopleOverview2 {
     width: 500px;
     max-width: 600px;
     min-height: 400px;
     border-radius: 15px;
-    position:center;
+    position: center;
 }
 
 @media screen and (max-width: 600px) {
