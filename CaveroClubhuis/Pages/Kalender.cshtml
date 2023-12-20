@@ -1,6 +1,7 @@
 ﻿@page
 @using System.Runtime.InteropServices.JavaScript
 @model KalenderModel
+@using System.Security.Claims;
 @{
     ViewData["Title"] = "Kalender";
 }
@@ -9,54 +10,164 @@
     <link rel="stylesheet" href="~/css/kalender.css" />
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var calendarEl = document.getElementById('calendar');
-        var initialView = window.innerWidth <= 768 ? 'timeGridDay' : 'timeGridWeek';
+        // hiermee werkt het om naar de model te sturen alleen evenId kan hij nie vinden :( (je kan hardcode een event id meegeven en dan werkt het wel zoals bijv 91 dan zien je in de console van de webbrowser dat het true is resultaat)
+        @* function IsUserJoined(eventId) {
+            var temp = Html.Raw(Json.Serialize(Model.IsUserJoined(eventId)));
+            return temp;
+            } *@
 
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            headerToolbar: {
-                start: 'dayGridMonth,timeGridWeek,timeGridDay',
-                center: 'title',
-                end: 'today,prev,next'
-            },
-            initialView: initialView,
-            firstDay: 1,
-            locale: 'nl',
-            events: @Html.Raw(Json.Serialize(Model.EventsList.Select(e => new { title = e.Title, start = e.Date.ToString("yyyy-MM-dd") + 'T' + e.StartTime, end = e.Date.ToString("yyyy-MM-dd") + 'T' + e.EndTime }))),
-            eventContent: function (arg) {
-                var title = arg.event.title;
+            // maak dit een global var
+                   var currentEventId;
+        document.addEventListener('DOMContentLoaded', function () {
+        
+            var calendarEl = document.getElementById('calendar');
+            var initialView = window.innerWidth <= 768 ? 'timeGridDay' : 'timeGridWeek';
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                scrollTime: '09:00:00',
+                headerToolbar: {
+                    start: 'dayGridMonth,timeGridWeek,timeGridDay',
+                    center: 'title',
+                    end: 'prev,today,next'
+                }, 
+                eventClick: function (info) {
+                    // Open de model
+                    $('#modal1').modal('show');
 
-                // formateer start tijd zodat het voor nederlands gebruik is
-                var startTime = new Date(arg.event.start);
-                var formattedStartTime = startTime.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+                    // pak de id van het gekilkte event
+                    currentEventId = info.event.id;
 
-                // formateer eind tijd zodat het voor nederlands gebruik is
-                var endTime = new Date(arg.event.end);
-                var formattedEndTime = endTime.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
-                // hier mee kan je de html van de content van een event aanpassen
-                return {
-                    html: '<div class="fc-content">' +
-                        '<div class="fc-title">' + title + '</div>' +
-                        '<div class="fc-time">' + formattedStartTime + ' - ' + formattedEndTime + '</div>' +
-                        '</div>'
-                };
-            }
+                    $('#modal1 .modal-title').text(info.event.title);
+                    // zet de hidden input gelijk aan de eventid
+                    $('#eventIdInput').val(currentEventId);
+                    console.log('Event ID:', currentEventId);
+
+                  //  console.log('Event ID:', currentEventId);
+                    console.log('Event ID:', currentEventId);
+                    console.log("Hidden Input Value:", $("#eventIdInput").val());
+
+                    // zet id in variabele voor qiuery
+                    var id = $('#eventIdInput').val();
+                   
+                    console.log("Type of eventIdInput:", typeof id);
+                    console.log("Raw Value of eventIdInput:", id);
+
+                    // select button
+                    var myButton = $('#join-submit-button');
+                     // zet joined op false
+                    var joined = false;
+                   // pak alle evenementen die bij de userid horen
+                    @{var userId = Model.userID;}
+                    var eventIds = @Json.Serialize(Model.AllParticipants
+                        .Where(ep => ep.UserId == userId)
+                        .Select(ep => ep.EventId)
+                        .ToList());
+                        // check of gekozen event hierbij zit en dan is de use joined
+                    if (eventIds.some(x => x == id)) {
+                        joined = true;
+                    }
+
+                    // verander button text op basis van joined of niet
+                    if(joined)
+                    {
+                        $("#myParagraph").text('Je bent al aangemeld voor dit evenement. Druk op de knop om je hiervoor af te melden.');
+                        myButton.text('Afmelden');
+                    }
+                    else
+                    {
+                        $("#myParagraph").text('Je bent nog niet aangemeeld voor dit evenement. Druk op de knop om hier aan deel te nemen');
+                        myButton.text('Aanmelden');
+                    }
+         
+       
+                   
+
+                    // Hide the close button dynamically
+                    $('#modal1 .close').addClass('cross');
+
+
+                
+                    // handle de close button
+                    $('#modal1 .btn-secondary').on('click', function () {
+                        // niks doen
+                        // en sluiten
+                        $('#modal1').modal('hide');
+                    });
+                    // handle de aanmneld button
+                    $('#submit-button').on('click', function () {
+                        // Manually submit the form when the button is pressed
+                        console.log("test")
+                        $('#modal1').modal('hide');
+                      
+                        console.log('currentEventId:', currentEventId);
+                    });
+                } ,
+                initialView: initialView,
+                firstDay: 1,
+                locale: 'nl',
+                contentHeight: "auto",
+                allDaySlot: false, // zorgt ervoor dat de "allday" blokje weg gaat uit de kalender
+                events: @Html.Raw(Json.Serialize(Model.EventsList.Select(e => new
+            {
+                title = e.Title,
+                start = e.Date.ToString("yyyy-MM-dd") + 'T' + e.StartTime,
+                end = e.Date.ToString("yyyy-MM-dd") + 'T' + e.EndTime,
+                id = e.Id
+            }))),
+                eventContent: function (arg) {
+                    var title = arg.event.title;
+                    var startTime = new Date(arg.event.start);
+                    var formattedStartTime = startTime.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+                    var endTime = new Date(arg.event.end);
+                    var formattedEndTime = endTime.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+
+                    return {
+                        html: '<div class="fc-content">' +
+                            '<div class="fc-title">' + title + '</div>' +
+                            '<div class="fc-time">' + formattedStartTime + ' - ' + formattedEndTime + '</div>' +
+                            '</div>'
+                    };
+                }
+            });
+            calendar.render();
+            window.addEventListener('resize', function () {
+                var newInitialView = window.innerWidth <= 768 ? 'timeGridDay' : 'timeGridWeek';
+
+                if (newInitialView !== initialView) {
+                    initialView = newInitialView;
+                    calendar.changeView(newInitialView);
+                }
+            });
         });
-
-        calendar.render();
-
-        // switch de calender based op scerm grote
-        window.addEventListener('resize', function () {
-            var newInitialView = window.innerWidth <= 768 ? 'timeGridDay' : 'timeGridWeek';
-
-            if (newInitialView !== initialView) {
-                initialView = newInitialView;
-                calendar.changeView(newInitialView);
-            }
-        });
-    });
+   
     </script>
-
+   
 </head>
 <div id='calendar'></div>
+<!-- model -->
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modal1Label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal1Label">Event Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <!-- Join Form -->
+                <form id="eventForm" method="post" asp-page-handler="Add">
+                    <input type="hidden" asp-for="EventId" name="eventIdInput" id="eventIdInput" />
+                    <button type="submit" id="join-submit-button" class="btn btn-primary aanmelden-btn"></button>
+                    <p id="myParagraph">Original Text</p>
+                    <div><span id="join-error-message" class="error-messageDialog"></span></div>
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
