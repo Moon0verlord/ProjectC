@@ -27,6 +27,8 @@ using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.AspNetCore.Hosting;
 //using MyApp.Communication.SMTP;
 using System.Configuration;
+using CaveroClubhuis.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CaveroClubhuis.Areas.Identity.Pages.Account
 {
@@ -38,13 +40,18 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<CaveroUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly CaveroClubhuisContext _context;
+
+        public List<Teams> AllTeams { get; private set; }
 
         public RegisterModel(
+            CaveroClubhuisContext context,
             UserManager<CaveroUser> userManager,
             IUserStore<CaveroUser> userStore,
             SignInManager<CaveroUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
+
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -52,6 +59,9 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
+
+            AllTeams = FetchTeams();
         }
 
         /// <summary>
@@ -60,6 +70,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
         /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
+
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -118,6 +129,12 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+
+            [Required]
+            [BindProperty]
+            [Display(Name = "Selecteer Team")]
+            public int SelectedTeams { get; set; }
         }
 
 
@@ -129,6 +146,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
@@ -137,6 +155,9 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
 
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
+                Console.WriteLine("Test");
+                Console.WriteLine(Input.SelectedTeams);
+                user.Team = _context.Teams.Where(_ => _.Id == Input.SelectedTeams).FirstOrDefault().Title;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -245,6 +266,12 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
                 }
                body = body.Replace("URL", urlLink);
             return body;
+        }
+
+        public List<Teams> FetchTeams()
+        {
+            var teams = _context.Teams.ToList();
+            return teams;
         }
     }
 }
