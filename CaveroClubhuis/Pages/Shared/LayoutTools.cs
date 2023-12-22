@@ -5,7 +5,18 @@ using Microsoft.AspNetCore.Identity;
 namespace CaveroClubhuis.Pages.Shared;
 
 
-public class LayoutTools
+public interface ILayoutTools
+{
+    (string FirstName, string LastName) LoadName(string userId);
+    void CheckIn(string userid);
+    void CheckOut(string userId);
+
+    bool IsUserCheckedIn(string userId);
+    void ToggleCheckIn(string userId);
+    bool checkAdmin(string userId);
+}
+
+public class LayoutTools : ILayoutTools
 {
     private readonly CaveroClubhuisContext _context;
     private readonly UserManager<CaveroUser> _userManager;

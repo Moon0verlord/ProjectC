@@ -18,7 +18,7 @@ public class IndexModel : PageModel
     private readonly ILogger<IndexModel> _logger;
     private readonly CaveroClubhuisContext _context;
     private readonly UserManager<CaveroUser> _userManager;
-    private readonly LayoutTools _layoutTools;
+    private readonly ILayoutTools _layoutTools;
     
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
@@ -38,7 +38,7 @@ public class IndexModel : PageModel
     public string daysofweek { get; set; }
 
     
-    public IndexModel(ILogger<IndexModel> logger,CaveroClubhuisContext context,UserManager<CaveroUser> userManager, LayoutTools layoutTools)
+    public IndexModel(ILogger<IndexModel> logger,CaveroClubhuisContext context,UserManager<CaveroUser> userManager, ILayoutTools layoutTools)
     {
         _logger = logger;
         _context = context;
@@ -116,7 +116,6 @@ public class IndexModel : PageModel
             UserId = userid,
             CheckInDate = utcStartDate,
             CheckOutDate = utcEndDate,
-            IsRecurring = true,
             DayOfWeek = dayOfWeek
         };
         _context.InOffice.Add(inOfficeEntry);

@@ -15,7 +15,7 @@ namespace CaveroClubhuis.Pages
     {
         private readonly CaveroClubhuisContext _context;
         private readonly UserManager<CaveroUser> _userManager;
-        private readonly LayoutTools _layoutTools;
+        private readonly ILayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
 
@@ -46,7 +46,7 @@ namespace CaveroClubhuis.Pages
         [Required(ErrorMessage = "Datum moet ingevuld worden")]
         public DateTime? date { get; set; }
 
-        public MakeEventModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, LayoutTools layoutTools)
+        public MakeEventModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, ILayoutTools layoutTools)
         {
             _context = context;
             _userManager = userManager;

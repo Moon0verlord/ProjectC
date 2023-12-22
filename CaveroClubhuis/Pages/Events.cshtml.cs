@@ -20,7 +20,7 @@ namespace CaveroClubhuis.Pages
         
         private readonly CaveroClubhuisContext _context;
         private readonly UserManager<CaveroUser> _userManager;
-        private readonly LayoutTools _layoutTools;
+        private readonly ILayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         [BindProperty(SupportsGet = true)]
@@ -31,7 +31,7 @@ namespace CaveroClubhuis.Pages
 
 
 
-        public EventsModel(CaveroClubhuisContext context,UserManager<CaveroUser> userManager, LayoutTools layoutTools)
+        public EventsModel(CaveroClubhuisContext context,UserManager<CaveroUser> userManager, ILayoutTools layoutTools)
         {
             _context = context;
             _userManager = userManager;
