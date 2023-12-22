@@ -5,6 +5,7 @@
     Layout = "_EmptyLayout.cshtml";
 }
 @using Newtonsoft.Json
+@addTagHelper *, Syncfusion.EJ2
 
 <head>
     <meta charset="utf-8" />
@@ -14,8 +15,8 @@
     <link rel="stylesheet" href="~/css/user-auth.css"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/19.3.58/material.css" />
-    <script src="https://cdn.syncfusion.com/ej2/19.3.58/dist/ej2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/23.1.44/bootstrap4.css" />
+    <script src="https://cdn.syncfusion.com/ej2/23.1.44/dist/ej2.min.js"></script>
 </head>
 
 <body class="css-selector">
@@ -59,18 +60,11 @@
                     <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
 
                     <div>
-                        <select>
-                        @foreach (var item in Model.AllTeams)
-                        {
-                            <option value="@item.Id">@item.Title</option>
-                        }
-                        </select>
-                    </div>
-                    <div>
-                        <ejs-dropdownlist id="selectedTeam" dataSource="@Model.AllTeams" placeholder="Kies een team" allowFiltering="true" filtering="onfiltering" ejs-for="Input.SelectedTeams">
+                        <ejs-dropdownlist id="selectedTeam" dataSource="@Model.AllTeams" cssClass="form-control" placeholder="Kies een team" allowFiltering="true" filtering="onfiltering" ejs-for="Input.SelectedTeams">
                             <e-dropdownlist-fields text="Title" value="Id"></e-dropdownlist-fields>
                         </ejs-dropdownlist>
                     </div>
+                    <span asp-validation-for="Input.SelectedTeams" class="text-danger"></span>
                 </div>
         <button type="submit" class="login_button">&rarr; Registreren</button>
     </form>
@@ -82,13 +76,42 @@
     <ejs-scripts></ejs-scripts>
 }
 
+
 <script>
-
-
-
     function onfiltering(e) {
         var query = new ej.data.Query();
         query = (e.text !== '') ? query.where('Title', 'startswith', e.text, true) : query;
         e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.AllTeams)), query);
     }
 </script>
+
+
+<style>
+    .e-dropdownbase .e-list-item.e-item-focus, .e-dropdownbase .e-list-item.e-active, .e-dropdownbase .e-list-item.e-active.e-hover, .e-dropdownbase .e-list-item.e-hover {
+        background-color: #803689 !important;
+        color: white !important;
+    }
+
+    .e-input-group:not(.e-success):not(.e-warning):not(.e-error), .e-input-group.e-control-wrapper:not(.e-success):not(.e-warning):not(.e-error) {
+        border: 2px solid black;
+        border-radius: 10px;
+        color: black;
+    }
+
+    .e-input-group.e-input-focus:not(.e-success):not(.e-warning):not(.e-error), .e-input-group.e-control-wrapper.e-input-focus:not(.e-success):not(.e-warning):not(.e-error) {
+        border-color: black;
+        box-shadow: 0 0 0 0px;
+    }
+
+
+    #selectedTeam_popup.e-popup {
+        border: 2px solid black; /* Change the border color and width as needed */
+    }
+
+    #selectedTeam{
+        color: black;
+    }
+
+
+
+</style>

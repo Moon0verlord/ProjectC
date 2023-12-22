@@ -131,9 +131,10 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
 
+            [Required]
             [BindProperty]
-            [Display(Name = "Nieuw Team")]
-            public List<int> SelectedTeams { get; private set; }
+            [Display(Name = "Selecteer Team")]
+            public int SelectedTeams { get; set; }
         }
 
 
@@ -145,6 +146,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
@@ -153,6 +155,9 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
 
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
+                Console.WriteLine("Test");
+                Console.WriteLine(Input.SelectedTeams);
+                user.Team = _context.Teams.Where(_ => _.Id == Input.SelectedTeams).FirstOrDefault().Title;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
