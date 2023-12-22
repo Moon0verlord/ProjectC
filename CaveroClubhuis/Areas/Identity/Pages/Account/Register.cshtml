@@ -4,6 +4,7 @@
     ViewData["Title"] = "Register";
     Layout = "_EmptyLayout.cshtml";
 }
+@using Newtonsoft.Json
 
 <head>
     <meta charset="utf-8" />
@@ -12,8 +13,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" />
     <link rel="stylesheet" href="~/css/user-auth.css"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/19.3.58/material.css" />
+    <script src="https://cdn.syncfusion.com/ej2/19.3.58/dist/ej2.min.js"></script>
 </head>
-
 
 <body class="css-selector">
 <div class="login">
@@ -24,38 +27,51 @@
                 <div class="login_register">
                     Heb je al een account? <a href="./Login">Log hier in!</a>
                 </div>
-        <div class="login_input">
-            
-    <div class = "name-fields">        
-            <div class="login_box">
-                <input type="text" asp-for="Input.FirstName" placeholder="Voornaam" required class="login_input smaller-input">
-                <i class="ri-user-fill"></i>
-            </div>
-            
-            <div class="login_box">
-                <input type="text" asp-for="Input.LastName" placeholder="Achternaam" required class="login_input smaller-input">
-                <i class="ri-user-fill"></i>
-            </div>
-    </div>
-            <div class="login_box">
-                <input type="email" asp-for="Input.Email" placeholder="Email" required class="login_input">
-                <i class="ri-mail-fill"></i>
-            </div>
-            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                <div class="login_input">
 
-            <div class="login_box">
-                <input type="password" asp-for="Input.Password" placeholder="Wachtwoord" required class="login_input">
-                <i class="ri-lock-2-fill"></i>
-            </div>
-            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    <div class="name-fields">
+                        <div class="login_box">
+                            <input type="text" asp-for="Input.FirstName" placeholder="Voornaam" required class="login_input smaller-input">
+                            <i class="ri-user-fill"></i>
+                        </div>
 
-            <div class="login_box">
-                <input type="password" asp-for="Input.ConfirmPassword" placeholder="Bevestig wachtwoord" required class="login_input">
-                <i class="ri-lock-2-fill"></i>
-            </div>
-            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            
-        </div>
+                        <div class="login_box">
+                            <input type="text" asp-for="Input.LastName" placeholder="Achternaam" required class="login_input smaller-input">
+                            <i class="ri-user-fill"></i>
+                        </div>
+                    </div>
+                    <div class="login_box">
+                        <input type="email" asp-for="Input.Email" placeholder="Email" required class="login_input">
+                        <i class="ri-mail-fill"></i>
+                    </div>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+
+                    <div class="login_box">
+                        <input type="password" asp-for="Input.Password" placeholder="Wachtwoord" required class="login_input">
+                        <i class="ri-lock-2-fill"></i>
+                    </div>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+                    <div class="login_box">
+                        <input type="password" asp-for="Input.ConfirmPassword" placeholder="Bevestig wachtwoord" required class="login_input">
+                        <i class="ri-lock-2-fill"></i>
+                    </div>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+
+                    <div>
+                        <select>
+                        @foreach (var item in Model.AllTeams)
+                        {
+                            <option value="@item.Id">@item.Title</option>
+                        }
+                        </select>
+                    </div>
+                    <div>
+                        <ejs-dropdownlist id="selectedTeam" dataSource="@Model.AllTeams" placeholder="Kies een team" allowFiltering="true" filtering="onfiltering" ejs-for="Input.SelectedTeams">
+                            <e-dropdownlist-fields text="Title" value="Id"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+                    </div>
+                </div>
         <button type="submit" class="login_button">&rarr; Registreren</button>
     </form>
 </div>
@@ -63,4 +79,16 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <ejs-scripts></ejs-scripts>
 }
+
+<script>
+
+
+
+    function onfiltering(e) {
+        var query = new ej.data.Query();
+        query = (e.text !== '') ? query.where('Title', 'startswith', e.text, true) : query;
+        e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.AllTeams)), query);
+    }
+</script>
