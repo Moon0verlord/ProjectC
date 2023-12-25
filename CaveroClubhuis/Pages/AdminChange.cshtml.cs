@@ -15,6 +15,7 @@ namespace CaveroClubhuis.Pages
         private readonly ILayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
+        public string ProfileImage { get; set; }
 
         public bool IsUserCheckedIn { get; private set; }
 
@@ -68,7 +69,7 @@ namespace CaveroClubhuis.Pages
             if (!_layoutTools.checkAdmin(userId)) return RedirectToPage("/Index");
 
             Events = FetchEvents();
-            (FirstName, LastName) = _layoutTools.LoadName(userId);
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
 
             return null!;
@@ -88,7 +89,7 @@ namespace CaveroClubhuis.Pages
             {
 
                 var userId = _userManager.GetUserId(User);
-                (FirstName, LastName) = _layoutTools.LoadName(userId!);
+                (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
                 IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
                 return Page();
             }
@@ -124,7 +125,7 @@ namespace CaveroClubhuis.Pages
 
             // weer id enzo neerzetten want hij gaat nog niet langs onget
             var userId = _userManager.GetUserId(User);
-            (FirstName, LastName) = _layoutTools.LoadName(userId);
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
             // return Page ipv Redirectpage zodat niet alles refreshed en start van het begin
             return Page(); // Redirect naar page weer

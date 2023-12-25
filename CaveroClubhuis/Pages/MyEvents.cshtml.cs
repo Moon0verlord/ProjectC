@@ -16,6 +16,7 @@ namespace CaveroClubhuis.Pages
         private readonly ILayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
+        public string ProfileImage { get; set; }
         
         
         public MyEventsModel(CaveroClubhuisContext context,UserManager<CaveroUser> userManager, ILayoutTools layoutTools)
@@ -29,7 +30,7 @@ namespace CaveroClubhuis.Pages
         {
             // get name of user
             var userId = _userManager.GetUserId(User);
-            (FirstName, LastName) = _layoutTools.LoadName(userId);
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
         }
         
 
