@@ -140,6 +140,11 @@ public class LayoutTools : ILayoutTools
 
     }
     
+    /// <summary>
+    /// Generates an image of initials with a background color determined by the hash of the initials.
+    /// </summary>
+    /// <param name="initials">The initials to be drawn on the image.</param>
+    /// <returns>An Image object containing the initials drawn on a colored background.</returns>
     public Image GenerateInitialsImage(string initials)
     {
         var bitmap = new Bitmap(100, 100);
@@ -163,8 +168,10 @@ public class LayoutTools : ILayoutTools
 
         return bitmap;
     }
-
     
+    /// <summary>
+    /// Converts an Image object to a Base64 string.
+    /// </summary>
     public string ImageToBase64(Image image, ImageFormat format)
     {
         using (var ms = new MemoryStream())
@@ -174,7 +181,5 @@ public class LayoutTools : ILayoutTools
             return Convert.ToBase64String(imageBytes);
         }
     }
-
-
-  
+    
 }
