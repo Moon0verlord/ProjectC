@@ -16,6 +16,7 @@ namespace CaveroClubhuis.Pages
         private readonly ILayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
+        public string ProfileImage { get; set; }
 
         public bool IsUserCheckedIn { get; private set; }
 
@@ -31,7 +32,7 @@ namespace CaveroClubhuis.Pages
         {
             // get name of user
             var userId = _userManager.GetUserId(User);
-            (FirstName, LastName) = _layoutTools.LoadName(userId!);
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
 
             //check if user is admin if not return to home page

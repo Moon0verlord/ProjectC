@@ -22,6 +22,7 @@ public class IndexModel : PageModel
     
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
+    public string ProfileImage { get; set; }
     public int PeopleCount { get; private set; }
     public bool IsUserCheckedIn { get; private set; }
     public List<PersonInfo> People { get; private set; }
@@ -53,8 +54,9 @@ public class IndexModel : PageModel
         PeopleCount = _context.InOffice.AsEnumerable().Where(x => !x.CheckOutDate.HasValue || now <= TimeZoneInfo.ConvertTimeToUtc((DateTime)x.CheckOutDate.Value, TimeZoneInfo.Utc)).Count();
         // get name of user
         var userId = _userManager.GetUserId(User);
-        (FirstName, LastName) = _layoutTools.LoadName(userId);
-        IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
+        (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);        IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
+        // get the profile picture of the user
+        
         
         People = CheckInOverview();
         // krijg alle events

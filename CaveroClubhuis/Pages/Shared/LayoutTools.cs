@@ -1,4 +1,8 @@
-﻿using CaveroClubhuis.Areas.Identity.Data;
+﻿using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Drawing.Text;
+using CaveroClubhuis.Areas.Identity.Data;
 using CaveroClubhuis.Data;
 using Microsoft.AspNetCore.Identity;
 
@@ -7,20 +11,29 @@ namespace CaveroClubhuis.Pages.Shared;
 
 public interface ILayoutTools
 {
-    (string FirstName, string LastName) LoadName(string userId);
+    (string FirstName, string LastName, string ProfileImage) LoadUserInfo(string userId);
     void CheckIn(string userid);
     void CheckOut(string userId);
-
     bool IsUserCheckedIn(string userId);
     void ToggleCheckIn(string userId);
     bool checkAdmin(string userId);
+    Image GenerateInitialsImage(string initials);
+    string ImageToBase64(Image image, ImageFormat format);
 }
 
 public class LayoutTools : ILayoutTools
 {
     private readonly CaveroClubhuisContext _context;
     private readonly UserManager<CaveroUser> _userManager;
-    
+    private static readonly Color[] Colors = new[]
+    {
+        Color.Crimson,
+        Color.MediumSeaGreen,
+        Color.DodgerBlue,
+        Color.PaleVioletRed,
+        Color.MediumVioletRed,
+    };
+
     
     public LayoutTools(CaveroClubhuisContext context,UserManager<CaveroUser> userManager)
     {
@@ -34,17 +47,25 @@ public class LayoutTools : ILayoutTools
     /// </summary>
     /// <param name="userId">The unique identifier of the user.</param>
     /// <returns>A tuple containing the first and last name of the user, or (null, null) if the user does not exist.</returns>
-    public (string FirstName, string LastName) LoadName(string userId)
+    public (string FirstName, string LastName, string ProfileImage) LoadUserInfo(string userId)
     {
         var user = _context.Users
             .Where(u => u.Id == userId)
             .Select(u => new { u.FirstName, u.LastName })
             .FirstOrDefault();
 
-        return user != null ? (user.FirstName, user.LastName) : (null, null);
+        if (user != null)
+        {
+            string initials = $"{user.FirstName?.FirstOrDefault()}{user.LastName?.FirstOrDefault()}";
+            var image = GenerateInitialsImage(initials);
+            string base64Image = ImageToBase64(image, ImageFormat.Png);
+            return (user.FirstName, user.LastName, base64Image);
+        }
+        return (null, null, null);
     }
 
 
+    
     /// <summary>
     /// Checks in a user to the office.
     /// </summary>
@@ -118,5 +139,47 @@ public class LayoutTools : ILayoutTools
         else return false;
 
     }
+    
+    /// <summary>
+    /// Generates an image of initials with a background color determined by the hash of the initials.
+    /// </summary>
+    /// <param name="initials">The initials to be drawn on the image.</param>
+    /// <returns>An Image object containing the initials drawn on a colored background.</returns>
+    public Image GenerateInitialsImage(string initials)
+    {
+        var bitmap = new Bitmap(100, 100);
 
+        // Deterministically select a color based on initials
+        int colorIndex = Math.Abs(initials.GetHashCode()) % Colors.Length;
+        var backgroundColor = Colors[colorIndex];
+
+        using (var graphics = Graphics.FromImage(bitmap))
+        {
+            graphics.Clear(backgroundColor);
+            graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+            using (var font = new Font("Arial", 40, FontStyle.Bold, GraphicsUnit.Pixel))
+            {
+                var textSize = graphics.MeasureString(initials, font);
+                graphics.DrawString(initials, font, Brushes.White, (100 - textSize.Width) / 2, (100 - textSize.Height) / 2);
+            }
+        }
+
+        return bitmap;
+    }
+    
+    /// <summary>
+    /// Converts an Image object to a Base64 string.
+    /// </summary>
+    public string ImageToBase64(Image image, ImageFormat format)
+    {
+        using (var ms = new MemoryStream())
+        {
+            image.Save(ms, format);
+            byte[] imageBytes = ms.ToArray();
+            return Convert.ToBase64String(imageBytes);
+        }
+    }
+    
 }

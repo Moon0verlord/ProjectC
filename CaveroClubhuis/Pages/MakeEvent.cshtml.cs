@@ -18,7 +18,7 @@ namespace CaveroClubhuis.Pages
         private readonly ILayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
-
+        public string ProfileImage { get; set; }
         public bool IsUserCheckedIn { get; private set; }
 
         //All the inputs needed for a new event
@@ -58,7 +58,7 @@ namespace CaveroClubhuis.Pages
         {
             // get name of user
             var userId = _userManager.GetUserId(User);
-            (FirstName, LastName) = _layoutTools.LoadName(userId!);
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
 
             //check if user is admin if not return to home page
@@ -78,7 +78,7 @@ namespace CaveroClubhuis.Pages
             {
                 //If inputs are missing return to the Page()
                 var userId = _userManager.GetUserId(User);
-                (FirstName, LastName) = _layoutTools.LoadName(userId!);
+                (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
                 IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
                 return Page();
             }

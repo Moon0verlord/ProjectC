@@ -15,6 +15,7 @@ namespace CaveroClubhuis.Pages
         public IList<Events> EventsList { get; set; }
         public IList<Events> oldEvents { get; set; }
         public IList<CaveroUser> Atendees { get; set; }
+        
         public IList<EventParticipants> AllParticipants { get; set; }
 
         
@@ -25,6 +26,7 @@ namespace CaveroClubhuis.Pages
         public string LastName { get; private set; }
         [BindProperty(SupportsGet = true)]
         public int EventId { get; set; }
+        public string ProfileImage { get; set; }
         public string UserId { get; set; }
 
         public bool IsUserCheckedIn { get; private set; }
@@ -45,7 +47,7 @@ namespace CaveroClubhuis.Pages
             EventsList = FetchEvents();
             oldEvents = OldEvents();
             var userId = _userManager.GetUserId(User);
-            (FirstName, LastName) = _layoutTools.LoadName(userId);
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
 
             

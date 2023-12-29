@@ -16,6 +16,7 @@ namespace CaveroClubhuis.Pages
         private readonly ILayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
+        public string ProfileImage { get; set; }
 
         public bool IsUserCheckedIn { get; private set; }
         [BindProperty]
@@ -44,7 +45,7 @@ namespace CaveroClubhuis.Pages
             if (!_layoutTools.checkAdmin(userId)) return RedirectToPage("/Index");
 
             EventsNames = FetchEventsName();
-            (FirstName, LastName) = _layoutTools.LoadName(userId);
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
 
             return null!;
