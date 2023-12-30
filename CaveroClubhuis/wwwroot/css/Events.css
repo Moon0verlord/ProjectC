@@ -109,7 +109,7 @@
     width: 50%;
 }
 
-button {
+.openModalBtn {
     float: right;
     background-color: #FFFFFF;
     border-radius: 45px;
