@@ -66,7 +66,7 @@ namespace CaveroClubhuis.Pages
 
             // weer id enzo neerzetten want hij gaat nog niet langs onget
             var userId = _userManager.GetUserId(User);
-            (FirstName, LastName) = _layoutTools.LoadName(userId);
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
             // return Page ipv Redirectpage zodat niet alles refreshed en start van het begin
             return Page(); // Redirect naar page weer
@@ -85,7 +85,7 @@ namespace CaveroClubhuis.Pages
             {
 
                 var userId = _userManager.GetUserId(User);
-                (FirstName, LastName) = _layoutTools.LoadName(userId!);
+                (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
                 IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
                 return Page();
             }
