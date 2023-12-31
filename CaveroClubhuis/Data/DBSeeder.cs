@@ -19,7 +19,9 @@ public class DBSeeder
             Console.WriteLine("Events table has already seeded.");
             return;
         }
-        
+
+
+        // Seed database with initial events
         var initialEvents = new Events[]
         {
             new Events
@@ -82,11 +84,44 @@ public class DBSeeder
         context.SaveChanges();
     }
 
+    public static void InitializeTeams(CaveroClubhuisContext context)
+    {
+        context.Database.EnsureCreated();
 
-    /// <summary>
-    /// Initializes a new entry for "In Office" in the database.
-    /// </summary>
-    /// <param name="context">The CaveroClubhuisContext instance representing the database context.</param>
+        if (context.Teams.Any())
+        {
+            Console.WriteLine("Teams table has already seeded.");
+            return;
+        }
+        var initialTeams = new Teams[]
+        {
+            new Teams
+            {
+                Title = ".Net Developers"
+            },
+            new Teams
+            {
+                Title = "Java Developers"
+            },
+            new Teams
+            {
+                Title = "Testers"
+            },
+            new Teams
+            {
+                Title = "Business Consultants"
+            },
+            new Teams
+            {
+                Title = "Microsoft 365 Consultants"
+            }
+        };
+        context.Teams.AddRange(initialTeams);
+        context.SaveChanges();
+
+    }
+    
+    // Seed your database with initial in-office entry
     public static void InitializeInOffice(CaveroClubhuisContext context)
     {
         var inOfficeEntry = new InOffice

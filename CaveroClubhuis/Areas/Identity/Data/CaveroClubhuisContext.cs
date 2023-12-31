@@ -7,13 +7,14 @@ namespace CaveroClubhuis.Data;
 
 public class CaveroClubhuisContext : IdentityDbContext<CaveroUser>
 {
-    
+
     public DbSet<Events> Events { get; set; }
     public DbSet<EventParticipants> EventParticipants { get; set; }
     public DbSet<EventReviews> EventReviews { get; set; }
     public DbSet<InOffice> InOffice { get; set; }
-
     public DbSet<Teams> Teams { get; set; }
+
+
 
     public CaveroClubhuisContext(DbContextOptions<CaveroClubhuisContext> options)
         : base(options)
@@ -46,6 +47,6 @@ public class CaveroClubhuisContext : IdentityDbContext<CaveroUser>
         builder.Entity<EventParticipants>()
             .Property(e => e.ResponseStatus)
             .HasConversion<string>();
-        
+
     }
 }
