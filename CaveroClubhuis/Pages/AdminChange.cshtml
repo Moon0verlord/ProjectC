@@ -10,6 +10,7 @@ ViewData["Title"] = "Admin";
     <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
 </head>
 
+<body>
 <div class="admin-bar">
     <!-- Buttons for the admin-->
     <a href="/MakeEvent">
@@ -18,7 +19,7 @@ ViewData["Title"] = "Admin";
         </button>
     </a>
     <a href="/AdminChange">
-        <button id="changeButton" class="admin-button" style="background-color: #803689; color: white;">
+        <button id="changeButton" class="admin-button">
             Event aanpassen
         </button>
     </a>
@@ -33,6 +34,9 @@ ViewData["Title"] = "Admin";
 
     <a href="/AdminRemoveTeam">
         <button id="TeamButton" class="admin-button">Team verwijderen</button>
+    </a>
+    <a href="/AdminFeedback">
+        <button id="feedbackButton" class="admin-button">Feedback bekijken</button>
     </a>
 </div>
 
@@ -148,56 +152,6 @@ ViewData["Title"] = "Admin";
 
                         </script>
 
-                        <style>
-                            .confirm-button {
-                                background-color: #803689 !important;
-                                border-color: #803689 !important;
-                                color: white !important;
-                            }
-
-
-                            .e-dialog {
-                                text-align: center; /* Horizontal centering */
-                                display: flex;
-                                flex-direction: column;
-                                justify-content: center;
-                                align-items: center;
-                                height: 100%;
-                            }
-
-                            
-
-
-                            .e-dialog .e-dlg-header {
-                                width: 340px;
-                                font-size: 20px;
-                                font-weight: normal;
-                                position: relative;
-                            }
-
-                            .e-dialog .e-dlg-content {
-                                display: flex;
-                                flex-direction: column;
-                                min-height: 200px;
-                                overflow: auto;
-                            }
-
-                            .e-dialog .e-dlg-content {
-                                overflow-y: auto;
-                            }
-
-                            .error-messageDialog {
-                                color: red;
-                            }
-
-                            #dialog1 {
-                                width: 550px !important;
-                            }
-
-                            .e-dropdownbase .e-list-item.e-item-focus, .e-dropdownbase .e-list-item.e-active, .e-dropdownbase .e-list-item.e-active.e-hover, .e-dropdownbase .e-list-item.e-hover {
-                                background-color: #803689 !important;
-                                color: white !important;
-                            }
-                        </style>
+</body>
 
 

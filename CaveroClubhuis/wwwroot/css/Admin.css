@@ -4,7 +4,7 @@
     margin-left: 80px;
     margin-right: 100px;
     max-width: 120px;
-    height: 390px;
+    height: 460px;
     background-color: #ffffff;
     border-radius: 13px;
     border: 2px solid #d9d9d9;
@@ -157,6 +157,57 @@
         color: red;
         margin-bottom: 10px;
     }
+
+/*AdminChange*/
+.confirm-button {
+    background-color: #803689 !important;
+    border-color: #803689 !important;
+    color: white !important;
+}
+
+
+.e-dialog {
+    text-align: center; /* Horizontal centering */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+
+
+
+    .e-dialog .e-dlg-header {
+        width: 340px;
+        font-size: 20px;
+        font-weight: normal;
+        position: relative;
+    }
+
+    .e-dialog .e-dlg-content {
+        display: flex;
+        flex-direction: column;
+        min-height: 200px;
+        overflow: auto;
+    }
+
+    .e-dialog .e-dlg-content {
+        overflow-y: auto;
+    }
+
+.error-messageDialog {
+    color: red;
+}
+
+#dialog1 {
+    width: 550px !important;
+}
+
+.e-dropdownbase .e-list-item.e-item-focus, .e-dropdownbase .e-list-item.e-active, .e-dropdownbase .e-list-item.e-active.e-hover, .e-dropdownbase .e-list-item.e-hover {
+    background-color: #803689 !important;
+    color: white !important;
+}
 
 
 /*

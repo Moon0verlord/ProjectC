@@ -12,8 +12,8 @@
     <div class="main-body">
         <div class="admin-bar">
             <!-- Buttons for the admin-->
-            <a href="/Admin">
-                <button id="makeButton" class="admin-button" style="background-color: #803689; color: white;">
+            <a href="/MakeEvent">
+                <button id="makeButton" class="admin-button">
                     Event aanmaken
                 </button>
             </a>
@@ -30,8 +30,12 @@
             <a href="/AdminMakeTeam">
                 <button id="TeamButton" class="admin-button">Team aanmaken</button>
             </a>
+
             <a href="/AdminRemoveTeam">
                 <button id="TeamButton" class="admin-button">Team verwijderen</button>
+            </a>
+            <a href="/AdminFeedback">
+                <button id="feedbackButton" class="admin-button">Feedback bekijken</button>
             </a>
         </div>
 
@@ -128,7 +132,3 @@
             xhr.send();
         }
 </script>
-
-<style>
-
-</style>
