@@ -21,11 +21,8 @@ namespace CaveroClubhuis.Pages
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public string ProfileImage { get;  set; }
-        
         public bool IsUserCheckedIn { get; private set; }
-
-     
-
+        
         public List<CaveroUser> InOfficeMembers { get; private set; }
 
         public List<CaveroUser> OtherInOfficeMembers { get; private set; }
@@ -139,6 +136,14 @@ namespace CaveroClubhuis.Pages
                 return membersInOffice;
             }
             return null;
+        }
+        
+        public async Task<IActionResult> OnPostToggleCheckInAsync()
+        {
+            var userId = _userManager.GetUserId(User);
+            _layoutTools.ToggleCheckIn(userId);
+
+            return RedirectToPage();
         }
 
 
