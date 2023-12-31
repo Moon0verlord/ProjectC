@@ -55,9 +55,6 @@ public class IndexModel : PageModel
         // get name of user
         var userId = _userManager.GetUserId(User);
         (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);        IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
-        // get the profile picture of the user
-        
-        
         People = CheckInOverview();
         // krijg alle events
         EventsList = FetchEvents();
