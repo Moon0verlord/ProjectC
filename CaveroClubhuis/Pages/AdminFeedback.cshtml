@@ -1,0 +1,208 @@
+﻿@page
+@model CaveroClubhuis.Pages.AdminFeedbackModel
+@using Newtonsoft.Json
+@{
+    var DialogButtons1 = new ButtonModel() { isPrimary = true, cssClass = "confirm-button", content = "Bevestig" };
+    var DialogButtons2 = new ButtonModel() { content = "Ga terug", cssClass = "e-flat" };
+    ViewData["Title"] = "Admin";
+}
+
+<style>
+    .confirm-button {
+        background-color: #803689 !important;
+        border-color: #803689 !important;
+        color: white !important;
+    }
+
+
+    .e-dialog {
+        text-align: center; /* Horizontal centering */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+
+        .e-dialog .e-dlg-header {
+            width: 340px;
+            font-size: 20px;
+            font-weight: normal;
+            position: relative;
+        }
+
+        .e-dialog .e-dlg-content {
+            display: flex;
+            flex-direction: column;
+            min-height: 200px;
+            overflow: auto;
+        }
+
+        .e-dialog .e-dlg-content {
+            overflow-y: auto;
+        }
+
+    .error-message {
+        color: red;
+    }
+
+
+    #dialog2 {
+        width: 550px !important;
+    }
+
+    .e-dropdownbase .e-list-item.e-item-focus, .e-dropdownbase .e-list-item.e-active, .e-dropdownbase .e-list-item.e-active.e-hover, .e-dropdownbase .e-list-item.e-hover {
+        background-color: #803689 !important;
+        color: white !important;
+    }
+
+    .feedbackstuk
+    {
+		height: 64vh;
+        width : 440px;
+		overflow-y: auto;
+	}
+
+    .feedbackstuk::-webkit-scrollbar {
+        width: 10px;
+        margin-left: -100px;
+    }
+
+    .feedbackstuk::-webkit-scrollbar-track {
+        background: #FFFFFF;
+    }
+
+    .feedbackstuk::-webkit-scrollbar-thumb {
+        background-color: #b1b3b4;
+        border-radius: 10px;
+        border: 3px solid #ffffff;
+    }
+</style>
+
+<head>
+    <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
+</head>
+
+<body>
+
+        <div class="admin-bar">
+            <!-- Buttons for the admin-->
+            <a href="/MakeEvent">
+                <button id="makeButton" class="admin-button">
+                    Event aanmaken
+                </button>
+            </a>
+            <a href="/AdminChange">
+                <button id="changeButton" class="admin-button">
+                    Event aanpassen
+                </button>
+            </a>
+            <a href="/AdminDelete">
+                <button id="removeButton" class="admin-button">
+                    Event verwijderen
+                </button>
+            </a>
+            <a href="/AdminMakeTeam">
+                <button id="TeamButton" class="admin-button">Team aanmaken</button>
+            </a>
+
+            <a href="/AdminRemoveTeam">
+                <button id="TeamButton" class="admin-button">Team verwijderen</button>
+            </a>
+            <a href="/AdminFeedback">
+                <button id="feedbackButton" class="admin-button">Feedback bekijken</button>
+            </a>
+        </div>
+
+    @if (Model.EventChoice == null)
+    {
+        <div id='container' style="height:350px;" class="make-event">
+
+            <ejs-dialog id="dialog" header="Zie feedback per evenement" visible="true" target="#container" style="min-height:525px; border-radius: 13px; box-shadow: none;  border: 2px solid #d9d9d9;
+ overflow-y: auto;" width="450px">
+                <e-content-template>
+
+                    <form id="ask-input" method="post" asp-page-handler="AskInput" onsubmit="validateForm">
+                        <div>
+                            <ejs-dropdownlist id="selectedEvent" dataSource="@Model.Events" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.SelectedEvents" style="width: 300px;">
+                                <e-dropdownlist-fields text="Title" value="Id"></e-dropdownlist-fields>
+                            </ejs-dropdownlist>
+                            <p></p>
+                            <p>Selecteer een evenement om feedback van te zien</p>
+
+                            <div><span id="error-message" class="error-messageDialog"></span></div>
+                        </div>
+                    </form>
+
+                </e-content-template>
+                <e-dialog-buttons>
+                    <e-dialog-dialogbutton buttonModel="DialogButtons1" click="submitForm" id="submit-button"></e-dialog-dialogbutton>
+                </e-dialog-buttons>
+            </ejs-dialog>
+        </div>
+
+
+
+    }
+
+    else
+    {
+        <div class="make-event">
+            <form id="change" class="make-event-form" method="post" style="display:flex;" asp-page-handler="seeFeedback">
+                <label for="Feedback">Feedback voor @Model.title</label>
+                <div class="feedbackstuk">
+                <p>@foreach(var feedback in @Model.feedbackText){
+                    <p>- @feedback</p>
+                }
+                </p>
+                </div>
+                <input type="submit" value="Ga terug">
+            </form>
+        </div>
+    }
+    <script>
+        window.onload = function () {
+
+            var dialogElement = document.getElementById("dialog");
+
+            if (dialogElement) {
+                var dialog = dialogElement.ej2_instances[0];
+
+                window.onresize = function () {
+                    // Make dialog responsive
+                    dialog.refreshPosition();
+                };
+            };
+        };
+
+        function onDialogClose() {
+            // Redirect to the home page
+            window.location.href = '/Index';
+        }
+
+        function submitForm() {
+            var errorMessageElement = document.getElementById("error-message");
+            var selectedEvent = document.getElementById('selectedEvent');
+            if (selectedEvent.value !== "") // check if there is a value or not
+            {
+                errorMessageElement.innerText = "";
+                // manually submit the form when button is pressed
+                document.getElementById('ask-input').submit();
+
+            } else {
+                // Show error message if no event is selected
+                errorMessageElement.innerText = "Selecteer één evenement om verder te gaan";
+            }
+        }
+
+
+        // Function to allow filtering with jquery
+        function onfiltering(e) {
+            var query = new ej.data.Query();
+            query = (e.text !== '') ? query.where('Title', 'startswith', e.text, true) : query;
+            e.updateData(@Html.Raw(JsonConvert.SerializeObject(Model.Events)), query);
+        }
+
+    </script>
+</body>
