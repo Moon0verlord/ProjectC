@@ -50,11 +50,15 @@
                     var today = new Date();
                     // Check if the current event is in the past
                     if (start < today) {
+                        console.log("Event is in the past");
                         // verstop de buttons en verander de tekst
                         $("#join-submit-button").hide();
                         $("#myParagraph").text('Deze is event is al geweest of vind nu plaats');
                     }
                     else {
+                        // voor het geval de join button hidden is
+                        $("#join-submit-button").show(); // Show the submit button
+                        console.log("Event is in the future");
                         // zet de hidden input gelijk aan de eventid
                         $('#eventIdInput').val(currentEventId);
                         console.log('Event ID:', currentEventId);
@@ -92,7 +96,7 @@
                         }
                         else
                         {
-                            $("#myParagraph").text('Je bent nog niet aangemeeld voor dit evenement. Druk op de knop om hier aan deel te nemen');
+                            $("#myParagraph").text('Je bent nog niet aangemeld voor dit evenement. Druk op de knop om hier aan deel te nemen');
                             myButton.text('Aanmelden');
                         }
                     }// end else van de ifstatement of de event al is geweest of niet\
