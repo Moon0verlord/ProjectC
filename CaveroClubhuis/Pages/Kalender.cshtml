@@ -47,13 +47,20 @@
                     $('#modal1 .modal-body').text(info.event.extendedProps.beschrijving);
                     // indien event al geweest is
                     var start = new Date(info.event.start);
+                    var end = new Date(info.event.end);
                     var today = new Date();
                     // Check if the current event is in the past
-                    if (start < today) {
+                    if (start < today && end > today) {
+                        console.log("Event is now!");
+                        // verstop de buttons en verander de tekst
+                        $("#join-submit-button").hide();
+                        $("#myParagraph").text('Deze event is nu gaande! rennen als je erbij wilt zijn!');
+                    }
+                    else if (start < today) { // indien het nu gaande is
                         console.log("Event is in the past");
                         // verstop de buttons en verander de tekst
                         $("#join-submit-button").hide();
-                        $("#myParagraph").text('Deze is event is al geweest of vind nu plaats');
+                        $("#myParagraph").text('dit event is al geweest');
                     }
                     else {
                         // voor het geval de join button hidden is
