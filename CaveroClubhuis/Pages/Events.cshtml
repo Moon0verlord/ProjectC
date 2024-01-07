@@ -45,7 +45,7 @@
                                 <h5 class="modal-title">@eventItem.Title</h5>
                                 <span class="close">&times;</span>
                             </div>
-                            <p>U bent nu Afgemeld voor: @eventItem.Title op @eventItem.Date.ToString("dd-MM-yy") om @eventItem.StartTime.ToString(@"hh\:mm")</p>
+                            <p class="aamodel">U bent nu Afgemeld voor: @eventItem.Title op @eventItem.Date.ToString("dd-MM-yy") om @eventItem.StartTime.ToString(@"hh\:mm")</p>
                         </div>
                     </div>
                 }
@@ -61,7 +61,7 @@
                                 <h5 class="modal-title">@eventItem.Title</h5>
                                 <span class="close">&times;</span>
                             </div>
-                            <p>U bent nu aangemeld voor: @eventItem.Title op @eventItem.Date.ToString("dd-MM-yy") om @eventItem.StartTime.ToString(@"hh\:mm")</p>
+                            <p class="aamodal">U bent nu aangemeld voor: @eventItem.Title op @eventItem.Date.ToString("dd-MM-yy") om @eventItem.StartTime.ToString(@"hh\:mm")</p>
                         </div>
                     </div>
                 }
@@ -74,6 +74,7 @@
                                 <h5 class="modal-title">@eventItem.Title</h5>
                                 <span class="close">&times;</span>
                             </div>
+                            <div class="content">
                             @foreach (var participant in Model.AllParticipants)
                             {
                             if (participant.EventId == eventItem.Id)
@@ -87,6 +88,7 @@
                                 }
                             }
                             }
+                            </div>
                         </div>
                     </div>
                 </div>

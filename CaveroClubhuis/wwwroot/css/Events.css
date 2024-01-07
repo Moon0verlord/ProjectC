@@ -46,6 +46,7 @@
     right: 0;
     margin-left: auto;
     margin-right: auto;
+    font-size: 30px;
 }
 
 .Title {
@@ -166,6 +167,26 @@
     border: 1px solid #888;
     width: 50%;
     text-align: center;
+}
+
+.content {
+    margin-top: 20px;
+    height: 20vh;
+    overflow-y: auto;
+}
+    .content::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .content::-webkit-scrollbar-thumb {
+        background-color: #b1b3b4;
+        border-radius: 10px;
+        border: 3px solid #ffffff;
+    }
+
+.aamodel {
+    margin-top: 70px;
+    height: 7vh;
 }
 
 /* The Close Button */
