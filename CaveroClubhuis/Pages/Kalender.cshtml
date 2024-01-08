@@ -33,25 +33,27 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
-        // hiermee werkt het om naar de model te sturen alleen evenId kan hij nie vinden :( (je kan hardcode een event id meegeven en dan werkt het wel zoals bijv 91 dan zien je in de console van de webbrowser dat het true is resultaat)
-        @* function IsUserJoined(eventId) {
-            var temp = Html.Raw(Json.Serialize(Model.IsUserJoined(eventId)));
-            return temp;
-            } *@
-
-            // maak dit een global var
-                   var currentEventId;
+        // maak dit een global var
+        var currentEventId;
         document.addEventListener('DOMContentLoaded', function () {
-        
             var calendarEl = document.getElementById('calendar');
             var initialView = window.innerWidth <= 768 ? 'timeGridDay' : 'timeGridWeek';
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                scrollTime: '09:00:00',
+                scrollTime: '09:00:00', // werkt niet jammer genoeg :(
                 headerToolbar: {
                     start: 'dayGridMonth,timeGridWeek,timeGridDay',
                     center: 'title',
                     end: 'prev,today,next'
-                }, 
+                },
+                eventColor: '#803689',
+             events: @Html.Raw(Json.Serialize(Model.EventsList.Select(e => new
+            {
+                title = e.Title,
+                beschrijving  = e.Description,
+                start = e.Date.ToString("yyyy-MM-dd") + 'T' + e.StartTime,
+                end = e.Date.ToString("yyyy-MM-dd") + 'T' + e.EndTime,
+                id = e.Id
+            }))),
                 eventClick: function (info) {
                     // Open de model
                     $('#modal1').modal('show');
@@ -60,55 +62,80 @@
                     currentEventId = info.event.id;
 
                     $('#modal1 .modal-title').text(info.event.title);
-                    // zet de hidden input gelijk aan de eventid
-                    $('#eventIdInput').val(currentEventId);
-                    console.log('Event ID:', currentEventId);
+                    $('#modal1 .modal-body').text(info.event.extendedProps.beschrijving);
+                    // indien event al geweest is
+                    var start = new Date(info.event.start);
+                    var end = new Date(info.event.end);
+                    var today = new Date();
+                    // Check if the current event is in the past
+                    if (start < today && end > today) {
+                        console.log("Event is now!");
+                        // verstop de buttons en verander de tekst
+                        $("#join-submit-button").hide();
+                        $("#myParagraph").text('Deze event is nu gaande! rennen als je erbij wilt zijn!');
+                    }
+                    else if (start < today) { // indien het nu gaande is
+                        console.log("Event is in the past");
+                        // verstop de buttons en verander de tekst
+                        $("#join-submit-button").hide();
+                        $("#myParagraph").text('dit event is al geweest');
+                    }
+                    else {
+                        // voor het geval de join button hidden is
+                        $("#join-submit-button").show(); // Show the submit button
+                        console.log("Event is in the future");
+                        // zet de hidden input gelijk aan de eventid
+                        $('#eventIdInput').val(currentEventId);
+                        console.log('Event ID:', currentEventId);
 
-                  //  console.log('Event ID:', currentEventId);
-                    console.log('Event ID:', currentEventId);
-                    console.log("Hidden Input Value:", $("#eventIdInput").val());
+                        //  console.log('Event ID:', currentEventId);
+                        console.log('Event ID:', currentEventId);
+                        console.log("Hidden Input Value:", $("#eventIdInput").val());
 
-                    // zet id in variabele voor qiuery
-                    var id = $('#eventIdInput').val();
-                   
-                    console.log("Type of eventIdInput:", typeof id);
-                    console.log("Raw Value of eventIdInput:", id);
+                        // zet id in variabele voor qiuery
+                        var id = $('#eventIdInput').val();
 
-                    // select button
-                    var myButton = $('#join-submit-button');
-                     // zet joined op false
-                    var joined = false;
-                   // pak alle evenementen die bij de userid horen
-                    @{var userId = Model.userID;}
-                    var eventIds = @Json.Serialize(Model.AllParticipants
-                        .Where(ep => ep.UserId == userId)
-                        .Select(ep => ep.EventId)
-                        .ToList());
+                        console.log("Type of eventIdInput:", typeof id);
+                        console.log("Raw Value of eventIdInput:", id);
+
+                        // select button
+                        var myButton = $('#join-submit-button');
+                        // zet joined op false
+                        var joined = false;
+                        // pak alle evenementen die bij de userid horen
+                        @{var userId = Model.userID;}
+                        var eventIds = @Json.Serialize(Model.AllParticipants
+                            .Where(ep => ep.UserId == userId)
+                            .Select(ep => ep.EventId)
+                            .ToList());
                         // check of gekozen event hierbij zit en dan is de use joined
-                    if (eventIds.some(x => x == id)) {
-                        joined = true;
-                    }
+                        if (eventIds.some(x => x == id)) {
+                            joined = true;
+                        }
 
-                    // verander button text op basis van joined of niet
-                    if(joined)
-                    {
-                        $("#myParagraph").text('Je bent al aangemeld voor dit evenement. Druk op de knop om je hiervoor af te melden.');
-                        myButton.text('Afmelden');
-                    }
-                    else
-                    {
-                        $("#myParagraph").text('Je bent nog niet aangemeeld voor dit evenement. Druk op de knop om hier aan deel te nemen');
-                        myButton.text('Aanmelden');
-                    }
-         
-       
-                   
+                        // verander button text op basis van joined of niet en kleur van button
+                        if(joined)
+                        {
+                            $("#myParagraph").text('Je bent al aangemeld voor dit evenement. Druk op de knop om je hiervoor af te melden.');
+                            myButton.text('Afmelden');
+                            myButton.css({
+                                'background-color': 'red',
+                                'border-color': 'red'
+                            });
+                        }
+                        else
+                        {
+                            $("#myParagraph").text('Je bent nog niet aangemeld voor dit evenement. Druk op de knop om hier aan deel te nemen');
+                            myButton.text('Aanmelden');
+                            myButton.css({
+                                'background-color': 'green',
+                                'border-color': 'green' 
+                            });
+                        }
+                    }// end else van de ifstatement of de event al is geweest of niet\
 
-                    // Hide the close button dynamically
+                    // verstop de x die boven de bootstrap normaal is
                     $('#modal1 .close').addClass('cross');
-
-
-                
                     // handle de close button
                     $('#modal1 .btn-secondary').on('click', function () {
                         // niks doen
@@ -120,7 +147,7 @@
                         // Manually submit the form when the button is pressed
                         console.log("test")
                         $('#modal1').modal('hide');
-                      
+
                         console.log('currentEventId:', currentEventId);
                     });
                 } ,
@@ -129,20 +156,12 @@
                 locale: 'nl',
                 contentHeight: "auto",
                 allDaySlot: false, // zorgt ervoor dat de "allday" blokje weg gaat uit de kalender
-                events: @Html.Raw(Json.Serialize(Model.EventsList.Select(e => new
-            {
-                title = e.Title,
-                start = e.Date.ToString("yyyy-MM-dd") + 'T' + e.StartTime,
-                end = e.Date.ToString("yyyy-MM-dd") + 'T' + e.EndTime,
-                id = e.Id
-            }))),
                 eventContent: function (arg) {
                     var title = arg.event.title;
                     var startTime = new Date(arg.event.start);
-                    var formattedStartTime = startTime.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
                     var endTime = new Date(arg.event.end);
+                    var formattedStartTime = startTime.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
                     var formattedEndTime = endTime.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
-
                     return {
                         html: '<div class="fc-content">' +
                             '<div class="fc-title">' + title + '</div>' +
@@ -161,9 +180,7 @@
                 }
             });
         });
-   
     </script>
-   
 </head>
 <div id='calendar'></div>
 <!-- model -->
@@ -175,6 +192,9 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+            </div>
+            <div class="modal-body">
+                <p>snoopy is goat</p>
             </div>
             <div class="modal-footer">
                 <!-- Join Form -->

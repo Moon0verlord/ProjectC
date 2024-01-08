@@ -72,9 +72,11 @@
                 <div class="kaart" style="background-color: @randomColor;">
                     <h2>@eventItem.Title</h2>
                     <h3>@eventItem.Date.ToString("dd-MM-yy"), @eventItem.StartTime.ToString(@"hh\:mm")</h3>
-                    <p id="beschijving">
-                        @eventItem.Description
-                    </p>
+                    <span class="Hover">
+                        <p id="beschijving">
+                            @eventItem.Description
+                        </p>
+                    </span>
                 </div>
 }
             </div>
