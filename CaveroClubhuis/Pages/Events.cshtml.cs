@@ -15,23 +15,26 @@ namespace CaveroClubhuis.Pages
         public IList<Events> EventsList { get; set; }
         public IList<Events> oldEvents { get; set; }
         public IList<CaveroUser> Atendees { get; set; }
+        
         public IList<EventParticipants> AllParticipants { get; set; }
 
         
         private readonly CaveroClubhuisContext _context;
         private readonly UserManager<CaveroUser> _userManager;
-        private readonly LayoutTools _layoutTools;
+        private readonly ILayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         [BindProperty(SupportsGet = true)]
         public int EventId { get; set; }
+        public string ProfileImage { get; set; }
         public string UserId { get; set; }
+        public string Feedback { get; set; }
 
         public bool IsUserCheckedIn { get; private set; }
 
 
 
-        public EventsModel(CaveroClubhuisContext context,UserManager<CaveroUser> userManager, LayoutTools layoutTools)
+        public EventsModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, ILayoutTools layoutTools)
         {
             _context = context;
             _userManager = userManager;
@@ -45,14 +48,15 @@ namespace CaveroClubhuis.Pages
             EventsList = FetchEvents();
             oldEvents = OldEvents();
             var userId = _userManager.GetUserId(User);
-            (FirstName, LastName) = _layoutTools.LoadName(userId);
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
 
             
         }
-        
 
-        public IList<EventParticipants> getAllParticipants() {
+
+        public IList<EventParticipants> getAllParticipants()
+        {
             var eventIds = _context.Events
                 .Select(e => e.Id)
                 .ToList();
@@ -131,15 +135,15 @@ namespace CaveroClubhuis.Pages
         }
 
         public override int GetHashCode()
-    {
-        unchecked
         {
-            int hash = 17;
-            hash = hash * 23 + EventId.GetHashCode();
-            hash = hash * 23 + UserId.GetHashCode();
-            return hash;
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + EventId.GetHashCode();
+                hash = hash * 23 + UserId.GetHashCode();
+                return hash;
+            }
         }
-    }
 
         // add user to event when button is clicked but check if user is already in the event
         public async Task<IActionResult> OnPostAdd()
@@ -161,7 +165,7 @@ namespace CaveroClubhuis.Pages
                 _context.EventParticipants.Add(eventParticipant);
                 await _context.SaveChangesAsync();
             }
-            await Task.Delay(TimeSpan.FromSeconds(3)); 
+            await Task.Delay(TimeSpan.FromSeconds(3));
             return RedirectToPage();
         }
 
@@ -178,7 +182,23 @@ namespace CaveroClubhuis.Pages
                 _context.EventParticipants.Remove(participantToRemove);
                 await _context.SaveChangesAsync();
             }
-            await Task.Delay(TimeSpan.FromSeconds(3)); 
+            await Task.Delay(TimeSpan.FromSeconds(3));
+            return RedirectToPage();
+        }
+
+        // Send feedback to database
+        public async Task<IActionResult> OnPostSubmitFeedback(string feedback, int eventId)
+        {
+            var userId = _userManager.GetUserId(User);
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            var feedbackToAdd = new EventReviews
+            {
+                UserId = userId,
+                FeedbackText = feedback,
+                EventId = eventId
+            };
+            _context.EventReviews.Add(feedbackToAdd);
+            await _context.SaveChangesAsync();
             return RedirectToPage();
         }
     }

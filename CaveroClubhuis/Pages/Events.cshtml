@@ -11,6 +11,8 @@
 </head>
 <body>
     <div class="Wrapper">
+
+
         <!--Opkomende Evenementen-->
         <div class="Accordion">
             <div class="flexbox">
@@ -21,7 +23,6 @@
         </div>
 
         <div class="panel">
-
             @foreach (var eventItem in Model.EventsList)
             {
             <div class="Evenementen-opkomend">
@@ -40,9 +41,11 @@
                     </form>
                     <div id="modal1_@eventItem.Id" class="modal">
                         <div class="modal-content">
-                            <h5 class="modal-title">@eventItem.Title</h5>
-                            <span class="close">&times;</span>
-                            <p>U bent nu Afgemeld voor: @eventItem.Title op @eventItem.Date.ToString("dd-MM-yy") om @eventItem.StartTime.ToString(@"hh\:mm")</p>
+                            <div class="Title-bar">
+                                <h5 class="modal-title">@eventItem.Title</h5>
+                                <span class="close">&times;</span>
+                            </div>
+                            <p class="aamodel">U bent nu Afgemeld voor: @eventItem.Title op @eventItem.Date.ToString("dd-MM-yy") om @eventItem.StartTime.ToString(@"hh\:mm")</p>
                         </div>
                     </div>
                 }
@@ -54,9 +57,11 @@
                     </form>
                     <div id="modal1_@eventItem.Id" class="modal">
                         <div class="modal-content">
-                            <h5 class="modal-title">@eventItem.Title</h5>
-                            <span class="close">&times;</span>
-                            <p>U bent nu aangemeld voor: @eventItem.Title op @eventItem.Date.ToString("dd-MM-yy") om @eventItem.StartTime.ToString(@"hh\:mm")</p>
+                            <div class="Title-bar">
+                                <h5 class="modal-title">@eventItem.Title</h5>
+                                <span class="close">&times;</span>
+                            </div>
+                            <p class="aamodal">U bent nu aangemeld voor: @eventItem.Title op @eventItem.Date.ToString("dd-MM-yy") om @eventItem.StartTime.ToString(@"hh\:mm")</p>
                         </div>
                     </div>
                 }
@@ -65,12 +70,13 @@
                     <button class="openModalBtn" data-modal-id="modal2_@eventItem.Id">Deelnemers</button>
                     <div id="modal2_@eventItem.Id" class="modal">
                         <div class="modal-content">
-                            <div class="flexbox">
+                            <div class="Title-bar">
                                 <h5 class="modal-title">@eventItem.Title</h5>
                                 <span class="close">&times;</span>
                             </div>
+                            <div class="content">
                             @foreach (var participant in Model.AllParticipants)
-                        {
+                            {
                             if (participant.EventId == eventItem.Id)
                             {
                                 foreach (var atendee in Model.Atendees)
@@ -81,46 +87,54 @@
                                     }
                                 }
                             }
-                        }
+                            }
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
                 }
-            </div>
+        </div>
 
- <!--Verlopen Evenementen-->
-            <div class="Accordion">
-                <div class="flexbox">
-                    <h2 class="Title">Verlopen evenementen</h2>
-                    <span class="arrow-down"></span>
-                </div>
-                <hr class="titleLine" />
+        <!--Verlopen Evenementen-->
+        <div class="Accordion">
+            <div class="flexbox">
+                <h2 class="Title">Verlopen evenementen</h2>
+                <span class="arrow-down"></span>
             </div>
-            <div class="panel">
-                @foreach (var eventItem in Model.oldEvents)
+            <hr class="titleLine" />
+        </div>
+        <div class="panel">
+            @foreach (var eventItem in Model.oldEvents)
                 {
-                <div class="Evenementen-verlopen">
-                    <h2>@eventItem.Title</h2>
-                    <h3>@eventItem.Date.ToString("dd-MM-yy"), @eventItem.StartTime.ToString(@"hh\:mm")</h3>
+            <div class="Evenementen-verlopen">
+                <h2>@eventItem.Title</h2>
+                <h3>@eventItem.Date.ToString("dd-MM-yy"), @eventItem.StartTime.ToString(@"hh\:mm")</h3>
 
-                    <div class="description-button-container-verlopen">
-                        <p id="beschijving">@eventItem.Description</p>
+                <div class="description-button-container-verlopen">
+                    <p id="beschijving">@eventItem.Description</p>
 
-                        <!-- Feedback Button -->
-                        <button class="openModalBtn" data-modal-id="modal3_@eventItem.Id">Feedback</button>
-                        <div id="modal3_@eventItem.Id" class="modal">
-                            <div class="modal-content">
-                                <div class="flexbox">
+                    <!-- Feedback Button -->
+                    <button class="openModalBtn" data-modal-id="modal3_@eventItem.Id">Feedback</button>
+                    <div id="modal3_@eventItem.Id" class="modal">
+                        <div class="modal-content">
+                            <div class="flexbox">
+
+                                <div class="Title-bar">
                                     <h5 class="modal-title">@eventItem.Title</h5>
                                     <span class="close">&times;</span>
-                                    <p>feedback button</p>
                                 </div>
+                                    <form method="post" asp-page-handler="SubmitFeedback">
+                                        <input type="hidden" name="eventId" value="@eventItem.Id" />
+                                        <textarea class="feedback" name="feedback" placeholder="Geef hier feedback over het event (denk aan dingen die je miste of juist goed geregeld waren)" rows="4" cols="50"></textarea>
+                                        <button class="Send-feedback" type="submit">Stuur feedback</button>
+                                    </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                    }
             </div>
+                    }
         </div>
+    </div>
 </body>

@@ -15,10 +15,10 @@ namespace CaveroClubhuis.Pages
     {
         private readonly CaveroClubhuisContext _context;
         private readonly UserManager<CaveroUser> _userManager;
-        private readonly LayoutTools _layoutTools;
+        private readonly ILayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
-
+        public string ProfileImage { get; set; }
         public bool IsUserCheckedIn { get; private set; }
 
         //All the inputs needed for a new event
@@ -46,7 +46,7 @@ namespace CaveroClubhuis.Pages
         [Required(ErrorMessage = "Datum moet ingevuld worden")]
         public DateTime? date { get; set; }
 
-        public MakeEventModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, LayoutTools layoutTools)
+        public MakeEventModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, ILayoutTools layoutTools)
         {
             _context = context;
             _userManager = userManager;
@@ -58,7 +58,7 @@ namespace CaveroClubhuis.Pages
         {
             // get name of user
             var userId = _userManager.GetUserId(User);
-            (FirstName, LastName) = _layoutTools.LoadName(userId!);
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
 
             //check if user is admin if not return to home page
@@ -78,15 +78,10 @@ namespace CaveroClubhuis.Pages
             {
                 //If inputs are missing return to the Page()
                 var userId = _userManager.GetUserId(User);
-                (FirstName, LastName) = _layoutTools.LoadName(userId!);
+                (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
                 IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
                 return Page();
             }
-
-            Console.WriteLine("test date");
-            Console.WriteLine(title);
-           // Console.WriteLine(DateTime.SpecifyKind(new DateTime(date.Year, date.Month, date.Day, 0, 0, 0), DateTimeKind.Utc));
-            //Create a new event with the inputs
             
             var newEvent = new Events
             {

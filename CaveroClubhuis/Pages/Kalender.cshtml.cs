@@ -13,9 +13,10 @@ namespace CaveroClubhuis.Pages
     {
         private readonly CaveroClubhuisContext _context;
         private readonly UserManager<CaveroUser> _userManager;
-        private readonly LayoutTools _layoutTools;
+        private readonly ILayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
+        public string ProfileImage { get; set; }
         public bool IsUserCheckedIn { get; private set; }
         public IList<EventParticipants> AllParticipants { get; set; }
 
@@ -24,7 +25,7 @@ namespace CaveroClubhuis.Pages
 
         public string userID { get; set; }
 
-        public KalenderModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, LayoutTools layoutTools)
+        public KalenderModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, ILayoutTools layoutTools)
         {
             _context = context;
             _userManager = userManager;
@@ -32,12 +33,14 @@ namespace CaveroClubhuis.Pages
             
         }
         public List<Events> EventsList { get; set; }
+        
+        
         public void OnGet()
         {
             // get name of user
             var userId = _userManager.GetUserId(User);
             userID = userId;
-            (FirstName, LastName) = _layoutTools.LoadName(userId);
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
             EventsList = FetchEvents();
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
             AllParticipants = getAllParticipants();

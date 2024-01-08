@@ -12,9 +12,10 @@ namespace CaveroClubhuis.Pages
 
         private readonly CaveroClubhuisContext _context;
         private readonly UserManager<CaveroUser> _userManager;
-        private readonly LayoutTools _layoutTools;
+        private readonly ILayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
+        public string ProfileImage { get;  set; }
 
         public bool IsUserCheckedIn { get; private set; }
 
@@ -33,7 +34,7 @@ namespace CaveroClubhuis.Pages
 
         public Teams SearchChoice { get; private set; }
 
-        public TeamSearchModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, LayoutTools layoutTools)
+        public TeamSearchModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, ILayoutTools layoutTools)
         {
             _context = context;
             _userManager = userManager;
@@ -45,7 +46,7 @@ namespace CaveroClubhuis.Pages
         public void OnGet()
         {
             var userId = _userManager.GetUserId(User);
-            (FirstName, LastName) = _layoutTools.LoadName(userId);
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
             AllTeams = FetchTeams();
             TeamChoice = FetchTeamChoice();
@@ -72,7 +73,7 @@ namespace CaveroClubhuis.Pages
                 // Handle the case where the team is not found
                 Console.WriteLine("nullll");
                 var userId = _userManager.GetUserId(User);
-                (FirstName, LastName) = _layoutTools.LoadName(userId);
+                (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
                 IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
                 return RedirectToPage("./Team");
             }
@@ -88,7 +89,7 @@ namespace CaveroClubhuis.Pages
             // viewdata aanpassen
             ViewData["ShowDialog2"] = true;
             var userId2 = _userManager.GetUserId(User);
-            (FirstName, LastName) = _layoutTools.LoadName(userId2);
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId2);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId2);
             return Page();
         }

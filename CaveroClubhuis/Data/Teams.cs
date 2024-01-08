@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CaveroClubhuis.Data;
 
 public class Teams
-    {
+{
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }

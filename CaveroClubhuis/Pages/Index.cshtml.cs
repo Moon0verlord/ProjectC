@@ -18,10 +18,11 @@ public class IndexModel : PageModel
     private readonly ILogger<IndexModel> _logger;
     private readonly CaveroClubhuisContext _context;
     private readonly UserManager<CaveroUser> _userManager;
-    private readonly LayoutTools _layoutTools;
+    private readonly ILayoutTools _layoutTools;
     
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
+    public string ProfileImage { get; set; }
     public int PeopleCount { get; private set; }
     public bool IsUserCheckedIn { get; private set; }
     public List<PersonInfo> People { get; private set; }
@@ -38,7 +39,7 @@ public class IndexModel : PageModel
     public string daysofweek { get; set; }
 
     
-    public IndexModel(ILogger<IndexModel> logger,CaveroClubhuisContext context,UserManager<CaveroUser> userManager, LayoutTools layoutTools)
+    public IndexModel(ILogger<IndexModel> logger,CaveroClubhuisContext context,UserManager<CaveroUser> userManager, ILayoutTools layoutTools)
     {
         _logger = logger;
         _context = context;
@@ -53,9 +54,7 @@ public class IndexModel : PageModel
         PeopleCount = _context.InOffice.AsEnumerable().Where(x => !x.CheckOutDate.HasValue || now <= TimeZoneInfo.ConvertTimeToUtc((DateTime)x.CheckOutDate.Value, TimeZoneInfo.Utc)).Count();
         // get name of user
         var userId = _userManager.GetUserId(User);
-        (FirstName, LastName) = _layoutTools.LoadName(userId);
-        IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
-        
+        (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);        IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
         People = CheckInOverview();
         // krijg alle events
         EventsList = FetchEvents();
@@ -116,7 +115,6 @@ public class IndexModel : PageModel
             UserId = userid,
             CheckInDate = utcStartDate,
             CheckOutDate = utcEndDate,
-            IsRecurring = true,
             DayOfWeek = dayOfWeek
         };
         _context.InOffice.Add(inOfficeEntry);

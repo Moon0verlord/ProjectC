@@ -12,8 +12,8 @@
     <div class="main-body">
         <div class="admin-bar">
             <!-- Buttons for the admin-->
-            <a href="/Admin">
-                <button id="makeButton" class="admin-button" style="background-color: #803689; color: white;">
+            <a href="/MakeEvent">
+                <button id="makeButton" class="admin-button">
                     Event aanmaken
                 </button>
             </a>
@@ -27,9 +27,26 @@
                     Event verwijderen
                 </button>
             </a>
+            <a href="/AdminMakeTeam">
+                <button id="TeamButton" class="admin-button">Team aanmaken</button>
+            </a>
+
+            <a href="/AdminRemoveTeam">
+                <button id="TeamButton" class="admin-button">Team verwijderen</button>
+            </a>
+            <a href="/AdminFeedback">
+                <button id="feedbackButton" class="admin-button">Feedback bekijken</button>
+            </a>
         </div>
 
         <div class="make-event">
+            <div class="form-dialog-header">
+                <header>
+                    <div class="maketeam">Evenement aanmaken</div>
+                </header>
+
+                <div class="line"></div>
+            </div>
             <form id="make" method="post" class="make-event-form" asp-page-handler="MakeEvent">
                 <!-- Add the make event inputs here-->
                 <label for="title">Titel</label>
@@ -61,6 +78,7 @@
                 <span asp-validation-for="location" class="error-message"></span>
                 <input type="text" id="location" placeholder="locatie" asp-for="location">
 
+                <div class="explain">Vul de velden in om een evenement te maken</div>
                 <input type="submit" value="Opslaan">
             </form>
         </div></div>

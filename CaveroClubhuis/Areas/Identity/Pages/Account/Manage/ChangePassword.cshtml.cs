@@ -26,6 +26,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account.Manage
 
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
+        public string ProfileImage { get; set; }
         private readonly ILogger<ChangePasswordModel> _logger;
 
         public ChangePasswordModel(
@@ -98,7 +99,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
             var userId = _userManager.GetUserId(User);
-            (FirstName, LastName) = _layoutTools.LoadName(userId!);
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
            
 
@@ -149,7 +150,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account.Manage
                     }
                 }
                 var userId = _userManager.GetUserId(User);
-                (FirstName, LastName) = _layoutTools.LoadName(userId!);
+                (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
                 IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
                 return Page();
             }

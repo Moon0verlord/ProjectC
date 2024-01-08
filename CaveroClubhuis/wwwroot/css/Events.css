@@ -18,14 +18,35 @@
     border-radius: 30px;
 }
 
-.active, .Accordion:hover {
-    background-color: #cccccc70;
-}
+    .active, .Accordion:hover {
+        background-color: #cccccc70;
+    }
 
 .flexbox {
     justify-content: space-between;
     align-items: center;
     position: relative;
+}
+
+.Title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+    .Title-bar::before {
+        content: '';
+        width: 28px;
+    }
+
+.modal-title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 30px;
 }
 
 .Title {
@@ -67,19 +88,19 @@
     max-height: 60vh;
 }
 
-.panel::-webkit-scrollbar {
-    width: 10px;
-}
+    .panel::-webkit-scrollbar {
+        width: 10px;
+    }
 
-.panel::-webkit-scrollbar-track {
-    background: #f2f0f8;
-}
+    .panel::-webkit-scrollbar-track {
+        background: #f2f0f8;
+    }
 
-.panel::-webkit-scrollbar-thumb {
-    background-color: #b1b3b4;
-    border-radius: 10px;
-    border: 3px solid #ffffff;
-}
+    .panel::-webkit-scrollbar-thumb {
+        background-color: #b1b3b4;
+        border-radius: 10px;
+        border: 3px solid #ffffff;
+    }
 
 /*single event item*/
 .Evenementen-opkomend, .Evenementen-verlopen {
@@ -89,27 +110,27 @@
     height: 120px;
 }
 
-.Evenementen-opkomend h2, .Evenementen-verlopen h2 {
-    margin-top: 20px;
-    font-size: 20px;
-    color: #FFFFFF;
-    margin-left: 5%;
-}
+    .Evenementen-opkomend h2, .Evenementen-verlopen h2 {
+        margin-top: 20px;
+        font-size: 20px;
+        color: #FFFFFF;
+        margin-left: 5%;
+    }
 
-.Evenementen-opkomend h3, .Evenementen-verlopen h3 {
-    color: #FFFFFF;
-    font-size: 12px;
-    margin-left: 5%;
-}
+    .Evenementen-opkomend h3, .Evenementen-verlopen h3 {
+        color: #FFFFFF;
+        font-size: 12px;
+        margin-left: 5%;
+    }
 
-.Evenementen-opkomend #beschijving, .Evenementen-verlopen #beschijving {
-    color: #FFFFFF;
-    font-size: 16px;
-    margin-left: 5%;
-    width: 50%;
-}
+    .Evenementen-opkomend #beschijving, .Evenementen-verlopen #beschijving {
+        color: #FFFFFF;
+        font-size: 16px;
+        margin-left: 5%;
+        width: 50%;
+    }
 
-button {
+.openModalBtn {
     float: right;
     background-color: #FFFFFF;
     border-radius: 45px;
@@ -118,11 +139,11 @@ button {
     margin-right: 20px;
 }
 
-button p {
-    color: #47525E;
-    font-size: 19px;
-    margin-top: 8px;
-}
+    button p {
+        color: #47525E;
+        font-size: 19px;
+        margin-top: 8px;
+    }
 
 /*pop up inside event item*/
 .modal {
@@ -148,26 +169,63 @@ button p {
     text-align: center;
 }
 
+.content {
+    margin-top: 20px;
+    height: 20vh;
+    overflow-y: auto;
+}
+    .content::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .content::-webkit-scrollbar-thumb {
+        background-color: #b1b3b4;
+        border-radius: 10px;
+        border: 3px solid #ffffff;
+    }
+
+.aamodel {
+    margin-top: 70px;
+    height: 7vh;
+}
+
 /* The Close Button */
 .close {
     color: #aaaaaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
-    text-align: right;
+    position: absolute;
+    right: 0;
 }
 
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
 
 .description-button-container-opkomend, .description-button-container-verlopen {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.feedback {
+    width: 60%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.Send-feedback {
+    float: right;
+    background-color: #FFFFFF;
+    border-radius: 45px;
+    width: 150px;
+    height: 50px;
+    margin-right: 20px;
+    margin-top: 20px;
 }
 
 /* Media query for mobile devices */
@@ -176,13 +234,13 @@ button p {
         width: 100%;
     }
 
-        .Evenementen-opkomend {
-            height: 170px;
-        }
+    .Evenementen-opkomend {
+        height: 170px;
+    }
 
-        .Evenementen-verlopen {
-            height: 130px;
-        }
+    .Evenementen-verlopen {
+        height: 130px;
+    }
 
         .Evenementen-opkomend h2, .Evenementen-verlopen h2 {
             font-size: 18px;
@@ -202,5 +260,9 @@ button p {
 
     .description-button-container-opkomend {
         display: block;
+    }
+
+    .feedback {
+        width: 100%;
     }
 }

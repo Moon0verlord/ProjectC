@@ -13,12 +13,13 @@ namespace CaveroClubhuis.Pages
     {
         private readonly CaveroClubhuisContext _context;
         private readonly UserManager<CaveroUser> _userManager;
-        private readonly LayoutTools _layoutTools;
+        private readonly ILayoutTools _layoutTools;
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
+        public string ProfileImage { get; set; }
         
         
-        public MyEventsModel(CaveroClubhuisContext context,UserManager<CaveroUser> userManager, LayoutTools layoutTools)
+        public MyEventsModel(CaveroClubhuisContext context,UserManager<CaveroUser> userManager, ILayoutTools layoutTools)
         {
             _context = context;
             _userManager = userManager;
@@ -29,7 +30,7 @@ namespace CaveroClubhuis.Pages
         {
             // get name of user
             var userId = _userManager.GetUserId(User);
-            (FirstName, LastName) = _layoutTools.LoadName(userId);
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
         }
         
 

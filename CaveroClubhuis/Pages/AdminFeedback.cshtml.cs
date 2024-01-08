@@ -4,11 +4,12 @@ using CaveroClubhuis.Pages.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace CaveroClubhuis.Pages
 {
-    public class AdminChangeModel : PageModel
+    public class AdminFeedbackModel : PageModel
     {
         private readonly CaveroClubhuisContext _context;
         private readonly UserManager<CaveroUser> _userManager;
@@ -55,82 +56,85 @@ namespace CaveroClubhuis.Pages
         public string Title { get; set; }
 
         public List<Events> Events { get; set; }
-        public AdminChangeModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, ILayoutTools layoutTools)
+        public List<EventReviews> Reviews { get; set; }
+        public List<string> feedbackText { get; set; }
+
+        public AdminFeedbackModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, ILayoutTools layoutTools)
         {
             _context = context;
             _userManager = userManager;
             _layoutTools = layoutTools;
             SelectedEvents = new List<int>();
-        }
 
+        }
         public IActionResult? OnGet()
         {
             var userId = _userManager.GetUserId(User);
             if (!_layoutTools.checkAdmin(userId)) return RedirectToPage("/Index");
 
             Events = FetchEvents();
-            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId); 
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
 
             return null!;
-
         }
 
-
-        public IActionResult OnPostChangeEvent()
+        public IActionResult OnPostseeFeedback()
         {
 
-           // de id van de tempdata in een variabele zetten voor opzoeken juiste event
+            // de id van de tempdata in een variabele zetten voor opzoeken juiste event
             int id = (int)TempData["EnteredEventID"];
-         
+
 
             var eventToUpdate = _context.Events.First(x => x.Id == id);
             if (!ModelState.IsValid)
             {
 
                 var userId = _userManager.GetUserId(User);
-                (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
+                (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId); 
                 IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
                 return Page();
             }
 
-            eventToUpdate.Title=title; 
-            eventToUpdate.Description=description;
+            eventToUpdate.Title = title;
+            eventToUpdate.Description = description;
             eventToUpdate.Date = DateTime.SpecifyKind(date, DateTimeKind.Utc);
             eventToUpdate.StartTime = startTime;
             eventToUpdate.EndTime = endTime;
             eventToUpdate.Location = location;
-            _context.SaveChanges();
             ModelState.Clear();
-            TempData["ChangeSuccess"] = "Evenement is succesvol gewijzigd";
             return RedirectToPage("./Index"); // Redirect naar page weer
         }
+
         public IActionResult OnPostAskInput()
         {
-
-          
             EventChoice = _context.Events
                  .Where(e => SelectedEvents.Contains(e.Id))
                  .FirstOrDefault();
 
+            Reviews = _context.EventReviews
+                .Where(e => e.EventId == EventChoice.Id)
+                .ToList();
+
+            feedbackText = Reviews.Select(x => x.FeedbackText).ToList();
+
             title = EventChoice.Title;
-            description=EventChoice.Description;
-            date= EventChoice.Date;
+            description = EventChoice.Description;
+            date = EventChoice.Date;
             startTime = EventChoice.StartTime;
             endTime = EventChoice.EndTime;
-            location= EventChoice.Location;
+            location = EventChoice.Location;
             EventID = EventChoice.Id;
-             // omdat properties gereset werden tempdata om de id op te slaan
+            // omdat properties gereset werden tempdata om de id op te slaan
             TempData["EnteredEventID"] = EventChoice.Id;
 
             // weer id enzo neerzetten want hij gaat nog niet langs onget
             var userId = _userManager.GetUserId(User);
-            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId); 
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
             // return Page ipv Redirectpage zodat niet alles refreshed en start van het begin
             return Page(); // Redirect naar page weer
         }
-
 
         public List<Events> FetchEvents()
         {
@@ -145,7 +149,5 @@ namespace CaveroClubhuis.Pages
 
             return RedirectToPage();
         }
-
     }
 }
-

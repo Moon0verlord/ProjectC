@@ -27,6 +27,8 @@ using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.AspNetCore.Hosting;
 //using MyApp.Communication.SMTP;
 using System.Configuration;
+using CaveroClubhuis.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CaveroClubhuis.Areas.Identity.Pages.Account
 {
@@ -38,13 +40,18 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<CaveroUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly CaveroClubhuisContext _context;
+
+        public List<Teams> AllTeams { get; private set; }
 
         public RegisterModel(
+            CaveroClubhuisContext context,
             UserManager<CaveroUser> userManager,
             IUserStore<CaveroUser> userStore,
             SignInManager<CaveroUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
+
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -52,6 +59,9 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
+
+            AllTeams = FetchTeams();
         }
 
         /// <summary>
@@ -60,6 +70,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
         /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
+
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -118,6 +129,12 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+
+            [Required]
+            [BindProperty]
+            [Display(Name = "Selecteer Team")]
+            public int SelectedTeams { get; set; }
         }
 
 
@@ -127,58 +144,71 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+{
+    returnUrl ??= Url.Content("~/");
+    ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+    if (ModelState.IsValid)
+    {
+        // Check if a user with the same email already exists
+        var existingUser = await _userManager.FindByEmailAsync(Input.Email);
+        if (existingUser != null)
         {
-            returnUrl ??= Url.Content("~/");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
-            {
-                var user = CreateUser();
+            ModelState.AddModelError(string.Empty, "A user with this email already exists.");
+            return Page();
+        }
+
+        // If the user does not exist, continue with the registration process
+        var user = CreateUser();
 
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
+                Console.WriteLine("Test");
+                Console.WriteLine(Input.SelectedTeams);
+                user.Team = _context.Teams.Where(_ => _.Id == Input.SelectedTeams).FirstOrDefault().Title;
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                var result = await _userManager.CreateAsync(user, Input.Password);
+        await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+        await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+        var result = await _userManager.CreateAsync(user, Input.Password);
 
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User created a new account with password.");
+        if (result.Succeeded)
+        {
+            _logger.LogInformation("User created a new account with password.");
 
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
+            var userId = await _userManager.GetUserIdAsync(user);
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+            var callbackUrl = Url.Page(
+                "/Account/ConfirmEmail",
+                pageHandler: null,
+                values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                protocol: Request.Scheme);
 
-                    // gemaakte sender aanroepen
-                    await SendEmailAsync(Input.Email, "Verifieer uw Clubhuis account",
-                       $"{BodyVerificationEmail(callbackUrl)}"
-                       );
+            // gemaakte sender aanroepen
+            await SendEmailAsync(Input.Email, "Verifieer uw Clubhuis account",
+                $"{BodyVerificationEmail(callbackUrl)}"
+            );
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
-                }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+            if (_userManager.Options.SignIn.RequireConfirmedAccount)
+            {
+                return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
             }
-
-            // If we got this far, something failed, redisplay form
-            return Page();
+            else
+            {
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                return LocalRedirect(returnUrl);
+            }
         }
+        foreach (var error in result.Errors)
+        {
+            ModelState.AddModelError(string.Empty, error.Description);
+        }
+    }
+
+    // If we got this far, something failed, redisplay form
+    return Page();
+}
+
 
     
         // nieuwe method voor email verzenden met bool kijken of succesvol
@@ -245,6 +275,12 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
                 }
                body = body.Replace("URL", urlLink);
             return body;
+        }
+
+        public List<Teams> FetchTeams()
+        {
+            var teams = _context.Teams.ToList();
+            return teams;
         }
     }
 }

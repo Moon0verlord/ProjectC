@@ -1,0 +1,67 @@
+﻿@page
+@model CaveroClubhuis.Pages.AdminMakeTeamModel
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
+</head>
+
+
+<body>
+    <div class="main-body">
+        <div class="admin-bar">
+            <!-- Buttons for the admin-->
+            <a href="/MakeEvent">
+                <button id="makeButton" class="admin-button">
+                    Event aanmaken
+                </button>
+            </a>
+            <a href="/AdminChange">
+                <button id="changeButton" class="admin-button">
+                    Event aanpassen
+                </button>
+            </a>
+            <a href="/AdminDelete">
+                <button id="removeButton" class="admin-button">
+                    Event verwijderen
+                </button>
+            </a>
+            <a href="/AdminMakeTeam">
+                <button id="TeamButton" class="admin-button">Team aanmaken</button>
+            </a>
+
+            <a href="/AdminRemoveTeam">
+                <button id="TeamButton" class="admin-button">Team verwijderen</button>
+            </a>
+            <a href="/AdminFeedback">
+                <button id="feedbackButton" class="admin-button">Feedback bekijken</button>
+            </a>
+        </div>
+
+        <div class="make-event">
+            <div class="form-dialog-header">
+                <header>
+                    <div class="maketeam">Team aanmaken</div>
+                </header>
+
+                <div class="line"></div>
+            </div>
+            <form id="make" method="post" class="make-event-form" asp-page-handler="MakeTeam">
+                <!-- Add the make event inputs here-->
+                <label for="title">Titel</label>
+                <span asp-validation-for="title" class="error-message"></span>
+                <input type="text" id="title" placeholder="titel" maxlength="20" asp-for="title">
+                <div class="explain">Vul het veld in om een team te maken.</div>
+                <input type="submit" value="Opslaan">
+            </form>
+            
+        </div>
+        </div>
+</body>
+
+<style>
+
+
+</style>

@@ -1,6 +1,9 @@
 ﻿@page
 @using System.Runtime.InteropServices.JavaScript
+@using CaveroClubhuis.Areas.Identity.Data
 @model KalenderModel
+@inject SignInManager<CaveroUser> SignInManager
+@inject UserManager<CaveroUser> UserManager
 @using System.Security.Claims;
 @{
     ViewData["Title"] = "Kalender";
@@ -10,6 +13,21 @@
     <link rel="stylesheet" href="~/css/kalender.css" />
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+    
+    <body>
+    @if (SignInManager.IsSignedIn(User))
+    { 
+        var user = await UserManager.GetUserAsync(User);
+        if (await UserManager.IsInRoleAsync(user, "Admin"))
+        {
+            <a href="/MakeEvent">
+                <button class="CreateButton"> Create Event</button>
+                </a>
+        }
+    }
+    </body>
+    
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

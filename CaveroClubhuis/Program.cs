@@ -21,7 +21,7 @@ builder.Services.AddDefaultIdentity<CaveroUser>(options => options.SignIn.Requir
 
 
 // Add custom services
-builder.Services.AddScoped<LayoutTools>();
+builder.Services.AddScoped<ILayoutTools, LayoutTools>();
 
 
 
