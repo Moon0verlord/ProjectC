@@ -1,5 +1,9 @@
-﻿@media screen and (min-width: 1368px) and (max-width: 1824px) {
-
+﻿@media screen and (min-width: 1824px) and (max-width: 2600px) {
+    .upcomming {
+        width: 400px;
+    }
+} /* speciaal voor maruf monitor monitor kon groter testen */
+@media screen and (min-width: 1368px) and (max-width: 1824px) {
 
     .check-inWidget {
         transform: scale(0.8);
@@ -27,7 +31,6 @@
     .Wrapper {
         width: 50%
     }
-    
 }
 
 .e-pager .e-currentitem {
@@ -213,14 +216,24 @@ body {
 }
 
 .kaart {
+    /* css voor hover functie */
+    display: inline-block;
+    overflow: hidden;
     margin-top: 50px; /* margin top */
     background-color: #803689;
     border-radius: 30px;
-    width: 94%;
-    height: 111px;
+    width: 70%;
+    height: 80px;
     margin: 0 auto;
 }
+.kaart .Hover {
+    hyphens: auto;
+}
 
+.kaart:hover {
+    height: fit-content;
+    white-space: initial;
+}
 .kaart h2 {
     margin-top: 25px;
     font-size: 20px;
