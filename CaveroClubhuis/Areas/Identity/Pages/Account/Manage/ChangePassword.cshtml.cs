@@ -21,7 +21,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<CaveroUser> _signInManager;
         private readonly CaveroClubhuisContext _context;
         private readonly UserManager<CaveroUser> _userManager;
-        private readonly LayoutTools _layoutTools;
+        private readonly ILayoutTools _layoutTools;
         public bool IsUserCheckedIn { get; private set; }
 
         public string FirstName { get; private set; }
@@ -32,7 +32,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account.Manage
         public ChangePasswordModel(
             UserManager<CaveroUser> userManager,
             SignInManager<CaveroUser> signInManager,
-            ILogger<ChangePasswordModel> logger, CaveroClubhuisContext context, LayoutTools layoutTools)
+            ILogger<ChangePasswordModel> logger, CaveroClubhuisContext context, ILayoutTools layoutTools)
         {
             _context = context;
             _userManager = userManager;
