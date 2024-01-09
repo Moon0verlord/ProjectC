@@ -33,7 +33,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     // Get all elements with class name "openModalBtn" (buttons that open the modals)
-    var buttons = document.querySelectorAll(".openModalBtn");
+    var buttons = document.querySelectorAll(".openModalBtn, .AanmeldModalBtn, .AfmeldModalBtn");
 
     // Loop through each button and attach click event listeners
     buttons.forEach(function (btn) {
