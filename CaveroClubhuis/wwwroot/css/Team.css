@@ -228,4 +228,8 @@ a[title="Manage"] {
     #container {
         margin-left: 100px;
     }
+
+    #dialog {
+        left: -0px !important;
+    }
 }
