@@ -252,6 +252,7 @@
 
         .Evenementen-opkomend #beschijving, .Evenementen-verlopen #beschijving {
             font-size: 14px;
+            width: 90%;
         }
 
     .modal-content {

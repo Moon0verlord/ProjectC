@@ -1,0 +1,681 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\CaveroClubhuis.bundle.scp.css",
+      "PackagePath": "staticwebassets\\CaveroClubhuis.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\css\\Admin.css",
+      "PackagePath": "staticwebassets\\css\\Admin.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\css\\Events.css",
+      "PackagePath": "staticwebassets\\css\\Events.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\css\\Layout.css",
+      "PackagePath": "staticwebassets\\css\\Layout.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\css\\Settings.css",
+      "PackagePath": "staticwebassets\\css\\Settings.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\css\\Team.css",
+      "PackagePath": "staticwebassets\\css\\Team.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\css\\index.css",
+      "PackagePath": "staticwebassets\\css\\index.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\css\\kalender.css",
+      "PackagePath": "staticwebassets\\css\\kalender.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\css\\user-auth.css",
+      "PackagePath": "staticwebassets\\css\\user-auth.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\emailVerification.html",
+      "PackagePath": "staticwebassets\\emailVerification.html"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\forgotEmail.html",
+      "PackagePath": "staticwebassets\\forgotEmail.html"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\An.jpeg",
+      "PackagePath": "staticwebassets\\images\\An.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\Bell.png",
+      "PackagePath": "staticwebassets\\images\\Bell.png"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\Calender_Icon.png",
+      "PackagePath": "staticwebassets\\images\\Calender_Icon.png"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\Cavero_white.png",
+      "PackagePath": "staticwebassets\\images\\Cavero_white.png"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\Event_Icon.png",
+      "PackagePath": "staticwebassets\\images\\Event_Icon.png"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\Home_Icon2.png",
+      "PackagePath": "staticwebassets\\images\\Home_Icon2.png"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\News.png",
+      "PackagePath": "staticwebassets\\images\\News.png"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\Settings.png",
+      "PackagePath": "staticwebassets\\images\\Settings.png"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\admin.svg",
+      "PackagePath": "staticwebassets\\images\\admin.svg"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\calendar.svg",
+      "PackagePath": "staticwebassets\\images\\calendar.svg"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\cavero.jpg",
+      "PackagePath": "staticwebassets\\images\\cavero.jpg"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\cavero_heel.jpg",
+      "PackagePath": "staticwebassets\\images\\cavero_heel.jpg"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\event.svg",
+      "PackagePath": "staticwebassets\\images\\event.svg"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\group.svg",
+      "PackagePath": "staticwebassets\\images\\group.svg"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\home.svg",
+      "PackagePath": "staticwebassets\\images\\home.svg"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\log-out.svg",
+      "PackagePath": "staticwebassets\\images\\log-out.svg"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\logo.png",
+      "PackagePath": "staticwebassets\\images\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\logo2.png",
+      "PackagePath": "staticwebassets\\images\\logo2.png"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\menu-hamburger.svg",
+      "PackagePath": "staticwebassets\\images\\menu-hamburger.svg"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\images\\settings.svg",
+      "PackagePath": "staticwebassets\\images\\settings.svg"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\js\\kalender.js",
+      "PackagePath": "staticwebassets\\js\\kalender.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\.package-lock.json",
+      "PackagePath": "staticwebassets\\npm\\.package-lock.json"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\LICENSE.md",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\README.md",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\README.md"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\index.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\index.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\plugins\\confirmDate\\confirmDate.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\plugins\\confirmDate\\confirmDate.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\plugins\\labelPlugin\\labelPlugin.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\plugins\\labelPlugin\\labelPlugin.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\plugins\\minMaxTimePlugin.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\plugins\\minMaxTimePlugin.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\plugins\\momentPlugin.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\plugins\\momentPlugin.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\plugins\\monthSelect\\index.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\plugins\\monthSelect\\index.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\plugins\\rangePlugin.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\plugins\\rangePlugin.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\plugins\\scrollPlugin.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\plugins\\scrollPlugin.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\plugins\\weekSelect\\weekSelect.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\plugins\\weekSelect\\weekSelect.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\types\\globals.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\types\\globals.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\types\\instance.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\types\\instance.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\types\\locale.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\types\\locale.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\types\\options.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\types\\options.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\utils\\dates.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\utils\\dates.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\utils\\dom.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\utils\\dom.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\utils\\formatting.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\utils\\formatting.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\utils\\index.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\utils\\index.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\esm\\utils\\polyfills.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\esm\\utils\\polyfills.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\flatpickr.css",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\flatpickr.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\flatpickr.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\flatpickr.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\flatpickr.min.css",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\flatpickr.min.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\flatpickr.min.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\flatpickr.min.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\ie.css",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\ie.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\confirmDate\\confirmDate.css",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\confirmDate\\confirmDate.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\confirmDate\\confirmDate.d.ts",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\confirmDate\\confirmDate.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\confirmDate\\confirmDate.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\confirmDate\\confirmDate.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\labelPlugin\\labelPlugin.d.ts",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\labelPlugin\\labelPlugin.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\labelPlugin\\labelPlugin.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\labelPlugin\\labelPlugin.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\minMaxTimePlugin.d.ts",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\minMaxTimePlugin.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\minMaxTimePlugin.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\minMaxTimePlugin.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\momentPlugin.d.ts",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\momentPlugin.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\momentPlugin.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\momentPlugin.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\monthSelect\\index.d.ts",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\monthSelect\\index.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\monthSelect\\index.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\monthSelect\\index.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\monthSelect\\style.css",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\monthSelect\\style.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\rangePlugin.d.ts",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\rangePlugin.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\rangePlugin.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\rangePlugin.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\scrollPlugin.d.ts",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\scrollPlugin.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\scrollPlugin.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\scrollPlugin.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\weekSelect\\weekSelect.d.ts",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\weekSelect\\weekSelect.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\plugins\\weekSelect\\weekSelect.js",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\plugins\\weekSelect\\weekSelect.js"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\themes\\airbnb.css",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\themes\\airbnb.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\themes\\confetti.css",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\themes\\confetti.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\themes\\dark.css",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\themes\\dark.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\themes\\light.css",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\themes\\light.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\themes\\material_blue.css",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\themes\\material_blue.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\themes\\material_green.css",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\themes\\material_green.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\themes\\material_orange.css",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\themes\\material_orange.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\themes\\material_red.css",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\themes\\material_red.css"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\types\\globals.d.ts",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\types\\globals.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\types\\instance.d.ts",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\types\\instance.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\types\\locale.d.ts",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\types\\locale.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\types\\options.d.ts",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\types\\options.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\typings.d.ts",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\typings.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\utils\\dates.d.ts",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\utils\\dates.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\utils\\dom.d.ts",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\utils\\dom.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\utils\\formatting.d.ts",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\utils\\formatting.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\dist\\utils\\index.d.ts",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\dist\\utils\\index.d.ts"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\package.json",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\package.json"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\src\\style\\_vars.styl",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\src\\style\\_vars.styl"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\src\\style\\flatpickr.styl",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\src\\style\\flatpickr.styl"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\src\\style\\ie.styl",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\src\\style\\ie.styl"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\src\\style\\themes\\airbnb.styl",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\src\\style\\themes\\airbnb.styl"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\src\\style\\themes\\confetti.styl",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\src\\style\\themes\\confetti.styl"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\src\\style\\themes\\dark.styl",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\src\\style\\themes\\dark.styl"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\src\\style\\themes\\light.styl",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\src\\style\\themes\\light.styl"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\src\\style\\themes\\material_blue.styl",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\src\\style\\themes\\material_blue.styl"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\src\\style\\themes\\material_green.styl",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\src\\style\\themes\\material_green.styl"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\src\\style\\themes\\material_orange.styl",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\src\\style\\themes\\material_orange.styl"
+    },
+    {
+      "Id": "C:\\Users\\jonas\\source\\repos\\projectc\\caveroClubhuis\\wwwroot\\npm\\flatpickr\\src\\style\\themes\\material_red.styl",
+      "PackagePath": "staticwebassets\\npm\\flatpickr\\src\\style\\themes\\material_red.styl"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.CaveroClubhuis.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.CaveroClubhuis.props",
+      "PackagePath": "build\\CaveroClubhuis.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.CaveroClubhuis.props",
+      "PackagePath": "buildMultiTargeting\\CaveroClubhuis.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.CaveroClubhuis.props",
+      "PackagePath": "buildTransitive\\CaveroClubhuis.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
