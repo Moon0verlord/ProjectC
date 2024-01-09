@@ -22,7 +22,7 @@
         if (await UserManager.IsInRoleAsync(user, "Admin"))
         {
             <a href="/MakeEvent">
-                <button class="CreateButton"> Create Event</button>
+                <button class="CreateButton">Maak nieuw event</button>
                 </a>
         }
     }
@@ -46,7 +46,7 @@
                     end: 'prev,today,next'
                 },
                 eventColor: '#803689',
-             events: @Html.Raw(Json.Serialize(Model.EventsList.Select(e => new
+                events: @Html.Raw(Json.Serialize(Model.EventsList.Select(e => new
             {
                 title = e.Title,
                 beschrijving  = e.Description,
@@ -54,6 +54,11 @@
                 end = e.Date.ToString("yyyy-MM-dd") + 'T' + e.EndTime,
                 id = e.Id
             }))),
+                buttonText: {
+                    month: 'maand',
+                    day: 'dag',
+                    today: 'vandaag'
+                },
                 eventClick: function (info) {
                     // Open de model
                     $('#modal1').modal('show');
