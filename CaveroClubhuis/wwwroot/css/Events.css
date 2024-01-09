@@ -130,6 +130,25 @@
         width: 50%;
     }
 
+.AanmeldModalBtn {
+    float: right;
+    background-color: #FFFFFF;
+    border-radius: 45px;
+    width: 150px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+.AfmeldModalBtn {
+    float: right;
+    background-color: #FFFFFF;
+    border-radius: 45px;
+    width: 150px;
+    height: 50px;
+    margin-right: 20px;
+    color: red;
+}
+
 .openModalBtn {
     float: right;
     background-color: #FFFFFF;
@@ -184,7 +203,7 @@
         border: 3px solid #ffffff;
     }
 
-.aamodel {
+.aaModal {
     margin-top: 70px;
     height: 7vh;
 }
