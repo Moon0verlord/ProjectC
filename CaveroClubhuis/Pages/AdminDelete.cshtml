@@ -7,12 +7,7 @@
 ViewData["Title"] = "Admin";
 }
 
-@if (TempData["ErrorMessage"] != null)
-{
-<div class="alert alert-danger">
-    @TempData["ErrorMessage"]
-</div>
-}
+
 <style>
     .confirm-button {
         background-color: #803689 !important;
@@ -130,7 +125,10 @@ ViewData["Title"] = "Admin";
 </div>
 
 
-
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}
 
 <script>
         window.onload = function () {

@@ -49,12 +49,13 @@
     border-radius: 15px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1280px) {
     /* Adjust styles for smaller screens */
     .peopleOverview {
-        width: 40%;
+        width: 60% !important;
     }
 }
+
 .e-pager div.e-icons.e-pager-default {
     color: #6c757d;
 

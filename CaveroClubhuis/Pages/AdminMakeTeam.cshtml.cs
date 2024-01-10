@@ -22,6 +22,9 @@ namespace CaveroClubhuis.Pages
         public string ProfileImage { get; set; }
         public bool IsUserCheckedIn { get; private set; }
 
+        [TempData]
+        public string StatusMessage { get; set; }
+
         [BindProperty]
         [Required(ErrorMessage = "Veld moet ingevuld worden")]
         public string? title { get; set; }
@@ -69,8 +72,9 @@ namespace CaveroClubhuis.Pages
             _context.Teams.ForEach(i => Console.WriteLine(i));
             _context.Teams.Add(newTeam);
             _context.SaveChanges();
-            ModelState.Clear();
-            return RedirectToPage("./Index"); // Redirect naar page weer
+            //ModelState.Clear();
+            TempData["StatusMessage"] = "Succesvol nieuw Team aangemaakt";
+            return RedirectToPage("./Admin"); // Redirect naar page weer
         }
     }
 }

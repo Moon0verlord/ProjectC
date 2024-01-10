@@ -26,6 +26,9 @@ namespace CaveroClubhuis.Pages
 
         public List<Teams> teams { get; set; }
 
+        [TempData]
+        public string StatusMessage { get; set; }
+
         public AdminRemoveTeamModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, ILayoutTools layoutTools)
         {
             _context = context;
@@ -79,6 +82,7 @@ namespace CaveroClubhuis.Pages
             Teams chosenTeam = _context.Teams.Where(_ => _.Id == chosenTeamID).FirstOrDefault()!;
             _context.Teams.Remove(chosenTeam);
             _context.SaveChanges();
+           TempData["StatusMessage"] = "Team is succesvol verwijderd";
             return RedirectToPage("/Admin");
         }
 

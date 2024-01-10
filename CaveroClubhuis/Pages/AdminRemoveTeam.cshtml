@@ -53,10 +53,10 @@
 
             <form id="make" method="post" class="remove-team-form" asp-page-handler="RemoveTeam">
 
-                <ejs-dropdownlist id="selectedEvent" dataSource="@Model.teams" placeholder="Kies een evenement" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.chosenTeamID" width="325px">
+                <ejs-dropdownlist id="selectedEvent" dataSource="@Model.teams" placeholder="Kies een team" allowFiltering="true" filtering="onfiltering" ejs-for="@Model.chosenTeamID" width="325px">
                     <e-dropdownlist-fields text="Title" value="Id"></e-dropdownlist-fields>
                 </ejs-dropdownlist>
-                <div class="explain">Vul het veld in om een team te maken.</div>
+                <div class="explain">Selecteer een team om deze te verwijderen.</div>
                 <span asp-validation-for="chosenTeamID" class="error-message-remove"></span>
                 <input type="submit" value="opslaan">
             </form>
