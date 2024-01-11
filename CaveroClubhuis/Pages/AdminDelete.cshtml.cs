@@ -1,3 +1,4 @@
+//using AspNetCore;
 using CaveroClubhuis.Areas.Identity.Data;
 using CaveroClubhuis.Data;
 using CaveroClubhuis.Pages.Shared;
@@ -31,6 +32,9 @@ namespace CaveroClubhuis.Pages
         public string Title { get; set; }
 
         public List<Events> EventsNames { get; set; }
+
+        [TempData]
+        public string StatusMessage { get; set; }
         public AdminDeleteModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, ILayoutTools layoutTools)
         {
             _context = context;
@@ -65,9 +69,9 @@ namespace CaveroClubhuis.Pages
             _context.RemoveRange(fullEvents);
             _context.SaveChanges();
             // notificatie opslaan
-            TempData["DeleteSuccess"] = "Evenement is succesvol verwijderd";
+            TempData["StatusMessage"] = "Evenement is succesvol verwijderd";
 
-            return RedirectToPage("./Index"); // Redirect naar page weer
+            return RedirectToPage("./Admin"); // Redirect naar page weer
         }
 
 
@@ -89,9 +93,11 @@ namespace CaveroClubhuis.Pages
 
     }
 }
+
 public class ButtonModel
 {
     public string content { get; set; }
     public bool isPrimary { get; set; }
     public string cssClass { get; set; }
 }
+

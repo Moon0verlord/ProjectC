@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Admin";
 }
-
+<partial name="_StatusMessage" model="@TempData["StatusMessage"]" />
 <head>
     <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
 </head>

@@ -52,9 +52,6 @@
                     </e-content-template>
                 </ejs-dialog>
                 </div>
-            
-            
-
         </div>
     </div>
     <div class="upcomming">
@@ -84,9 +81,9 @@
     </div>
     
     <div class="check-inWidget">
-        <p>Setup Recurring check-in</p>
+        <p>Auto Check-in instellen</p>
         <div class="line"></div>
-        Select a start and end date for the recurring check-in:
+        Selecteer een begin- en einddatum voor de terugkerende check-in:
         @if (TempData["ErrorMessage"] != null)
         {
             <div class="error-message">
@@ -94,8 +91,8 @@
             </div>
         }
         <form method="post" asp-page-handler="RecurringCheck">
-            <input type="text" id="startDatePicker" class="flatpickr" name="StartDate" placeholder="Please Select Start Date">
-            <input type="text" id="endDatePicker" class="flatpickr" name="EndDate" placeholder="Please Select End Date">
+            <input type="text" id="startDatePicker" class="flatpickr" name="StartDate" placeholder="Selecteer startdatum">
+            <input type="text" id="endDatePicker" class="flatpickr" name="EndDate" placeholder="Selecteer startdatum">
             <button type="submit" class="check-in">
                 <i class="ri-login-circle-line"></i>
                 Check - in

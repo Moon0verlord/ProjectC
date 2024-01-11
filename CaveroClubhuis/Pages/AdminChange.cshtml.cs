@@ -55,6 +55,9 @@ namespace CaveroClubhuis.Pages
         public string Title { get; set; }
 
         public List<Events> Events { get; set; }
+
+        [TempData]
+        public string StatusMessage { get; set; }
         public AdminChangeModel(CaveroClubhuisContext context, UserManager<CaveroUser> userManager, ILayoutTools layoutTools)
         {
             _context = context;
@@ -102,8 +105,8 @@ namespace CaveroClubhuis.Pages
             eventToUpdate.Location = location;
             _context.SaveChanges();
             ModelState.Clear();
-            TempData["ChangeSuccess"] = "Evenement is succesvol gewijzigd";
-            return RedirectToPage("./Index"); // Redirect naar page weer
+            TempData["StatusMessage"] = "Evenement is succesvol gewijzigd";
+            return RedirectToPage("./Admin"); // Redirect naar page weer
         }
         public IActionResult OnPostAskInput()
         {

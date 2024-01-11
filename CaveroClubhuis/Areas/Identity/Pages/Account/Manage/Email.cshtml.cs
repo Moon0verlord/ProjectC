@@ -28,7 +28,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<CaveroUser> _signInManager;
         private readonly CaveroClubhuisContext _context;
         private readonly UserManager<CaveroUser> _userManager;
-        private readonly LayoutTools _layoutTools;
+        private readonly ILayoutTools _layoutTools;
         public bool IsUserCheckedIn { get; private set; }
 
         public string FirstName { get; private set; }
@@ -37,49 +37,28 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account.Manage
 
         public EmailModel(
             UserManager<CaveroUser> userManager,
-            SignInManager<CaveroUser> signInManager, CaveroClubhuisContext context, LayoutTools layoutTools)
+            SignInManager<CaveroUser> signInManager, CaveroClubhuisContext context, ILayoutTools layoutTools)
         {
             _context = context;
             _userManager = userManager;
             _layoutTools = layoutTools;
         }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
+    
         public string Email { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
+    
         public bool IsEmailConfirmed { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         [TempData]
         public string StatusMessage { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
+           // input email
             [Required(ErrorMessage = "Alle velden zijn verplicht om in te vullen")]
             [EmailAddress]
             [Display(Name = "Nieuwe email")]

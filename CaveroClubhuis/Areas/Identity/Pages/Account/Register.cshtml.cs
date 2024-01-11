@@ -90,48 +90,42 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
+            // input first name
             
-            [Required]
+            [Required(ErrorMessage = "Voornaam is vereist.")]
             [DataType(DataType.Text)]
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
             
-            [Required]
+            // inpuit last name
+            [Required(ErrorMessage = "Achternaam is vereist.")]
             [DataType(DataType.Text)]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
             
-            [Required]
+            // input email
+            [Required(ErrorMessage = "Het veld E-mail is vereist.")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$", ErrorMessage = "Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one digit, and one special character.")]
+            // input wachtwoord
+            [Required(ErrorMessage = "Het veld Wachtwoord is vereist.")]
+            [StringLength(100, ErrorMessage = "De {0} moet minimaal {2} en maximaal {1} tekens lang zijn.", MinimumLength = 6)]
+            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$", ErrorMessage = "Het wachtwoord moet minstens 8 tekens lang zijn en minstens één kleine letter, één hoofdletter, één cijfer en één speciaal teken bevatten.")]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
+            // verificatie wachtwoord
+            [Required(ErrorMessage = "Bevestig wachtwoord veld is vereist" )]
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "Het wachtwoord en het bevestigingswachtwoord komen niet overeen.")]
             public string ConfirmPassword { get; set; }
 
-
-            [Required]
+            // input team
+            [Required(ErrorMessage = "Het veld Team is vereist.")]
             [BindProperty]
             [Display(Name = "Selecteer Team")]
             public int SelectedTeams { get; set; }

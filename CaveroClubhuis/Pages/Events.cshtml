@@ -37,7 +37,7 @@
                 {
                     <form method="post" asp-page-handler="Leave">
                         <input type="hidden" name="eventId" value="@eventItem.Id" />
-                        <button type="submit" class="openModalBtn" data-modal-id="modal1_@eventItem.Id">Afmelden</button>
+                        <button type="submit" class="AfmeldModalBtn" data-modal-id="modal1_@eventItem.Id">Afmelden</button>
                     </form>
                     <div id="modal1_@eventItem.Id" class="modal">
                         <div class="modal-content">
@@ -45,7 +45,7 @@
                                 <h5 class="modal-title">@eventItem.Title</h5>
                                 <span class="close">&times;</span>
                             </div>
-                            <p class="aamodel">U bent nu Afgemeld voor: @eventItem.Title op @eventItem.Date.ToString("dd-MM-yy") om @eventItem.StartTime.ToString(@"hh\:mm")</p>
+                            <p class="aaModal">U bent nu Afgemeld voor: @eventItem.Title op @eventItem.Date.ToString("dd-MM-yy") om @eventItem.StartTime.ToString(@"hh\:mm")</p>
                         </div>
                     </div>
                 }
@@ -53,7 +53,7 @@
                 {
                     <form method="post" asp-page-handler="Add">
                         <input type="hidden" name="eventId" value="@eventItem.Id" />
-                        <button type="submit" class="openModalBtn" data-modal-id="modal1_@eventItem.Id">Aanmelden</button>
+                        <button type="submit" class="AanmeldModalBtn" data-modal-id="modal1_@eventItem.Id">Aanmelden</button>
                     </form>
                     <div id="modal1_@eventItem.Id" class="modal">
                         <div class="modal-content">
@@ -61,7 +61,7 @@
                                 <h5 class="modal-title">@eventItem.Title</h5>
                                 <span class="close">&times;</span>
                             </div>
-                            <p class="aamodal">U bent nu aangemeld voor: @eventItem.Title op @eventItem.Date.ToString("dd-MM-yy") om @eventItem.StartTime.ToString(@"hh\:mm")</p>
+                            <p class="aaModal">U bent nu aangemeld voor: @eventItem.Title op @eventItem.Date.ToString("dd-MM-yy") om @eventItem.StartTime.ToString(@"hh\:mm")</p>
                         </div>
                     </div>
                 }

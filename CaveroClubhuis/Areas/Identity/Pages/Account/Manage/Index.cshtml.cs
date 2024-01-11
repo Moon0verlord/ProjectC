@@ -1,8 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-#nullable disable
-
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -21,15 +17,14 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<CaveroUser> _signInManager;
         private readonly CaveroClubhuisContext _context;
         private readonly UserManager<CaveroUser> _userManager;
-        private readonly LayoutTools _layoutTools;
+        private readonly ILayoutTools _layoutTools;
         public bool IsUserCheckedIn { get; private set; }
-
+        public string ProfileImage { get; set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
-        public string ProfileImage { get;  set; }
         public IndexModel(
             UserManager<CaveroUser> userManager,
-            SignInManager<CaveroUser> signInManager,CaveroClubhuisContext context, LayoutTools layoutTools)
+            SignInManager<CaveroUser> signInManager,CaveroClubhuisContext context, ILayoutTools layoutTools)
         {
             _context = context;
             _userManager = userManager;
@@ -99,7 +94,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
             var userId = _userManager.GetUserId(User);
-            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
+            (FirstName, LastName,ProfileImage) = _layoutTools.LoadUserInfo(userId!);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
             await LoadAsync(user);
             return Page();
@@ -117,7 +112,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account.Manage
             {
                 await LoadAsync(user);
                 var userId = _userManager.GetUserId(User);
-                (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
+                (FirstName, LastName,ProfileImage) = _layoutTools.LoadUserInfo(userId!);
                 IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
 
                 return Page();

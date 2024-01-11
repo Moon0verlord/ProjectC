@@ -21,7 +21,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<CaveroUser> _signInManager;
         private readonly CaveroClubhuisContext _context;
         private readonly UserManager<CaveroUser> _userManager;
-        private readonly LayoutTools _layoutTools;
+        private readonly ILayoutTools _layoutTools;
         public bool IsUserCheckedIn { get; private set; }
 
         public string FirstName { get; private set; }
@@ -32,7 +32,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account.Manage
         public ChangePasswordModel(
             UserManager<CaveroUser> userManager,
             SignInManager<CaveroUser> signInManager,
-            ILogger<ChangePasswordModel> logger, CaveroClubhuisContext context, LayoutTools layoutTools)
+            ILogger<ChangePasswordModel> logger, CaveroClubhuisContext context, ILayoutTools layoutTools)
         {
             _context = context;
             _userManager = userManager;
@@ -41,39 +41,22 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account.Manage
             _signInManager = signInManager;
         }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
+
         [BindProperty]
         public InputModel Input { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         [TempData]
         public string StatusMessage { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
+           // inputmodel oude wactwoord
             [Required(ErrorMessage = "Dit veld is verplicht om in te vullen")]
             [DataType(DataType.Password)]
             [Display(Name = "Huidig wachtwoord")]
             public string OldPassword { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
+          // input noieuw wachtwoord
             [Required(ErrorMessage = "Dit veld is verplicht om in te vullen")]
             [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$", ErrorMessage = "Het wachtwoord moet minimaal 8 tekens lang zijn en minimaal één kleine letter, één hoofdletter, één cijfer en één speciaal teken bevatten.")]
             [StringLength(100, ErrorMessage = "het {0} moet tussen {2} en {1} karakters zijn.", MinimumLength = 6)]
@@ -81,10 +64,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Nieuw wachtwoord")]
             public string NewPassword { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
+            // nieuw wacghtwoord herhaling
             [DataType(DataType.Password)]
             [Display(Name = "Verifieer nieuw wachtwoord")]
             [Compare("NewPassword", ErrorMessage = "Het nieuwe wachtwoord is niet hetzelfde als het ingevulde wachtwoord")]
