@@ -1,35 +1,35 @@
 ﻿var acc = document.getElementsByClassName("Accordion");
-    var i;
+var i;
 
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function () {
-            var panel = this.nextElementSibling;
-            var isActive = this.classList.contains("active");
+for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+        var panel = this.nextElementSibling;
+        var isActive = this.classList.contains("active");
 
-            // Close all accordion panels except the clicked one
-            for (var j = 0; j < acc.length; j++) {
-                if (j !== i) {
-                    acc[j].classList.remove("active");
-                    acc[j].nextElementSibling.style.display = "none";
-                }
+        // Close all accordion panels except the clicked one
+        for (var j = 0; j < acc.length; j++) {
+            if (j !== i) {
+                acc[j].classList.remove("active");
+                acc[j].nextElementSibling.style.display = "none";
             }
-
-            // Toggle the clicked accordion panel
-            if (isActive) {
-                this.classList.remove("active");
-                panel.style.display = "none";
-            } else {
-                this.classList.add("active");
-                panel.style.display = "block";
-            }
-        });
-
-        // Open the first accordion panel by default
-        if (i === 0) {
-            acc[i].classList.add("active");
-            acc[i].nextElementSibling.style.display = "block";
         }
+
+        // Toggle the clicked accordion panel
+        if (isActive) {
+            this.classList.remove("active");
+            panel.style.display = "none";
+        } else {
+            this.classList.add("active");
+            panel.style.display = "block";
+        }
+    });
+
+    // Open the first accordion panel by default
+    if (i === 0) {
+        acc[i].classList.add("active");
+        acc[i].nextElementSibling.style.display = "block";
     }
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     // Get all elements with class name "openModalBtn" (buttons that open the modals)
@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-
     // When the user clicks anywhere outside of the modal, close it
     window.addEventListener("click", function (event) {
         var modals = document.querySelectorAll(".modal");
@@ -75,5 +74,14 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
-}
-);
+
+    // popup function for feedback
+    window.showPopup = function() {
+        var popup = document.getElementById("popup");
+        popup.style.display = "block";
+
+        setTimeout(function () {
+            popup.style.display = "none";
+        }, 2000);
+    }
+});

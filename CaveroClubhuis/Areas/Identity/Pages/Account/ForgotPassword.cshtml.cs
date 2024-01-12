@@ -37,7 +37,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
         public class InputModel
         {
            //inpiuit email
-            [Required]
+            [Required(ErrorMessage ="Email is verplicht om in te vullen")]
             [EmailAddress]
             public string Email { get; set; }
         }

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CaveroClubhuis.Areas.Identity.Pages.Account
 {
@@ -32,20 +33,21 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
         public class InputModel
         {
            // input email
-            [Required]
+            [Required(ErrorMessage = "Email is vereist")]
             [EmailAddress]
             public string Email { get; set; }
 
             // input wachtwoord
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Wachtwoord is vereist")]
+            [Display(Name = "Nieuw wachtwoord")]
+            [StringLength(100, ErrorMessage = "Het {0} moet tussen de {2} en {1} karakters zijn.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             public string Password { get; set; }
                
             // input verificatie wachtwoord 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Bevestigings wachtwoord")]
+            [Compare("Password", ErrorMessage = "Het nieuwe wachtwoord en bevestigingswachtwoord komen niet overeen.")]
             public string ConfirmPassword { get; set; }
 
             // authenticatie code
@@ -81,7 +83,9 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToPage("./ResetPasswordConfirmation");
+                string error = "email is onjuist";
+                ModelState.AddModelError(string.Empty, error);
+                return Page();
             }
 
             var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
