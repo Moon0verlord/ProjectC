@@ -12,6 +12,7 @@
 <body>
     <div class="Wrapper">
 
+        <div id="popup" style="display: none;">Feedback is verstuurd</div>
 
         <!--Opkomende Evenementen-->
         <div class="Accordion">
@@ -127,7 +128,7 @@
                                     <form method="post" asp-page-handler="SubmitFeedback">
                                         <input type="hidden" name="eventId" value="@eventItem.Id" />
                                         <textarea class="feedback" name="feedback" placeholder="Geef hier feedback over het event (denk aan dingen die je miste of juist goed geregeld waren)" rows="4" cols="50"></textarea>
-                                        <button class="Send-feedback" type="submit">Stuur feedback</button>
+                                        <button class="Send-feedback" type="submit" onclick="showPopup()">Stuur feedback</button>
                                     </form>
                             </div>
                         </div>
@@ -137,4 +138,5 @@
                     }
         </div>
     </div>
+    
 </body>

@@ -28,20 +28,21 @@
         <div class="login_register">
             Heb je al een account? <a href="./Login">Log hier in!</a>
         </div>
-        <div class="validation-summary-errors text-danger" asp-validation-summary="All"></div>
+
         <div class="login_input">
-            
-    <div class = "name-fields">        
-            <div class="login_box">
-                <input type="text" asp-for="Input.FirstName" placeholder="Voornaam" required class="login_input smaller-input">
-                <i class="ri-user-fill"></i>
+            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            <div class="name-fields">
+                <div class="login_box">
+                    <input type="text" asp-for="Input.FirstName" placeholder="Voornaam" required class="login_input smaller-input">
+                    <i class="ri-user-fill"></i>
+                </div>
+                
+                <div class="login_box">
+                    <input type="text" asp-for="Input.LastName" placeholder="Achternaam" required class="login_input smaller-input">
+                    <i class="ri-user-fill"></i>
+                </div>
             </div>
-            
-            <div class="login_box">
-                <input type="text" asp-for="Input.LastName" placeholder="Achternaam" required class="login_input smaller-input">
-                <i class="ri-user-fill"></i>
-            </div>
-    </div>
             <div class="login_box">
                 <input type="email" asp-for="Input.Email" placeholder="Email" required class="login_input">
                 <i class="ri-mail-fill"></i>

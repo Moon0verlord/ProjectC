@@ -92,39 +92,40 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
         {
             // input first name
             
-            [Required]
+            [Required(ErrorMessage = "Voornaam is vereist.")]
             [DataType(DataType.Text)]
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
             
             // inpuit last name
-            [Required]
+            [Required(ErrorMessage = "Achternaam is vereist.")]
             [DataType(DataType.Text)]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
             
             // input email
-            [Required]
+            [Required(ErrorMessage = "Het veld E-mail is vereist.")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
             // input wachtwoord
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$", ErrorMessage = "Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one digit, and one special character.")]
+            [Required(ErrorMessage = "Het veld Wachtwoord is vereist.")]
+            [StringLength(100, ErrorMessage = "De {0} moet minimaal {2} en maximaal {1} tekens lang zijn.", MinimumLength = 6)]
+            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$", ErrorMessage = "Het wachtwoord moet minstens 8 tekens lang zijn en minstens één kleine letter, één hoofdletter, één cijfer en één speciaal teken bevatten.")]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
             // verificatie wachtwoord
+            [Required(ErrorMessage = "Bevestig wachtwoord veld is vereist" )]
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "Het wachtwoord en het bevestigingswachtwoord komen niet overeen.")]
             public string ConfirmPassword { get; set; }
 
             // input team
-            [Required]
+            [Required(ErrorMessage = "Het veld Team is vereist.")]
             [BindProperty]
             [Display(Name = "Selecteer Team")]
             public int SelectedTeams { get; set; }

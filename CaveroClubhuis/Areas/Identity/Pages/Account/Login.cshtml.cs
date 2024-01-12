@@ -45,12 +45,12 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
         public class InputModel
         {
             // input email
-            [Required]
+            [Required(ErrorMessage = "Email is verplicht")]
             [EmailAddress]
             public string Email { get; set; }
 
            // input wachtwoord
-            [Required]
+            [Required(ErrorMessage = "Wachtwoord is verplicht")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
             // remember me 
@@ -102,7 +102,7 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Ongeldige inlogpoging.");
                     return Page();
                 }
             }
