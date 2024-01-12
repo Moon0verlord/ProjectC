@@ -247,6 +247,18 @@
     margin-top: 20px;
 }
 
+#popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    background-color: #4CAF50;
+    text-align: center;
+    padding: 10px;
+    z-index: 1000;
+}
+
 /* Media query for mobile devices */
 @media (max-width: 480px) {
     .Accordion, .panel, .Evenementen-opkomend, .Evenementen-verlopen {
