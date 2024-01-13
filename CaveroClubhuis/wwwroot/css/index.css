@@ -9,9 +9,11 @@
         transform: scale(0.8);
         margin-left: 0px;
     }
-
+    .upcomming{
+        width:20%;
+    }
     .Wrapper.Wrapper {
-        width: 55%;
+        width: 60%;
     }
     
     .kaart.kaart #beschijving{
