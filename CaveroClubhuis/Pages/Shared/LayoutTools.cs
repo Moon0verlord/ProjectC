@@ -111,19 +111,32 @@ public class LayoutTools : ILayoutTools
     /// Toggles the check-in status of a user identified by their user ID.
     /// @param userId The unique identifier of the user.
     /// /
-    public void ToggleCheckIn(string userId)
-    {
-        var currentStatus = IsUserCheckedIn(userId);
+public void ToggleCheckIn(string userId)
+{
+    var inOfficeRecord = _context.InOffice
+        .FirstOrDefault(io => io.UserId == userId);
 
-        if (currentStatus)
+    if (inOfficeRecord != null)
+    {
+        // Check if the user has a recurring check-in and if the check-out date is past the current date
+        if (inOfficeRecord.IsRecurring.GetValueOrDefault() && inOfficeRecord.CheckOutDate.GetValueOrDefault(DateTime.MinValue) > DateTime.UtcNow)
         {
-            CheckOut(userId);
-        }
-        else
-        {
-            CheckIn(userId);
+            // If the conditions are met, do not toggle the check-in status
+            return;
         }
     }
+
+    var currentStatus = IsUserCheckedIn(userId);
+
+    if (currentStatus)
+    {
+        CheckOut(userId);
+    }
+    else
+    {
+        CheckIn(userId);
+    }
+}
 
     /// <summary>
     /// Checks if the user with the given userId is an admin.
