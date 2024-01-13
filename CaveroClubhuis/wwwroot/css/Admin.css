@@ -1,4 +1,13 @@
-﻿.admin-bar {
+﻿@media screen and (max-width: 600px) {
+    /* Adjust styles for smaller screens */
+     .make-event, .e-control {
+        position: absolute !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+    }
+}
+.admin-bar {
     display: inline-block;
     float: left;
     margin-left: 80px;
