@@ -26,59 +26,114 @@ public class DBSeeder
         {
             new Events
             {
-                Title = "Why Bald People?",
-                Description = "Exploring baldness and its effects on the human psyche",
-                Date = DateTime.UtcNow.Date.AddDays(10),
-                StartTime = DateTime.UtcNow.AddHours(2).TimeOfDay,
-                EndTime = DateTime.UtcNow.AddHours(4).TimeOfDay,
+                Title = "Yakub has been Spawned. What now?",
+                Description = "We didn't think this far ahead. What do we do now?",
+                Date = DateTime.UtcNow.Date.AddDays(3),
+                StartTime = DateTime.UtcNow.AddHours(10).TimeOfDay,
+                EndTime = DateTime.UtcNow.AddHours(12).TimeOfDay,
                 UserId = GetRandomUserId(context),
-                Location = "Online",
+                Location = "The Cube",
                 Approval = true
             },
             new Events
             {
-                Title = "Capitol Visit",
-                Description = "We will be visiting the capitol to convince the government to ban baldness",
+                Title = "The battle of the balds",
+                Description = "The balds have taken over. We can't let this happen we must fight back.",
                 Date = DateTime.UtcNow.Date.AddDays(2),
-                StartTime = DateTime.UtcNow.AddHours(8).TimeOfDay,
-                EndTime = DateTime.UtcNow.AddHours(10).TimeOfDay,
+                StartTime = DateTime.UtcNow.AddHours(13).TimeOfDay,
+                EndTime = DateTime.UtcNow.AddHours(15).TimeOfDay,
                 UserId = GetRandomUserId(context),
-                Location = "Den Haag",
+                Location = "Baldlandia",
                 Approval = false
             },
             new Events
             {
-                Title = "Spawning Yakub",
-                Description = "We will be attempting the summoning of Yakub.",
+                Title = "Stealing the Cube",
+                Description = "They have a cube. We want the cube. We will take the cube.",
                 Date = DateTime.UtcNow.Date.AddDays(5),
-                StartTime = DateTime.UtcNow.AddHours(5).TimeOfDay,
-                EndTime = DateTime.UtcNow.AddHours(6).TimeOfDay,
+                StartTime = DateTime.UtcNow.AddHours(18).TimeOfDay,
+                EndTime = DateTime.UtcNow.AddHours(20).TimeOfDay,
                 UserId = GetRandomUserId(context),
                 Location = "Arabia",
                 Approval = true
             },
             new Events
             {
-                Title = "Joining the war on drugs",
-                Description = "We will be joining the war on drugs. by selling drugs.",
-                Date = DateTime.UtcNow.Date.AddDays(1),
-                StartTime = DateTime.UtcNow.AddHours(3).TimeOfDay,
-                EndTime = DateTime.UtcNow.AddHours(4).TimeOfDay,
+                Title = "Taking DMT with Joe Rogan",
+                Description = "Joseph James Rogan has invited us to take DMT with him and interview God Himself.",
+                Date = DateTime.SpecifyKind(new DateTime(2024,01,19), DateTimeKind.Utc),
+                StartTime = DateTime.UtcNow.AddHours(8).TimeOfDay,
+                EndTime = DateTime.UtcNow.AddHours(9).TimeOfDay,
                 UserId = GetRandomUserId(context),
-                Location = "The streets",
-                Approval = false
+                Location = "Mars?",
+                Approval = true
             },
             new Events
             {
-                Title = "Tax Fraud part 2",
-                Description = "We will be committing tax fraud. again.",
-                Date = DateTime.UtcNow.Date.AddDays(7),
+                Title = "Joining FeetFinder",
+                Description = "We have feet. We want to find other feet. We will join FeetFinder and share feet.",
+                Date = DateTime.SpecifyKind(new DateTime(2024,01,12), DateTimeKind.Utc),
                 StartTime = DateTime.UtcNow.AddHours(6).TimeOfDay,
                 EndTime = DateTime.UtcNow.AddHours(8).TimeOfDay,
                 UserId = GetRandomUserId(context),
-                Location = "Belastingdienst HQ",
+                Location = "feetfinder.com",
                 Approval = true
-            }
+            },
+            new Events
+            {
+                Title = "Rigging the 2024 Presidential Election",
+                Description = "The russians have asked us to rig the 2024 presidential election. MAGA2024",
+                Date = DateTime.SpecifyKind(new DateTime(2024,01,18), DateTimeKind.Utc),
+                StartTime = DateTime.UtcNow.AddHours(8).TimeOfDay,
+                EndTime = DateTime.UtcNow.AddHours(10).TimeOfDay,
+                UserId = GetRandomUserId(context),
+                Location = "The US of A",
+                Approval = true
+            },
+            new Events
+            {
+                Title = "Abolishing the Zoomers",
+                Description = "We must delete every Zoomer born after 2002, they are corrupting the youth with their lack of brain cells.",
+                Date = DateTime.SpecifyKind(new DateTime(2024,01,17), DateTimeKind.Utc),
+                StartTime = DateTime.UtcNow.AddHours(7).TimeOfDay,
+                EndTime = DateTime.UtcNow.AddHours(9).TimeOfDay,
+                UserId = GetRandomUserId(context),
+                Location = "Everywhere",
+                Approval = true
+            },
+            new Events
+            {
+                Title = "What is a skibidi toilet?",
+                Description = "What are these kids saying? What is a skibidi toilet? why are they saying it?",
+                Date = DateTime.SpecifyKind(new DateTime(2024,01,11), DateTimeKind.Utc),
+                StartTime = DateTime.UtcNow.AddHours(8).TimeOfDay,
+                EndTime = DateTime.UtcNow.AddHours(10).TimeOfDay,
+                UserId = GetRandomUserId(context),
+                Location = "On the streets",
+                Approval = true
+            },
+            new Events
+            {
+                Title = "Whats going on in the sewers of New York?",
+                Description = "We have been told people are going dripped out into the sewers of new york city. We must investigate.",
+                Date = DateTime.SpecifyKind(new DateTime(2024, 1, 10), DateTimeKind.Utc),
+                StartTime = DateTime.UtcNow.AddHours(8).TimeOfDay,
+                EndTime = DateTime.UtcNow.AddHours(10).TimeOfDay,
+                UserId = GetRandomUserId(context),
+                Location = "New York",
+                Approval = true
+            },
+            new Events
+            {
+                Title = "Liberating Taiwan",
+                Description = "The homie himself Xi Jinping has asked us to liberate Taiwan from the liberals. By our hand Taiwan will be free.",
+                Date = DateTime.SpecifyKind(new DateTime(2024,01,19), DateTimeKind.Utc),
+                StartTime = DateTime.UtcNow.AddHours(9).TimeOfDay,
+                EndTime = DateTime.UtcNow.AddHours(10).TimeOfDay,
+                UserId = GetRandomUserId(context),
+                Location = "The South China Sea",
+                Approval = true
+            },
         };
         context.Events.AddRange(initialEvents);
         context.SaveChanges();
