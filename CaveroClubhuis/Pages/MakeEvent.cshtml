@@ -5,6 +5,7 @@
 }
 <head>
     <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
+    <script src="~/js/Admin_Close.js"></script>
 </head>
 
 
@@ -80,6 +81,7 @@
 
                 <div class="explain">Vul de velden in om een evenement te maken</div>
                 <input type="submit" value="Opslaan">
+                <button type="button" id="Maakevent-closebutton" onclick="sluitform()">Terug</button>
             </form>
         </div></div>
 </body>
@@ -130,5 +132,5 @@
             };
 
             xhr.send();
-        }
+    }
 </script>
