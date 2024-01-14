@@ -65,18 +65,33 @@ namespace CaveroClubhuis.Pages
             _userManager = userManager;
             _layoutTools = layoutTools;
             SelectedEvents = new List<int>();
-
+            Events = FetchEvents();
         }
-        public IActionResult? OnGet()
+        public IActionResult OnGet()
         {
             var userId = _userManager.GetUserId(User);
             if (!_layoutTools.checkAdmin(userId)) return RedirectToPage("/Index");
 
             Events = FetchEvents();
-            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId); 
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
 
             return null!;
+        }
+
+
+        public async Task<IActionResult> OnPostToggleCheckInAsync()
+        {
+            var userId = _userManager.GetUserId(User);
+            _layoutTools.ToggleCheckIn(userId);
+
+            return RedirectToPage();
+        }
+
+        public List<Events> FetchEvents()
+        {
+            DateTime currentDate = DateTime.UtcNow;
+            return _context.Events.Where(x => x.Date < currentDate).ToList();
         }
 
         public IActionResult OnPostseeFeedback()
@@ -84,24 +99,6 @@ namespace CaveroClubhuis.Pages
 
             // de id van de tempdata in een variabele zetten voor opzoeken juiste event
             int id = (int)TempData["EnteredEventID"];
-
-
-            var eventToUpdate = _context.Events.First(x => x.Id == id);
-            if (!ModelState.IsValid)
-            {
-
-                var userId = _userManager.GetUserId(User);
-                (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId); 
-                IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId!);
-                return Page();
-            }
-
-            eventToUpdate.Title = title;
-            eventToUpdate.Description = description;
-            eventToUpdate.Date = DateTime.SpecifyKind(date, DateTimeKind.Utc);
-            eventToUpdate.StartTime = startTime;
-            eventToUpdate.EndTime = endTime;
-            eventToUpdate.Location = location;
             ModelState.Clear();
             return RedirectToPage("./Index"); // Redirect naar page weer
         }
@@ -116,7 +113,15 @@ namespace CaveroClubhuis.Pages
                 .Where(e => e.EventId == EventChoice.Id)
                 .ToList();
 
-            feedbackText = Reviews.Select(x => x.FeedbackText).ToList();
+            // Check if there are any reviews for the selected event
+            if (!Reviews.Any())
+            {
+                feedbackText = null;
+            }
+            else
+            {
+                feedbackText = Reviews.Select(x => x.FeedbackText).ToList();
+            }
 
             title = EventChoice.Title;
             description = EventChoice.Description;
@@ -125,29 +130,14 @@ namespace CaveroClubhuis.Pages
             endTime = EventChoice.EndTime;
             location = EventChoice.Location;
             EventID = EventChoice.Id;
-            // omdat properties gereset werden tempdata om de id op te slaan
             TempData["EnteredEventID"] = EventChoice.Id;
 
             // weer id enzo neerzetten want hij gaat nog niet langs onget
             var userId = _userManager.GetUserId(User);
-            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId); 
+            (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);
             IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
             // return Page ipv Redirectpage zodat niet alles refreshed en start van het begin
             return Page(); // Redirect naar page weer
-        }
-
-        public List<Events> FetchEvents()
-        {
-            return _context.Events.Select(x => x).ToList();
-        }
-
-
-        public async Task<IActionResult> OnPostToggleCheckInAsync()
-        {
-            var userId = _userManager.GetUserId(User);
-            _layoutTools.ToggleCheckIn(userId);
-
-            return RedirectToPage();
         }
     }
 }
