@@ -159,6 +159,14 @@ a[title="Manage"] {
     overflow: auto;
 }
 
+.confirm-button {
+    background-color: #FFFFFF;
+    border-radius: 45px;
+    width: 150px;
+    height: 50px;
+    margin-right: 20px;
+}
+
 @media screen and (max-width: 600px) {
     /* Adjust styles for smaller screens */
     .kaartTeam {
