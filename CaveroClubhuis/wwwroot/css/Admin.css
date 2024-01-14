@@ -5,8 +5,8 @@
         right: 0 !important;
         left: 0 !important;
     }
-    .confirm {
-        margin-top: -42px;;
+    .confirm, .confirm-button {
+        margin-top: -42px;
     }
 }
 .admin-bar {
@@ -186,7 +186,7 @@
     }
 
 /*AdminChange*/
-.confirm-button {
+.confirm {
     background-color: #803689 !important;
     border-color: #803689 !important;
     color: white !important;
