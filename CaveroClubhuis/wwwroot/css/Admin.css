@@ -8,6 +8,12 @@
     .confirm, .confirm-button {
         margin-top: -42px;
     }
+    .backBtn{
+        margin-top: 400px;
+        bottom: auto;
+        right:auto;
+        margin-left: 100px;
+    }
 }
 .admin-bar {
     display: inline-block;
