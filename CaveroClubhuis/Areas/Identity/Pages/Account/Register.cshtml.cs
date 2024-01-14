@@ -141,6 +141,12 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
 public async Task<IActionResult> OnPostAsync(string returnUrl = null)
 {
     returnUrl ??= Url.Content("~/");
+    // if uncommented users can only sign up using an email with a @cavero domain
+    // if (!Input.Email.Contains("@cavero"))
+    // {
+    //     ModelState.AddModelError(string.Empty, "U kunt zich alleen registreren met een @cavero e-mailadres.");
+    //     return Page();
+    // }
     ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
     if (ModelState.IsValid)
     {
@@ -148,7 +154,7 @@ public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         var existingUser = await _userManager.FindByEmailAsync(Input.Email);
         if (existingUser != null)
         {
-            ModelState.AddModelError(string.Empty, "A user with this email already exists.");
+            ModelState.AddModelError(string.Empty, "Er bestaat al een account met dit e-mailadres.");
             return Page();
         }
 

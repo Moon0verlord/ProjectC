@@ -59,8 +59,8 @@
 
     .feedbackstuk
     {
-		height: 64vh;
-        width : 440px;
+		height: 60vh;
+        width : 430px;
 		overflow-y: auto;
 	}
 
@@ -78,6 +78,24 @@
         border-radius: 10px;
         border: 3px solid #ffffff;
     }
+
+    .wrapper {
+        position: relative;
+    }
+
+    .backBtn {
+        background-color: #803689 !important;
+        border-color: #803689 !important;
+        color: white !important;
+        border-radius: 5px;
+        text-decoration: none;
+        padding: 10px;
+        position: absolute;
+        left: 50%;
+        bottom: 2%;
+    }
+
+
 </style>
 
 <head>
@@ -151,18 +169,41 @@
 
     else
     {
-        <div class="make-event">
-            <form id="change" class="make-event-form" method="post" style="display:flex;" asp-page-handler="seeFeedback">
-                <label for="Feedback">Feedback voor @Model.title</label>
-                <div class="feedbackstuk">
-                <p>@foreach(var feedback in @Model.feedbackText){
-                    <p>- @feedback</p>
-                }
-                </p>
+        if (Model.feedbackText is null)
+        {
+            <div class="wrapper">
+            <div class="make-event">
+                <form id="change" class="make-event-form" method="post" style="display:flex;" asp-page-handler="seeFeedback">
+                    <label for="Feedback">Feedback voor @Model.title</label>
+                    <div class="feedbackstuk">
+                        <p style="margin-top:20px;text-align:center;font-weight:bold;">Er is nog geen feedback voor dit evenement</p>
+                    </div>
+                </form>
                 </div>
-                <input type="submit" value="Ga terug">
-            </form>
-        </div>
+            <a class="backBtn" href="/AdminFeedback">Ga terug</a>
+            </div>
+
+        }
+
+        else
+        {
+            <div class="wrapper">
+            <div class="make-event">
+                <form id="change" class="make-event-form" method="post" style="display:flex;" asp-page-handler="seeFeedback">
+                    <label for="Feedback">Feedback voor @Model.title</label>
+                    <div class="feedbackstuk">
+                        <p>@foreach (var feedback in @Model.feedbackText)
+                            {
+                                <p>- @feedback</p>
+                            }
+                        </p>
+                    </div>
+                </form>
+                </div>
+                <a class="backBtn" href="/AdminFeedback">Ga terug</a>
+            </div>
+
+        }
     }
     <script>
         window.onload = function () {

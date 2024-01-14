@@ -115,7 +115,8 @@ public class IndexModel : PageModel
             UserId = userid,
             CheckInDate = utcStartDate,
             CheckOutDate = utcEndDate,
-            DayOfWeek = dayOfWeek
+            DayOfWeek = dayOfWeek,
+            IsRecurring = true
         };
         _context.InOffice.Add(inOfficeEntry);
         _context.SaveChanges();
