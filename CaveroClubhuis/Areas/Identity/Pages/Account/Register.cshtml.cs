@@ -141,6 +141,12 @@ namespace CaveroClubhuis.Areas.Identity.Pages.Account
 public async Task<IActionResult> OnPostAsync(string returnUrl = null)
 {
     returnUrl ??= Url.Content("~/");
+    // if uncommented users can only sign up using an email with a @cavero domain
+    // if (!Input.Email.Contains("@cavero"))
+    // {
+    //     ModelState.AddModelError(string.Empty, "Email must be a '@cavero' domain");
+    //     return Page();
+    // }
     ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
     if (ModelState.IsValid)
     {
