@@ -6,6 +6,7 @@
 
 <head>
     <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
+    <script src="~/js/Admin_Close.js"></script>
 </head>
 
 
@@ -55,6 +56,7 @@
                 <input type="text" id="title" placeholder="titel" maxlength="20" asp-for="title">
                 <div class="explain">Vul het veld in om een team te maken.</div>
                 <input type="submit" value="Opslaan">
+                <button type="button" id="Maakevent-closebutton" onclick="sluitform()">Terug</button>
             </form>
             
         </div>

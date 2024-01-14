@@ -2,12 +2,14 @@
 @model CaveroClubhuis.Pages.AdminChangeModel
 @{
     var DialogButtons1 = new ButtonModel() { isPrimary = true, cssClass = "confirm-button", content = "Bevestig" };
+    var DialogButtons2 = new ButtonModel() { isPrimary = true, cssClass = "confirm-button", content = "Terug" };
 ViewData["Title"] = "Admin";
 }
 @using Newtonsoft.Json
 
 <head>
     <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
+    <script src="~/js/Admin_Close.js"></script>
 </head>
 
 <body>
@@ -49,7 +51,7 @@ ViewData["Title"] = "Admin";
     {
         <div id='container' style="height:350px;" class="make-event">
 
-            <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" target="#container" style="min-height:525px; border-radius: 13px; box-shadow: none;  border: 2px solid #d9d9d9;
+            <ejs-dialog id="dialog" header="Wijzig evenement" visible="true" target="#container" showCloseIcon='true'  style="min-height:525px; font-size:10px; border-radius: 13px; box-shadow: none;  border: 2px solid #d9d9d9;
  overflow-y: auto;" width="450px">
                 <e-content-template>
 
@@ -68,6 +70,7 @@ ViewData["Title"] = "Admin";
                 </e-content-template>
                 <e-dialog-buttons>
                     <e-dialog-dialogbutton buttonModel="DialogButtons1" click="submitForm" id="submit-button"></e-dialog-dialogbutton>
+                    <e-dialog-dialogbutton style="margin-top:100px;" buttonModel="DialogButtons1" click="submitForm" id="submit-button"></e-dialog-dialogbutton>
                 </e-dialog-buttons>
             </ejs-dialog>
         </div>
@@ -79,37 +82,36 @@ ViewData["Title"] = "Admin";
                         else
                         {
 <div class="make-event">
-                        <form id="change" class="make-event-form" method="post" style="display:flex;" asp-page-handler="ChangeEvent">
-                            <!-- Add the make event inputs here-->
+    <form id="change" class="make-event-form" method="post" style="display:flex;" asp-page-handler="ChangeEvent">
+        <!-- Add the make event inputs here-->
 
-                            <label for="title">Titel</label>
+        <label for="title">Titel</label>
 
-                            <input type="text" id="title" value="@Model.EventChoice.Title" maxlength="20" asp-for="title" required>
-
-
-                            <label for="description">Omschrijving</label>
-
-                            <textarea type="text" id="description" value="@Model.description" maxlength="120" asp-for="description" required></textarea>
-
-                            <label for="date">Datum</label>
-
-                            <input type="date" id="date" value="@Model.date.ToString("yyyy-MM-dd")" asp-for="date" required>
-
-                            <label for="startTime">Start tijd</label>
-
-                            <input type="time" id="startTime" value="@Model.startTime.ToString("hh\\:mm")" asp-for="startTime" required>
-
-                            <label for="endTime">Eind tijd</label>
-
-                            <input type="time" id="endTime" value="@Model.endTime.ToString("hh\\:mm")" asp-for="endTime" required>
-
-                            <label for="location">Locatie</label>
-
-                            <input type="text" id="location" value="@Model.location" asp-for="location" required>
+        <input type="text" id="title" value="@Model.EventChoice.Title" maxlength="20" asp-for="title" required>
 
 
-                            <input type="submit" value="Opslaan">
-                        </form>
+        <label for="description">Omschrijving</label>
+
+        <textarea type="text" id="description" value="@Model.description" maxlength="120" asp-for="description" required></textarea>
+
+        <label for="date">Datum</label>
+
+        <input type="date" id="date" value="@Model.date.ToString("yyyy-MM-dd")" asp-for="date" required>
+
+        <label for="startTime">Start tijd</label>
+
+        <input type="time" id="startTime" value="@Model.startTime.ToString("hh\\:mm")" asp-for="startTime" required>
+
+        <label for="endTime">Eind tijd</label>
+
+        <input type="time" id="endTime" value="@Model.endTime.ToString("hh\\:mm")" asp-for="endTime" required>
+
+        <label for="location">Locatie</label>
+
+        <input type="text" id="location" value="@Model.location" asp-for="location" required>
+        <input type="submit" value="Opslaan">
+        <button type="button" id="Maakevent-closebutton" onclick="sluitform()">Terug</button>
+    </form>
     </div>
                         }
                         <script>
@@ -120,6 +122,9 @@ ViewData["Title"] = "Admin";
                                 if (dialogElement) {
                                     var dialog = dialogElement.ej2_instances[0];
 
+                                    dialog.beforeClose = function (args) {
+                                        window.location.href = '/Admin';
+                                    };
                                     window.onresize = function () {
                                         // Make dialog responsive
                                         dialog.refreshPosition();

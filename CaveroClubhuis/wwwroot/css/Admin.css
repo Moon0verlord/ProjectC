@@ -67,13 +67,29 @@
         .make-event-form input[type="date"] {
             min-height: 23px;
         }
-        .make-event-form input[type="submit"] {
+        .make-event-form input[type="submit"], #Maakevent-closebutton {
             margin-top: 10px;
             min-height: 30px;
             border-radius: 10px;
             background-color: #803689;
             color: white;
         }
+#Maakevent-closebutton {
+    margin-left: 75px;
+    border: 2px solid #b1b3b4;
+}
+#Maakevent-closebutton:hover, #adminremoveteam-closebutton:hover {
+    border: 1px #803689;
+}
+#adminremoveteam-closebutton {
+    margin-top: 10px;
+    min-height: 30px;
+    border-radius: 10px;
+    background-color: #803689;
+    border: 2px solid #b1b3b4;
+    color: white;
+    width: 200px;
+}
     .make-event-form label {
         margin-left: 75px;
         min-height: 23px;
@@ -174,6 +190,11 @@
     color: white !important;
 }
 
+.terug-button {
+    background-color: #803689 !important;
+    border-color: #803689 !important;
+    color: white !important;
+}
 
 .e-dialog {
     text-align: center; /* Horizontal centering */
