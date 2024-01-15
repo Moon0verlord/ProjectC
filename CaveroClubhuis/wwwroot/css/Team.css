@@ -1,4 +1,10 @@
-﻿.Wrapper {
+﻿@media screen and (max-width: 600px) {
+    /* Adjust styles for smaller screens */
+    .peopleOverview2 {
+        margin-left:50px;
+    }
+}
+.Wrapper {
     overflow: hidden;
 }
 
