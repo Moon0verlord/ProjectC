@@ -139,13 +139,10 @@ public class IndexModel : PageModel
     {
         DateTime today = DateTime.UtcNow.Date;
         DateTime endOfWeek = today.AddDays(6); // hierdoor is zondag de laatste dag
-        // maak een case om te kijken welke dag het is en op basis daarvan bereken je door tot de zondag van de week indien het zondag is return niks
-
-        // navragen of dit goed is of dat we 6 dagen van vandaag kijken of dat we tot einde van de week van de dag kijken
 
         // Fetch events van deze week
         var upcomingEvents = _context.Events
-            .Where(e => e.Date >= today && e.Date <= endOfWeek) // met de >= today zorg je dat je de events na vandaag neemt tot 6 dagen in de toekomst
+            .Where(e => e.Date > today && e.Date <= endOfWeek) // met de >= today zorg je dat je de events na vandaag neemt tot 6 dagen in de toekomst
             .OrderBy(e => e.Date)  // order by date
             .ToList();
 
@@ -157,12 +154,27 @@ public class IndexModel : PageModel
     /// Performs a recurring check for a user asynchronously.
     /// </summary>
     /// <returns>The <see cref="IActionResult"/> representing the result of the operation.</returns>
+    public bool DoesRecurringCheckInExist(string userId, DateTime startDate, DateTime endDate)
+    {
+        // Convert the dates to UTC
+        DateTime utcStartDate = TimeZoneInfo.ConvertTimeToUtc(startDate).Date;
+
+        // Check if a recurring check-in exists for the given user and dates
+        return _context.InOffice.Any(i => i.UserId == userId && i.CheckInDate.Date == utcStartDate);
+    }
+    
     public async Task<IActionResult> OnPostRecurringCheckAsync()
     {
-        Console.WriteLine("Recurring Check");
         var userId = _userManager.GetUserId(User);
+
+        if (DoesRecurringCheckInExist(userId, StartDate, EndDate))
+        {
+            TempData["ErrorMessage"] = "A recurring check-in already exists for the selected start date.";
+            return RedirectToPage();
+        }
+
         RecurringCheckIn(userId, StartDate, EndDate, daysofweek);
-        
+
         return RedirectToPage();
     }
     
