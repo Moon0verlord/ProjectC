@@ -22,6 +22,12 @@
         right: auto;
         margin-left: 100px;
     }
+    #dialog2{
+        margin-left:25px !important;
+    }
+    #dialog2 button{
+        margin-right:10px;
+    }
 
 }
 .admin-bar {
