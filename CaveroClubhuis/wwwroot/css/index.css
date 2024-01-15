@@ -218,6 +218,20 @@ body {
     float: left;
 }
 
+    .Evenementen::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .Evenementen::-webkit-scrollbar-track {
+        background: #fff;
+    }
+
+    .Evenementen::-webkit-scrollbar-thumb {
+        background-color: #b1b3b4;
+        border-radius: 10px;
+        border: 3px solid #ffffff;
+    }
+
 .kaart {
     /* css voor hover functie */
     display: inline-block;
