@@ -95,7 +95,6 @@
         bottom: 2%;
     }
 
-
 </style>
 
 <head>
@@ -136,9 +135,9 @@
 
     @if (Model.EventChoice == null)
     {
-        <div id='container' style="height:350px;" class="make-event">
+        <div id='container'>
 
-            <ejs-dialog id="dialog" header="Zie feedback per evenement" showCloseIcon='true' visible="true" target="#container" style="min-height:525px; border-radius: 13px; box-shadow: none;  border: 2px solid #d9d9d9;
+            <ejs-dialog id="dialog" header="Zie feedback per evenement" visible="true" target="#container" style=" margin-top:310px; border-radius: 13px; box-shadow: none;  border: 2px solid #d9d9d9;
  overflow-y: auto;" width="450px">
                 <e-content-template>
 
@@ -152,13 +151,12 @@
 
                             <div><span id="error-message" class="error-messageDialog"></span></div>
                         </div>
-                        <button type="button" id="Maakevent-closebutton" onclick="sluitform()">Terug</button>
                     </form>
 
                 </e-content-template>
                 <e-dialog-buttons>
                     <e-dialog-dialogbutton buttonModel="DialogButtons1" click="submitForm" id="submit-button"></e-dialog-dialogbutton>
-                    <input type="submit" value="Ga terug">
+                    <e-dialog-dialogbutton buttonModel="DialogButtons2" click="sluitform" id="close-button"></e-dialog-dialogbutton>
                 </e-dialog-buttons>
             </ejs-dialog>
         </div>

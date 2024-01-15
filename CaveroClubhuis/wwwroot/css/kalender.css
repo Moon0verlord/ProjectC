@@ -3,7 +3,6 @@ html, body {
     overflow-x: hidden; /* zorgt ervoor dat de pagina niet scroll able is side-ways */
     overflow: hidden;
 }
-
 /* achtergrond kleur van de agenda */
 #calendar {
     margin-left: 10px;
@@ -50,9 +49,9 @@ html, body {
 }
 
 #calendar .fc-event {
-    background-color: #4285f4; /* background kleur van de event */
+    background-color: #803689; /* background kleur van de event */
     color: #fff; /* tekst kleur van de event */
-    border: 1px solid #4285f4; /* kleur van border */
+    border: 1px solid #803689; /* kleur van border */
     border-radius: 3px;
     font-size: 12px; /* kleinere font zodat mobile niet cluster fuck is */
 }

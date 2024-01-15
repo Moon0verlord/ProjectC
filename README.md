@@ -26,7 +26,17 @@ Microsoft.AspNetCore.Identity.EntityFrameworkCore Version="7.0.11"
 Microsoft.AspNetCore.Identity.UI Version="7.0.11"
 ```
 
+## Email Domain Verification
 
+In the RegisterModel class, there is a commented out section of code that checks if the email domain of the user trying to register is @cavero. This is done in the OnPostAsync method.
+```
+// if uncommented users can only sign up using an email with a @cavero domain
+// if (!Input.Email.Contains("@cavero"))
+// {
+//     ModelState.AddModelError(string.Empty, "U kunt zich alleen registreren met een @cavero e-mailadres.");
+//     return Page();
+// }
+```
 
 ## Running CaveroClubhuis
 
