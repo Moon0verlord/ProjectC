@@ -74,9 +74,12 @@ thead {
 .fc-toolbar {
     position: sticky;
     top: 0;
-    z-index: 2; /* zorgt ervoor dat de inhoud boven op alles staat */
+    z-index: 10; /* zorgt ervoor dat de inhoud boven op alles staat */
 }
-
+/* zorgt ervoor dat scrollen op mobile goed gaat */
+.fc-scrollgrid-sync-inner{
+    margin-top:10px;
+}
 /* jona code voor scroll-bar */
 /* Chrome, Edge, and Safari */
 #calendar::-webkit-scrollbar {
