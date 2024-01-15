@@ -29,7 +29,7 @@
     }
 }
 @media screen and (max-width: 1280px) {
-    .check-inWidget {
+    .check-inWidget.check-inWidget {
         transform: scale(0.7);
         margin-left: 0px;
     }
@@ -210,12 +210,35 @@
         border: 1px #9D9FA1 solid;
     }
 
-    .StickyHeader {
-        position: sticky;
-        position: -webkit-sticky;
-        top: 0;
-        background-color: #FFFFFF;
+
+    .Evenementen::-webkit-scrollbar {
+        width: 10px;
     }
+
+    .Evenementen::-webkit-scrollbar-track {
+        background: #fff;
+    }
+
+    .Evenementen::-webkit-scrollbar-thumb {
+        background-color: #b1b3b4;
+        border-radius: 10px;
+        border: 3px solid #ffffff;
+    }
+
+.kaart {
+    /* css voor hover functie */
+    display: inline-block;
+    overflow: hidden;
+    margin-top: 50px; /* margin top */
+    background-color: #803689;
+    border-radius: 30px;
+    width: 70%;
+    height: 80px;
+    margin: 0 auto;
+}
+.kaart .Hover {
+    hyphens: auto;
+}
 
     .Evenementen {
         height: 50vh;
