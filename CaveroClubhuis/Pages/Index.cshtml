@@ -128,7 +128,7 @@
                     flatpickr("#startDatePicker", {
                         enableTime: true,
                         dateFormat: "d-m-Y H:i",
-                        minDate: new Date(@Model.MinDate.Year, @Model.MinDate.Month - 1, @Model.MinDate.Day, @Model.MinDate.Hour, @Model.MinDate.Minute),
+                         minDate: "today",
                         disable: [
                             function(date) {
                                 return (date.getDay() === 0 || date.getDay() === 6);
@@ -141,7 +141,7 @@
                     flatpickr("#endDatePicker", {
                         enableTime: true,
                         dateFormat: "d-m-Y H:i",
-                        minDate: new Date(@Model.MinDate.Year, @Model.MinDate.Month - 1, @Model.MinDate.Day, @Model.MinDate.Hour, @Model.MinDate.Minute),
+                         minDate: "today",
                         disable: [
                             function(date) {
                                 return (date.getDay() === 0 || date.getDay() === 6);

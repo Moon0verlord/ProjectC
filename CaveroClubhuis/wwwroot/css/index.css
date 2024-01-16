@@ -132,7 +132,7 @@
         display: flex;
         background-color: #7f3688;
         flex-direction: column;
-        height: 260px;
+        max-height: 360px;
         width: 500px;
         color: white;
         border-radius: 10px;
