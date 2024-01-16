@@ -51,7 +51,7 @@ public class IndexModel : PageModel
     {
         //DateTimeOffset dateTimeOffset = DateTimeOffset.Now;
         var now = DateTimeOffset.UtcNow;
-        PeopleCount = _context.InOffice.AsEnumerable().Where(x => !x.CheckOutDate.HasValue || now <= TimeZoneInfo.ConvertTimeToUtc((DateTime)x.CheckOutDate.Value, TimeZoneInfo.Utc)).Count();
+        PeopleCount = CheckInOverview().Distinct().Count();
         // get name of user
         var userId = _userManager.GetUserId(User);
         (FirstName, LastName, ProfileImage) = _layoutTools.LoadUserInfo(userId);        IsUserCheckedIn = _layoutTools.IsUserCheckedIn(userId);
@@ -83,7 +83,7 @@ public class IndexModel : PageModel
             (i, c) => new { InOffice = i, CaveroUser = c }
         )
         .AsEnumerable() 
-        .Where(ti => !ti.InOffice.CheckOutDate.HasValue || now <= TimeZoneInfo.ConvertTimeToUtc(ti.InOffice.CheckOutDate.Value, TimeZoneInfo.Utc))
+        .Where(ti => !ti.InOffice.CheckOutDate.HasValue  || (now >= TimeZoneInfo.ConvertTimeToUtc(ti.InOffice.CheckInDate, TimeZoneInfo.Utc) && now <= TimeZoneInfo.ConvertTimeToUtc(ti.InOffice.CheckOutDate.Value, TimeZoneInfo.Utc)))
         .Select(ti => new PersonInfo
         {
             FirstName = ti.CaveroUser.FirstName,
@@ -160,7 +160,7 @@ public class IndexModel : PageModel
         DateTime utcStartDate = TimeZoneInfo.ConvertTimeToUtc(startDate).Date;
 
         // Check if a recurring check-in exists for the given user and dates
-        return _context.InOffice.Any(i => i.UserId == userId && i.CheckInDate.Date == utcStartDate);
+        return _context.InOffice.Any(i => i.UserId == userId && i.CheckInDate.Date == utcStartDate );
     }
     
     public async Task<IActionResult> OnPostRecurringCheckAsync()
@@ -169,7 +169,7 @@ public class IndexModel : PageModel
 
         if (DoesRecurringCheckInExist(userId, StartDate, EndDate))
         {
-            TempData["ErrorMessage"] = "A recurring check-in already exists for the selected start date.";
+            TempData["ErrorMessage"] = "A  check-in already exists for the selected start date.";
             return RedirectToPage();
         }
 
